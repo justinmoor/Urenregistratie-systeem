@@ -6,6 +6,7 @@ public class DatabaseConnectie {
     Connection connection;
     Statement statement;
     ResultSet results;
+
     public DatabaseConnectie() {
         try {
             connection = DriverManager.getConnection("jdbc:mariadb://localhost:3306/UrenregistratieDatabase?user=root&password=ipsen123");
