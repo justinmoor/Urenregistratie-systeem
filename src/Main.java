@@ -8,6 +8,7 @@ public class Main {
         System.out.println("Gittest");
         System.out.println("Yoyo");
         System.out.println("Klinklariekoek");
+        System.out.println("Klinklariekoek2");
     }
 
 }
