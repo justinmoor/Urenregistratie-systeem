@@ -9,7 +9,7 @@ public class Yolo {
         System.out.println("Yolo");
         System.out.println("Yolo");
         System.out.println("Yolo");
-        System.out.println("Yolo");
+        System.out.println("Yoo");
     }
 
 }
