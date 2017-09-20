@@ -1,4 +1,7 @@
 import Database.DatabaseConnectie;
+import Database.InlogView;
+import javafx.application.Application;
+import javafx.stage.Stage;
 
 /**
  * Created by Ian on 9/11/2017.
@@ -6,12 +9,10 @@ import Database.DatabaseConnectie;
 public class Main {
 
     public static void main (String[] args){
-        System.out.println("Jo");
-        System.out.println("Gittest");
-        System.out.println("Yoyo");
-        System.out.println("Klinklariekoek");
-
         DatabaseConnectie dbc = new DatabaseConnectie();
+        InlogController ilc = new InlogController(dbc);
+
+
     }
 
 }
