@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.ScrollBar?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: f9f9f7;" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <ImageView fitHeight="10.0" fitWidth="600.0" layoutY="390.0">
+         <image>
+            <Image url="@blauwlijntje.png" />
+         </image>
+      </ImageView>
+      <Label layoutX="19.0" layoutY="18.0" text="VRIJE DAGEN AANVRAGEN" textFill="#60c8db" visible="false">
+         <font>
+            <Font name="SansSerif Bold" size="18.0" />
+         </font>
+      </Label>
+      <Label layoutX="243.0" layoutY="13.0" text="WEEKOVERZICHT" textFill="#6b757d">
+         <font>
+            <Font name="SansSerif Bold" size="13.0" />
+         </font>
+      </Label>
+      <ListView layoutX="59.0" layoutY="98.0" prefHeight="229.0" prefWidth="480.0" />
+      <ScrollBar layoutX="522.0" layoutY="98.0" orientation="VERTICAL" prefHeight="229.0" prefWidth="17.0" style="-fx-background-color: FCFCFC; -fx-border-color: C7C7C5;" />
+      <Label layoutX="270.0" layoutY="74.0" text="WEEK 34" textFill="#60c8db">
+         <font>
+            <Font name="SansSerif Bold" size="13.0" />
+         </font>
+      </Label>
+      <ImageView fitHeight="8.0" fitWidth="8.0" layoutX="337.0" layoutY="78.0">
+         <image>
+            <Image url="@../../pijltje.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="8.0" fitWidth="8.0" layoutX="252.0" layoutY="78.0">
+         <image>
+            <Image url="@../../ejtljip.png" />
+         </image>
+      </ImageView>
+      <ImageView fitWidth="200.0" layoutX="200.0" layoutY="41.0">
+         <image>
+            <Image url="@lijntje.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="14.0" fitWidth="14.0" layoutX="579.0" layoutY="6.0">
+         <image>
+            <Image url="@kruisje.png" />
+         </image>
+      </ImageView>
+   </children>
+</Pane>

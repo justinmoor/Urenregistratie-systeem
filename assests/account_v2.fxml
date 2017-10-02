@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: f9f9f7;" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Label layoutX="268.0" layoutY="15.0" text="ACCOUNT" textFill="#6b757d">
+         <font>
+            <Font name="SansSerif Bold" size="13.0" />
+         </font>
+      </Label>
+      <ImageView fitHeight="1.0" fitWidth="600.0" layoutY="45.0">
+         <image>
+            <Image url="@lijntje.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="10.0" fitWidth="600.0" layoutY="390.0">
+         <image>
+            <Image url="@blauwlijntje.png" />
+         </image>
+      </ImageView>
+      <Label layoutX="505.0" layoutY="15.0" text="Pieter van Vliet" textFill="#889097">
+         <font>
+            <Font name="SansSerif Regular" size="12.0" />
+         </font>
+      </Label>
+      <Label layoutX="159.0" layoutY="65.0" text="Voornaam:" textFill="#6b757d">
+         <font>
+            <Font name="SansSerif Regular" size="13.0" />
+         </font>
+      </Label>
+      <Label layoutX="159.0" layoutY="100.0" text="Tussenvoegsel:" textFill="#6b757d">
+         <font>
+            <Font name="SansSerif Regular" size="13.0" />
+         </font>
+      </Label>
+      <TextField layoutX="293.0" layoutY="251.0" prefHeight="29.0" prefWidth="147.0" style="-fx-background-color: FCFCFC; -fx-border-color: C7C7C5;" />
+      <ImageView fitWidth="16.0" layoutX="14.0" layoutY="15.0">
+         <image>
+            <Image url="@back.png" />
+         </image>
+      </ImageView>
+      <Label layoutX="293.0" layoutY="65.0" text="Pieter" textFill="#6b757d">
+         <font>
+            <Font name="SansSerif Bold" size="13.0" />
+         </font>
+      </Label>
+      <Label layoutX="293.0" layoutY="100.0" text="van" textFill="#6b757d">
+         <font>
+            <Font name="SansSerif Bold" size="13.0" />
+         </font>
+      </Label>
+      <Label layoutX="159.0" layoutY="135.0" text="Achternaam:" textFill="#6b757d">
+         <font>
+            <Font name="SansSerif Regular" size="13.0" />
+         </font>
+      </Label>
+      <Label layoutX="293.0" layoutY="135.0" text="Vliet" textFill="#6b757d">
+         <font>
+            <Font name="SansSerif Bold" size="13.0" />
+         </font>
+      </Label>
+      <Label layoutX="159.0" layoutY="170.0" text="E-Mail:" textFill="#6b757d">
+         <font>
+            <Font name="SansSerif Regular" size="13.0" />
+         </font>
+      </Label>
+      <Label layoutX="293.0" layoutY="170.0" text="pvanvliet@webedu.nl" textFill="#6b757d">
+         <font>
+            <Font name="SansSerif Bold" size="13.0" />
+         </font>
+      </Label>
+      <Label layoutX="159.0" layoutY="205.0" text="Wachtwoord:" textFill="#6b757d">
+         <font>
+            <Font name="SansSerif Regular" size="13.0" />
+         </font>
+      </Label>
+      <Label layoutX="293.0" layoutY="205.0" text="frankfan123" textFill="#6b757d">
+         <font>
+            <Font name="SansSerif Bold" size="13.0" />
+         </font>
+      </Label>
+      <Label layoutX="159.0" layoutY="258.0" text="Nieuw wachtwoord:" textFill="#6b757d">
+         <font>
+            <Font name="SansSerif Regular" size="13.0" />
+         </font>
+      </Label>
+      <Label layoutX="159.0" layoutY="295.0" text="Herhaal wachtwoord:" textFill="#6b757d">
+         <font>
+            <Font name="SansSerif Regular" size="13.0" />
+         </font>
+      </Label>
+      <TextField layoutX="293.0" layoutY="289.0" prefHeight="29.0" prefWidth="147.0" style="-fx-background-color: FCFCFC; -fx-border-color: C7C7C5;" />
+      <ImageView fitHeight="1.0" fitWidth="281.0" layoutX="159.0" layoutY="232.0">
+         <image>
+            <Image url="@lijntje.png" />
+         </image>
+      </ImageView>
+      <Button layoutX="159.0" layoutY="328.0" mnemonicParsing="false" prefHeight="36.0" prefWidth="281.0" style="-fx-background-color: f9f9f7; -fx-border-color: #60c8db;" text="OPSLAAN" textFill="#60c8db">
+         <font>
+            <Font name="SansSerif Bold" size="13.0" />
+         </font>
+      </Button>
+   </children>
+</Pane>
