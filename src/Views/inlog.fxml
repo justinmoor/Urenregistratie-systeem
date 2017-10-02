@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: f9f9f7;" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="InlogController">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: f9f9f7;" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.InlogController">
    <children>
       <Label layoutX="178.0" layoutY="100.0" prefHeight="42.0" prefWidth="242.0" text="Urenregistratie" textFill="#6b757d">
          <font>
@@ -32,7 +32,7 @@
             <Image url="@assests/blauwlijntje.png" />
          </image>
       </ImageView>
-      <Button fx:id="logInButton" layoutX="179.0" layoutY="247.0" mnemonicParsing="false" onAction="#setOnAction" prefHeight="36.0" prefWidth="240.0" style="-fx-background-color: f9f9f7; -fx-border-color: #60c8db;" text="LOG IN" textFill="#60c8db">
+      <Button fx:id="logInButton" layoutX="179.0" layoutY="247.0" mnemonicParsing="false" onAction="#logIn" prefHeight="36.0" prefWidth="240.0" style="-fx-background-color: f9f9f7; -fx-border-color: #60c8db;" text="LOG IN" textFill="#60c8db">
          <font>
             <Font name="SansSerif Bold" size="13.0" />
          </font>

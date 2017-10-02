@@ -21,7 +21,7 @@
       </Label>
       <ImageView fitHeight="1.0" fitWidth="600.0" layoutY="45.0">
          <image>
-            <Image url="@assests/lijntje.png" />
+            <Image url="@src/Views/lijntje.png" />
          </image>
       </ImageView>
       <Button layoutX="51.0" layoutY="110.0" mnemonicParsing="false" prefHeight="80.0" prefWidth="239.0" style="-fx-background-color: f9f9f7; -fx-border-color: #60c8db;" text="UREN REGISTREREN" textFill="#60c8db">
@@ -46,7 +46,7 @@
       </Button>
       <ImageView fitHeight="10.0" fitWidth="600.0" layoutY="390.0">
          <image>
-            <Image url="@assests/blauwlijntje.png" />
+            <Image url="@src/Views/blauwlijntje.png" />
          </image>
       </ImageView>
    </children>

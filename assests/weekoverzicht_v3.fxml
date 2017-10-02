@@ -20,12 +20,12 @@
       </Label>
       <ImageView fitHeight="1.0" fitWidth="600.0" layoutY="45.0">
          <image>
-            <Image url="@lijntje.png" />
+            <Image url="@../src/Views/lijntje.png" />
          </image>
       </ImageView>
       <ImageView fitHeight="10.0" fitWidth="600.0" layoutY="390.0">
          <image>
-            <Image url="@blauwlijntje.png" />
+            <Image url="@../src/Views/blauwlijntje.png" />
          </image>
       </ImageView>
       <Label layoutX="505.0" layoutY="15.0" text="Pieter van Vliet" textFill="#889097">
@@ -45,7 +45,7 @@
       </ImageView>
       <ImageView fitHeight="345.0" fitWidth="1.0" layoutX="160.0" layoutY="45.0">
          <image>
-            <Image url="@lijntje.png" />
+            <Image url="@../src/Views/lijntje.png" />
          </image>
       </ImageView>
       <TextField layoutX="13.0" layoutY="124.0" prefHeight="29.0" prefWidth="134.0" style="-fx-background-color: FCFCFC; -fx-border-color: C7C7C5;" />

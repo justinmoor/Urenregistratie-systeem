@@ -3,9 +3,7 @@ package Database;
 import java.sql.*;
 
 public class DatabaseConnectie {
-    Connection connection;
-    Statement statement;
-    ResultSet results;
+    public static Connection connection;
 
     public DatabaseConnectie() {
         try {
@@ -14,12 +12,8 @@ public class DatabaseConnectie {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        try {
-            statement = connection.createStatement();
-            results = statement.executeQuery("INSERT INTO personeel VALUES ('lololol', 'loloooool', 'lmaoooo')");
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
 
     }
+
+
 }

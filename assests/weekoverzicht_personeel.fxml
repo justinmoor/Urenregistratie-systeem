@@ -12,7 +12,7 @@
    <children>
       <ImageView fitHeight="10.0" fitWidth="600.0" layoutY="390.0">
          <image>
-            <Image url="@blauwlijntje.png" />
+            <Image url="@../src/Views/blauwlijntje.png" />
          </image>
       </ImageView>
       <Label layoutX="19.0" layoutY="18.0" text="VRIJE DAGEN AANVRAGEN" textFill="#60c8db" visible="false">
@@ -44,7 +44,7 @@
       </ImageView>
       <ImageView fitWidth="200.0" layoutX="200.0" layoutY="41.0">
          <image>
-            <Image url="@lijntje.png" />
+            <Image url="@../src/Views/lijntje.png" />
          </image>
       </ImageView>
       <ImageView fitHeight="14.0" fitWidth="14.0" layoutX="579.0" layoutY="6.0">

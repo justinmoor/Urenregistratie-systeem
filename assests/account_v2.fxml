@@ -17,12 +17,12 @@
       </Label>
       <ImageView fitHeight="1.0" fitWidth="600.0" layoutY="45.0">
          <image>
-            <Image url="@lijntje.png" />
+            <Image url="@../src/Views/lijntje.png" />
          </image>
       </ImageView>
       <ImageView fitHeight="10.0" fitWidth="600.0" layoutY="390.0">
          <image>
-            <Image url="@blauwlijntje.png" />
+            <Image url="@../src/Views/blauwlijntje.png" />
          </image>
       </ImageView>
       <Label layoutX="505.0" layoutY="15.0" text="Pieter van Vliet" textFill="#889097">
@@ -99,7 +99,7 @@
       <TextField layoutX="293.0" layoutY="289.0" prefHeight="29.0" prefWidth="147.0" style="-fx-background-color: FCFCFC; -fx-border-color: C7C7C5;" />
       <ImageView fitHeight="1.0" fitWidth="281.0" layoutX="159.0" layoutY="232.0">
          <image>
-            <Image url="@lijntje.png" />
+            <Image url="@../src/Views/lijntje.png" />
          </image>
       </ImageView>
       <Button layoutX="159.0" layoutY="328.0" mnemonicParsing="false" prefHeight="36.0" prefWidth="281.0" style="-fx-background-color: f9f9f7; -fx-border-color: #60c8db;" text="OPSLAAN" textFill="#60c8db">

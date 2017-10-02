@@ -18,12 +18,12 @@
       </Label>
       <ImageView fitHeight="1.0" fitWidth="600.0" layoutY="45.0">
          <image>
-            <Image url="@lijntje.png" />
+            <Image url="@../src/Views/lijntje.png" />
          </image>
       </ImageView>
       <ImageView fitHeight="10.0" fitWidth="600.0" layoutY="390.0">
          <image>
-            <Image url="@blauwlijntje.png" />
+            <Image url="@../src/Views/blauwlijntje.png" />
          </image>
       </ImageView>
       <Label layoutX="505.0" layoutY="15.0" text="Pieter van Vliet" textFill="#889097">
@@ -82,7 +82,7 @@
       </CheckBox>
       <ImageView fitHeight="1.0" fitWidth="256.0" layoutX="172.0" layoutY="278.0">
          <image>
-            <Image url="@lijntje.png" />
+            <Image url="@../src/Views/lijntje.png" />
          </image>
       </ImageView>
    </children>
