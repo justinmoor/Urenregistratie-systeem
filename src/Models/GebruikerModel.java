@@ -2,15 +2,32 @@ package Models;
 
 public class GebruikerModel {
 
-    private String gebruikerID;
+    private int gebruikerID;
     private String voornaam;
     private String tussenvoegsel;
     private String achternaam;
     private String email;
     private String wachtwoord;
-    private int rechten;
+    private String rechten;
 
-    public GebruikerModel(String gebruikerID, String voornaam, String tussenvoegsel, String achternaam, String email, String wachtwoord, int rechten) {
+    @Override
+    public String toString() {
+        return "GebruikerModel{" +
+                "gebruikerID=" + gebruikerID +
+                ", voornaam='" + voornaam + '\'' +
+                ", tussenvoegsel='" + tussenvoegsel + '\'' +
+                ", achternaam='" + achternaam + '\'' +
+                ", email='" + email + '\'' +
+                ", wachtwoord='" + wachtwoord + '\'' +
+                ", rechten='" + rechten + '\'' +
+                '}';
+    }
+
+    public GebruikerModel(){
+
+    }
+
+    public GebruikerModel(int gebruikerID, String achternaam, String tussenvoegsel, String voornaam, String email, String wachtwoord, String rechten) {
         this.gebruikerID = gebruikerID;
         this.voornaam = voornaam;
         this.tussenvoegsel = tussenvoegsel;
@@ -21,7 +38,7 @@ public class GebruikerModel {
     }
 
     // Mensen zonder tussenvoegsel
-    public GebruikerModel(String gebruikerID, String voornaam, String achternaam, String email, String wachtwoord, int rechten) {
+    public GebruikerModel(int gebruikerID, String voornaam, String achternaam, String email, String wachtwoord, String rechten) {
         this.gebruikerID = gebruikerID;
         this.voornaam = voornaam;
         this.achternaam = achternaam;
@@ -30,11 +47,11 @@ public class GebruikerModel {
         this.rechten = rechten;
     }
 
-    public String getGebruikerID() {
+    public int getGebruikerID() {
         return gebruikerID;
     }
 
-    public void setGebruikerID(String gebruikerID) {
+    public void setGebruikerID(int gebruikerID) {
         this.gebruikerID = gebruikerID;
     }
 
@@ -78,11 +95,11 @@ public class GebruikerModel {
         this.wachtwoord = wachtwoord;
     }
 
-    public int getRechten() {
+    public String getRechten() {
         return rechten;
     }
 
-    public void setRechten(int rechten) {
+    public void setRechten(String rechten) {
         this.rechten = rechten;
     }
 }

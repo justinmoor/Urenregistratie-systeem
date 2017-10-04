@@ -20,7 +20,7 @@ public class InlogController {
 
     private DatabaseConnectie db;
     private GebruikerDAO gebruikerDAO;
-
+    private GebruikerModel model;
     public InlogController(Stage stage) {
 
         this.stage = stage;
@@ -35,9 +35,10 @@ public class InlogController {
     public void logIn(String email, String wachtwoord) {
         if(gebruikerDAO.getWachtwoordQuery(email).equals(wachtwoord)){
             System.out.println("Ingelogd");
-            gebruikerDAO.GetGebruikerFromDB(email);
+            model = gebruikerDAO.GetGebruikerFromDB(email);
+            System.out.println(model.toString());
         } else {
-            System.out.println("Werk2");
+            System.out.println("Gebruikersnaam of wachtwoord is fout.");
         }
     }
 }
