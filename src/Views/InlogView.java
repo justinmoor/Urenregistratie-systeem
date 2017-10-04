@@ -1,5 +1,6 @@
 package views;
 
+import Controllers.InlogController;
 import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -15,23 +16,30 @@ import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.stage.Stage;
 
-public class InlogView extends Application {
+public class InlogView extends Scene {
 	private GridPane gridpane;
-	
-	private VBox vbox;
-		private Label title;
 
-		private Label email;
-		private Label password;
+	private Label title;
+
+	private Label email;
+	private Label password;
 				
-		private TextField email_input;
-		private TextField password_input;
+	private TextField email_input;
+	private TextField password_input;
 		
-		private Button login;
+	private Button login;
 		
-	private Scene scene;
+	private InlogController controller;
 
-	public void start(Stage stage) {
+	public InlogView(InlogController controller){
+		super(new GridPane());
+		gridpane = (GridPane) this.getRoot();
+		this.controller = controller;
+
+		initGui();
+	}
+
+	public void initGui() {
 		gridpane = new GridPane();
 		gridpane.setAlignment(Pos.CENTER);
 		gridpane.setHgap(20);
@@ -61,15 +69,7 @@ public class InlogView extends Application {
 			login = new Button("Log in");
 			gridpane.add(login, 0, 3);
 		
-		scene = new Scene(gridpane, 600, 400);
 
-		stage.setTitle("Inlog");
-		stage.setScene(scene);
-		stage.show();
 	}
-	
-	public static void main(String[] args) {
-        launch(args);
-    }
 
 }
