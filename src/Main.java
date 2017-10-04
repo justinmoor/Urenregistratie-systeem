@@ -1,18 +1,16 @@
-import Database.DatabaseConnectie;
-import Views.LoginView;
+import Controllers.InlogController;
+import Views.InlogView;
 import javafx.application.Application;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Scene;
-import javafx.scene.image.Image;
-import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
-import static javafx.application.Application.launch;
 
 /**
  * Created by Ian on 9/11/2017.
  */
 public class Main extends Application {
+
+    private InlogView login;
+    private InlogController loginController;
 
     public static void main (String[] args){
         launch(args);
@@ -20,10 +18,8 @@ public class Main extends Application {
 
     public void start(Stage primaryStage) throws Exception{
 
-        Pane pane  = FXMLLoader.load(getClass().getResource("/Views/inlog.fxml"));
-        Scene scene = new Scene(pane);
-        primaryStage.setScene(scene);
-        primaryStage.show();
+        loginController = new InlogController(primaryStage);
+
     }
 
 }

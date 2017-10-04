@@ -1,30 +1,23 @@
 package Controllers;
 
-import DAO.GebruikerDAO;
-import Database.DatabaseConnectie;
-import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.PasswordField;
-import javafx.scene.control.TextField;
+
+import Views.InlogView;
+import javafx.stage.Stage;
 
 public class InlogController {
 
-    DatabaseConnectie db = new DatabaseConnectie();
+    private Stage stage;
+    private InlogView loginView;
 
-    @FXML
-    public Button logInButton = new Button();
+    public InlogController(Stage stage){
+        this.stage = stage;
+        loginView = new InlogView(this);
+        stage.setScene(loginView);
+        stage.show();
+    }
 
-    @FXML
-    public TextField naam = new TextField();
-
-    @FXML
-    public PasswordField ww = new PasswordField();
-
-    GebruikerDAO dao = new GebruikerDAO();
 
     public void logIn(){
-        if(dao.query(naam.getText(), ww.getText())){
-            System.out.println("Nice");
-        }
+
     }
 }
