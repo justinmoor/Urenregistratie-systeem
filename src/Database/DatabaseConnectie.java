@@ -3,7 +3,7 @@ package Database;
 import java.sql.*;
 
 public class DatabaseConnectie {
-    public static Connection connection;
+    private Connection connection;
 
     public DatabaseConnectie() {
         try {
@@ -15,5 +15,8 @@ public class DatabaseConnectie {
 
     }
 
+    public Connection getConnection(){
+        return this.connection;
+    }
 
 }

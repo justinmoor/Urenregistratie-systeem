@@ -6,6 +6,7 @@ import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
@@ -22,11 +23,12 @@ public class InlogView extends Scene {
 	private Label password;
 				
 	private TextField email_input;
-	private TextField password_input;
+	private PasswordField password_input;
 		
 	private Button login;
 		
 	private InlogController controller;
+	private Label foutief;
 
 	public InlogView(InlogController controller){
 		super(new GridPane(), 600,  400); // Nieuwe pane meegeven aan de superklasse (dus scene).
@@ -61,11 +63,14 @@ public class InlogView extends Scene {
 		password.setTextFill(Color.GREY);
 		gridpane.add(password, 0, 2);
 					
-		password_input = new TextField();
+		password_input = new PasswordField();
 		gridpane.add(password_input, 1, 2);
 					
 		login = new Button("Log in");
 		gridpane.add(login, 0, 3);
+
+		foutief = new Label("");
+		gridpane.add(foutief, 0, 4);
 
 
 	}
@@ -73,7 +78,11 @@ public class InlogView extends Scene {
 	//Functionele zaken initialiseren.
 	private void InitAction(){
 		login.setOnAction(e -> {
-			// controller.doedingen();
+			if(controller.logIn(email.getText(), password_input.getText()) == 2){
+				foutief.setText("De verkeerde gegevens zijn ingevoerd!");
+			} else if (controller.logIn(email.getText(), password_input.getText()) == 1){
+				foutief.setText("Geen connectie!");
+			}
 		});
 	}
 
