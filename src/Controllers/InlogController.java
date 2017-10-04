@@ -37,6 +37,9 @@ public class InlogController {
             System.out.println("Ingelogd");
             model = gebruikerDAO.GetGebruikerFromDB(email);
             System.out.println(model.toString());
+            HoofdMenuController hmc = new HoofdMenuController(stage,model);
+            hmc.setScene();
+
         } else {
             System.out.println("Gebruikersnaam of wachtwoord is fout.");
         }
