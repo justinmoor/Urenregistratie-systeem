@@ -3,6 +3,7 @@ package Controllers;
 
 import DAO.GebruikerDAO;
 import Database.DatabaseConnectie;
+import Models.GebruikerModel;
 import Views.InlogView;
 import javafx.stage.Stage;
 
@@ -30,7 +31,13 @@ public class InlogController {
         stage.show();
     }
 
-    public int logIn(String naam, String wachtwoord) {
-        return gebruikerDAO.query(naam, wachtwoord);
+
+    public void logIn(String email, String wachtwoord) {
+        if(gebruikerDAO.getWachtwoordQuery(email).equals(wachtwoord)){
+            System.out.println("Ingelogd");
+            gebruikerDAO.GetGebruikerFromDB(email);
+        } else {
+            System.out.println("Werk2");
+        }
     }
 }

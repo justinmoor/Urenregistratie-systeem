@@ -15,75 +15,71 @@ import javafx.scene.text.FontWeight;
 
 
 public class InlogView extends Scene {
-	private GridPane gridpane;
+    private GridPane gridpane;
 
-	private Label title;
+    private Label title;
 
-	private Label email;
-	private Label password;
-				
-	private TextField email_input;
-	private PasswordField password_input;
-		
-	private Button login;
-		
-	private InlogController controller;
-	private Label foutief;
+    private Label email;
+    private Label password;
 
-	public InlogView(InlogController controller){
-		super(new GridPane(), 600,  400); // Nieuwe pane meegeven aan de superklasse (dus scene).
-		gridpane = (GridPane) this.getRoot(); // Deze nieuwe gridpane van de superklasse wordt de gridpane die hier gebruikt wordt.
-		this.controller = controller; // Controller zaken, moeten we nog overleggen.
+    private TextField email_input;
+    private PasswordField password_input;
 
-		initGui(); // InitGui om alle grafische elementen te initialiseren.
-		InitAction(); // InitAction om alle functionaliteiten te initialiseren, denk aan knop.setOnAction() etc.
-	}
+    private Button login;
 
-	//Grafische elementen initialiseren.
-	public void initGui() {
-		gridpane.setAlignment(Pos.CENTER);
-		gridpane.setHgap(20);
-		gridpane.setVgap(15);
-		gridpane.setPadding(new Insets(25, 25, 25, 25));
-		gridpane.setStyle("-fx-background-color: #f9f9f7");
-		
-		title = new Label("Urenregistratie");
-		title.setFont(Font.font("SansSerif", FontWeight.BOLD, 30));
-		title.setTextFill(Color.GREY);
-		gridpane.add(title, 0, 0, 2, 1);
+    private InlogController controller;
+    private Label foutief;
 
-		email = new Label("E-Mail:");
-		email.setTextFill(Color.GREY);
-		gridpane.add(email, 0, 1);
-			
-		email_input = new TextField();
-		gridpane.add(email_input, 1, 1);
-			
-		password = new Label("Wachtwoord:");
-		password.setTextFill(Color.GREY);
-		gridpane.add(password, 0, 2);
-					
-		password_input = new PasswordField();
-		gridpane.add(password_input, 1, 2);
-					
-		login = new Button("Log in");
-		gridpane.add(login, 0, 3);
+    public InlogView(InlogController controller) {
+        super(new GridPane(), 600, 400); // Nieuwe pane meegeven aan de superklasse (dus scene).
+        gridpane = (GridPane) this.getRoot(); // Deze nieuwe gridpane van de superklasse wordt de gridpane die hier gebruikt wordt.
+        this.controller = controller; // Controller zaken, moeten we nog overleggen.
 
-		foutief = new Label("");
-		gridpane.add(foutief, 0, 4);
+        initGui(); // InitGui om alle grafische elementen te initialiseren.
+        InitAction(); // InitAction om alle functionaliteiten te initialiseren, denk aan knop.setOnAction() etc.
+    }
+
+    //Grafische elementen initialiseren.
+    public void initGui() {
+        gridpane.setAlignment(Pos.CENTER);
+        gridpane.setHgap(20);
+        gridpane.setVgap(15);
+        gridpane.setPadding(new Insets(25, 25, 25, 25));
+        gridpane.setStyle("-fx-background-color: #f9f9f7");
+
+        title = new Label("Urenregistratie");
+        title.setFont(Font.font("SansSerif", FontWeight.BOLD, 30));
+        title.setTextFill(Color.GREY);
+        gridpane.add(title, 0, 0, 2, 1);
+
+        email = new Label("E-Mail:");
+        email.setTextFill(Color.GREY);
+        gridpane.add(email, 0, 1);
+
+        email_input = new TextField();
+        gridpane.add(email_input, 1, 1);
+
+        password = new Label("Wachtwoord:");
+        password.setTextFill(Color.GREY);
+        gridpane.add(password, 0, 2);
+
+        password_input = new PasswordField();
+        gridpane.add(password_input, 1, 2);
+
+        login = new Button("Log in");
+        gridpane.add(login, 0, 3);
+
+        foutief = new Label("");
+        gridpane.add(foutief, 0, 4);
 
 
-	}
+    }
 
-	//Functionele zaken initialiseren.
-	private void InitAction(){
-		login.setOnAction(e -> {
-			if(controller.logIn(email.getText(), password_input.getText()) == 2){
-				foutief.setText("De verkeerde gegevens zijn ingevoerd!");
-			} else if (controller.logIn(email.getText(), password_input.getText()) == 1){
-				foutief.setText("Geen connectie!");
-			}
-		});
-	}
+    //Functionele zaken initialiseren.
+    private void InitAction() {
+        login.setOnAction(e -> {
+            controller.logIn(email_input.getText(), password_input.getText());
+        });
+    }
 
 }
