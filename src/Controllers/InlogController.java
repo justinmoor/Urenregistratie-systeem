@@ -1,15 +1,11 @@
 package Controllers;
 
-
 import DAO.GebruikerDAO;
 import Database.DatabaseConnectie;
 import Models.GebruikerModel;
 import Views.InlogView;
 import javafx.stage.Stage;
 
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
 
 public class InlogController {
 
