@@ -12,11 +12,9 @@ public class DatabaseConnectie {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
     }
 
     public Connection getConnection(){
-        return this.connection;
+        return this.connection; //Geeft de connectie terug
     }
-
 }
