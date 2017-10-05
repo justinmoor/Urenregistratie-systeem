@@ -1,18 +1,18 @@
 package Controllers;
 
+import Database.DatabaseConnectie;
+import Models.GebruikerModel;
+
 public class GebruikerController {
 
-    private String voornaam;
-    private String tussenvoegsel;
-    private String achternaam;
-    private String email;
-    private char rechten;
+    private GebruikerModel model;
+    private DatabaseConnectie dbc;
+    public GebruikerController(){
 
-    public GebruikerController(String voornaam, String tussenvoegsel, String achternaam, String email, char rechten) {
-        this.voornaam = voornaam;
-        this.tussenvoegsel = tussenvoegsel;
-        this.achternaam = achternaam;
-        this.email = email;
-        this.rechten = rechten;
+    }
+
+    public GebruikerController(DatabaseConnectie dbc, GebruikerModel model) {
+        this.model = model;
+        this.dbc = dbc;
     }
 }

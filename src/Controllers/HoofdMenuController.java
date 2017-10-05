@@ -1,5 +1,6 @@
 package Controllers;
 
+import Database.DatabaseConnectie;
 import Models.GebruikerModel;
 import Views.AccountToevoegenView;
 import Views.AdministratieHoofdmenuView;
@@ -14,13 +15,21 @@ public class HoofdMenuController {
     private AdministratieHoofdmenuView adminView;
     private AccountToevoegenView accountToevoegenView;
 
-    public HoofdMenuController(Stage stage, GebruikerModel gebruikerModel){
+    private GebruikerController gebruikerController;
+
+    private DatabaseConnectie db;
+
+    public HoofdMenuController(Stage stage, GebruikerModel gebruikerModel, DatabaseConnectie db){
         this.stage = stage;
         this.gebruikerModel = gebruikerModel;
 
+        this.db = db;
+
+        //gebruikerController = new GebruikerController(this);
+
         personeelView = new PersoneelHoofdmenuView(this);
         adminView = new AdministratieHoofdmenuView(this);
-        accountToevoegenView = new AccountToevoegenView(this);
+        //accountToevoegenView = new AccountToevoegenView(this);
     }
 
 
@@ -29,11 +38,12 @@ public class HoofdMenuController {
     }
 
     public void setAdminHoofdMenu(){
-        stage.setScene(adminView);
+       stage.setScene(adminView);
     }
 
     public void setAccountToevoegenView(){
-        stage.setScene(accountToevoegenView);
+        new GebruikerToevoegenController(stage, db);
+        //stage.setScene(accountToevoegenView);
     }
 
 }
