@@ -48,12 +48,10 @@ public class InlogController {
             }
 
         } else {
-<<<<<<< HEAD
+
             System.out.println("Gebruikersnaam of wachtwoord is fout.");
             loginView.setFoutief();
-=======
-            System.out.println("Gebruikersnaam of wachtwoord is fout!!!!");
->>>>>>> f5a68df5883cadee6e751dc3225a83253223821c
+
         }
     }
 }
