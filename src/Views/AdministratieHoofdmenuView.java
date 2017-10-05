@@ -1,5 +1,6 @@
-package Views;
+package views;
 
+import controllers.AdministratieHoofdmenuController;
 import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -15,22 +16,30 @@ import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.stage.Stage;
 
-public class AdministratieHoofdmenuView extends Application {
+public class AdministratieHoofdmenuView extends Scene {
 	private GridPane gridpane;
 	
 	private HBox hbox;
-		private VBox links;
-			private Button uren;
-			private Button week;
+	private VBox links;
+	private Button uren;
+	private Button week;
 		
-		private VBox rechts;
-			private Button account;
-			private Button personeel;
-		
-	private Scene scene;
+	private VBox rechts;
+	private Button account;
+	private Button personeel;
+			
+	private AdministratieHoofdmenuController controller;
+	
+	public AdministratieHoofdmenuView(AdministratieHoofdmenuController controller){
+		super(new GridPane(), 600,  400); 		// Nieuwe pane meegeven aan de superklasse (dus scene).
+		gridpane = (GridPane) this.getRoot(); 	// Deze nieuwe gridpane van de superklasse wordt de gridpane die hier gebruikt wordt.
+		this.controller = controller; 			// Controller zaken, moeten we nog overleggen.
 
-	public void start(Stage stage) {
-		gridpane = new GridPane();
+		initGui(); 		// InitGui om alle grafische elementen te initialiseren.
+		InitAction();	// InitAction om alle functionaliteiten te initialiseren, denk aan knop.setOnAction() etc.
+	}
+
+	public void initGui() {
 		gridpane.setAlignment(Pos.CENTER);
 		gridpane.setPadding(new Insets(25, 25, 25, 25));
 		gridpane.setStyle("-fx-background-color: #f9f9f7");
@@ -67,17 +76,22 @@ public class AdministratieHoofdmenuView extends Application {
 		hbox.getChildren().addAll(links, rechts);
 		
 		gridpane.add(hbox, 1, 0);
-		
-		scene = new Scene(gridpane, 600, 400);
-
-		stage.setTitle("Hoofdmenu");
-		stage.setScene(scene);
-		stage.show();
 	}
 	
-	public static void main(String[] args) {
-        launch(args);
-    }
+	private void InitAction(){
+		uren.setOnAction(e -> {
+			// controller.doedingen();
+		});
+		week.setOnAction(e -> {
+			// controller.doedingen();
+		});
+		account.setOnAction(e -> {
+			// controller.doedingen();
+		});
+		personeel.setOnAction(e -> {
+			// controller.doedingen();
+		});
+	}
 
 }
 
