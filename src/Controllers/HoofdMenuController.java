@@ -2,7 +2,6 @@ package Controllers;
 
 import Models.GebruikerModel;
 import Views.AdministratieHoofdmenuView;
-import Views.InlogView;
 import Views.PersoneelHoofdmenuView;
 import javafx.stage.Stage;
 

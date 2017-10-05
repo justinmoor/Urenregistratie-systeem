@@ -1,20 +1,12 @@
-package views;
+package Views;
 
-import controllers.PersoneelHoofdmenuController;
-import javafx.application.Application;
+import Controllers.HoofdMenuController;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
-import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-import javafx.scene.paint.Color;
-import javafx.scene.text.Font;
-import javafx.scene.text.FontWeight;
-import javafx.stage.Stage;
 
 public class PersoneelHoofdmenuView extends Scene {
 	private GridPane gridpane;	
@@ -22,9 +14,9 @@ public class PersoneelHoofdmenuView extends Scene {
 	private Button uren;
 	private Button week;
 		
-	private PersoneelHoofdmenuController controller;
+	private HoofdMenuController controller;
 	
-	public PersoneelHoofdmenuView(PersoneelHoofdmenuController controller){
+	public PersoneelHoofdmenuView(HoofdMenuController controller){
 		super(new GridPane(), 600,  400); 		// Nieuwe pane meegeven aan de superklasse (dus scene).
 		gridpane = (GridPane) this.getRoot(); 	// Deze nieuwe gridpane van de superklasse wordt de gridpane die hier gebruikt wordt.
 		this.controller = controller; 			// Controller zaken, moeten we nog overleggen.

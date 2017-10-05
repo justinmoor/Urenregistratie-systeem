@@ -42,7 +42,7 @@ public class InlogController {
             if(model.getRechten().equals("1")) {
                 hmc.setPersoneelHoofdmenu();
             } else if (model.getRechten().equals("0")){
-
+                hmc.setAdminHoofdMenu();
             }
 
         } else {
