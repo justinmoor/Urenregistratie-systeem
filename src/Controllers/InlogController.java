@@ -21,12 +21,14 @@ public class InlogController {
     private DatabaseConnectie db;
     private GebruikerDAO gebruikerDAO;
     private GebruikerModel model;
+
     public InlogController(Stage stage) {
 
         this.stage = stage;
         loginView = new InlogView(this);
         db = new DatabaseConnectie();
         gebruikerDAO = new GebruikerDAO(db);
+        menuController = new HoofdMenuController(stage,model);
         stage.setScene(loginView);
         stage.show();
     }
@@ -37,8 +39,13 @@ public class InlogController {
             System.out.println("Ingelogd");
             model = gebruikerDAO.GetGebruikerFromDB(email);
             System.out.println(model.toString());
-            HoofdMenuController hmc = new HoofdMenuController(stage,model);
-            hmc.setScene();
+
+
+            if(model.getRechten().equals("1")) {
+                menuController.setPersoneelHoofdmenu();
+            } else if (model.getRechten().equals("0")){
+                menuController.setAdminHoofdMenu();
+            }
 
         } else {
             System.out.println("Gebruikersnaam of wachtwoord is fout.");

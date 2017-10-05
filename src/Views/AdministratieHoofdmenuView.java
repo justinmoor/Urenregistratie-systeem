@@ -1,6 +1,7 @@
-package views;
+package Views;
 
-import controllers.AdministratieHoofdmenuController;
+
+import Controllers.HoofdMenuController;
 import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -27,14 +28,13 @@ public class AdministratieHoofdmenuView extends Scene {
 	private VBox rechts;
 	private Button account;
 	private Button personeel;
-			
-	private AdministratieHoofdmenuController controller;
-	
-	public AdministratieHoofdmenuView(AdministratieHoofdmenuController controller){
+
+	private HoofdMenuController controller;
+
+	public AdministratieHoofdmenuView(HoofdMenuController controller){
 		super(new GridPane(), 600,  400); 		// Nieuwe pane meegeven aan de superklasse (dus scene).
 		gridpane = (GridPane) this.getRoot(); 	// Deze nieuwe gridpane van de superklasse wordt de gridpane die hier gebruikt wordt.
-		this.controller = controller; 			// Controller zaken, moeten we nog overleggen.
-
+		this.controller = controller;
 		initGui(); 		// InitGui om alle grafische elementen te initialiseren.
 		InitAction();	// InitAction om alle functionaliteiten te initialiseren, denk aan knop.setOnAction() etc.
 	}
