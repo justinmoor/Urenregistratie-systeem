@@ -80,7 +80,7 @@ public class AdministratieHoofdmenuView extends Scene {
 	
 	private void InitAction(){
 		uren.setOnAction(e -> {
-			// controller.doedingen();
+			controller.setInvullenUrenView();
 		});
 		week.setOnAction(e -> {
 			// controller.doedingen();

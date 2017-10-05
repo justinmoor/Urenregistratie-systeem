@@ -73,10 +73,8 @@ public class InlogView extends Scene {
         foutief = new Label("");
         gridpane.add(foutief, 0, 4, 4, 1);
 
-<<<<<<< HEAD
-=======
         this.getStylesheets().add("Views/styles.css");
->>>>>>> 1a64c329d8c15ef71ccd481d43528547def52df1
+
     }
 
     //Functionele zaken initialiseren.
