@@ -86,7 +86,7 @@ public class AdministratieHoofdmenuView extends Scene {
 			// controller.doedingen();
 		});
 		account.setOnAction(e -> {
-			// controller.doedingen();
+			controller.setAccountToevoegenView();
 		});
 		personeel.setOnAction(e -> {
 			// controller.doedingen();

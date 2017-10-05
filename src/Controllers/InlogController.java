@@ -28,6 +28,7 @@ public class InlogController {
         loginView = new InlogView(this);
         db = new DatabaseConnectie();
         gebruikerDAO = new GebruikerDAO(db);
+
         stage.setScene(loginView);
         stage.show();
     }
@@ -39,6 +40,7 @@ public class InlogController {
             System.out.println(model.toString());
 
             menuController = new HoofdMenuController(stage,model);
+
             if(model.getRechten().equals("1")) {
                 menuController.setPersoneelHoofdmenu();
             } else if (model.getRechten().equals("0")){

@@ -58,5 +58,28 @@ public class GebruikerDAO {
         }
         return wachtwoord;
     }
+
+    public void insertAccount(String voornaam, String tussenvoegsel, String achternaam, String email, char rechten){
+        String query = "INSERT INTO personeel (achternaam, tussenvoegsel, voornaam, email, rechten) VALUES (?, ?, ?, ?, ?);";
+        String r = "" + rechten;
+        try {
+            PreparedStatement statement = db.getConnection().prepareStatement(query);
+            statement.setString(1, voornaam);
+
+            if(tussenvoegsel.equals("")){
+                statement.setString(2, null);
+            } else {
+                statement.setString(2, tussenvoegsel);
+            }
+            statement.setString(3, achternaam);
+            statement.setString(4, email);
+            statement.setString(5, r);
+
+            statement.executeQuery();
+        } catch (SQLException e){
+            e.printStackTrace();
+        }
+    }
+
 }
 
