@@ -1,13 +1,12 @@
 package Views;
 
+import Controllers.GebruikerToevoegenController;
 import Controllers.HoofdMenuController;
+import Models.GebruikerModel;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.CheckBox;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.paint.Color;
@@ -24,20 +23,20 @@ public class AccountToevoegenView extends Scene {
 		private Label email;
 		private Label rechten;
 					
-		private TextField voornaam_input;
-		private TextField tussenvoegsel_input;
-		private TextField achternaam_input;
-		private TextField email_input;
+		private TextField voornaamInput;
+		private TextField tussenvoegselInput;
+		private TextField achternaamInput;
+		private TextField emailInput;
 		private HBox hbox;
-		private CheckBox personeel;
-		private CheckBox administratie;
+
+		private ComboBox rechtenKeuze;
 			
 		private Button toevoegen;
-		private HoofdMenuController controller;
-		
-//	private AccountToevoegenController controller;
+		private GebruikerToevoegenController controller;
 
-	public AccountToevoegenView(HoofdMenuController controller){
+
+
+	public AccountToevoegenView(GebruikerToevoegenController controller){
 		super(new GridPane(), 600,  400); 		// Nieuwe pane meegeven aan de superklasse (dus scene).
 		gridpane = (GridPane) this.getRoot(); 	// Deze nieuwe gridpane van de superklasse wordt de gridpane die hier gebruikt wordt.
 		this.controller = controller; 			// Controller zaken, moeten we nog overleggen.
@@ -63,38 +62,42 @@ public class AccountToevoegenView extends Scene {
 		voornaam.setTextFill(Color.GREY);
 		gridpane.add(voornaam, 0, 1);
 			
-		voornaam_input = new TextField();
-		gridpane.add(voornaam_input, 1, 1);
+		voornaamInput = new TextField();
+		gridpane.add(voornaamInput, 1, 1);
 			
 		tussenvoegsel = new Label("Tussenvoegsel:");
 		tussenvoegsel.setTextFill(Color.GREY);
 		gridpane.add(tussenvoegsel, 0, 2);
 					
-		tussenvoegsel_input = new TextField();
-		gridpane.add(tussenvoegsel_input, 1, 2);
+		tussenvoegselInput = new TextField();
+		gridpane.add(tussenvoegselInput, 1, 2);
 		
 		achternaam = new Label("Achternaam:");
 		achternaam.setTextFill(Color.GREY);
 		gridpane.add(achternaam, 0, 3);
 					
-		achternaam_input = new TextField();
-		gridpane.add(achternaam_input, 1, 3);
+		achternaamInput = new TextField();
+		gridpane.add(achternaamInput, 1, 3);
 		
 		email = new Label("E-Mail:");
 		email.setTextFill(Color.GREY);
 		gridpane.add(email, 0, 4);
 					
-		email_input = new TextField();
-		gridpane.add(email_input, 1, 4);
+		emailInput = new TextField();
+		gridpane.add(emailInput, 1, 4);
 		
 		rechten = new Label("Rechten:");
 		rechten.setTextFill(Color.GREY);
 		gridpane.add(rechten, 0, 5);
 					
 		hbox = new HBox(10);
-		personeel = new CheckBox("Personeel");
-		administratie = new CheckBox("Administratie");
-		hbox.getChildren().addAll(personeel, administratie);
+		rechtenKeuze = new ComboBox();
+		rechtenKeuze.getItems().addAll(
+				"Personeel",
+				"Administratie"
+		);
+		rechtenKeuze.setValue("Personeel");
+		hbox.getChildren().addAll(rechtenKeuze);
 		gridpane.add(hbox, 1, 5);
 					
 		toevoegen = new Button("Toevoegen");
@@ -104,9 +107,10 @@ public class AccountToevoegenView extends Scene {
 	//Functionele zaken initialiseren.
 	private void InitAction(){
 		toevoegen.setOnAction(e -> {
-
+			controller.insert(voornaamInput.getText(), tussenvoegselInput.getText(), achternaamInput.getText(), emailInput.getText(), rechtenKeuze.getValue().toString());
 		});
 	}
+
 
 }
 

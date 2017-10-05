@@ -39,7 +39,7 @@ public class InlogController {
             model = gebruikerDAO.GetGebruikerFromDB(email);
             System.out.println(model.toString());
 
-            menuController = new HoofdMenuController(stage,model);
+            menuController = new HoofdMenuController(stage,model, db);
 
             if(model.getRechten().equals("1")) {
                 menuController.setPersoneelHoofdmenu();
