@@ -70,7 +70,7 @@ public class InlogView extends Scene {
         gridpane.add(login, 0, 3);
 
         foutief = new Label("");
-        gridpane.add(foutief, 0, 4);
+        gridpane.add(foutief, 0, 4, 4, 1);
 
 
     }
