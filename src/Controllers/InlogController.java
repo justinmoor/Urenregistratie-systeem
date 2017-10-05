@@ -38,7 +38,12 @@ public class InlogController {
             model = gebruikerDAO.GetGebruikerFromDB(email);
             System.out.println(model.toString());
             HoofdMenuController hmc = new HoofdMenuController(stage,model);
-            hmc.setScene();
+
+            if(model.getRechten().equals("1")) {
+                hmc.setPersoneelHoofdmenu();
+            } else if (model.getRechten().equals("0")){
+
+            }
 
         } else {
             System.out.println("Gebruikersnaam of wachtwoord is fout.");
