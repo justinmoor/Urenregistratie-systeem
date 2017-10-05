@@ -1,6 +1,6 @@
 package Views;
 
-import Controllers.InlogController;
+import Controllers.LoginController;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -14,7 +14,7 @@ import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 
 
-public class InlogView extends Scene {
+public class LoginView extends Scene {
     private GridPane gridpane;
 
     private Label title;
@@ -27,10 +27,10 @@ public class InlogView extends Scene {
 
     private Button login;
 
-    private InlogController controller;
+    private LoginController controller;
     private Label feedback;
 
-    public InlogView(InlogController controller) {
+    public LoginView(LoginController controller) {
         super(new GridPane(), 600, 400); // Nieuwe pane meegeven aan de superklasse (dus scene).
         gridpane = (GridPane) this.getRoot(); // Deze nieuwe gridpane van de superklasse wordt de gridpane die hier gebruikt wordt.
         this.controller = controller; // Controller zaken, moeten we nog overleggen.

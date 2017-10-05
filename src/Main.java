@@ -1,5 +1,5 @@
-import Controllers.InlogController;
-import Views.InlogView;
+import Controllers.LoginController;
+import Views.LoginView;
 import javafx.application.Application;
 import javafx.stage.Stage;
 
@@ -9,8 +9,8 @@ import javafx.stage.Stage;
  */
 public class Main extends Application {
 
-    private InlogView login;
-    private InlogController loginController;
+    private LoginView login;
+    private LoginController loginController;
 
     public static void main (String[] args){
         launch(args);
@@ -18,7 +18,7 @@ public class Main extends Application {
 
     public void start(Stage primaryStage) throws Exception{
 
-        loginController = new InlogController(primaryStage);
+        loginController = new LoginController(primaryStage);
 
     }
 

@@ -3,14 +3,14 @@ package Controllers;
 import DAO.GebruikerDAO;
 import Database.DatabaseConnectie;
 import Models.GebruikerModel;
-import Views.InlogView;
+import Views.LoginView;
 import javafx.stage.Stage;
 
 
-public class InlogController {
+public class LoginController {
 
     private Stage stage;
-    private InlogView loginView;
+    private LoginView loginView;
 
     private HoofdMenuController menuController;
 
@@ -18,10 +18,10 @@ public class InlogController {
     private GebruikerDAO gebruikerDAO;
     private GebruikerModel model;
 
-    public InlogController(Stage stage) {
+    public LoginController(Stage stage) {
 
         this.stage = stage;
-        loginView = new InlogView(this);
+        loginView = new LoginView(this);
         db = new DatabaseConnectie();
         gebruikerDAO = new GebruikerDAO(db);
 
