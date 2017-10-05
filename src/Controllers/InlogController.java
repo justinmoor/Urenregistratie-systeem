@@ -28,7 +28,7 @@ public class InlogController {
         loginView = new InlogView(this);
         db = new DatabaseConnectie();
         gebruikerDAO = new GebruikerDAO(db);
-        menuController = new HoofdMenuController(stage,model);
+
         stage.setScene(loginView);
         stage.show();
     }
@@ -36,10 +36,10 @@ public class InlogController {
 
     public void logIn(String email, String wachtwoord) {
         if(gebruikerDAO.getWachtwoordQuery(email).equals(wachtwoord)){
-            System.out.println("Ingelogd");
             model = gebruikerDAO.GetGebruikerFromDB(email);
             System.out.println(model.toString());
 
+            menuController = new HoofdMenuController(stage,model);
 
             if(model.getRechten().equals("p")) {
                 menuController.setPersoneelHoofdmenu();
@@ -48,8 +48,12 @@ public class InlogController {
             }
 
         } else {
+<<<<<<< HEAD
             System.out.println("Gebruikersnaam of wachtwoord is fout.");
             loginView.setFoutief();
+=======
+            System.out.println("Gebruikersnaam of wachtwoord is fout!!!!");
+>>>>>>> f5a68df5883cadee6e751dc3225a83253223821c
         }
     }
 }
