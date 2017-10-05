@@ -28,7 +28,7 @@ public class InlogView extends Scene {
     private Button login;
 
     private InlogController controller;
-    private Label foutief;
+    private Label feedback;
 
     public InlogView(InlogController controller) {
         super(new GridPane(), 600, 400); // Nieuwe pane meegeven aan de superklasse (dus scene).
@@ -69,8 +69,8 @@ public class InlogView extends Scene {
         login = new Button("Log in");
         gridpane.add(login, 0, 3);
 
-        foutief = new Label("");
-        gridpane.add(foutief, 0, 4, 4, 1);
+        feedback = new Label("");
+        gridpane.add(feedback, 0, 4, 4, 1);
 
 
     }
@@ -78,8 +78,15 @@ public class InlogView extends Scene {
     //Functionele zaken initialiseren.
     private void InitAction() {
         login.setOnAction(e -> {
-            controller.logIn(email_input.getText(), password_input.getText());
+            if(email_input.getText()==null||password_input.getText()==null){
+                feedback.setText("Vul een email en wachtwoord in pls");
+            } else {
+                controller.logIn(email_input.getText(), password_input.getText());
+            }
         });
     }
 
+    public void setFeedback(String feedback) {
+        this.feedback.setText(feedback);
+    }
 }

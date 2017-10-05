@@ -35,20 +35,22 @@ public class InlogController {
 
 
     public void logIn(String email, String wachtwoord) {
-        if(gebruikerDAO.getWachtwoordQuery(email).equals(wachtwoord)){
-            model = gebruikerDAO.GetGebruikerFromDB(email);
-            System.out.println(model.toString());
 
-            menuController = new HoofdMenuController(stage,model, db);
+            if (gebruikerDAO.getWachtwoordQuery(email).equals(wachtwoord)) {
+                model = gebruikerDAO.GetGebruikerFromDB(email);
+                System.out.println(model.toString());
 
-            if(model.getRechten().equals("0")) {
-                menuController.setPersoneelHoofdmenu();
-            } else if (model.getRechten().equals("1")){
-                menuController.setAdminHoofdMenu();
+                menuController = new HoofdMenuController(stage, model, db);
+
+                if (model.getRechten().equals("0")) {
+                    menuController.setPersoneelHoofdmenu();
+                } else if (model.getRechten().equals("1")) {
+                    menuController.setAdminHoofdMenu();
+                }
+
+            } else {
+                System.out.println("Gebruikersnaam of wachtwoord is fout!!!!");
             }
 
-        } else {
-            System.out.println("Gebruikersnaam of wachtwoord is fout!!!!");
-        }
     }
 }
