@@ -1,6 +1,6 @@
 package Views;
 
-import Controllers.InlogController;
+import Controllers.LoginController;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -14,7 +14,7 @@ import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 
 
-public class InlogView extends Scene {
+public class LoginView extends Scene {
     private GridPane gridpane;
 
     private Label title;
@@ -27,10 +27,10 @@ public class InlogView extends Scene {
 
     private Button login;
 
-    private InlogController controller;
-    private Label foutief;
+    private LoginController controller;
+    private Label feedback;
 
-    public InlogView(InlogController controller) {
+    public LoginView(LoginController controller) {
         super(new GridPane(), 600, 400); // Nieuwe pane meegeven aan de superklasse (dus scene).
         gridpane = (GridPane) this.getRoot(); // Deze nieuwe gridpane van de superklasse wordt de gridpane die hier gebruikt wordt.
         this.controller = controller; // Controller zaken, moeten we nog overleggen.
@@ -70,22 +70,24 @@ public class InlogView extends Scene {
         login = new Button("Log in");
         gridpane.add(login, 0, 3);
 
-        foutief = new Label("");
-        gridpane.add(foutief, 0, 4, 4, 1);
+        feedback = new Label("");
+        gridpane.add(feedback, 0, 4, 4, 1);
 
         this.getStylesheets().add("Views/styles.css");
-
     }
 
     //Functionele zaken initialiseren.
     private void InitAction() {
         login.setOnAction(e -> {
-            controller.logIn(email_input.getText(), password_input.getText());
+            if(email_input.getText()==null||password_input.getText()==null){
+                feedback.setText("Vul een email en wachtwoord in pls");
+            } else {
+                controller.logIn(email_input.getText(), password_input.getText());
+            }
         });
     }
 
-    public void setFoutief() {
-        foutief.setText("Gebruikersnaam of wachtwoord is fout.");
+    public void setFeedback(String feedback) {
+        this.feedback.setText(feedback);
     }
-
 }
