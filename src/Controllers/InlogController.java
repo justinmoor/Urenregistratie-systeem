@@ -41,9 +41,9 @@ public class InlogController {
 
             menuController = new HoofdMenuController(stage,model, db);
 
-            if(model.getRechten().equals("1")) {
+            if(model.getRechten().equals("0")) {
                 menuController.setPersoneelHoofdmenu();
-            } else if (model.getRechten().equals("0")){
+            } else if (model.getRechten().equals("1")){
                 menuController.setAdminHoofdMenu();
             }
 
