@@ -19,12 +19,12 @@ import javafx.scene.text.FontWeight;
 import javafx.stage.Stage;
 
 public class PersoneelHoofdmenuView extends Scene {
-	HoofdMenuController controller;
-	GridPane gridpane;
-	public Label persoonNaam;
-	public Label persoonEmail;
+	private HoofdMenuController controller;
+	private GridPane gridpane;
+	private  Label persoonNaam;
+	private Label persoonEmail;
 	public PersoneelHoofdmenuView(HoofdMenuController controller) {
-		super(new GridPane(), 1200, 800); // Nieuwe pane meegeven aan de superklasse (dus scene).
+		super(new GridPane(), 600, 400); // Nieuwe pane meegeven aan de superklasse (dus scene).
 		gridpane = (GridPane) this.getRoot(); // Deze nieuwe gridpane van de superklasse wordt de gridpane die hier gebruikt wordt.
 		this.controller = controller; // Controller zaken, moeten we nog overleggen.
 
@@ -41,7 +41,7 @@ public class PersoneelHoofdmenuView extends Scene {
 		gridpane.setPadding(new Insets(25, 25, 25, 25));
 		gridpane.setStyle("-fx-background-color: #f9f9f7");
 
-		persoonEmail = new Label();
+		persoonEmail = new Label("Ingelogd!");
 		persoonNaam = new Label();
 
 		gridpane.getChildren().addAll(persoonEmail, persoonNaam);

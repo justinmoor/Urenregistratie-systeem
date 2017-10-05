@@ -15,7 +15,7 @@ public class HoofdMenuController {
         this.stage = stage;
         this.gebruikerModel = gebruikerModel;
 
-        PersoneelHoofdmenuView view = new PersoneelHoofdmenuView(this);
+        personeelView = new PersoneelHoofdmenuView(this);
     }
 
 
