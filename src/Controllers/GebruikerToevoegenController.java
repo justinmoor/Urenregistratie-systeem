@@ -8,7 +8,6 @@ import javafx.stage.Stage;
 
 public class GebruikerToevoegenController {
     private AccountToevoegenView accountToevoegenView;
-    private GebruikerModel gebruikerModel;
     private DatabaseConnectie db;
     private GebruikerDAO dao;
 
@@ -30,6 +29,4 @@ public class GebruikerToevoegenController {
 
         dao.insertAccount(voornaam, tussenvoegsel, achternaam, email, rechten);
     }
-
-
 }

@@ -48,6 +48,7 @@ public class InlogView extends Scene {
         gridpane.setStyle("-fx-background-color: #f9f9f7");
 
         title = new Label("Urenregistratie");
+        title.setId("title");
         title.setFont(Font.font("SansSerif", FontWeight.BOLD, 30));
         title.setTextFill(Color.GREY);
         gridpane.add(title, 0, 0, 2, 1);
@@ -72,6 +73,10 @@ public class InlogView extends Scene {
         foutief = new Label("");
         gridpane.add(foutief, 0, 4, 4, 1);
 
+<<<<<<< HEAD
+=======
+        this.getStylesheets().add("Views/styles.css");
+>>>>>>> 1a64c329d8c15ef71ccd481d43528547def52df1
     }
 
     //Functionele zaken initialiseren.

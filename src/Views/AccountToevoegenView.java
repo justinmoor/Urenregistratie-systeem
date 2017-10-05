@@ -108,9 +108,8 @@ public class AccountToevoegenView extends Scene {
 	private void InitAction(){
 		toevoegen.setOnAction(e -> {
 			controller.insert(voornaamInput.getText(), tussenvoegselInput.getText(), achternaamInput.getText(), emailInput.getText(), rechtenKeuze.getValue().toString());
+
 		});
 	}
-
-
 }
 
