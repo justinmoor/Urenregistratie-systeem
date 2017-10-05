@@ -70,9 +70,7 @@ public class InlogView extends Scene {
         gridpane.add(login, 0, 3);
 
         foutief = new Label("");
-        gridpane.add(foutief, 0, 4);
-
-
+        gridpane.add(foutief, 0, 4, 4, 1);
     }
 
     //Functionele zaken initialiseren.
@@ -80,6 +78,10 @@ public class InlogView extends Scene {
         login.setOnAction(e -> {
             controller.logIn(email_input.getText(), password_input.getText());
         });
+    }
+
+    public void setFoutief() {
+        foutief.setText("Gebruikersnaam of wachtwoord is fout.");
     }
 
 }
