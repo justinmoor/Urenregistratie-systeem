@@ -41,9 +41,9 @@ public class InlogController {
             System.out.println(model.toString());
 
 
-            if(model.getRechten().equals("1")) {
+            if(model.getRechten().equals("p")) {
                 menuController.setPersoneelHoofdmenu();
-            } else if (model.getRechten().equals("0")){
+            } else if (model.getRechten().equals("a")){
                 menuController.setAdminHoofdMenu();
             }
 
