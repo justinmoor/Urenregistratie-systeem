@@ -1,6 +1,7 @@
 package Views;
 
 import Controllers.InlogController;
+import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -8,10 +9,13 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyCode;
 import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
+
+import java.awt.event.KeyEvent;
 
 
 public class InlogView extends Scene {
@@ -73,6 +77,7 @@ public class InlogView extends Scene {
         foutief = new Label("");
         gridpane.add(foutief, 0, 4, 4, 1);
 
+
         this.getStylesheets().add("Views/styles.css");
     }
 
@@ -81,6 +86,7 @@ public class InlogView extends Scene {
         login.setOnAction(e -> {
             controller.logIn(email_input.getText(), password_input.getText());
         });
-    }
 
+        login.setDefaultButton(true); // Gebruik enter om in te loggen. (enige knop op het scherm, dus default knop.)
+    }
 }

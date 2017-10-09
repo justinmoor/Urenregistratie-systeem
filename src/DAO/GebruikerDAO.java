@@ -16,7 +16,6 @@ public class GebruikerDAO {
         this.db = db;
     }
 
-
     // Accepteert een email string en geeft de bijbehorende gebruiker uit de database terug.
     public GebruikerModel GetGebruikerFromDB(String email){
         GebruikerModel model = new GebruikerModel();
@@ -102,7 +101,6 @@ public class GebruikerDAO {
 
                 gebruikers.add(gebruiker);
             }
-
         } catch(SQLException e){
             e.printStackTrace();
         }
