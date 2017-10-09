@@ -5,6 +5,7 @@ import Models.GebruikerModel;
 import Models.IngevuldeTijdModel;
 import Views.AccountToevoegenView;
 import Views.AdministratieHoofdmenuView;
+import Views.GebruikerInfoView;
 import Views.PersoneelHoofdmenuView;
 import javafx.stage.Stage;
 
@@ -15,6 +16,7 @@ public class HoofdMenuController {
     private IngevuldeTijdModel tijdmodel;
     private PersoneelHoofdmenuView personeelView;
     private AdministratieHoofdmenuView adminView;
+    private GebruikerInfoView gebruikerInfoView;
     private AccountToevoegenView accountToevoegenView;
 
     private DatabaseConnectie db;
@@ -47,6 +49,10 @@ public class HoofdMenuController {
 
     public void setInvullenUrenView() {
         new InvullenUrenController(stage, db);
+    }
+
+    public void setGebruikerInfoView(){
+        new GebruikerInfoController(stage, db);
     }
 
 }
