@@ -89,7 +89,7 @@ public class AdministratieHoofdmenuView extends Scene {
 			controller.setAccountToevoegenView();
 		});
 		personeel.setOnAction(e -> {
-			// controller.doedingen();
+			controller.setGebruikerInfoView();
 		});
 	}
 
