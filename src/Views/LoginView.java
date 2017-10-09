@@ -1,5 +1,6 @@
 package Views;
 
+
 import Controllers.LoginController;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -12,7 +13,6 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
-
 
 public class LoginView extends Scene {
     private GridPane gridpane;
@@ -28,7 +28,7 @@ public class LoginView extends Scene {
     private Button login;
 
     private LoginController controller;
-    private Label feedback;
+    private Label foutief;
 
     public LoginView(LoginController controller) {
         super(new GridPane(), 600, 400); // Nieuwe pane meegeven aan de superklasse (dus scene).
@@ -70,8 +70,9 @@ public class LoginView extends Scene {
         login = new Button("Log in");
         gridpane.add(login, 0, 3);
 
-        feedback = new Label("");
-        gridpane.add(feedback, 0, 4, 4, 1);
+        foutief = new Label("");
+        gridpane.add(foutief, 0, 4, 4, 1);
+
 
         this.getStylesheets().add("Views/styles.css");
     }
@@ -79,15 +80,9 @@ public class LoginView extends Scene {
     //Functionele zaken initialiseren.
     private void InitAction() {
         login.setOnAction(e -> {
-            if(email_input.getText()==null||password_input.getText()==null){
-                feedback.setText("Vul een email en wachtwoord in pls");
-            } else {
-                controller.logIn(email_input.getText(), password_input.getText());
-            }
+            controller.logIn(email_input.getText(), password_input.getText());
         });
-    }
 
-    public void setFeedback(String feedback) {
-        this.feedback.setText(feedback);
+        login.setDefaultButton(true); // Gebruik enter om in te loggen. (enige knop op het scherm, dus default knop.)
     }
 }

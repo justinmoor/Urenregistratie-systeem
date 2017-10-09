@@ -6,6 +6,7 @@ import Models.GebruikerModel;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 public class GebruikerDAO {
 
@@ -14,7 +15,6 @@ public class GebruikerDAO {
     public GebruikerDAO(DatabaseConnectie db) {
         this.db = db;
     }
-
 
     // Accepteert een email string en geeft de bijbehorende gebruiker uit de database terug.
     public GebruikerModel GetGebruikerFromDB(String email){
@@ -81,5 +81,30 @@ public class GebruikerDAO {
         }
     }
 
+    //Alle accounts krijgen
+    private ArrayList<GebruikerModel> gebruikers;
+
+    public ArrayList getAllAccount(){
+        gebruikers = new ArrayList<>();
+        String query = "SELECT voornaam, tussenvoegsel, achternaam, email, rechten FROM personeel;";
+
+        try {
+            PreparedStatement statement = db.getConnection().prepareStatement(query);
+            ResultSet result = statement.executeQuery();
+
+            while(result.next()){
+                GebruikerModel gebruiker = new GebruikerModel();
+                gebruiker.setVoornaam(result.getString("voornaam"));
+                gebruiker.setTussenvoegsel(result.getString("tussenvoegsel"));
+                gebruiker.setAchternaam(result.getString("achternaam"));
+                gebruiker.setEmail(result.getString("email"));
+
+                gebruikers.add(gebruiker);
+            }
+        } catch(SQLException e){
+            e.printStackTrace();
+        }
+        return gebruikers;
+    }
 }
 

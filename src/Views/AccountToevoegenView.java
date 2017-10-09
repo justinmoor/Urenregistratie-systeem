@@ -1,8 +1,6 @@
 package Views;
 
 import Controllers.GebruikerToevoegenController;
-import Controllers.HoofdMenuController;
-import Models.GebruikerModel;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -14,7 +12,7 @@ import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 
 public class AccountToevoegenView extends Scene {
-	private GridPane gridpane;
+		private GridPane gridpane;
 		private Label title;
 	
 		private Label voornaam;
@@ -33,8 +31,6 @@ public class AccountToevoegenView extends Scene {
 			
 		private Button toevoegen;
 		private GebruikerToevoegenController controller;
-
-
 
 	public AccountToevoegenView(GebruikerToevoegenController controller){
 		super(new GridPane(), 600,  400); 		// Nieuwe pane meegeven aan de superklasse (dus scene).
