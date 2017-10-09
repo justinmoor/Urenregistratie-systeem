@@ -99,6 +99,12 @@ public class GebruikerDAO {
                 gebruiker.setAchternaam(result.getString("achternaam"));
                 gebruiker.setEmail(result.getString("email"));
 
+                if(result.getString("rechten").equals("1")) {
+                    gebruiker.setRechten(("Administrator"));
+                } else {
+                    gebruiker.setRechten("Personeel");
+                }
+
                 gebruikers.add(gebruiker);
             }
         } catch(SQLException e){
