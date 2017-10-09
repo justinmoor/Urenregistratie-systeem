@@ -1,6 +1,6 @@
 package Views;
 
-import Controllers.AutoCompletionTexfieldController;
+import Controllers.AutoCompletionTextfieldController;
 import Controllers.InvullenUrenController;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -35,9 +35,9 @@ public class InvullenUrenView extends Scene {
     private Label EDatumLabel;
     private Label EtijdLabel;
 
-    private AutoCompletionTexfieldController klantField;
-    private AutoCompletionTexfieldController projectField;
-    private AutoCompletionTexfieldController onderwerpField;
+    private AutoCompletionTextfieldController klantField;
+    private AutoCompletionTextfieldController projectField;
+    private AutoCompletionTextfieldController onderwerpField;
     private TextField commentaarField;
     private TextField BeginDatum;
     private TextField BeginTijd;

@@ -20,7 +20,4 @@ public class InvullenUrenController {
         dao = new IngevuldeTijdDAO(db);
     }
 
-    public void insert(int uurId, int PersoneelId, String beginDatum, String beginTijd, String eindDatum, String eindTijd, String klant, String project, String onderwerp, String commentaar) {
-
-    }
 }

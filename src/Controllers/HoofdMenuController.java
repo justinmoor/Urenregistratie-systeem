@@ -25,7 +25,6 @@ public class HoofdMenuController {
         this.tijdmodel = tijdmodel;
         this.db = db;
 
-        //gebruikerController = new GebruikerController(this);
 
         personeelView = new PersoneelHoofdmenuView(this);
         adminView = new AdministratieHoofdmenuView(this);
@@ -46,7 +45,7 @@ public class HoofdMenuController {
         //stage.setScene(accountToevoegenView);
     }
 
-    public void setIvullenUrenView() {
+    public void setInvullenUrenView() {
         new InvullenUrenController(stage, db);
     }
 
