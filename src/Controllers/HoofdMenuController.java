@@ -17,11 +17,9 @@ public class HoofdMenuController {
     private AdministratieHoofdmenuView adminView;
     private AccountToevoegenView accountToevoegenView;
 
-    private GebruikerController gebruikerController;
-
     private DatabaseConnectie db;
 
-    public HoofdMenuController(Stage stage, GebruikerModel gebruikerModel, IngevuldeTijdModel tijdmodel, DatabaseConnectie db){
+    public HoofdMenuController(Stage stage, GebruikerModel gebruikerModel, DatabaseConnectie db){
         this.stage = stage;
         this.gebruikerModel = gebruikerModel;
         this.tijdmodel = tijdmodel;
