@@ -1,6 +1,7 @@
 package Views;
 
-import Controllers.LoginController;
+import Controllers.InlogController;
+import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -8,24 +9,19 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyCode;
 import javafx.scene.layout.GridPane;
-import javafx.scene.layout.HBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 
+import java.awt.event.KeyEvent;
 
-public class LoginView extends Scene {
+
+public class InlogView extends Scene {
     private GridPane gridpane;
 
     private Label title;
-    
-//    private ImageView grijs;
-//    private Image lijntje;
-    
-//    private HBox hbox;
 
     private Label email;
     private Label password;
@@ -35,10 +31,10 @@ public class LoginView extends Scene {
 
     private Button login;
 
-    private LoginController controller;
-    private Label feedback;
+    private InlogController controller;
+    private Label foutief;
 
-    public LoginView(LoginController controller) {
+    public InlogView(InlogController controller) {
         super(new GridPane(), 600, 400); // Nieuwe pane meegeven aan de superklasse (dus scene).
         gridpane = (GridPane) this.getRoot(); // Deze nieuwe gridpane van de superklasse wordt de gridpane die hier gebruikt wordt.
         this.controller = controller; // Controller zaken, moeten we nog overleggen.
@@ -49,71 +45,48 @@ public class LoginView extends Scene {
 
     //Grafische elementen initialiseren.
     public void initGui() {
-    	   
         gridpane.setAlignment(Pos.CENTER);
-        gridpane.setHgap(15);
+        gridpane.setHgap(20);
         gridpane.setVgap(15);
+        gridpane.setPadding(new Insets(25, 25, 25, 25));
         gridpane.setStyle("-fx-background-color: #f9f9f7");
-        
-        getStylesheets().add("Views/styles.css");
 
-//        hbox.setPrefHeight(27);
-//        hbox.setPrefWidth(144);
-        
         title = new Label("Urenregistratie");
         title.setId("title");
+        title.setFont(Font.font("SansSerif", FontWeight.BOLD, 30));
+        title.setTextFill(Color.GREY);
         gridpane.add(title, 0, 0, 2, 1);
-        
-//        lijntje = new Image("lijntje.png");
-//        grijs = new ImageView();
-//        grijs.setImage(lijntje);
-//        gridpane.add(grijs, 0, 1);
 
         email = new Label("E-Mail:");
-        email.setId("emailLabel");
         email.setTextFill(Color.GREY);
         gridpane.add(email, 0, 1);
 
         email_input = new TextField();
-        email_input.setId("emailTextfield");
-//        email_input.setMinHeight(hbox.getPrefHeight());
-//        email_input.setMinWidth(hbox.getPrefWidth());
         gridpane.add(email_input, 1, 1);
-        
-//        hbox.getChildren().addAll(email, email_input);
 
         password = new Label("Wachtwoord:");
-        password.setId("passwordLabel");
         password.setTextFill(Color.GREY);
         gridpane.add(password, 0, 2);
 
         password_input = new PasswordField();
-        password_input.setId("passwordTextfield");
         gridpane.add(password_input, 1, 2);
 
-        login = new Button("LOG IN");
-        login.setId("loginButton");
-        login.setAlignment(Pos.CENTER);
-        gridpane.add(login, 1, 3);
+        login = new Button("Log in");
+        gridpane.add(login, 0, 3);
 
-        feedback = new Label("");
-        gridpane.add(feedback, 0, 4, 4, 1);
+        foutief = new Label("");
+        gridpane.add(foutief, 0, 4, 4, 1);
 
-        
+
+        this.getStylesheets().add("Views/styles.css");
     }
 
     //Functionele zaken initialiseren.
     private void InitAction() {
         login.setOnAction(e -> {
-            if(email_input.getText()==null||password_input.getText()==null){
-                feedback.setText("Vul een email en wachtwoord in pls");
-            } else {
-                controller.logIn(email_input.getText(), password_input.getText());
-            }
+            controller.logIn(email_input.getText(), password_input.getText());
         });
-    }
 
-    public void setFeedback(String feedback) {
-        this.feedback.setText(feedback);
+        login.setDefaultButton(true); // Gebruik enter om in te loggen. (enige knop op het scherm, dus default knop.)
     }
 }
