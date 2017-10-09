@@ -11,6 +11,5 @@ public class IngevuldeTijdDAO {
         this.db = db;
     }
 
-    public String getKlant ()
 
 }
