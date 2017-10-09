@@ -12,19 +12,15 @@ public class HoofdMenuController {
 
     private Stage stage;
     private GebruikerModel gebruikerModel;
-    private IngevuldeTijdModel tijdmodel;
     private PersoneelHoofdmenuView personeelView;
     private AdministratieHoofdmenuView adminView;
     private AccountToevoegenView accountToevoegenView;
 
-    private GebruikerController gebruikerController;
-
     private DatabaseConnectie db;
 
-    public HoofdMenuController(Stage stage, GebruikerModel gebruikerModel, IngevuldeTijdModel tijdmodel, DatabaseConnectie db){
+    public HoofdMenuController(Stage stage, GebruikerModel gebruikerModel,  DatabaseConnectie db){
         this.stage = stage;
         this.gebruikerModel = gebruikerModel;
-        this.tijdmodel = tijdmodel;
         this.db = db;
 
         //gebruikerController = new GebruikerController(this);
