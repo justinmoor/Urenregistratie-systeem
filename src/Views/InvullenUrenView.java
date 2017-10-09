@@ -19,7 +19,6 @@ import javafx.scene.text.FontWeight;
 
 public class InvullenUrenView extends Scene {
 
-    private GridPane gridpane;
     private InvullenUrenController urencontroller;
     private GridPane gridpane;
 

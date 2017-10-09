@@ -1,6 +1,7 @@
 package Views;
 
 import Controllers.HoofdMenuController;
+import Controllers.InvullenUrenController;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -70,7 +71,7 @@ public class PersoneelHoofdmenuView extends Scene {
 	
 	private void InitAction(){
 		uren.setOnAction(e -> {
-			// controller.doedingen();
+		//	new InvullenUrenController(stage, db);
 		});
 		week.setOnAction(e -> {
 			// controller.doedingen();
