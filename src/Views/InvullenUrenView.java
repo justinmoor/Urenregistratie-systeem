@@ -1,29 +1,30 @@
 package Views;
 
 import Controllers.AutoCompletionTextfieldController;
+import Controllers.HoofdMenuController;
 import Controllers.InvullenUrenController;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
-import Controllers.InvullenUrenController;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
-import javafx.scene.layout.HBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
+
+import java.sql.SQLException;
 
 
 public class InvullenUrenView extends Scene {
 
     private GridPane gridpane;
     private BorderPane pane;
-    private InvullenUrenController urencontroller;
+    private InvullenUrenController controller;
+    private HoofdMenuController hoofdMenuController;
 
     private Label urenRegistrerenLabel;
     private Label klantLabel;
@@ -52,13 +53,20 @@ public class InvullenUrenView extends Scene {
     public InvullenUrenView(InvullenUrenController controller) {
         super(new BorderPane(), 600, 500);
         pane = (BorderPane) this.getRoot();
-        this.urencontroller = controller;
+        this.controller = controller;
+        this.hoofdMenuController = controller.getHoofdMenuController();
+        try {
+            initgui();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
 
-        initgui();
+        InitAction();
+
     }
 
 
-    private void initgui() {
+    private void initgui() throws SQLException {
 
         gridpane = new GridPane();
         gridpane.setAlignment(Pos.CENTER);
@@ -69,11 +77,10 @@ public class InvullenUrenView extends Scene {
 
         pane.setCenter(gridpane);
 
-
         urenRegistrerenLabel = new Label("UrenRegistratie");
         urenRegistrerenLabel.setFont(Font.font("SansSerif", FontWeight.BOLD, 30));
         urenRegistrerenLabel.setTextFill(Color.GREY);
-        gridpane.add(urenRegistrerenLabel, 1, 0, 2, 1);
+        pane.setTop(urenRegistrerenLabel);
 
 
         klantLabel = new Label("Klant");
@@ -150,6 +157,34 @@ public class InvullenUrenView extends Scene {
 
         home = new Button("home");
         pane.setTop(home);
+
+        klantField.getEntries().addAll(controller.getKlanten());
+        projectField.getEntries().addAll(controller.getProjecten());
+        onderwerpField.getEntries().addAll(controller.getOnderwerpen());
+        
     }
+
+    private void InitAction(){
+        Opslaan.setOnAction(e -> {
+            if(commentaarField.getText() != null){
+                controller.insert(klantField.getText(), projectField.getText(), onderwerpField.getText(), commentaarField.getText(), BeginDatum.getText(),
+                        BeginTijd.getText(), EindDatum.getText(), EindTijd.getText());
+            } else {
+                controller.insert(klantField.getText(), projectField.getText(), onderwerpField.getText(), BeginDatum.getText(),
+                        BeginTijd.getText(), EindDatum.getText(), EindTijd.getText());
+            }
+
+        });
+
+        home.setOnAction(e -> {
+            if (controller.getHoofdMenuController().getGebruikerModel().getRechten().equals("1")) {
+                controller.getHoofdMenuController().setAdminHoofdMenu();
+            } else if (controller.getHoofdMenuController().getGebruikerModel().getRechten().equals("0")) {
+                controller.getHoofdMenuController().setPersoneelHoofdmenu();
+            }
+
+        });
+    }
+
 
 }
