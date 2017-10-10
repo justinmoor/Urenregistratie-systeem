@@ -46,7 +46,10 @@ public class HoofdMenuController {
     }
 
     public void setInvullenUrenView() {
-        new InvullenUrenController(stage, db);
+        new InvullenUrenController(stage, db, this);
     }
 
+    public GebruikerModel getGebruikerModel() {
+        return gebruikerModel;
+    }
 }

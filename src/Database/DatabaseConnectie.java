@@ -15,6 +15,7 @@ public class DatabaseConnectie {
     }
 
     public Connection getConnection(){
+        System.out.println("connected");
         return this.connection; //Geeft de connectie terug
     }
 }

@@ -46,6 +46,7 @@ public class LoginController {
 
             } else {
                 System.out.println("Gebruikersnaam of wachtwoord is fout!!!!");
+                loginView.setFoutief();
             }
 
     }

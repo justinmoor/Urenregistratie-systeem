@@ -161,7 +161,7 @@ public class InvullenUrenView extends Scene {
         klantField.getEntries().addAll(controller.getKlanten());
         projectField.getEntries().addAll(controller.getProjecten());
         onderwerpField.getEntries().addAll(controller.getOnderwerpen());
-        
+
     }
 
     private void InitAction(){

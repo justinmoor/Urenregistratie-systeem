@@ -85,4 +85,7 @@ public class LoginView extends Scene {
 
         login.setDefaultButton(true); // Gebruik enter om in te loggen. (enige knop op het scherm, dus default knop.)
     }
+    public void setFoutief() {
+        foutief.setText("Email of wachtwoord is fout ingevult.");
+    }
 }
