@@ -33,6 +33,10 @@ public class HoofdMenuController {
         //accountToevoegenView = new AccountToevoegenView(this);
     }
 
+    public GebruikerModel getGebruikerModel() {
+        return gebruikerModel;
+    }
+
 
     public void setPersoneelHoofdmenu(){
         stage.setScene(personeelView);
@@ -48,7 +52,7 @@ public class HoofdMenuController {
     }
 
     public void setInvullenUrenView() {
-        new InvullenUrenController(stage, db);
+        new InvullenUrenController(stage, db, this);
     }
 
     public void setGebruikerInfoView(){
