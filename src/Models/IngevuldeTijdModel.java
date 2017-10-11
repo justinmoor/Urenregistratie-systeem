@@ -8,36 +8,36 @@ public class IngevuldeTijdModel {
  private String beginTijd;
  private String eindDatum;
  private String eindTijd;
- private String klant;
- private String project;
- private String onderwerp;
+ private String klantNaam;
+ private String projectNaam;
+ private String onderwerpNaam;
  private String commentaar;
  private boolean goedgekeurd;
 
 
  //met commentaar
- public IngevuldeTijdModel(int uurId, int personeelId, String beginDatum, String beginTijd, String eindDatum, String eindTijd, String klant, String project, String onderwerp, String commentaar) {
+ public IngevuldeTijdModel(int uurId, int personeelId, String beginDatum, String beginTijd, String eindDatum, String eindTijd, String klantNaam, String projectNaam, String onderwerpNaam, String commentaar) {
   this.uurId = uurId;
   this.personeelID = personeelId;
   this.beginDatum = beginDatum;
   this.beginTijd = beginTijd;
   this.eindDatum = eindDatum;
   this.eindTijd = eindTijd;
-  this.klant = klant;
-  this.project = project;
-  this.onderwerp = onderwerp;
+  this.klantNaam = klantNaam;
+  this.projectNaam = projectNaam;
+  this.onderwerpNaam = onderwerpNaam;
   this.commentaar = commentaar;
  }
- public IngevuldeTijdModel(int uurId, int personeelId, String beginDatum, String beginTijd, String eindDatum, String eindTijd, String klant, String project, String onderwerp, String commentaar, boolean goedgekeurd) {
+ public IngevuldeTijdModel(int uurId, String beginDatum, String eindDatum, String beginTijd,  String eindTijd, String commentaar,  boolean goedgekeurd, int personeelId,  String klantNaam, String projectNaam, String onderwerpNaam) {
   this.uurId = uurId;
   this.personeelID = personeelId;
   this.beginDatum = beginDatum;
   this.beginTijd = beginTijd;
   this.eindDatum = eindDatum;
   this.eindTijd = eindTijd;
-  this.klant = klant;
-  this.project = project;
-  this.onderwerp = onderwerp;
+  this.klantNaam = klantNaam;
+  this.projectNaam = projectNaam;
+  this.onderwerpNaam = onderwerpNaam;
   this.commentaar = commentaar;
   this.goedgekeurd = goedgekeurd;
  }
@@ -90,28 +90,28 @@ public class IngevuldeTijdModel {
   this.eindTijd = eindTijd;
  }
 
- public String getKlant() {
-  return klant;
+ public String getKlantNaam() {
+  return klantNaam;
  }
 
- public void setKlant(String klant) {
-  this.klant = klant;
+ public void setKlantNaam(String klantNaam) {
+  this.klantNaam = klantNaam;
  }
 
- public String getProject() {
-  return project;
+ public String getProjectNaam() {
+  return projectNaam;
  }
 
- public void setProject(String project) {
-  this.project = project;
+ public void setProjectNaam(String projectNaam) {
+  this.projectNaam = projectNaam;
  }
 
- public String getOnderwerp() {
-  return onderwerp;
+ public String getOnderwerpNaam() {
+  return onderwerpNaam;
  }
 
- public void setOnderwerp(String onderwerp) {
-  this.onderwerp = onderwerp;
+ public void setOnderwerpNaam(String onderwerpNaam) {
+  this.onderwerpNaam = onderwerpNaam;
  }
 
  public String getCommentaar() {

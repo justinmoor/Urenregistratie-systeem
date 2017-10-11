@@ -6,6 +6,7 @@ import Models.IngevuldeTijdModel;
 import Views.InzienUrenAdminView;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.scene.control.Alert;
 import javafx.stage.Stage;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -13,6 +14,7 @@ import java.util.ArrayList;
 
 public class InzienUrenAdminController {
 
+    private final String ERRORMESSAGENORESULTS = "De zoekopdracht heeft geen resultaten opgeleverd";
     /**
      * Maak alle hulpklassen aan.
      */
@@ -41,7 +43,13 @@ public class InzienUrenAdminController {
     public void buttonPressed(){
         results = dao.getAdminOverzicht(view.getBegindatum(), view.getEinddatum());
         makeModelsFromResultSet(results);
-        makeTableViewFromArrayList();
+
+        if(resultatenlijst.isEmpty()){
+            Alert legeResultatenLijstAlert = new Alert(Alert.AlertType.ERROR, ERRORMESSAGENORESULTS);
+            legeResultatenLijstAlert.show();
+        } else {
+            makeTableViewFromArrayList();
+        }
     }
 
     /**
@@ -50,22 +58,26 @@ public class InzienUrenAdminController {
      */
     private void makeModelsFromResultSet(ResultSet results) {
         try {
-            while(results.next()){
-                resultatenlijst = new ArrayList<>();
-                resultatenlijst.add(new IngevuldeTijdModel(
-                        results.getInt("uurID"),
-                        results.getInt("persoonID"),
-                        results.getString("begindatum"),
-                        results.getString("begintijd"),
-                        results.getString("einddatum"),
-                        results.getString("eindtijd"),
-                        results.getString("klantID"),
-                        results.getString("projectID"),
-                        results.getString("onderwerpID"),
-                        results.getString("commentaar"),
-                        results.getBoolean("goedgekeurd")));
+            if(results.next()){
+                do{
+                    resultatenlijst = new ArrayList<>();
+                    resultatenlijst.add(new IngevuldeTijdModel(
+                            results.getInt("uurID"),
+                            results.getString("begindatum"),
+                            results.getString("einddatum"),
+                            results.getString("begintijd"),
+                            results.getString("eindtijd"),
+                            results.getString("commentaar"),
+                            results.getBoolean("goedgekeurd"),
+                            results.getInt("persoonID"),
+                            results.getString("klant_naam"),
+                            results.getString("project_naam"),
+                            results.getString( "onderwerp_naam")));
 
-                System.out.println(results.getString("begindatum"));
+                    System.out.println(results.getString("begindatum"));
+                } while(results.next());
+            } else{
+                resultatenlijst = new ArrayList<>();
             }
             results.close();
         } catch (SQLException e) {

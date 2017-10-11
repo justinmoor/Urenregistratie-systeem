@@ -169,6 +169,8 @@ public class InzienUrenAdminView extends Scene {
 
     }
 
+
+
     /**
      * Getters en setters
      */

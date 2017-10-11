@@ -61,7 +61,7 @@ local.properties
 .target
 
 # Tern plugin
-.tern-project
+.tern-projectNaam
 
 # TeXlipse plugin
 .texlipse
@@ -78,5 +78,5 @@ local.properties
 .worksheet
 
 # Eclipse
-.project
+.projectNaam
 .classpath
