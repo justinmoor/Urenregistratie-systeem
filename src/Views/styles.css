@@ -5,33 +5,66 @@
 	-fx-text-fill: #6b757d;
 }
 
-#emailLabel {
+.label {
 	-fx-font-family: "SansSerif";
 	-fx-font-size: 13px;
 	-fx-text-fill: #6b757d;
-}
-
-#emailTextfield {
-	-fx-background-color: #fcfcfc;
-	-fx-border-color: #c7c7c5;
-}
-
-#passwordLabel {
-	-fx-font-family: "SansSerif";
-	-fx-font-size: 13px;
-	-fx-text-fill: #6b757d;
-}
-
-#passwordTextfield {
-	-fx-background-color: #fcfcfc;
-	-fx-border-color: #c7c7c5;
 }
 
 .text-field {
+	-fx-font-family: "SansSerif";
+	-fx-font-size: 12px;
+	-fx-text-fill: #6b757d;
+	-fx-background-color: #fcfcfc;
+	-fx-border-color: #c7c7c5;
 	-fx-max-width: 150;
+	-fx-min-height: 30;
+}
+
+.password-field {
+	-fx-font-family: "SansSerif";
+	-fx-font-size: 12px;
+	-fx-text-fill: #6b757d;
+	-fx-background-color: #fcfcfc;
+	-fx-border-color: #c7c7c5;
+	-fx-max-width: 150;
+	-fx-min-height: 30;
+}
 }
 
 .button {
+	-fx-background-color: #f9f9f7;
+	-fx-border-color: #c7c7c5;
+	-fx-text-fill: #6b757d;
+	-fx-min-height: 40;
+	-fx-min-width: 241;
+}
+
+.button:hover {
+	-fx-background-color: #f9f9f7;
+	-fx-border-color: #34CCDE;
+	-fx-text-fill: #34CCDE;
+	-fx-font-familiy: "SansSerif";
+}
+
+#home {
+	-fx-font-family: "SansSerif";
+	-fx-font-size: 14px;
+	-fx-text-fill: #6b757d;
+	-fx-font-weight: bold;
+}
+
+.combo-box {
+	-fx-background-color: #fcfcfc;
+	-fx-border-color: #c7c7c5;
+	-fx-min-width: 150;
+	-fx-min-height: 30;
+	-fx-font-family: "SansSerif";
+	-fx-font-size: 12px;
+	-fx-text-fill: #6b757d;
+}
+
+#login {
 	-fx-background-color: #fcfcfc;
 	-fx-border-color: #c7c7c5;
 	-fx-text-fill: #6b757d;
@@ -39,10 +72,41 @@
 	-fx-max-width: 150;
 }
 
-.button:hover {
+#login:hover {
 	-fx-transition: 1s;
-	-fx-background-color: #f9f9f7;
+	-fx-background-color: #fcfcfc;
 	-fx-border-color: #60c8db;
 	-fx-text-fill: #60c8db;
+}
+
+#toevoegen {
+	-fx-background-color: #fcfcfc;
+	-fx-border-color: #c7c7c5;
+	-fx-text-fill: #6b757d;
+	-fx-min-height: 36;
+	-fx-max-width: 150;
+}
+
+#toevoegen:hover {
+	-fx-transition: 1s;
+	-fx-background-color: #fcfcfc;
+	-fx-border-color: #60c8db;
+	-fx-text-fill: #60c8db;
+}
+
+#administratieKnoppen {
 	-fx-font-familiy: "SansSerif";
+	-fx-font-weight: bold;
+	-fx-background-color: #fcfcfc;
+	-fx-border-color: #c7c7c5;
+	-fx-text-fill: #6b757d;
+	-fx-min-height: 80;
+	-fx-min-width: 240;
+}
+
+#administratieKnoppen:hover {
+	-fx-transition: 1s;
+	-fx-background-color: #fcfcfc;
+	-fx-border-color: #60c8db;
+	-fx-text-fill: #60c8db;
 }

@@ -5,6 +5,7 @@ import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.paint.Color;
@@ -13,7 +14,9 @@ import javafx.scene.text.FontWeight;
 
 public class AccountToevoegenView extends Scene {
 		private GridPane gridpane;
-		private Label title;
+		private BorderPane pane;
+		
+		private Label titel;
 	
 		private Label voornaam;
 		private Label tussenvoegsel;
@@ -44,15 +47,19 @@ public class AccountToevoegenView extends Scene {
 	//Grafische elementen initialiseren.
 	public void initGui() {
 		gridpane.setAlignment(Pos.CENTER);
-		gridpane.setHgap(20);
-		gridpane.setVgap(15);
-		gridpane.setPadding(new Insets(25, 25, 25, 25));
-		gridpane.setStyle("-fx-background-color: #f9f9f7");
+		gridpane.setHgap(15);
+		gridpane.setVgap(12);
+		gridpane.setStyle("-fx-background-image: url('/Assets/background.png')");
 		
-		title = new Label("Account toevoegen");
-		title.setFont(Font.font("SansSerif", FontWeight.BOLD, 30));
-		title.setTextFill(Color.GREY);
-		gridpane.add(title, 0, 0, 2, 1);
+//		titel = new Label("TITEL");
+//		titel.setId("home");
+//		titel.setPadding(new Insets(15));
+//		
+//		
+//		pane.setTop(titel);
+//		pane.setAlignment(titel, Pos.CENTER);
+//		pane.setCenter(gridpane);
+//		pane.setStyle("-fx-background-image: url('/Assets/navlijntje.png')");
 
 		voornaam = new Label("Voornaam:");
 		voornaam.setTextFill(Color.GREY);
@@ -96,8 +103,11 @@ public class AccountToevoegenView extends Scene {
 		hbox.getChildren().addAll(rechtenKeuze);
 		gridpane.add(hbox, 1, 5);
 					
-		toevoegen = new Button("Toevoegen");
-		gridpane.add(toevoegen, 0, 6);
+		toevoegen = new Button("TOEVOEGEN");
+		toevoegen.setId("toevoegen");
+		gridpane.add(toevoegen, 1, 6);
+		
+		getStylesheets().add("Views/styles.css");
 	}
 
 	//Functionele zaken initialiseren.

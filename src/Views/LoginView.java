@@ -1,7 +1,7 @@
 package Views;
 
-
 import Controllers.LoginController;
+import javafx.geometry.HPos;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -9,80 +9,94 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
+import javafx.scene.text.Text;
 
 public class LoginView extends Scene {
-    private GridPane gridpane;
+	private LoginController controller;
+	
+	private BorderPane pane;
+    
+    private VBox groep;
+    
+    private Label titel;
+    
+    private Image img;
+    private ImageView lijntje;
+    
+    private HBox email;
+    private Label lbl1;
+    private TextField tf1;
 
-    private Label title;
-
-    private Label email;
-    private Label password;
-
-    private TextField email_input;
-    private PasswordField password_input;
-
+    private HBox wachtwoord;
+    private Label lbl2;
+    private PasswordField tf2;
+    
     private Button login;
-
-    private LoginController controller;
+    
     private Label foutief;
 
     public LoginView(LoginController controller) {
-        super(new GridPane(), 600, 400); // Nieuwe pane meegeven aan de superklasse (dus scene).
-        gridpane = (GridPane) this.getRoot(); // Deze nieuwe gridpane van de superklasse wordt de gridpane die hier gebruikt wordt.
-        this.controller = controller; // Controller zaken, moeten we nog overleggen.
+        super(new BorderPane(), 600, 400); 		// Nieuwe pane meegeven aan de superklasse (dus scene).
+        pane = (BorderPane) this.getRoot(); 		// Deze nieuwe gridpane van de superklasse wordt de gridpane die hier gebruikt wordt.
+        this.controller = controller; 			// Controller zaken, moeten we nog overleggen.
 
-        initGui(); // InitGui om alle grafische elementen te initialiseren.
-        InitAction(); // InitAction om alle functionaliteiten te initialiseren, denk aan knop.setOnAction() etc.
+        initGui(); 			// InitGui om alle grafische elementen te initialiseren.
+        InitAction(); 		// InitAction om alle functionaliteiten te initialiseren, denk aan knop.setOnAction() etc.
     }
 
     //Grafische elementen initialiseren.
     public void initGui() {
-        gridpane.setAlignment(Pos.CENTER);
-        gridpane.setHgap(20);
-        gridpane.setVgap(15);
-        gridpane.setPadding(new Insets(25, 25, 25, 25));
-        gridpane.setStyle("-fx-background-color: #f9f9f7");
+		pane.setStyle("-fx-background-image: url('/assets/background.png')");
 
-        title = new Label("Urenregistratie");
-        title.setId("title");
-        title.setFont(Font.font("SansSerif", FontWeight.BOLD, 30));
-        title.setTextFill(Color.GREY);
-        gridpane.add(title, 0, 0, 2, 1);
-
-        email = new Label("E-Mail:");
-        email.setTextFill(Color.GREY);
-        gridpane.add(email, 0, 1);
-
-        email_input = new TextField();
-        gridpane.add(email_input, 1, 1);
-
-        password = new Label("Wachtwoord:");
-        password.setTextFill(Color.GREY);
-        gridpane.add(password, 0, 2);
-
-        password_input = new PasswordField();
-        gridpane.add(password_input, 1, 2);
-
-        login = new Button("Log in");
-        gridpane.add(login, 0, 3);
+		groep = new VBox(12);
+		
+		titel = new Label("Urenregistratie");
+		titel.setId("title");
+		
+		img = new Image("/assets/lijntje.png");
+		lijntje = new ImageView(img);
+		lijntje.setFitWidth(241);
+		
+		email = new HBox(50);
+		lbl1 = new Label("E-Mail:");
+		tf1 = new TextField();
+		email.getChildren().addAll(lbl1, tf1);
+		
+		wachtwoord = new HBox(15);
+		lbl2 = new Label("Wachtwoord:");
+		tf2 = new PasswordField();
+		wachtwoord.getChildren().addAll(lbl2, tf2);
+		
+		login = new Button("LOG IN");
+		
+		groep.getChildren().addAll(titel, lijntje, email, wachtwoord, login);
+		
+		pane.setCenter(groep);
+		groep.setAlignment(Pos.CENTER);
+		email.setAlignment(Pos.CENTER);
+		wachtwoord.setAlignment(Pos.CENTER);
 
         foutief = new Label("");
-        gridpane.add(foutief, 0, 4, 4, 1);
 
-
-        this.getStylesheets().add("Views/styles.css");
+        getStylesheets().add("Views/styles.css");
     }
 
     //Functionele zaken initialiseren.
     private void InitAction() {
         login.setOnAction(e -> {
-            controller.logIn(email_input.getText(), password_input.getText());
+            controller.logIn(tf1.getText(), tf2.getText());
         });
 
-        login.setDefaultButton(true); // Gebruik enter om in te loggen. (enige knop op het scherm, dus default knop.)
+        login.setDefaultButton(true); 	// Gebruik enter om in te loggen. (enige knop op het scherm, dus default knop.)
     }
+
 }
