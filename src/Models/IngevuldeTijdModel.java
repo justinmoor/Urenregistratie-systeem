@@ -13,7 +13,7 @@ public class IngevuldeTijdModel {
  private String onderwerpNaam;
  private String commentaar;
  private boolean goedgekeurd;
-
+ private boolean isChanged = false;
 
  //met commentaar
  public IngevuldeTijdModel(int uurId, int personeelId, String beginDatum, String beginTijd, String eindDatum, String eindTijd, String klantNaam, String projectNaam, String onderwerpNaam, String commentaar) {
@@ -128,5 +128,13 @@ public class IngevuldeTijdModel {
 
  public void setGoedgekeurd(boolean goedgekeurd) {
   this.goedgekeurd = goedgekeurd;
+ }
+
+ public boolean isChanged() {
+  return isChanged;
+ }
+
+ public void setChanged(boolean changed) {
+  isChanged = changed;
  }
 }

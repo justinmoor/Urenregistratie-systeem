@@ -11,6 +11,7 @@ import javafx.stage.Stage;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.List;
 
 public class InzienUrenAdminController {
 
@@ -25,6 +26,7 @@ public class InzienUrenAdminController {
     IngevuldeTijdDAO dao;
     ResultSet results;
     ArrayList<IngevuldeTijdModel> resultatenlijst;
+    HoofdMenuController hoofdMenuController;
 
     /**
      * Is de klasse die de InzienUrenAdminView onderhoudt.
@@ -32,7 +34,8 @@ public class InzienUrenAdminController {
      * @param stage
      * @param dbc
      */
-    public  InzienUrenAdminController(Stage stage, DatabaseConnectie dbc){
+    public  InzienUrenAdminController(Stage stage, DatabaseConnectie dbc, HoofdMenuController hoofdMenuController){
+        this.hoofdMenuController = hoofdMenuController;
         dao = new IngevuldeTijdDAO(dbc);
         view = new InzienUrenAdminView(this);
         stage.setScene(view);
@@ -93,5 +96,25 @@ public class InzienUrenAdminController {
     private void makeTableViewFromArrayList(){
         ObservableList<IngevuldeTijdModel> records = FXCollections.observableArrayList(resultatenlijst);
         view.vulTabelUitLijst(records);
+    }
+
+    /**
+     * Ontvangt een lijst van models die geselecteerd zijn in de view, verandert de goedgekeurd boolean
+     * naar true en stuurt ze vervolgens een voor een door naar de dao om weggeschreven te worden.
+     * @param models
+     */
+    public void keurGoed(List<IngevuldeTijdModel> models){
+        for (IngevuldeTijdModel model:models
+             ) {
+            model.setGoedgekeurd(true);
+            dao.veranderGoedgekeurdKolom(model);
+        }
+    }
+
+    /**
+     * Wanneer aangeroepen verandert de scene weer naar het hoofdmenu.
+     */
+    public void backToHomeScreen(){
+        hoofdMenuController.setHoofdMenuView();
     }
 }

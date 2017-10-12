@@ -3,7 +3,9 @@ package Views;
 import Controllers.InzienUrenAdminController;
 import Models.IngevuldeTijdModel;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.event.EventType;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -12,6 +14,8 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.List;
 
 public class InzienUrenAdminView extends Scene {
 
@@ -68,6 +72,12 @@ public class InzienUrenAdminView extends Scene {
     private TableColumn <IngevuldeTijdModel, String> goedgekeurdColumn;
 
     /**
+     * Maak het contextmenu voor het goedkeuren van de uren, en de opties.
+     */
+    private ContextMenu contextMenuRightClick;
+    private MenuItem keurGoed;
+
+    /**
      * Maak de begin en einddatum.
      */
     private String begindatum;
@@ -91,13 +101,16 @@ public class InzienUrenAdminView extends Scene {
 
         begindatumVbox = new VBox(begindatumLabel, begindatumPicker);
         einddatumVbox = new VBox(einddatumLabel, einddatumPicker);
+
         this.controller = controller;
+
         gridpane = (GridPane) this.getRoot();
+
         overzichtTableView = new TableView();
+
         goButton = new Button(KNOPSTRING);
+
         leftFilterPanel = new VBox(begindatumVbox, einddatumVbox, goButton);
-
-
 
 
         /**
@@ -125,6 +138,19 @@ public class InzienUrenAdminView extends Scene {
         goButton.setOnAction(a ->{
             buttonPressed();
         });
+         contextMenuRightClick = new ContextMenu();
+        keurGoed = new MenuItem("Goedkeuren");
+
+        keurGoed.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                final ArrayList<IngevuldeTijdModel> aangevinkteRijen = new ArrayList<IngevuldeTijdModel>(overzichtTableView.getSelectionModel().getSelectedItems());
+                controller.keurGoed(aangevinkteRijen);
+            }
+        });
+        contextMenuRightClick.getItems().add(keurGoed);
+        overzichtTableView.setContextMenu(contextMenuRightClick);
+        overzichtTableView.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
 
         /**
          * Initialiseer de tabel.
@@ -187,9 +213,11 @@ public class InzienUrenAdminView extends Scene {
 
         gridpane.getChildren().addAll(leftFilterPanel, overzichtTableView);               //Voegt alles toe aan de GridPane.
 
+        /**
+         * Zorgt ervoor dat wanneer er op de ESCAPE key wordt gedrukt dat er teruggegaan wordt naar het hoofdmenu.
+         */
         this.addEventHandler(KeyEvent.KEY_PRESSED, new EventHandler<KeyEvent>
                 () {
-
             @Override
             public void handle(KeyEvent t) {
                 if(t.getCode()== KeyCode.ESCAPE)
@@ -229,7 +257,7 @@ public class InzienUrenAdminView extends Scene {
     }
 
     private void backToHomeScreen(){
-
+        controller.backToHomeScreen();
     }
 
 

@@ -1,6 +1,7 @@
 package DAO;
 
 import Database.DatabaseConnectie;
+import Models.IngevuldeTijdModel;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -120,5 +121,19 @@ public class IngevuldeTijdDAO {
         }
 
         return results;
+    }
+
+    /**
+     * Ontvangt het model waarvan de goeddgekeurd boolean is veranderd en stuurt deze om weg te schrijven naar de database.
+     * @param model
+     */
+    public void veranderGoedgekeurdKolom(IngevuldeTijdModel model){
+        try {
+            PreparedStatement goedkeurenQuery = db.getConnection().prepareStatement("UPDATE geregistreerdetijd SET goedgekeurd = TRUE WHERE uurid = ?");
+            goedkeurenQuery.setInt(1, model.getUurId());
+            goedkeurenQuery.executeQuery();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 }
