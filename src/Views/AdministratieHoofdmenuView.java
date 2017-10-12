@@ -1,6 +1,5 @@
 package Views;
 
-
 import Controllers.HoofdMenuController;
 import javafx.application.Application;
 import javafx.geometry.Insets;
@@ -49,7 +48,7 @@ public class AdministratieHoofdmenuView extends Scene {
 
 	public AdministratieHoofdmenuView(HoofdMenuController controller){
 		super(new BorderPane(), 600,  400); 		// Nieuwe pane meegeven aan de superklasse (dus scene).
-		pane = (BorderPane) this.getRoot(); 	// Deze nieuwe gridpane van de superklasse wordt de gridpane die hier gebruikt wordt.
+		pane = (BorderPane) this.getRoot(); 		// Deze nieuwe gridpane van de superklasse wordt de gridpane die hier gebruikt wordt.
 		this.controller = controller;
 		initGui(); 		// InitGui om alle grafische elementen te initialiseren.
 		InitAction();	// InitAction om alle functionaliteiten te initialiseren, denk aan knop.setOnAction() etc.
