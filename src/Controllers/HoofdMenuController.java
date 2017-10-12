@@ -6,6 +6,7 @@ import Models.IngevuldeTijdModel;
 import Views.AccountToevoegenView;
 import Views.AdministratieHoofdmenuView;
 import Views.GebruikerInfoView;
+import Views.InvullenUrenView;
 import Views.PersoneelHoofdmenuView;
 import javafx.stage.Stage;
 
@@ -37,7 +38,6 @@ public class HoofdMenuController {
         return gebruikerModel;
     }
 
-
     public void setPersoneelHoofdmenu(){
         stage.setScene(personeelView);
     }
@@ -60,7 +60,7 @@ public class HoofdMenuController {
     }
 
     public void setGebruikerInfoView(){
-        new GebruikerInfoController(stage, db);
+        new GebruikerInfoController(stage, db, this);
     }
 
 }

@@ -52,10 +52,11 @@ public class GebruikerInfoView extends Scene {
   //  private HoofdMenuController controller;
 
     public GebruikerInfoView(GebruikerInfoController controller){
-        super(new BorderPane(), 1200, 700);
+        super(new BorderPane(), 900, 600);
         pane = (BorderPane) this.getRoot();
         this.controller = controller;
         initGui();
+        InitAction();
     }
 
     private void initGui(){
@@ -121,6 +122,17 @@ public class GebruikerInfoView extends Scene {
 
         InitTable();
     }
+    
+    private void InitAction(){
+    	 	img_box.setOnMousePressed(e -> {
+             if (controller.getHoofdMenuController().getGebruikerModel().getRechten().equals("1")) {
+                 controller.getHoofdMenuController().setAdminHoofdMenu();
+             } else if (controller.getHoofdMenuController().getGebruikerModel().getRechten().equals("0")) {
+                 controller.getHoofdMenuController().setPersoneelHoofdmenu();
+             }
+
+         });
+	}
 
     private void InitTable(){
         ObservableList<GebruikerModel> gebruikers = FXCollections.observableList(controller.getGebruikers());
