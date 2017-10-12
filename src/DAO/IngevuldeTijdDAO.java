@@ -93,6 +93,32 @@ public class IngevuldeTijdDAO {
             e1.printStackTrace();
         }
 
+    }
 
+    /**
+     * Produceert een ResultSet wanneer wordt aangeroepen. Vereist de begin en einddatum als argument.
+     * @param begindatum
+     * @param einddatum
+     * @return
+     */
+    public ResultSet getAdminOverzicht(String begindatum, String einddatum) {
+        ResultSet results;
+        results = null;
+        try {
+            PreparedStatement getResults = db.getConnection().prepareStatement("SELECT * FROM geregistreerdetijd WHERE begindatum >=? AND einddatum<=?");
+            getResults.setString(1, begindatum);
+            getResults.setString(2, einddatum);
+
+            System.out.println(begindatum);
+            System.out.println(einddatum);
+
+            results = getResults.executeQuery();
+
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return results;
     }
 }

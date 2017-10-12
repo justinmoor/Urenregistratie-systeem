@@ -118,7 +118,7 @@ public class AdministratieHoofdmenuView extends Scene {
 	
 	private void InitAction(){
 		uren.setOnAction(e -> {
-	//		controller.setInvullenUrenView();
+			controller.setIvullenUrenView();
 		});
 		week.setOnAction(e -> {
 			controller.startInzienUrenAdminController();

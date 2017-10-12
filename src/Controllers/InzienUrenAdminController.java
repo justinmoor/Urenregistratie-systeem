@@ -61,8 +61,8 @@ public class InzienUrenAdminController {
     private void makeModelsFromResultSet(ResultSet results) {
         try {
             if(results.next()){
+                resultatenlijst = new ArrayList<>();
                 do{
-                    resultatenlijst = new ArrayList<>();
                     resultatenlijst.add(new IngevuldeTijdModel(
                             results.getInt("uurID"),
                             results.getString("begindatum"),
