@@ -38,6 +38,7 @@ public class LoginController {
          * Zet de LoginView als actieve view.
          */
         stage.setScene(loginView);
+        stage.setResizable(false);
         stage.show();
     }
 

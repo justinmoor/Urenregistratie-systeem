@@ -51,7 +51,6 @@ public class LoginView extends Scene {
         super(new BorderPane(), 600, 400); 		// Nieuwe pane meegeven aan de superklasse (dus scene).
         pane = (BorderPane) this.getRoot(); 		// Deze nieuwe gridpane van de superklasse wordt de gridpane die hier gebruikt wordt.
         this.controller = controller; 			// Controller zaken, moeten we nog overleggen.
-
         initGui(); 			// InitGui om alle grafische elementen te initialiseren.
         InitAction(); 		// InitAction om alle functionaliteiten te initialiseren, denk aan knop.setOnAction() etc.
     }
@@ -92,7 +91,7 @@ public class LoginView extends Scene {
         
         img2 = new Image("/Assets/blauwlijntje.png");
 		blauw_lijntje = new ImageView(img2);
-		blauw_lijntje.setFitWidth(600);
+		blauw_lijntje.setFitWidth(612);
 		
 		pane.setBottom(blauw_lijntje);
 

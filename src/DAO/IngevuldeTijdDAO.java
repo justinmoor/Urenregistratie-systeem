@@ -93,7 +93,6 @@ public class IngevuldeTijdDAO {
             e1.printStackTrace();
         }
 
-    }
 
     /**
      * Produceert een ResultSet wanneer wordt aangeroepen. Vereist de begin en einddatum als argument.
