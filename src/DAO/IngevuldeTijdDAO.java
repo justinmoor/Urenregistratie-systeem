@@ -2,13 +2,9 @@ package DAO;
 
 import Database.DatabaseConnectie;
 
-import java.util.Date;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.List;
 
 public class IngevuldeTijdDAO {
 
@@ -20,11 +16,11 @@ public class IngevuldeTijdDAO {
     }
 
     public ArrayList haalKlantenOp() throws SQLException {
-        Connection conn = DriverManager.getConnection("jdbc:mariadb://localhost:3306/UrenregistratieDatabase?user=root&password=ipsen123");
+        //Connection conn = DriverManager.getConnection("jdbc:mariadb://localhost:3306/UrenregistratieDatabase?user=root&password=ipsen123");
         ArrayList<String> klant_namen = null;
         try {
             ResultSet results;
-            PreparedStatement haalKlantenOp = conn.prepareStatement("SELECT klant_naam FROM klant;");
+            PreparedStatement haalKlantenOp = db.getConnection().prepareStatement("SELECT klant_naam FROM klant;");
             results = haalKlantenOp.executeQuery();
             klant_namen = new ArrayList<String>();
             while (results.next()) {
@@ -33,16 +29,17 @@ public class IngevuldeTijdDAO {
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
-        conn.close();
+      //  conn.close();
         return klant_namen;
     }
 
-    public ArrayList haalProjectenOp() throws SQLException{
-        Connection conn = DriverManager.getConnection("jdbc:mariadb://localhost:3306/UrenregistratieDatabase?user=root&password=ipsen123");
+    public ArrayList haalProjectenOp(String klant_naam) throws SQLException{
+       // Connection conn = DriverManager.getConnection("jdbc:mariadb://localhost:3306/UrenregistratieDatabase?user=root&password=ipsen123");
         ArrayList<String> projecten = null;
         try {
             ResultSet results;
-            PreparedStatement haalProjectenOp = conn.prepareStatement("SELECT project_naam FROM project;");
+            PreparedStatement haalProjectenOp = db.getConnection().prepareStatement("SELECT project_naam FROM project WHERE klant_naam =?;");
+            haalProjectenOp.setString(1, klant_naam);
             results = haalProjectenOp.executeQuery();
             projecten = new ArrayList<String>();
             while(results.next()) {
@@ -51,16 +48,17 @@ public class IngevuldeTijdDAO {
         } catch (SQLException sql) {
             sql.printStackTrace();
         }
-        conn.close();
+      //  conn.close();
         return projecten;
     }
 
-    public ArrayList haalOnderwerpenOp() throws SQLException{
-        Connection conn = DriverManager.getConnection("jdbc:mariadb://localhost:3306/UrenregistratieDatabase?user=root&password=ipsen123");
+    public ArrayList haalOnderwerpenOp(String project_naam) throws SQLException{
+      //  Connection conn = DriverManager.getConnection("jdbc:mariadb://localhost:3306/UrenregistratieDatabase?user=root&password=ipsen123");
         ArrayList<String> onderwerpen = null;
         try {
             ResultSet results;
-            PreparedStatement haalOnderwerpenOp = conn.prepareStatement("SELECT onderwerp_naam FROM onderwerp;");
+            PreparedStatement haalOnderwerpenOp = db.getConnection().prepareStatement("SELECT onderwerp_naam FROM onderwerp WHERE project_naam =?;");
+            haalOnderwerpenOp.setString(1, project_naam);
             results = haalOnderwerpenOp.executeQuery();
             onderwerpen = new ArrayList<String>();
             while (results.next()) {
@@ -69,29 +67,32 @@ public class IngevuldeTijdDAO {
         } catch (SQLException sql) {
             sql.printStackTrace();
         }
-        conn.close();
+      //  conn.close();
         return onderwerpen;
     }
 
-    public ResultSet getAdminOverzicht(String begindatum, String einddatum) {
-        ResultSet results;
-        results = null;
+
+    public void insertMetCommentaar(int getPersoonsID, String klant, String project, String onderwerp, String commentaar, String begindatum, String begintijd, String einddatum, String eindtijd) throws SQLException{
+        Connection conn = DriverManager.getConnection("jdbc:mariadb://localhost:3306/UrenregistratieDatabase?user=root&password=ipsen123");
+
         try {
-            PreparedStatement getResults = db.getConnection().prepareStatement("SELECT * FROM geregistreerdetijd WHERE begindatum >=? AND einddatum<=?");
-            getResults.setString(1, begindatum);
-            getResults.setString(2, einddatum);
+            PreparedStatement insertMetCommentaar = db.getConnection().prepareStatement("INSERT INTO geregistreerdetijd (persoonID, klant_naam, project_naam, onderwerp_naam, commentaar, begindatum, begintijd, einddatum, eindtijd) VALUES(?,?,?,?,?,?,?,?,?)");
 
-            System.out.println(begindatum);
-            System.out.println(einddatum);
+            insertMetCommentaar.setInt(1, getPersoonsID);
+            insertMetCommentaar.setString(2, klant);
+            insertMetCommentaar.setString(3, project);
+            insertMetCommentaar.setString(4, onderwerp);
+            insertMetCommentaar.setString(5, commentaar);
+            insertMetCommentaar.setString(6, begindatum);
+            insertMetCommentaar.setString(7, begintijd);
+            insertMetCommentaar.setString(8, einddatum);
+            insertMetCommentaar.setString(9, eindtijd);
 
-            results = getResults.executeQuery();
-
-
-        } catch (SQLException e) {
-            e.printStackTrace();
+            insertMetCommentaar.executeQuery();
+        } catch (SQLException e1) {
+            e1.printStackTrace();
         }
 
 
-        return results;
     }
 }

@@ -34,6 +34,9 @@ public class PersoneelHoofdmenuView extends Scene {
     private VBox knoppen;
     private Button uren;
     private Button week;
+    
+    private Image img3;
+    private ImageView blauw_lijntje;
 		
 	private HoofdMenuController controller;
 	
@@ -47,7 +50,7 @@ public class PersoneelHoofdmenuView extends Scene {
 	}
 
 	public void initGui() {
-		pane.setStyle("-fx-background-image: url('/Assets/background.png')");
+		pane.setId("pane");
 		
 		navigatie = new BorderPane();
 		
@@ -85,13 +88,17 @@ public class PersoneelHoofdmenuView extends Scene {
 		pane.setTop(navigatie);
 		pane.setCenter(knoppen);
 		knoppen.setAlignment(Pos.CENTER);
+		
+		img3 = new Image("/Assets/blauwlijntje.png");
+		blauw_lijntje = new ImageView(img3);
+		blauw_lijntje.setFitWidth(600);
     
 		getStylesheets().add("Views/styles.css");
 	}
 	
 	private void InitAction(){
 		uren.setOnAction(e -> {
-		//	new InvullenUrenController(stage, db);
+			controller.setInvullenUrenView();
 		});
 		week.setOnAction(e -> {
 			// controller.doedingen();

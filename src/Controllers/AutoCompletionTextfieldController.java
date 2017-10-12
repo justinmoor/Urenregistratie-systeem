@@ -21,43 +21,33 @@ public class AutoCompletionTextfieldController extends TextField {
 
     public AutoCompletionTextfieldController() {
         super();
-        System.out.println("10");
         this.entries = new TreeSet<>();
         this.entriesPopup = new ContextMenu();
-        System.out.println("11");
         setListener();
     }
 
     private void setListener() {
-        System.out.println("12");
         textProperty().addListener((Observable, oldValue, newValue) -> {
             String enteredText = getText();
-            System.out.println("13");
             if (enteredText == null || enteredText.isEmpty()) {
                 entriesPopup.hide();
-                System.out.println("14");
             } else {
                 List<String> filteredEntries = entries.stream()
                         .filter(e -> e.toLowerCase().contains(enteredText.toLowerCase()))
                         .collect(Collectors.toList());
-                System.out.println("15");
                 if (!filteredEntries.isEmpty()) {
                     populatePopup(filteredEntries, enteredText);
-                    System.out.println("16");
                     if(!entriesPopup.isShowing()) {
                         entriesPopup.show(Controllers.AutoCompletionTextfieldController.this, Side.BOTTOM, 0, 0);
-                        System.out.println("17");
                     }
                 } else {
                     entriesPopup.hide();
-                    System.out.println("18");
                 }
             }
         });
 
         focusedProperty().addListener((observableValue, oldValue, newValue) -> {
             entriesPopup.hide();
-            System.out.println("19");
         });
     }
 
@@ -90,6 +80,10 @@ public class AutoCompletionTextfieldController extends TextField {
 
     public SortedSet<String> getEntries() {
         return entries;
+    }
+
+    public void setEntries() {
+        entries.clear();
     }
 }
 
