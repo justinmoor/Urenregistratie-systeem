@@ -5,6 +5,7 @@ import Models.GebruikerModel;
 import Models.IngevuldeTijdModel;
 import Views.AccountToevoegenView;
 import Views.AdministratieHoofdmenuView;
+import Views.GebruikerInfoView;
 import Views.PersoneelHoofdmenuView;
 import javafx.stage.Stage;
 
@@ -15,8 +16,8 @@ public class HoofdMenuController {
     private IngevuldeTijdModel tijdmodel;
     private PersoneelHoofdmenuView personeelView;
     private AdministratieHoofdmenuView adminView;
-
-
+    private GebruikerInfoView gebruikerInfoView;
+    private AccountToevoegenView accountToevoegenView;
     private DatabaseConnectie db;
 
     public HoofdMenuController(Stage stage, GebruikerModel gebruikerModel, DatabaseConnectie db){
@@ -30,6 +31,10 @@ public class HoofdMenuController {
         personeelView = new PersoneelHoofdmenuView(this);
         adminView = new AdministratieHoofdmenuView(this);
         //accountToevoegenView = new AccountToevoegenView(this);
+    }
+
+    public GebruikerModel getGebruikerModel() {
+        return gebruikerModel;
     }
 
 
