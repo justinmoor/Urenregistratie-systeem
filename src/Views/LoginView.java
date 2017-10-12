@@ -58,6 +58,8 @@ public class LoginView extends Scene {
 
     //Grafische elementen initialiseren.
     public void initGui() {
+    		pane.setId("pane");
+    	
 		groep = new VBox(12);
 		
 		titel = new Label("Urenregistratie");

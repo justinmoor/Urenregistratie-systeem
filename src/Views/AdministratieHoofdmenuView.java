@@ -58,7 +58,7 @@ public class AdministratieHoofdmenuView extends Scene {
 	}
 
 	public void initGui() {
-		pane.setStyle("-fx-background-image: url('/Assets/background.png')");
+		pane.setId("pane");
 		
 		navigatie = new BorderPane();
 		
