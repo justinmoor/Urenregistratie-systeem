@@ -21,24 +21,29 @@ import javafx.scene.text.FontWeight;
 import javafx.stage.Stage;
 
 public class AdministratieHoofdmenuView extends Scene {
-	private GridPane gridpane;
 	private BorderPane pane;
-	
-	private Image img;
-	private ImageView back;
-	
-	private Label home;
-	
-	private Label gebruiker;
-	
-	private HBox hbox;
-	private VBox links;
-	private Button uren;
-	private Button week;
-		
-	private VBox rechts;
-	private Button account;
-	private Button personeel;
+    
+    private BorderPane navigatie;
+    
+    private VBox img_box;
+    private Image img;
+    private ImageView terug;
+    
+    private Label home;
+    private Label gebruiker;
+    
+    private Image img2;
+    private ImageView lijntje;
+    
+    private HBox knoppen;
+    
+    private VBox links;
+    private Button uren;
+    private Button week;
+    
+    private VBox rechts;
+    private Button account;
+    private Button personeel;
 
 	private HoofdMenuController controller;
 
@@ -51,63 +56,56 @@ public class AdministratieHoofdmenuView extends Scene {
 	}
 
 	public void initGui() {
-		gridpane = new GridPane();
-		gridpane.setAlignment(Pos.CENTER);
-		gridpane.setStyle("-fx-background-image: url('/Assets/test.png')");
+		pane.setStyle("-fx-background-image: url('/assets/background.png')");
+		
+		navigatie = new BorderPane();
+		
+		img_box = new VBox();
+		img = new Image("/assets/back.png");
+		terug = new ImageView(img);
+		img_box.getChildren().add(terug);
+		img_box.setPadding(new Insets(15, 83, 15, 14));
 		
 		home = new Label("HOME");
 		home.setId("home");
 		home.setPadding(new Insets(15));
 		
-		img = new Image("/Assets/back.png");
-		back = new ImageView(img);
-		back.setId("back");
+		gebruiker = new Label("Peter van Vliet");
+		gebruiker.setPadding(new Insets(15, 14, 15, 15));
 		
-		pane.setTop(home);
-		pane.setAlignment(home, Pos.CENTER);
-		//pane.setLeft(back);
-		pane.setCenter(gridpane);
+		img2 = new Image("/assets/lijntje.png");
+		lijntje = new ImageView(img2);
+		lijntje.setFitWidth(600);
 		
-		pane.setStyle("-fx-background-image: url('/Assets/navlijntje.png')");
+		navigatie.setLeft(img_box);
+		navigatie.setCenter(home);
+		navigatie.setRight(gebruiker);
+		navigatie.setBottom(lijntje);
+
+		knoppen = new HBox(19);
 		
-		links = new VBox(15);
-		links.setPrefWidth(200);
-		links.setPrefHeight(60);
-		
+		links = new VBox(19);
 		uren = new Button("UREN REGISTREREN");
-		uren.setMinWidth(links.getPrefWidth());
-		uren.setMinHeight(links.getPrefHeight());
-		uren.setId("administratieKnoppen");
-		
+		uren.setId("knoppen2");
 		week = new Button("WEEKOVERZICHT");
-		week.setMinWidth(links.getPrefWidth());
-		week.setMinHeight(links.getPrefHeight());
-		week.setId("administratieKnoppen");
-		
+		week.setId("knoppen2");
 		links.getChildren().addAll(uren, week);
 		
-		rechts = new VBox(15);
-		rechts.setPrefWidth(200);
-		rechts.setPrefHeight(60);
-		
+		rechts = new VBox(19);
 		account = new Button("ACCOUNT TOEVOEGEN");
-		account.setMinWidth(rechts.getPrefWidth());
-		account.setMinHeight(rechts.getPrefHeight());
-		account.setId("administratieKnoppen");
-		
+		account.setId("knoppen2");
 		personeel = new Button("PERSONEEL INFO");
-		personeel.setMinWidth(rechts.getPrefWidth());
-		personeel.setMinHeight(rechts.getPrefHeight());
-		personeel.setId("administratieKnoppen");
-		
+		personeel.setId("knoppen2");
 		rechts.getChildren().addAll(account, personeel);
 		
-		hbox = new HBox(15);
-		hbox.getChildren().addAll(links, rechts);
+		knoppen.getChildren().addAll(links, rechts);
+		knoppen.setPadding(new Insets(80, 0, 0, 0));
 		
-		getStylesheets().add("Views/styles.css");
-		
-		gridpane.add(hbox, 1, 0);
+		pane.setTop(navigatie);
+		pane.setCenter(knoppen);
+		knoppen.setAlignment(Pos.CENTER);
+    
+    		getStylesheets().add("Views/styles.css");
 	}
 	
 	private void InitAction(){

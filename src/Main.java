@@ -19,7 +19,7 @@ public class Main extends Application {
     public void start(Stage primaryStage) throws Exception{
 
         loginController = new LoginController(primaryStage);
-
+        
     }
 
 }
