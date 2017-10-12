@@ -64,7 +64,7 @@ public class PersoneelHoofdmenuView extends Scene {
 		home.setId("home");
 		home.setPadding(new Insets(15));
 		
-		gebruiker = new Label("Peter van Vliet");
+		gebruiker = new Label("Peter van Vliet"); //Gebruiker model
 		gebruiker.setPadding(new Insets(15, 14, 15, 15));
 		
 		img2 = new Image("/Assets/lijntje.png");
