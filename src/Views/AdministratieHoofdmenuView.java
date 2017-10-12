@@ -118,11 +118,7 @@ public class AdministratieHoofdmenuView extends Scene {
 	
 	private void InitAction(){
 		uren.setOnAction(e -> {
-<<<<<<< Updated upstream
 			controller.setIvullenUrenView();
-=======
-			//controller.setInvullenUrenView();
->>>>>>> Stashed changes
 		});
 		week.setOnAction(e -> {
 			controller.startInzienUrenAdminController();

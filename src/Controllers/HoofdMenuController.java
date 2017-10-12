@@ -62,5 +62,13 @@ public class HoofdMenuController {
     public void setGebruikerInfoView(){
         new GebruikerInfoController(stage, db, this);
     }
+    
+    public void setHoofdMenuView() {
+    	 if (getGebruikerModel().getRechten().equals("1")) {
+             setAdminHoofdMenu();
+         } else if (getGebruikerModel().getRechten().equals("0")) {
+             setPersoneelHoofdmenu();
+         }
+    }
 
 }
