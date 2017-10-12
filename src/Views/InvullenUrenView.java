@@ -218,12 +218,7 @@ public class InvullenUrenView extends Scene {
         });
 
         home.setOnAction(e -> {
-            if (controller.getHoofdMenuController().getGebruikerModel().getRechten().equals("1")) {
-                controller.getHoofdMenuController().setAdminHoofdMenu();
-            } else if (controller.getHoofdMenuController().getGebruikerModel().getRechten().equals("0")) {
-                controller.getHoofdMenuController().setPersoneelHoofdmenu();
-            }
-
+        	 	controller.getHoofdMenuController().setHoofdMenuView();
         });
     }
 

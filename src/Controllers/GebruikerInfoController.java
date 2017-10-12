@@ -3,7 +3,9 @@ package Controllers;
 import DAO.GebruikerDAO;
 import Database.DatabaseConnectie;
 import Models.GebruikerModel;
+import Views.AdministratieHoofdmenuView;
 import Views.GebruikerInfoView;
+import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 import java.util.ArrayList;
@@ -16,10 +18,14 @@ public class GebruikerInfoController {
     private GebruikerInfoView gebruikerInfoView;
 
     private ArrayList<GebruikerModel> gebruikers;
+	private AdministratieHoofdmenuView adminView;
+	
+	private HoofdMenuController hoofdmenucontroller;
 
-    public GebruikerInfoController(Stage stage, DatabaseConnectie db){
+    public GebruikerInfoController(Stage stage, DatabaseConnectie db, HoofdMenuController hoofdmenucontroller){
         this.stage = stage;
         this.db = db;
+        this.hoofdmenucontroller = hoofdmenucontroller;
         dao = new GebruikerDAO(db);
 
         gebruikerInfoView = new GebruikerInfoView(this);
@@ -32,5 +38,13 @@ public class GebruikerInfoController {
         gebruikers = dao.getAllAccount();
         return gebruikers;
     }
+    
+    public HoofdMenuController getHoofdMenuController() {
+    		return hoofdmenucontroller;
+    }
+
+	public void setAdminHoofdMenu() {
+		stage.setScene(adminView);
+	}
 
 }
