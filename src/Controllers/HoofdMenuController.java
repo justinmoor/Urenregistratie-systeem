@@ -18,7 +18,6 @@ public class HoofdMenuController {
     private AdministratieHoofdmenuView adminView;
     private GebruikerInfoView gebruikerInfoView;
     private AccountToevoegenView accountToevoegenView;
-
     private DatabaseConnectie db;
 
     public HoofdMenuController(Stage stage, GebruikerModel gebruikerModel, DatabaseConnectie db){
@@ -27,6 +26,7 @@ public class HoofdMenuController {
         this.tijdmodel = tijdmodel;
         this.db = db;
 
+        //gebruikerController = new GebruikerController(this);
 
         personeelView = new PersoneelHoofdmenuView(this);
         adminView = new AdministratieHoofdmenuView(this);
@@ -51,12 +51,12 @@ public class HoofdMenuController {
         //stage.setScene(accountToevoegenView);
     }
 
-    public void setInvullenUrenView() {
-        new InvullenUrenController(stage, db, this);
+    public void startInzienUrenAdminController(){
+        new InzienUrenAdminController(stage, db);
     }
 
-    public void setGebruikerInfoView(){
-        new GebruikerInfoController(stage, db);
+    public void setIvullenUrenView() {
+        new InvullenUrenController(stage, db);
     }
 
 }

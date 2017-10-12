@@ -110,10 +110,10 @@ public class AdministratieHoofdmenuView extends Scene {
 	
 	private void InitAction(){
 		uren.setOnAction(e -> {
-			controller.setInvullenUrenView();
+	//		controller.setInvullenUrenView();
 		});
 		week.setOnAction(e -> {
-			// controller.doedingen();
+			controller.startInzienUrenAdminController();
 		});
 		account.setOnAction(e -> {
 			controller.setAccountToevoegenView();

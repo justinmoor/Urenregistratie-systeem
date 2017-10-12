@@ -2,9 +2,13 @@ package DAO;
 
 import Database.DatabaseConnectie;
 
+import java.util.Date;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
 import java.sql.*;
 import java.util.ArrayList;
-import java.util.List;
 
 public class IngevuldeTijdDAO {
 
@@ -15,6 +19,9 @@ public class IngevuldeTijdDAO {
         this.db = db;
     }
 
+    public ResultSet getAdminOverzicht(String begindatum, String einddatum){
+        ResultSet results;
+        results = null;
     public ArrayList haalKlantenOp() throws SQLException {
         Connection conn = DriverManager.getConnection("jdbc:mariadb://localhost:3306/UrenregistratieDatabase?user=root&password=ipsen123");
         ArrayList<String> klant_namen = null;
@@ -69,4 +76,22 @@ public class IngevuldeTijdDAO {
         return onderwerpen;
     }
 
+        try {
+            PreparedStatement getResults = db.getConnection().prepareStatement("SELECT * FROM geregistreerdetijd WHERE begindatum >=? AND einddatum<=?");
+            getResults.setString(1, begindatum);
+            getResults.setString(2, einddatum);
+
+            System.out.println(begindatum);
+            System.out.println(einddatum);
+
+            results = getResults.executeQuery();
+
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+
+        return results;
+    }
 }
