@@ -34,6 +34,9 @@ public class PersoneelHoofdmenuView extends Scene {
     private VBox knoppen;
     private Button uren;
     private Button week;
+    
+    private Image img3;
+    private ImageView blauw_lijntje;
 		
 	private HoofdMenuController controller;
 	
@@ -47,12 +50,12 @@ public class PersoneelHoofdmenuView extends Scene {
 	}
 
 	public void initGui() {
-		pane.setStyle("-fx-background-image: url('/assets/background.png')");
+		pane.setStyle("-fx-background-image: url('/Assets/background.png')");
 		
 		navigatie = new BorderPane();
 		
 		img_box = new VBox();
-		img = new Image("/assets/back.png");
+		img = new Image("/Assets/back.png");
 		terug = new ImageView(img);
 		img_box.getChildren().add(terug);
 		img_box.setPadding(new Insets(15, 83, 15, 14));
@@ -64,7 +67,7 @@ public class PersoneelHoofdmenuView extends Scene {
 		gebruiker = new Label("Peter van Vliet");
 		gebruiker.setPadding(new Insets(15, 14, 15, 15));
 		
-		img2 = new Image("/assets/lijntje.png");
+		img2 = new Image("/Assets/lijntje.png");
 		lijntje = new ImageView(img2);
 		lijntje.setFitWidth(600);
 		
@@ -85,6 +88,10 @@ public class PersoneelHoofdmenuView extends Scene {
 		pane.setTop(navigatie);
 		pane.setCenter(knoppen);
 		knoppen.setAlignment(Pos.CENTER);
+		
+		img3 = new Image("/Assets/blauwlijntje.png");
+		blauw_lijntje = new ImageView(img3);
+		blauw_lijntje.setFitWidth(600);
     
 		getStylesheets().add("Views/styles.css");
 	}

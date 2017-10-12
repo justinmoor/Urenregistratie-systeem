@@ -63,7 +63,7 @@ public class LoginView extends Scene {
 		titel = new Label("Urenregistratie");
 		titel.setId("title");
 		
-		img = new Image("/assets/lijntje.png");
+		img = new Image("/Assets/lijntje.png");
 		lijntje = new ImageView(img);
 		lijntje.setFitWidth(241);
 		
@@ -88,7 +88,7 @@ public class LoginView extends Scene {
 
         foutief = new Label("");
         
-        img2 = new Image("/assets/blauwlijntje.png");
+        img2 = new Image("/Assets/blauwlijntje.png");
 		blauw_lijntje = new ImageView(img2);
 		blauw_lijntje.setFitWidth(600);
 		

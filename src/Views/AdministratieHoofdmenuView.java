@@ -43,6 +43,9 @@ public class AdministratieHoofdmenuView extends Scene {
     private VBox rechts;
     private Button account;
     private Button personeel;
+    
+    private Image img3;
+    private ImageView blauw_lijntje;
 
 	private HoofdMenuController controller;
 
@@ -60,7 +63,7 @@ public class AdministratieHoofdmenuView extends Scene {
 		navigatie = new BorderPane();
 		
 		img_box = new VBox();
-		img = new Image("/assets/back.png");
+		img = new Image("/Assets/back.png");
 		terug = new ImageView(img);
 		img_box.getChildren().add(terug);
 		img_box.setPadding(new Insets(15, 83, 15, 14));
@@ -72,7 +75,7 @@ public class AdministratieHoofdmenuView extends Scene {
 		gebruiker = new Label("Peter van Vliet");
 		gebruiker.setPadding(new Insets(15, 14, 15, 15));
 		
-		img2 = new Image("/assets/lijntje.png");
+		img2 = new Image("/Assets/lijntje.png");
 		lijntje = new ImageView(img2);
 		lijntje.setFitWidth(600);
 		
@@ -103,6 +106,12 @@ public class AdministratieHoofdmenuView extends Scene {
 		pane.setTop(navigatie);
 		pane.setCenter(knoppen);
 		knoppen.setAlignment(Pos.CENTER);
+		
+		img3 = new Image("/Assets/blauwlijntje.png");
+		blauw_lijntje = new ImageView(img3);
+		blauw_lijntje.setFitWidth(600);
+		
+		pane.setBottom(blauw_lijntje);
     
     		getStylesheets().add("Views/styles.css");
 	}
