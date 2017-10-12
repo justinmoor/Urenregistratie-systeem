@@ -55,12 +55,12 @@ public class AdministratieHoofdmenuView extends Scene {
 	}
 
 	public void initGui() {
-		pane.setStyle("-fx-background-image: url('/assets/background.png')");
+		pane.setStyle("-fx-background-image: url('/Assets/background.png')");
 		
 		navigatie = new BorderPane();
 		
 		img_box = new VBox();
-		img = new Image("/assets/back.png");
+		img = new Image("/Assets/back.png");
 		terug = new ImageView(img);
 		img_box.getChildren().add(terug);
 		img_box.setPadding(new Insets(15, 83, 15, 14));
@@ -72,7 +72,7 @@ public class AdministratieHoofdmenuView extends Scene {
 		gebruiker = new Label("Peter van Vliet");
 		gebruiker.setPadding(new Insets(15, 14, 15, 15));
 		
-		img2 = new Image("/assets/lijntje.png");
+		img2 = new Image("/Assets/lijntje.png");
 		lijntje = new ImageView(img2);
 		lijntje.setFitWidth(600);
 		
