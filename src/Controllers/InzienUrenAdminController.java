@@ -66,6 +66,12 @@ public class InzienUrenAdminController {
             if(results.next()){
                 resultatenlijst = new ArrayList<>();
                 do{
+                    String personeelsNaam;
+                    if(results.getString("tussenvoegsel")!=null) {
+                        personeelsNaam = results.getString("voornaam") +" "+ results.getString("tussenvoegsel") + " "+ results.getString("achternaam");
+                    }else{
+                        personeelsNaam = results.getString("voornaam")+" "+ results.getString("achternaam");
+                    }
                     resultatenlijst.add(new IngevuldeTijdModel(
                             results.getInt("uurID"),
                             results.getString("begindatum"),
@@ -77,7 +83,9 @@ public class InzienUrenAdminController {
                             results.getInt("persoonID"),
                             results.getString("klant_naam"),
                             results.getString("project_naam"),
-                            results.getString( "onderwerp_naam")));
+                            results.getString( "onderwerp_naam"),
+                            personeelsNaam
+                    ));
 
                     System.out.println(results.getString("klant_naam"));
                 } while(results.next());

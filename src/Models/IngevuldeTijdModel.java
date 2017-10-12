@@ -13,6 +13,7 @@ public class IngevuldeTijdModel {
  private String onderwerpNaam;
  private String commentaar;
  private boolean goedgekeurd;
+ private String persoonNaam;
  private boolean isChanged = false;
 
  //met commentaar
@@ -28,7 +29,7 @@ public class IngevuldeTijdModel {
   this.onderwerpNaam = onderwerpNaam;
   this.commentaar = commentaar;
  }
- public IngevuldeTijdModel(int uurId, String beginDatum, String eindDatum, String beginTijd,  String eindTijd, String commentaar,  boolean goedgekeurd, int personeelId,  String klantNaam, String projectNaam, String onderwerpNaam) {
+ public IngevuldeTijdModel(int uurId, String beginDatum, String eindDatum, String beginTijd,  String eindTijd, String commentaar,  boolean goedgekeurd, int personeelId,  String klantNaam, String projectNaam, String onderwerpNaam, String persoonNaam) {
   this.uurId = uurId;
   this.personeelID = personeelId;
   this.beginDatum = beginDatum;
@@ -40,6 +41,7 @@ public class IngevuldeTijdModel {
   this.onderwerpNaam = onderwerpNaam;
   this.commentaar = commentaar;
   this.goedgekeurd = goedgekeurd;
+  this.persoonNaam = persoonNaam;
  }
 
  public int getUurId() {
@@ -133,6 +135,15 @@ public class IngevuldeTijdModel {
  public boolean isChanged() {
   return isChanged;
  }
+
+ public String getPersoonNaam() {
+  return persoonNaam;
+ }
+
+ public void setPersoonNaam(String persoonNaam) {
+  this.persoonNaam = persoonNaam;
+ }
+
 
  public void setChanged(boolean changed) {
   isChanged = changed;

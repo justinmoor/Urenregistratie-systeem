@@ -106,7 +106,7 @@ public class IngevuldeTijdDAO {
         ResultSet results;
         results = null;
         try {
-            PreparedStatement getResults = db.getConnection().prepareStatement("SELECT * FROM geregistreerdetijd WHERE begindatum >=? AND einddatum<=?");
+            PreparedStatement getResults = db.getConnection().prepareStatement("SELECT geregistreerdetijd.*, personeel.voornaam, personeel.tussenvoegsel, personeel.achternaam FROM geregistreerdetijd JOIN personeel ON geregistreerdetijd.persoonID = personeel.persoonID\n WHERE begindatum >=? AND einddatum<=?");
             getResults.setString(1, begindatum);
             getResults.setString(2, einddatum);
 

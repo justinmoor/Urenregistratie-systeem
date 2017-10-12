@@ -26,7 +26,7 @@ public class InzienUrenAdminView extends Scene {
     private static final double PANEWIDTH = 1400;               //Grootte van de pane
     private static final double PANEHEIGHT = 800;
 
-    private final double PERSONEELIDCOLUMNWIDTH = 30;               //Breedten van de kolommen.
+    private final double PERSONEELNAAMCOLUMNWIDTH = 150;               //Breedten van de kolommen.
     private final double BEGINDATUMCOLUMNWIDTH = 90;
     private final double EINDDATUMCOLUMNWIDTH = 90;
     private final double BEGINTIJCOLUMNDWIDTH = 90;
@@ -34,7 +34,6 @@ public class InzienUrenAdminView extends Scene {
     private final double KLANTNAAMCOLUMNWIDTH = 100;
     private final double PROJECTNAAMCOLUMNWIDTH = 100;
     private final double ONDERWERPNAAMCOLUMNWIDTH = 100;
-    private final double UURIDCOLUMNWIDTH = 30;
     private final double COMMENTAARCOLUMNWIDTH = 350;
     private final double GOEDGEKEURDCOLUMNWIDTH = 80 ;
 
@@ -59,7 +58,7 @@ public class InzienUrenAdminView extends Scene {
      * Maak de tabel en alle bijbehorende kolommen.
      */
     private TableView <IngevuldeTijdModel>overzichtTableView;
-    private TableColumn <IngevuldeTijdModel, String> personeelidColumn;
+    private TableColumn <IngevuldeTijdModel, String> personeelNaamColumn;
     private TableColumn <IngevuldeTijdModel, String> begindatumColumn;
     private TableColumn <IngevuldeTijdModel, String> einddatumColumn;
     private TableColumn <IngevuldeTijdModel, String> begintijdColumn;
@@ -137,7 +136,11 @@ public class InzienUrenAdminView extends Scene {
         goButton.setOnAction(a ->{
             buttonPressed();
         });
-         contextMenuRightClick = new ContextMenu();
+
+        /**
+         * Maakt de context menu voor wanneer er met de rechtermuisknop wordt gedrukt op een rij. Voegt de "Goedkeuren" optie er aan toe.
+         */
+        contextMenuRightClick = new ContextMenu();
         keurGoed = new MenuItem("Goedkeuren");
 
         keurGoed.setOnAction(new EventHandler<ActionEvent>() {
@@ -147,6 +150,7 @@ public class InzienUrenAdminView extends Scene {
                 controller.keurGoed(aangevinkteRijen);
             }
         });
+
         contextMenuRightClick.getItems().add(keurGoed);
         overzichtTableView.setContextMenu(contextMenuRightClick);
         overzichtTableView.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
@@ -154,7 +158,7 @@ public class InzienUrenAdminView extends Scene {
         /**
          * Initialiseer de tabel.
          */
-        personeelidColumn = new TableColumn("Personeel ID");
+        personeelNaamColumn = new TableColumn("Medewerker");
         begindatumColumn = new TableColumn("Begindatum");
         einddatumColumn = new TableColumn("Einddatum");
         begintijdColumn = new TableColumn("Begintijd");
@@ -167,8 +171,10 @@ public class InzienUrenAdminView extends Scene {
 
         /**
          * Koppel de kollommen uit de tabel met de attributen uit IngevuldeTijdModel.
+         * Stringvalues dienen gelijk te zijn aan de namen die voor de attributen in het model zijn gebruikt.
+         * De gebruikte attributen dienen een getter en setter te hebben.
          */
-        personeelidColumn.setCellValueFactory(new PropertyValueFactory<>("personeelID"));
+        personeelNaamColumn.setCellValueFactory(new PropertyValueFactory<>("persoonNaam"));
         begindatumColumn.setCellValueFactory(new PropertyValueFactory<>("beginDatum"));
         einddatumColumn.setCellValueFactory(new PropertyValueFactory<>("eindDatum"));
         begintijdColumn.setCellValueFactory(new PropertyValueFactory<>("beginTijd"));
@@ -182,7 +188,7 @@ public class InzienUrenAdminView extends Scene {
         /**
          * Configureer de breedte van de kolommen. Constante waarden staan bovenaan.
          */
-        personeelidColumn.setMaxWidth(PERSONEELIDCOLUMNWIDTH);
+        personeelNaamColumn.setMaxWidth(PERSONEELNAAMCOLUMNWIDTH);
         begindatumColumn.setMaxWidth(BEGINDATUMCOLUMNWIDTH);
         einddatumColumn.setMaxWidth(EINDDATUMCOLUMNWIDTH);
         begintijdColumn.setMaxWidth(BEGINTIJCOLUMNDWIDTH);
@@ -194,7 +200,7 @@ public class InzienUrenAdminView extends Scene {
         goedgekeurdColumn.setMaxWidth(GOEDGEKEURDCOLUMNWIDTH);
 
         overzichtTableView.getColumns().addAll(         //voeg alle gemaakte kolommen toe aan de tabel.
-                personeelidColumn,
+                personeelNaamColumn,
                 onderwerpnaamColumn,
                 begintijdColumn,
                 eindtijdColumn,
