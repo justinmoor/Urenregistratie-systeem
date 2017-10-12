@@ -3,12 +3,12 @@ package Views;
 import Controllers.InzienUrenAdminController;
 import Models.IngevuldeTijdModel;
 import javafx.collections.ObservableList;
+import javafx.event.EventHandler;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.DatePicker;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 import java.time.format.DateTimeFormatter;
@@ -19,8 +19,23 @@ public class InzienUrenAdminView extends Scene {
      * Initialiseer constanten
      */
     private static final String KNOPSTRING = "Ververs";
-    private static final double PANEWIDTH = 1200;
-    private static final double PANEHEIGHT = 623;
+    private static final double PANEWIDTH = 1400;               //Grootte van de pane
+    private static final double PANEHEIGHT = 800;
+
+    private final double PERSONEELIDCOLUMNWIDTH = 30;               //Breedten van de kolommen.
+    private final double BEGINDATUMCOLUMNWIDTH = 90;
+    private final double EINDDATUMCOLUMNWIDTH = 90;
+    private final double BEGINTIJCOLUMNDWIDTH = 90;
+    private final double EINDTIJDCOLUMNWIDTH = 90;
+    private final double KLANTNAAMCOLUMNWIDTH = 100;
+    private final double PROJECTNAAMCOLUMNWIDTH = 100;
+    private final double ONDERWERPNAAMCOLUMNWIDTH = 100;
+    private final double UURIDCOLUMNWIDTH = 30;
+    private final double COMMENTAARCOLUMNWIDTH = 350;
+    private final double GOEDGEKEURDCOLUMNWIDTH = 80 ;
+
+    private final double TABLEWIDTH = 1150;                 //Grootte van de tabel.
+    private final int TABLEHEIGHT = 780;
 
     /**
      * Allocate space voor alle beeldobjecten.
@@ -29,8 +44,12 @@ public class InzienUrenAdminView extends Scene {
     private DatePicker begindatumPicker;
     private DatePicker einddatumPicker;
     private GridPane gridpane;
-    private VBox datepickers;
+    private VBox leftFilterPanel;
     private Button goButton;
+    private VBox begindatumVbox;
+    private VBox einddatumVbox;
+    private Label einddatumLabel;
+    private Label begindatumLabel;
 
     /**
      * Maak de tabel en alle bijbehorende kolommen.
@@ -64,30 +83,41 @@ public class InzienUrenAdminView extends Scene {
          * Initialiseer alle beeldobjecten.
          */
         super(new GridPane(), PANEWIDTH, PANEHEIGHT);
+        einddatumLabel = new Label("Einddatum: ");
+        begindatumLabel = new Label("Begindatum: ");
+
+        einddatumPicker = new DatePicker();
+        begindatumPicker = new DatePicker();
+
+        begindatumVbox = new VBox(begindatumLabel, begindatumPicker);
+        einddatumVbox = new VBox(einddatumLabel, einddatumPicker);
         this.controller = controller;
         gridpane = (GridPane) this.getRoot();
-        begindatumPicker = new DatePicker();
-        einddatumPicker = new DatePicker();
         overzichtTableView = new TableView();
-        datepickers = new VBox(begindatumPicker, einddatumPicker);
         goButton = new Button(KNOPSTRING);
+        leftFilterPanel = new VBox(begindatumVbox, einddatumVbox, goButton);
+
+
+
 
         /**
          * Zet alle beeldobjecten op de goede plek.
          */
-        gridpane.setRowIndex(datepickers, 1);
-        gridpane.setColumnIndex(datepickers, 1);
-
+        gridpane.setRowIndex(leftFilterPanel, 1);
+        gridpane.setColumnIndex(leftFilterPanel, 1);
+        gridpane.setHgap(12);
+        gridpane.setVgap(12);
         gridpane.setRowIndex(overzichtTableView, 1);
-        gridpane.setColumnIndex(overzichtTableView, 3);
+        gridpane.setColumnIndex(overzichtTableView, 2);
 
+        overzichtTableView.setMinWidth(TABLEWIDTH);           //Zet de grootte van de tabel.
+        overzichtTableView.setMinHeight(TABLEHEIGHT);
 
-        gridpane.setRowIndex(goButton, 2);
-        gridpane.setColumnIndex(goButton, 3);
-
-        overzichtTableView.setMinWidth(1000);           //Zet de grootte van de tabel.
-        overzichtTableView.setMinHeight(600);
-
+        leftFilterPanel.setPrefWidth(200);
+        leftFilterPanel.setSpacing(12);
+        goButton.setPrefWidth(leftFilterPanel.getPrefWidth());
+        einddatumPicker.setPrefWidth(leftFilterPanel.getPrefWidth());
+        begindatumPicker.setPrefWidth(leftFilterPanel.getPrefWidth());
 
         /**
          * Wordt uitgevoerd wanneer de 'Ververs' knop wordt ingedrukt.
@@ -126,6 +156,21 @@ public class InzienUrenAdminView extends Scene {
         commentaarColumn.setCellValueFactory(new PropertyValueFactory<>("commentaar"));
         goedgekeurdColumn.setCellValueFactory(new PropertyValueFactory<>("goedgekeurd"));
 
+        /**
+         * Configureer de breedte van de kolommen. Constante waarden staan bovenaan.
+         */
+        uuridColumn.setMaxWidth(UURIDCOLUMNWIDTH);
+        personeelidColumn.setMaxWidth(PERSONEELIDCOLUMNWIDTH);
+        begindatumColumn.setMaxWidth(BEGINDATUMCOLUMNWIDTH);
+        einddatumColumn.setMaxWidth(EINDDATUMCOLUMNWIDTH);
+        begintijdColumn.setMaxWidth(BEGINTIJCOLUMNDWIDTH);
+        eindtijdColumn.setMaxWidth(EINDTIJDCOLUMNWIDTH);
+        klantnaamColumn.setMaxWidth(KLANTNAAMCOLUMNWIDTH);
+        projectnaamColumn.setMaxWidth(PROJECTNAAMCOLUMNWIDTH);
+        onderwerpnaamColumn.setMaxWidth(ONDERWERPNAAMCOLUMNWIDTH);
+        commentaarColumn.setMaxWidth(COMMENTAARCOLUMNWIDTH);
+        goedgekeurdColumn.setMaxWidth(GOEDGEKEURDCOLUMNWIDTH);
+
         overzichtTableView.getColumns().addAll(         //voeg alle gemaakte kolommen toe aan de tabel.
                 uuridColumn,
                 personeelidColumn,
@@ -140,7 +185,19 @@ public class InzienUrenAdminView extends Scene {
                 goedgekeurdColumn);
         overzichtTableView.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
 
-        gridpane.getChildren().addAll(datepickers, overzichtTableView, goButton);               //Voegt alles toe aan de GridPane.
+        gridpane.getChildren().addAll(leftFilterPanel, overzichtTableView);               //Voegt alles toe aan de GridPane.
+
+        this.addEventHandler(KeyEvent.KEY_PRESSED, new EventHandler<KeyEvent>
+                () {
+
+            @Override
+            public void handle(KeyEvent t) {
+                if(t.getCode()== KeyCode.ESCAPE)
+                {
+                    backToHomeScreen();
+                }
+            }
+        });
     }
 
     /**
@@ -150,6 +207,8 @@ public class InzienUrenAdminView extends Scene {
         convertDates();
         controller.buttonPressed();
     }
+
+
 
     /**
      * Converteert de data uit de DataPickers naar 'YYYY-MM-DD' formaat en assigned ze aan de klassenvariabelen.
@@ -166,6 +225,10 @@ public class InzienUrenAdminView extends Scene {
     public void vulTabelUitLijst(ObservableList data){
         overzichtTableView.getItems().clear();
         overzichtTableView.setItems(data);
+
+    }
+
+    private void backToHomeScreen(){
 
     }
 

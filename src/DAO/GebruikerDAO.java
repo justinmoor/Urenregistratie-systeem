@@ -32,8 +32,6 @@ public class GebruikerDAO {
                     model = new GebruikerModel(results.getInt("persoonID"), results.getString("achternaam"), results.getString("voornaam"), results.getString("email"), results.getString("wachtwoord"), results.getString("rechten"), results.getString("werkzaam"));
                 }
             }
-
-
         } catch (SQLException e) {
             e.printStackTrace();
         }

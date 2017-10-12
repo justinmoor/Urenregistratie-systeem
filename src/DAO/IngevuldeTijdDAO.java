@@ -72,7 +72,7 @@ public class IngevuldeTijdDAO {
     }
 
 
-    public void insertMetCommentaar(int getPersoonsID, String klant, String project, String onderwerp, String commentaar, String begindatum, String begintijd, String einddatum, String eindtijd) throws SQLException{
+    public void insertMetCommentaar(int getPersoonsID, String klant, String project, String onderwerp, String commentaar, String begindatum, String begintijd, String einddatum, String eindtijd) throws SQLException {
         Connection conn = DriverManager.getConnection("jdbc:mariadb://localhost:3306/UrenregistratieDatabase?user=root&password=ipsen123");
 
         try {
@@ -92,7 +92,7 @@ public class IngevuldeTijdDAO {
         } catch (SQLException e1) {
             e1.printStackTrace();
         }
-
+    }
 
     /**
      * Produceert een ResultSet wanneer wordt aangeroepen. Vereist de begin en einddatum als argument.
