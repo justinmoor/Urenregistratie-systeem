@@ -52,6 +52,7 @@ public class GebruikerInfoView extends Scene {
         rechten = new TableColumn("Rechten");
 
         table.getColumns().addAll(naam, tussenvoegsel, achternaam, email, rechten);
+        table.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
 
         box.setPadding(new Insets(10, 10, 10, 10));
         box.getChildren().addAll(personeelsInfo, table);
@@ -78,7 +79,6 @@ public class GebruikerInfoView extends Scene {
 
         rechten.setCellValueFactory(
                 new PropertyValueFactory<>("rechten"));
-
 
     }
 

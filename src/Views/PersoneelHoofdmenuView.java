@@ -9,6 +9,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
@@ -16,57 +17,83 @@ import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 
 public class PersoneelHoofdmenuView extends Scene {
-	private GridPane gridpane;
-	
-	private ImageView grijslijntje;
-	private Image lijntjePNG;
-	
-	private VBox vbox;	
-	private Button uren;
-	private Button week;
+	private BorderPane pane;
+    
+    private BorderPane navigatie;
+    
+    private VBox img_box;
+    private Image img;
+    private ImageView terug;
+    
+    private Label home;
+    private Label gebruiker;
+    
+    private Image img2;
+    private ImageView lijntje;
+    
+    private VBox knoppen;
+    private Button uren;
+    private Button week;
+    
+    private Image img3;
+    private ImageView blauw_lijntje;
 		
 	private HoofdMenuController controller;
 	
 	public PersoneelHoofdmenuView(HoofdMenuController controller){
-		super(new GridPane(), 600,  400); 		// Nieuwe pane meegeven aan de superklasse (dus scene).
-		gridpane = (GridPane) this.getRoot(); 	// Deze nieuwe gridpane van de superklasse wordt de gridpane die hier gebruikt wordt.
+		super(new BorderPane(), 600,  400); 		// Nieuwe pane meegeven aan de superklasse (dus scene).
+		pane = (BorderPane) this.getRoot(); 		// Deze nieuwe gridpane van de superklasse wordt de gridpane die hier gebruikt wordt.
 		this.controller = controller; 			// Controller zaken, moeten we nog overleggen.
 
-		initGui(); 		// InitGui om alle grafische elementen te initialiseren.
-		InitAction();	// InitAction om alle functionaliteiten te initialiseren, denk aan knop.setOnAction() etc.
+		initGui(); 			// InitGui om alle grafische elementen te initialiseren.
+		InitAction();		// InitAction om alle functionaliteiten te initialiseren, denk aan knop.setOnAction() etc.
 	}
 
 	public void initGui() {
-		gridpane.setAlignment(Pos.TOP_CENTER);
-		gridpane.setPadding(new Insets(25, 25, 25, 25));
-		gridpane.setStyle("-fx-background-color: #f9f9f7");
+		pane.setId("pane");
 		
-		vbox = new VBox(20);
-		vbox.setPrefWidth(270);
-		vbox.setPrefHeight(70);
+		navigatie = new BorderPane();
 		
-		uren = new Button("Uren registreren");
-		uren.setMinWidth(vbox.getPrefWidth());
-		uren.setMinHeight(vbox.getPrefHeight());
+		img_box = new VBox();
+		img = new Image("/Assets/back.png");
+		terug = new ImageView(img);
+		img_box.getChildren().add(terug);
+		img_box.setPadding(new Insets(15, 83, 15, 14));
 		
-		week = new Button("Weekoverzicht");
-		week.setMinWidth(vbox.getPrefWidth());
-		week.setMinHeight(vbox.getPrefHeight());
+		home = new Label("HOME");
+		home.setId("home");
+		home.setPadding(new Insets(15));
 		
-		vbox.getChildren().addAll(uren, week);
+		gebruiker = new Label("Peter van Vliet"); //Gebruiker model
+		gebruiker.setPadding(new Insets(15, 14, 15, 15));
 		
-//		hboxGebruiker = new HBox();
-//		hboxGebruiker.setPrefWidth(270);
-//		hboxGebruiker.setAlignment(Pos.CENTER);
-//		
-//		gebruiker = new Label("HOME");
-//		gebruiker.setFont(Font.font("SansSerif", FontWeight.BOLD, 14));
-//		gebruiker.setMinWidth(hboxGebruiker.getPrefWidth());
-//		
-//		hboxGebruiker.getChildren().add(gebruiker);
-//		
-//		gridpane.add(gebruiker, 0, 0);
-		gridpane.add(vbox, 0, 2);
+		img2 = new Image("/Assets/lijntje.png");
+		lijntje = new ImageView(img2);
+		lijntje.setFitWidth(600);
+		
+		navigatie.setLeft(img_box);
+		navigatie.setCenter(home);
+		navigatie.setRight(gebruiker);
+		navigatie.setBottom(lijntje);
+
+		knoppen = new VBox(19);
+		
+		uren = new Button("UREN REGISTREREN");
+		uren.setId("knoppen");
+		week = new Button("WEEKOVERZICHT");
+		week.setId("knoppen");
+		
+		knoppen.getChildren().addAll(uren, week);
+		
+		pane.setTop(navigatie);
+		pane.setCenter(knoppen);
+		knoppen.setAlignment(Pos.CENTER);
+		
+		img3 = new Image("/Assets/blauwlijntje.png");
+		blauw_lijntje = new ImageView(img3);
+		blauw_lijntje.setFitWidth(600);
+    
+		getStylesheets().add("Views/styles.css");
 	}
 	
 	private void InitAction(){

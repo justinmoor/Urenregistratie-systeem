@@ -1,3 +1,7 @@
+#pane {
+	-fx-background-color: #f9f9f9;
+}
+
 #title {
 	-fx-font-family: "SansSerif";
 	-fx-font-size: 34px;
@@ -5,44 +9,67 @@
 	-fx-text-fill: #6b757d;
 }
 
-#emailLabel {
+.label {
 	-fx-font-family: "SansSerif";
 	-fx-font-size: 13px;
 	-fx-text-fill: #6b757d;
 }
 
-#emailTextfield {
-	-fx-background-color: #fcfcfc;
-	-fx-border-color: #c7c7c5;
-}
-
-#passwordLabel {
+#home {
 	-fx-font-family: "SansSerif";
-	-fx-font-size: 13px;
+	-fx-font-size: 14px;
+	-fx-font-weight: bold;
 	-fx-text-fill: #6b757d;
-}
-
-#passwordTextfield {
-	-fx-background-color: #fcfcfc;
-	-fx-border-color: #c7c7c5;
 }
 
 .text-field {
+	-fx-font-family: "SansSerif";
+	-fx-font-size: 12px;
+	-fx-text-fill: #6b757d;
+	-fx-background-color: #fcfcfc;
+	-fx-border-color: #c7c7c5;
 	-fx-max-width: 150;
+	-fx-min-height: 30;
 }
 
 .button {
-	-fx-background-color: #fcfcfc;
+	-fx-background-color: #f9f9f7;
 	-fx-border-color: #c7c7c5;
 	-fx-text-fill: #6b757d;
-	-fx-min-height: 36;
-	-fx-max-width: 150;
+	-fx-min-height: 40;
+	-fx-min-width: 241;
 }
 
 .button:hover {
-	-fx-transition: 1s;
 	-fx-background-color: #f9f9f7;
 	-fx-border-color: #60c8db;
 	-fx-text-fill: #60c8db;
-	-fx-font-familiy: "SansSerif";
+}
+
+#knoppen {
+	-fx-background-color: #f9f9f7;
+	-fx-border-color: #c7c7c5;
+	-fx-text-fill: #6b757d;
+	-fx-min-height: 82;
+	-fx-min-width: 302;
+}
+
+#knoppen:hover {
+	-fx-background-color: #f9f9f7;
+	-fx-border-color: #60c8db;
+	-fx-text-fill: #60c8db;
+}
+
+#knoppen2 {
+	-fx-background-color: #f9f9f7;
+	-fx-border-color: #c7c7c5;
+	-fx-text-fill: #6b757d;
+	-fx-min-height: 82;
+	-fx-min-width: 242;
+}
+
+#knoppen2:hover {
+	-fx-background-color: #f9f9f7;
+	-fx-border-color: #60c8db;
+	-fx-text-fill: #60c8db;
 }
