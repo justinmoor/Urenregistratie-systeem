@@ -15,6 +15,7 @@ import java.util.ArrayList;
 public class InzienUrenAdminController {
 
     private final String ERRORMESSAGENORESULTS = "De zoekopdracht heeft geen resultaten opgeleverd";
+
     /**
      * Maak alle hulpklassen aan.
      */
@@ -26,6 +27,7 @@ public class InzienUrenAdminController {
     ArrayList<IngevuldeTijdModel> resultatenlijst;
 
     /**
+     * Is de klasse die de InzienUrenAdminView onderhoudt.
      * Krijgt DatabaseConnectie mee, zodat deze kan worden doorgegeven aan de DAO.
      * @param stage
      * @param dbc
