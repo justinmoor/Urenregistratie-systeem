@@ -43,6 +43,9 @@ public class LoginView extends Scene {
     private Button login;
     
     private Label foutief;
+    
+    private Image img2;
+    private ImageView blauw_lijntje; 
 
     public LoginView(LoginController controller) {
         super(new BorderPane(), 600, 400); 		// Nieuwe pane meegeven aan de superklasse (dus scene).
@@ -55,8 +58,6 @@ public class LoginView extends Scene {
 
     //Grafische elementen initialiseren.
     public void initGui() {
-		pane.setStyle("-fx-background-image: url('/assets/background.png')");
-
 		groep = new VBox(12);
 		
 		titel = new Label("Urenregistratie");
@@ -86,6 +87,12 @@ public class LoginView extends Scene {
 		wachtwoord.setAlignment(Pos.CENTER);
 
         foutief = new Label("");
+        
+        img2 = new Image("/assets/blauwlijntje.png");
+		blauw_lijntje = new ImageView(img2);
+		blauw_lijntje.setFitWidth(600);
+		
+		pane.setBottom(blauw_lijntje);
 
         getStylesheets().add("Views/styles.css");
     }
