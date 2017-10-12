@@ -56,7 +56,11 @@ public class HoofdMenuController {
     }
 
     public void setIvullenUrenView() {
-        new InvullenUrenController(stage, db);
+        new InvullenUrenController(stage, db, this);
+    }
+
+    public void setGebruikerInfoView(){
+        new GebruikerInfoController(stage, db);
     }
 
 }
