@@ -52,8 +52,8 @@ public class GebruikerInfoView extends Scene {
   //  private HoofdMenuController controller;
 
     public GebruikerInfoView(GebruikerInfoController controller){
-        super(new VBox(), 1200, 700);
-        box = (VBox) this.getRoot();
+        super(new BorderPane(), 1200, 700);
+        pane = (BorderPane) this.getRoot();
         this.controller = controller;
         initGui();
     }

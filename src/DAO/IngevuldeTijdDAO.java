@@ -92,7 +92,28 @@ public class IngevuldeTijdDAO {
         } catch (SQLException e1) {
             e1.printStackTrace();
         }
-
-
     }
+
+    public ResultSet getAdminOverzicht(String begindatum, String einddatum) {
+        ResultSet results;
+        results = null;
+        try {
+            PreparedStatement getResults = db.getConnection().prepareStatement("SELECT * FROM geregistreerdetijd WHERE begindatum >=? AND einddatum<=?");
+            getResults.setString(1, begindatum);
+            getResults.setString(2, einddatum);
+
+            System.out.println(begindatum);
+            System.out.println(einddatum);
+
+            results = getResults.executeQuery();
+
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+
+        return results;
+    }
+
 }
