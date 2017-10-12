@@ -55,14 +55,14 @@ public class LoginView extends Scene {
 
     //Grafische elementen initialiseren.
     public void initGui() {
-		pane.setStyle("-fx-background-image: url('/assets/background.png')");
+		pane.setStyle("-fx-background-image: url('/Assets/background.png')");
 
 		groep = new VBox(12);
 		
 		titel = new Label("Urenregistratie");
 		titel.setId("title");
 		
-		img = new Image("/assets/lijntje.png");
+		img = new Image("/Assets/lijntje.png");
 		lijntje = new ImageView(img);
 		lijntje.setFitWidth(241);
 		

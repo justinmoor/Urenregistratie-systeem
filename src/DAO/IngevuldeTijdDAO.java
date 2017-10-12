@@ -19,9 +19,7 @@ public class IngevuldeTijdDAO {
         this.db = db;
     }
 
-    public ResultSet getAdminOverzicht(String begindatum, String einddatum){
-        ResultSet results;
-        results = null;
+
     public ArrayList haalKlantenOp() throws SQLException {
         Connection conn = DriverManager.getConnection("jdbc:mariadb://localhost:3306/UrenregistratieDatabase?user=root&password=ipsen123");
         ArrayList<String> klant_namen = null;
@@ -75,7 +73,9 @@ public class IngevuldeTijdDAO {
         conn.close();
         return onderwerpen;
     }
-
+    public ResultSet getAdminOverzicht(String begindatum, String einddatum){
+        ResultSet results;
+        results = null;
         try {
             PreparedStatement getResults = db.getConnection().prepareStatement("SELECT * FROM geregistreerdetijd WHERE begindatum >=? AND einddatum<=?");
             getResults.setString(1, begindatum);
