@@ -45,14 +45,15 @@ public class GebruikerInfoView extends Scene {
     
     private Image img3;
     private ImageView blauw_lijntje;
+    private TableColumn <GebruikerModel, String> werkzaam;
 
     private GebruikerInfoController controller;
 
   //  private HoofdMenuController controller;
 
     public GebruikerInfoView(GebruikerInfoController controller){
-        super(new BorderPane(), 900, 600);
-        pane = (BorderPane) this.getRoot();
+        super(new VBox(), 1200, 700);
+        box = (VBox) this.getRoot();
         this.controller = controller;
         initGui();
     }
@@ -98,8 +99,11 @@ public class GebruikerInfoView extends Scene {
         achternaam = new TableColumn("Achternaam");
         email = new TableColumn("Email");
         rechten = new TableColumn("Rechten");
+        werkzaam = new TableColumn("Werkzaam");
 
-        table.getColumns().addAll(naam, tussenvoegsel, achternaam, email, rechten);
+        werkzaam.setEditable(true);
+
+        table.getColumns().addAll(naam, tussenvoegsel, achternaam, email, rechten, werkzaam);
         table.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
         table.setPadding(new Insets(10));
         
@@ -123,21 +127,12 @@ public class GebruikerInfoView extends Scene {
 
         table.setItems(gebruikers);
 
-        naam.setCellValueFactory(
-                new PropertyValueFactory<>("voornaam"));
-
-        tussenvoegsel.setCellValueFactory(
-                new PropertyValueFactory<>("tussenvoegsel"));
-
-        achternaam.setCellValueFactory(
-                new PropertyValueFactory<>("achternaam"));
-
-        email.setCellValueFactory(
-                new PropertyValueFactory<>("email"));
-
-        rechten.setCellValueFactory(
-                new PropertyValueFactory<>("rechten"));
-
+        naam.setCellValueFactory(new PropertyValueFactory<>("voornaam"));
+        tussenvoegsel.setCellValueFactory(new PropertyValueFactory<>("tussenvoegsel"));
+        achternaam.setCellValueFactory(new PropertyValueFactory<>("achternaam"));
+        email.setCellValueFactory(new PropertyValueFactory<>("email"));
+        rechten.setCellValueFactory(new PropertyValueFactory<>("rechten"));
+        werkzaam.setCellValueFactory(new PropertyValueFactory<>("werkzaam"));
     }
 
 }

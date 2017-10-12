@@ -9,6 +9,7 @@ public class GebruikerModel {
     private String email;
     private String wachtwoord;
     private String rechten;
+    private String werkzaam;
 
     @Override
     public String toString() {
@@ -20,6 +21,7 @@ public class GebruikerModel {
                 ", email='" + email + '\'' +
                 ", wachtwoord='" + wachtwoord + '\'' +
                 ", rechten='" + rechten + '\'' +
+                ", werkzaam='" + werkzaam + '\'' +
                 '}';
     }
 
@@ -27,7 +29,7 @@ public class GebruikerModel {
 
     }
 
-    public GebruikerModel(int gebruikerID, String achternaam, String tussenvoegsel, String voornaam, String email, String wachtwoord, String rechten) {
+    public GebruikerModel(int gebruikerID, String achternaam, String tussenvoegsel, String voornaam, String email, String wachtwoord, String rechten, String werkzaam) {
         this.gebruikerID = gebruikerID;
         this.voornaam = voornaam;
         this.tussenvoegsel = tussenvoegsel;
@@ -35,16 +37,26 @@ public class GebruikerModel {
         this.email = email;
         this.wachtwoord = wachtwoord;
         this.rechten = rechten;
+        this.werkzaam = werkzaam;
     }
 
     // Mensen zonder tussenvoegsel
-    public GebruikerModel(int gebruikerID, String voornaam, String achternaam, String email, String wachtwoord, String rechten) {
+    public GebruikerModel(int gebruikerID, String voornaam, String achternaam, String email, String wachtwoord, String rechten, String werkzaam) {
         this.gebruikerID = gebruikerID;
         this.voornaam = voornaam;
         this.achternaam = achternaam;
         this.email = email;
         this.wachtwoord = wachtwoord;
         this.rechten = rechten;
+        this.werkzaam = werkzaam;
+    }
+
+    public String getWerkzaam(){
+        return werkzaam;
+    }
+
+    public void setWerkzaam(String werkzaam){
+        this.werkzaam = werkzaam;
     }
 
     public int getGebruikerID() {

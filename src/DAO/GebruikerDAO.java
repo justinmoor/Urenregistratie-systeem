@@ -27,9 +27,9 @@ public class GebruikerDAO {
 
             if(results.next() ){
                 if(results.getString("tussenvoegsel")!=null){
-                    model = new GebruikerModel(results.getInt("persoonID"), results.getString("achternaam"), results.getString("tussenvoegsel"), results.getString("voornaam"), results.getString("email"), results.getString("wachtwoord"), results.getString("rechten"));
+                    model = new GebruikerModel(results.getInt("persoonID"), results.getString("achternaam"), results.getString("tussenvoegsel"), results.getString("voornaam"), results.getString("email"), results.getString("wachtwoord"), results.getString("rechten"), results.getString("werkzaam"));
                 } else{
-                    model = new GebruikerModel(results.getInt("persoonID"), results.getString("achternaam"), results.getString("voornaam"), results.getString("email"), results.getString("wachtwoord"), results.getString("rechten"));
+                    model = new GebruikerModel(results.getInt("persoonID"), results.getString("achternaam"), results.getString("voornaam"), results.getString("email"), results.getString("wachtwoord"), results.getString("rechten"), results.getString("werkzaam"));
                 }
             }
 
@@ -86,7 +86,7 @@ public class GebruikerDAO {
 
     public ArrayList getAllAccount(){
         gebruikers = new ArrayList<>();
-        String query = "SELECT voornaam, tussenvoegsel, achternaam, email, rechten FROM personeel;";
+        String query = "SELECT voornaam, tussenvoegsel, achternaam, email, rechten, werkzaam FROM personeel;";
 
         try {
             PreparedStatement statement = db.getConnection().prepareStatement(query);
@@ -103,6 +103,12 @@ public class GebruikerDAO {
                     gebruiker.setRechten(("Administrator"));
                 } else {
                     gebruiker.setRechten("Personeel");
+                }
+
+                if(result.getString("werkzaam").equals("1")){
+                    gebruiker.setWerkzaam("Ja");
+                } else {
+                    gebruiker.setWerkzaam("Nee");
                 }
 
                 gebruikers.add(gebruiker);

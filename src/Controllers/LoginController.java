@@ -26,6 +26,7 @@ public class LoginController {
         gebruikerDAO = new GebruikerDAO(db);
 
         stage.setScene(loginView);
+        stage.setResizable(false);
         stage.show();
     }
 
