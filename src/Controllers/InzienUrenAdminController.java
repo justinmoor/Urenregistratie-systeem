@@ -79,7 +79,7 @@ public class InzienUrenAdminController {
                             results.getString("project_naam"),
                             results.getString( "onderwerp_naam")));
 
-                    System.out.println(results.getString("begindatum"));
+                    System.out.println(results.getString("klant_naam"));
                 } while(results.next());
             } else{
                 resultatenlijst = new ArrayList<>();

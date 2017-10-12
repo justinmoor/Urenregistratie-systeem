@@ -59,7 +59,6 @@ public class InzienUrenAdminView extends Scene {
      * Maak de tabel en alle bijbehorende kolommen.
      */
     private TableView <IngevuldeTijdModel>overzichtTableView;
-    private TableColumn <IngevuldeTijdModel, String> uuridColumn;
     private TableColumn <IngevuldeTijdModel, String> personeelidColumn;
     private TableColumn <IngevuldeTijdModel, String> begindatumColumn;
     private TableColumn <IngevuldeTijdModel, String> einddatumColumn;
@@ -155,7 +154,6 @@ public class InzienUrenAdminView extends Scene {
         /**
          * Initialiseer de tabel.
          */
-        uuridColumn = new TableColumn("Uur ID");
         personeelidColumn = new TableColumn("Personeel ID");
         begindatumColumn = new TableColumn("Begindatum");
         einddatumColumn = new TableColumn("Einddatum");
@@ -170,22 +168,20 @@ public class InzienUrenAdminView extends Scene {
         /**
          * Koppel de kollommen uit de tabel met de attributen uit IngevuldeTijdModel.
          */
-        uuridColumn.setCellValueFactory(new PropertyValueFactory<>("uurId"));
         personeelidColumn.setCellValueFactory(new PropertyValueFactory<>("personeelID"));
         begindatumColumn.setCellValueFactory(new PropertyValueFactory<>("beginDatum"));
         einddatumColumn.setCellValueFactory(new PropertyValueFactory<>("eindDatum"));
         begintijdColumn.setCellValueFactory(new PropertyValueFactory<>("beginTijd"));
         eindtijdColumn.setCellValueFactory(new PropertyValueFactory<>("eindTijd"));
-        klantnaamColumn.setCellValueFactory(new PropertyValueFactory<>("klant"));
-        projectnaamColumn.setCellValueFactory(new PropertyValueFactory<>("project"));
-        onderwerpnaamColumn.setCellValueFactory(new PropertyValueFactory<>("onderwerp"));
+        klantnaamColumn.setCellValueFactory(new PropertyValueFactory<>("klantNaam"));
+        projectnaamColumn.setCellValueFactory(new PropertyValueFactory<>("projectNaam"));
+        onderwerpnaamColumn.setCellValueFactory(new PropertyValueFactory<>("onderwerpNaam"));
         commentaarColumn.setCellValueFactory(new PropertyValueFactory<>("commentaar"));
         goedgekeurdColumn.setCellValueFactory(new PropertyValueFactory<>("goedgekeurd"));
 
         /**
          * Configureer de breedte van de kolommen. Constante waarden staan bovenaan.
          */
-        uuridColumn.setMaxWidth(UURIDCOLUMNWIDTH);
         personeelidColumn.setMaxWidth(PERSONEELIDCOLUMNWIDTH);
         begindatumColumn.setMaxWidth(BEGINDATUMCOLUMNWIDTH);
         einddatumColumn.setMaxWidth(EINDDATUMCOLUMNWIDTH);
@@ -198,15 +194,14 @@ public class InzienUrenAdminView extends Scene {
         goedgekeurdColumn.setMaxWidth(GOEDGEKEURDCOLUMNWIDTH);
 
         overzichtTableView.getColumns().addAll(         //voeg alle gemaakte kolommen toe aan de tabel.
-                uuridColumn,
                 personeelidColumn,
-                begindatumColumn,
-                einddatumColumn,
+                onderwerpnaamColumn,
                 begintijdColumn,
                 eindtijdColumn,
+                begindatumColumn,
+                einddatumColumn,
                 klantnaamColumn,
                 projectnaamColumn,
-                onderwerpnaamColumn,
                 commentaarColumn,
                 goedgekeurdColumn);
         overzichtTableView.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
