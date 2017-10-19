@@ -5,7 +5,6 @@ import Models.IngevuldeTijdModel;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
-import javafx.event.EventType;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -15,7 +14,6 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.List;
 
 public class InzienUrenAdminView extends Scene {
 
@@ -25,6 +23,7 @@ public class InzienUrenAdminView extends Scene {
     private static final String KNOPSTRING = "Ververs";
     private static final double PANEWIDTH = 1400;               //Grootte van de pane
     private static final double PANEHEIGHT = 800;
+    private static final String TERUGKNOPTEKST = "Terug";
 
     private final double PERSONEELNAAMCOLUMNWIDTH = 150;               //Breedten van de kolommen.
     private final double BEGINDATUMCOLUMNWIDTH = 90;
@@ -48,7 +47,8 @@ public class InzienUrenAdminView extends Scene {
     private DatePicker einddatumPicker;
     private GridPane gridpane;
     private VBox leftFilterPanel;
-    private Button goButton;
+    private Button verversKnop;
+    private Button terugKnop;
     private VBox begindatumVbox;
     private VBox einddatumVbox;
     private Label einddatumLabel;
@@ -106,9 +106,10 @@ public class InzienUrenAdminView extends Scene {
 
         overzichtTableView = new TableView();
 
-        goButton = new Button(KNOPSTRING);
+        terugKnop = new Button(TERUGKNOPTEKST);
+        verversKnop = new Button(KNOPSTRING);
 
-        leftFilterPanel = new VBox(begindatumVbox, einddatumVbox, goButton);
+        leftFilterPanel = new VBox(begindatumVbox, einddatumVbox, verversKnop, terugKnop);
 
 
         /**
@@ -126,15 +127,25 @@ public class InzienUrenAdminView extends Scene {
 
         leftFilterPanel.setPrefWidth(200);
         leftFilterPanel.setSpacing(12);
-        goButton.setPrefWidth(leftFilterPanel.getPrefWidth());
+
+        /**
+         * Bepaal de breedte van alle knoppen in het linkerpanel.
+         */
+        terugKnop.setPrefWidth(leftFilterPanel.getPrefWidth());
+        verversKnop.setPrefWidth(leftFilterPanel.getPrefWidth());
         einddatumPicker.setPrefWidth(leftFilterPanel.getPrefWidth());
         begindatumPicker.setPrefWidth(leftFilterPanel.getPrefWidth());
 
+
         /**
-         * Wordt uitgevoerd wanneer de 'Ververs' knop wordt ingedrukt.
+         * Bepaal wat de knoppen doen.
          */
-        goButton.setOnAction(a ->{
+        verversKnop.setOnAction(a ->{
             buttonPressed();
+        });
+
+        terugKnop.setOnAction(a ->{
+            controller.backToHomeScreen();
         });
 
         /**
