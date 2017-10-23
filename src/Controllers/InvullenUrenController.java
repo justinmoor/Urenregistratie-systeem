@@ -2,6 +2,9 @@ package Controllers;
 
 import DAO.IngevuldeTijdDAO;
 import Database.DatabaseConnectie;
+import Models.KlantModel;
+import Models.OnderwerpModel;
+import Models.ProjectModel;
 import Views.InvullenUrenView;
 import javafx.stage.Stage;
 
@@ -27,24 +30,25 @@ public class InvullenUrenController {
         stage.show();
         this.db = db;
         this.hoofdMenuController = controller;
+        dao = new IngevuldeTijdDAO(db);
     }
 
-    public ArrayList getKlanten() throws SQLException {
-        dao = new IngevuldeTijdDAO(db);
-        ArrayList<String> klanten = dao.haalKlantenOp();
+    public ArrayList<KlantModel> getKlanten() throws SQLException {
+
+        ArrayList<KlantModel> klanten = dao.haalKlantenOp();
         return klanten;
 
     }
 
-    public ArrayList getProjecten(String klant_naam) throws SQLException {
-        dao = new IngevuldeTijdDAO(db);
-        ArrayList<String> projecten = dao.haalProjectenOp(klant_naam);
+    public ArrayList<ProjectModel> getProjecten(String klant_naam) throws SQLException {
+
+        ArrayList<ProjectModel> projecten = dao.haalProjectenOp(klant_naam);
         return projecten;
     }
 
-    public ArrayList<String> getOnderwerpen(String project_naam) throws SQLException {
-        dao = new IngevuldeTijdDAO(db);
-        ArrayList<String> onderwerpen = dao.haalOnderwerpenOp(project_naam);
+    public ArrayList<OnderwerpModel> getOnderwerpen(String project_naam) throws SQLException {
+
+        ArrayList<OnderwerpModel> onderwerpen = dao.haalOnderwerpenOp(project_naam);
 
         return onderwerpen;
     }
@@ -55,7 +59,7 @@ public class InvullenUrenController {
     public void insert(String klant, String project, String onderwerp, String commentaar, String begindatum, String begintijd, String einddatum, String eindtijd) throws SQLException {
         int  PersoonsID = hoofdMenuController.getGebruikerModel().getGebruikerID();
 
-        dao = new IngevuldeTijdDAO(db);
+
         dao.insertMetCommentaar(PersoonsID, klant, project, onderwerp, commentaar, begindatum, begintijd, einddatum, eindtijd);
     }
 
@@ -63,4 +67,15 @@ public class InvullenUrenController {
         return hoofdMenuController;
     }
 
+    public void voegKlantToe(String klant, String project, String onderwerp) {
+        dao.voegNieuweKlantToe(klant, project,onderwerp);
+    }
+
+    public void voegProjectToe(String klant, String project, String onderwerp) {
+        dao.voegNieuwProjectToe(klant,project,onderwerp);
+    }
+
+    public void voegOnderwerpToe(String project, String onderwerp) {
+        dao.voegNiewOnderwerpToe(project, onderwerp);
+    }
 }
