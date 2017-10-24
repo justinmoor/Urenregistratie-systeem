@@ -53,15 +53,19 @@ public class AccountToevoegenView extends Scene {
 		private ComboBox rechtenKeuze;
 			
 		private Button toevoegen;
+		
+		private Image img3;
+	    private ImageView blauw_lijntje; 
+	    
 		private GebruikerToevoegenController controller;
 
 	public AccountToevoegenView(GebruikerToevoegenController controller){
-		super(new BorderPane(), 600,  400); 		// Nieuwe pane meegeven aan de superklasse (dus scene).
-		pane = (BorderPane) this.getRoot(); 	// Deze nieuwe gridpane van de superklasse wordt de gridpane die hier gebruikt wordt.
-		this.controller = controller; 			// Controller zaken, moeten we nog overleggen.
+		super(new BorderPane(), 600,  400); 			// Nieuwe pane meegeven aan de superklasse (dus scene).
+		pane = (BorderPane) this.getRoot(); 			// Deze nieuwe gridpane van de superklasse wordt de gridpane die hier gebruikt wordt.
+		this.controller = controller; 				// Controller zaken, moeten we nog overleggen.
 
-		initGui(); 		// InitGui om alle grafische elementen te initialiseren.
-		InitAction();	// InitAction om alle functionaliteiten te initialiseren, denk aan knop.setOnAction() etc.
+		initGui(); 			// InitGui om alle grafische elementen te initialiseren.
+		InitAction();		// InitAction om alle functionaliteiten te initialiseren, denk aan knop.setOnAction() etc.
 	}
 
 	//Grafische elementen initialiseren.
@@ -76,7 +80,7 @@ public class AccountToevoegenView extends Scene {
 		img_box.getChildren().add(terug);
 		img_box.setPadding(new Insets(15, 83, 15, 14));
 		
-		home = new Label("HOME");
+		home = new Label("ACCOUNT TOEVOEGEN");
 		home.setId("home");
 		home.setPadding(new Insets(15));
 		
@@ -112,17 +116,25 @@ public class AccountToevoegenView extends Scene {
 		emailInput = new TextField();
 		emailBox.getChildren().addAll(email, emailInput);
 		
+		rechtenBox = new HBox(20);
 		rechten = new Label("Rechten:");
-		rechten.setTextFill(Color.GREY);
-					
-		hbox = new HBox(10);
 		rechtenKeuze = new ComboBox();
 		rechtenKeuze.getItems().addAll("Personeel", "Administratie");
 		rechtenKeuze.setValue("Personeel");
-		hbox.getChildren().addAll(rechtenKeuze);
+		rechtenBox.getChildren().addAll(rechten, rechtenKeuze);
 					
 		toevoegen = new Button("TOEVOEGEN");
 		toevoegen.setId("toevoegen");
+		
+		groep.getChildren().addAll(voornaamBox, tussenvoegselBox, achternaamBox, emailBox, rechtenBox, toevoegen);
+		
+		img3 = new Image("/Assets/blauwlijntje.png");
+		blauw_lijntje = new ImageView(img3);
+		blauw_lijntje.setFitWidth(612);
+		
+		pane.setTop(navigatie);
+		pane.setCenter(groep);
+		pane.setBottom(blauw_lijntje);
 		
 		getStylesheets().add("Views/styles.css");
 	}
