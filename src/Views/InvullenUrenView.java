@@ -5,7 +5,6 @@ package Views;
         import Models.KlantModel;
         import Models.OnderwerpModel;
         import Models.ProjectModel;
-        import com.sun.tools.doclets.formats.html.SourceToHTMLConverter;
         import javafx.geometry.Insets;
         import javafx.geometry.Pos;
         import javafx.scene.Scene;
@@ -85,9 +84,6 @@ public class InvullenUrenView extends Scene {
 
     private void initgui() throws SQLException {
 
-        Dimension screensize = Toolkit.getDefaultToolkit().getScreenSize();
-
-        System.out.println(screensize.getWidth());
         gridpane = new GridPane();
         gridpane.setAlignment(Pos.CENTER);
         gridpane.setHgap(10);
