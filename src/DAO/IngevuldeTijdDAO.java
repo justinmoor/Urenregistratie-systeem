@@ -2,6 +2,9 @@ package DAO;
 
 import Database.DatabaseConnectie;
 import Models.IngevuldeTijdModel;
+import Models.KlantModel;
+import Models.OnderwerpModel;
+import Models.ProjectModel;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -132,6 +135,52 @@ public class IngevuldeTijdDAO {
             PreparedStatement goedkeurenQuery = db.getConnection().prepareStatement("UPDATE geregistreerdetijd SET goedgekeurd = TRUE WHERE uurid = ?");
             goedkeurenQuery.setInt(1, model.getUurId());
             goedkeurenQuery.executeQuery();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void voegNieuweKlantToe(String klant, String project, String onderwerp) {
+
+        try {
+            PreparedStatement voegKlantToe = db.getConnection().prepareStatement("INSERT INTO klant (klant_naam) VALUES(?)");
+
+            voegKlantToe.setString(1, klant);
+
+            voegKlantToe.executeQuery();
+
+            voegNieuwProjectToe(klant, project, onderwerp);
+
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void voegNieuwProjectToe(String klant, String project, String onderwerp) {
+
+        try {
+            PreparedStatement voegProjectToe = db.getConnection().prepareStatement("INSERT INTO project (klant_naam, project_naam) VALUES(?,?)");
+
+            voegProjectToe.setString(1,klant);
+            voegProjectToe.setString(2, project);
+            voegProjectToe.executeQuery();
+
+            voegNiewOnderwerpToe(project, onderwerp);
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void voegNiewOnderwerpToe(String project, String onderwerp) {
+        try {
+            PreparedStatement voegOnderwerpToe = db.getConnection().prepareStatement("INSERT INTO onderwerp (project_naam, onderwerp_naam) VALUES(?,?)");
+
+            voegOnderwerpToe.setString(1, project);
+            voegOnderwerpToe.setString(2, onderwerp);
+            voegOnderwerpToe.executeQuery();
+
         } catch (SQLException e) {
             e.printStackTrace();
         }
