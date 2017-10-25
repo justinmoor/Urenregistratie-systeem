@@ -2,6 +2,9 @@ package Views;
         import Controllers.AutoCompletionTextfieldController;
         import Controllers.HoofdMenuController;
         import Controllers.InvullenUrenController;
+        import Models.KlantModel;
+        import Models.OnderwerpModel;
+        import Models.ProjectModel;
         import javafx.geometry.Insets;
         import javafx.geometry.Pos;
         import javafx.scene.Scene;
@@ -19,6 +22,10 @@ package Views;
 
         import java.awt.*;
         import java.sql.SQLException;
+        import java.time.LocalDate;
+        import java.util.ArrayList;
+        import java.util.Optional;
+        import java.util.OptionalInt;
 
 public class InvullenUrenView extends Scene {
 
@@ -55,6 +62,10 @@ public class InvullenUrenView extends Scene {
     private Button Opslaan;
     private Button home;
 
+    private ArrayList<KlantModel> klanten;
+    private ArrayList<ProjectModel> projecten;
+    private ArrayList<OnderwerpModel> onderwerpen;
+
     public InvullenUrenView(InvullenUrenController controller) {
 
         super(new BorderPane(), 600, 500);
@@ -73,9 +84,6 @@ public class InvullenUrenView extends Scene {
 
     private void initgui() throws SQLException {
 
-        Dimension screensize = Toolkit.getDefaultToolkit().getScreenSize();
-
-        System.out.println(screensize.getWidth());
         gridpane = new GridPane();
         gridpane.setAlignment(Pos.CENTER);
         gridpane.setHgap(10);
@@ -151,12 +159,14 @@ public class InvullenUrenView extends Scene {
         gridpane.add(ETijdLabel, 2, 6);
 
         BeginDatum = new DatePicker();
+        BeginDatum.setValue(LocalDate.now());
         gridpane.add(BeginDatum, 3, 2);
 
         BeginTijd = new TextField();
         gridpane.add(BeginTijd, 3, 3);
 
         EindDatum = new DatePicker();
+        EindDatum.setValue(LocalDate.now());
         gridpane.add(EindDatum, 3, 5);
 
         EindTijd = new TextField();
@@ -176,52 +186,140 @@ public class InvullenUrenView extends Scene {
     private void InitAction(){
 
 
+
         klantField.setOnKeyPressed(e -> {
+            klanten = null;
             try {
-                klantField.getEntries().addAll(controller.getKlanten());
+                klanten = controller.getKlanten();
             } catch (SQLException e1) {
                 e1.printStackTrace();
             }
+            for (int i = 0; i < klanten.size(); i++) {
+                klantField.getEntries().add(klanten.get(i).getNaam());
+            }
         });
         projectField.setOnKeyPressed(e -> {
+            projecten = null;
             try {
-                projectField.setEntries();
-                projectField.getEntries().addAll(controller.getProjecten(klantField.getText()));
+                projecten = controller.getProjecten(klantField.getText());
             } catch (SQLException e1) {
                 e1.printStackTrace();
+            }
+            for (int i = 0; i < projecten.size(); i++) {
+                projectField.getEntries().add(projecten.get(i).getProject_naam());
             }
         });
 
         onderwerpField.setOnKeyPressed(e -> {
+            onderwerpen = null;
             try {
-                onderwerpField.getEntries().addAll(controller.getOnderwerpen(projectField.getText()));
+                onderwerpen = controller.getOnderwerpen(projectField.getText());
             } catch (SQLException e3) {
                 e3.printStackTrace();
+            }
+            for (int i = 0; i < onderwerpen.size(); i++) {
+                onderwerpField.getEntries().add(onderwerpen.get(i).getOnderwerp_naam());
             }
         });
 
         Opslaan.setOnAction(e -> {
-                try {
-                    controller.insert(klantField.getText(), projectField.getText(), onderwerpField.getText(), commentaarField.getText(), BeginDatum.getValue().toString(),
-                            BeginTijd.getText(), EindDatum.getValue().toString(), EindTijd.getText());
-                } catch (SQLException e1) {
-                    e1.printStackTrace();
+            if(klantField.getLength() > 1 && projectField.getLength() > 1 && onderwerpField.getLength() > 1 && !BeginDatum.getValue().equals("") && BeginTijd.getLength() > 1 && !EindDatum.getValue().equals("") && EindTijd.getLength() > 1) {
+
+                boolean bestaandeKlant = false;
+                boolean bestaandProject = false;
+                boolean bestaandOnderwerp = false;
+
+                //als klant voorkomt true anders melding met klant project en onderwerp
+
+                for (int i = 0 ; i < klanten.size(); i++ ) {
+                    if (klantField.getText().equals(klanten.get(i).getNaam())){
+                        bestaandeKlant = true;
+                    }
                 }
 
+                for (int i = 0; i < projecten.size(); i++) {
+                    if (projectField.getText().equals(projecten.get(i).getProject_naam())) {
+                        bestaandProject = true;
+                    }
+                }
 
-            klantField.setText("");
-            projectField.setText("");
-            onderwerpField.setText("");
-            commentaarField.setText("");
-            BeginTijd.setText("");
-            EindTijd.setText("");
+                for (int i = 0; i < onderwerpen.size(); i++) {
+                    if (onderwerpField.getText().equals(onderwerpen.get(i).getOnderwerp_naam())) {
+                        bestaandOnderwerp = true;
+                    }
+                }
+
+                if (bestaandeKlant != true) {
+
+                    Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+                    alert.setTitle("Toevoeg scherm");
+                    alert.setHeaderText("wilt u deze klant: '" +klantField.getText()+"' en het bijbehorende project: '"+projectField.getText()+"' en onderwerp: '"+onderwerpField.getText()+"' toevoegen?");
+                    alert.setContentText("Klik ja om de bovenstaande gegevens toetevoegen, klik nee om een  nieuwe klant in te vullen ");
+                    Optional<ButtonType> result = alert.showAndWait();
+                    if (result.get() == ButtonType.OK) {
+                        controller.voegKlantToe(klantField.getText(), projectField.getText(), onderwerpField.getText());
+                        InvullenUren();
+                    } else if (result.get() == ButtonType.CANCEL) {
+                        klantField.setText("");
+                        projectField.setText("");
+                        onderwerpField.setText("");
+                    }
+
+                } else if (bestaandProject != true) {
+                    Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+                    alert.setTitle("Toevoegen scherm");
+                    alert.setHeaderText("wilt u dit project: '"+projectField.getText()+"' en onderwerp: '"+onderwerpField.getText()+"' toevoegen?");
+                    alert.setContentText("Klik ja om de bovenstaande gegevens toetevoegen, klik nee om een  nieuwe klant in te vullen ");
+                    Optional<ButtonType> result = alert.showAndWait();
+                    if (result.get() == ButtonType.OK) {
+                        controller.voegProjectToe(klantField.getText(), projectField.getText(), onderwerpField.getText());
+                        InvullenUren();
+                    } else if (result.get() == ButtonType.CANCEL) {
+                        projectField.setText("");
+                        onderwerpField.setText("");
+                    }
+                } else if (bestaandOnderwerp != true) {
+                    Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+                    alert.setTitle("Toevoegen scherm");
+                    alert.setHeaderText("wilt u dit onderwerp: '"+onderwerpField.getText()+"' toevoegen?");
+                    alert.setContentText("Klik ja om de bovenstaande gegevens toetevoegen, klik nee om een  nieuwe klant in te vullen ");
+                    Optional<ButtonType> result = alert.showAndWait();
+                    if (result.get() == ButtonType.OK) {
+                        controller.voegOnderwerpToe(projectField.getText(), onderwerpField.getText());
+                        InvullenUren();
+                    } else if (result.get() == ButtonType.CANCEL) {
+                        onderwerpField.setText("");
+                    }
+                } else {
+                    InvullenUren();
+                }
+
+            } else {
+                System.out.println("Invullen");
+            }
+
         });
 
         home.setOnAction(e -> {
         	 	controller.getHoofdMenuController().setHoofdMenuView();
         });
+
+
     }
 
+    private void InvullenUren() {
+        try {
+            controller.insert(klantField.getText(), projectField.getText(), onderwerpField.getText(), commentaarField.getText(), BeginDatum.getValue().toString(),
+                    BeginTijd.getText(), EindDatum.getValue().toString(), EindTijd.getText());
+        } catch (SQLException e1) {
+            e1.printStackTrace();
+        }
 
-
+        klantField.setText("");
+        projectField.setText("");
+        onderwerpField.setText("");
+        commentaarField.setText("");
+        BeginTijd.setText("");
+        EindTijd.setText("");
+    }
 }
