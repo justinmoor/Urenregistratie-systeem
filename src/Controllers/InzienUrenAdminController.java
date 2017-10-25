@@ -67,7 +67,7 @@ public class InzienUrenAdminController {
                 resultatenlijst = new ArrayList<>();
                 do{
                     String personeelsNaam;
-                    if(results.getString(3)!=null) {
+                    if(results.getString("tussenvoegsel")!=null) {
                         personeelsNaam = results.getString("voornaam") +" "+ results.getString("tussenvoegsel") + " "+ results.getString("achternaam");
                     }else{
                         personeelsNaam = results.getString("voornaam")+" "+ results.getString("achternaam");

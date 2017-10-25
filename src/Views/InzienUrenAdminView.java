@@ -259,8 +259,14 @@ public class InzienUrenAdminView extends Scene {
      * Wordt uitgevoerd wanneer de "Ververs" knop wordt ingedrukt.
      */
     public void buttonPressed(){
-        convertDates();
-        controller.buttonPressed();
+        try {
+            convertDates();
+            controller.buttonPressed();
+        } catch (NullPointerException e){
+            Alert geenDatumIngevuldError = new Alert(Alert.AlertType.ERROR, "Vul een begin- en einddatum in!");
+            geenDatumIngevuldError.show();
+        }
+
     }
 
 
