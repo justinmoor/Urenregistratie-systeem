@@ -46,7 +46,7 @@ public class InzienUrenAdminController {
      * Krijgt een ResultSet van de DAO, maakt IngevuldeTijdModels van de resultset en voert deze door naar de view.
      */
     public void buttonPressed(){
-        results = dao.getAdminOverzicht(view.getBegindatum(), view.getEinddatum());
+        results = dao.getAdminOverzicht(view.getBegindatum(), view.getEinddatum(), view.getKlantnaam(), view.getProjectnaam());
         makeModelsFromResultSet(results);
 
         if(resultatenlijst.isEmpty()){

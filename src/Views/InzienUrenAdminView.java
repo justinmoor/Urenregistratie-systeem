@@ -1,5 +1,6 @@
 package Views;
 
+import Controllers.AutoCompletionTextfieldController;
 import Controllers.InzienUrenAdminController;
 import Models.IngevuldeTijdModel;
 import javafx.collections.ObservableList;
@@ -53,6 +54,12 @@ public class InzienUrenAdminView extends Scene {
     private VBox einddatumVbox;
     private Label einddatumLabel;
     private Label begindatumLabel;
+    private Label klantLabel;
+    private Label projectLabel;
+    private VBox klantBox;
+    private VBox projectBox;
+    private TextField klantNaamInput;
+    private TextField projectNaamInput;
 
     /**
      * Maak de tabel en alle bijbehorende kolommen.
@@ -94,6 +101,14 @@ public class InzienUrenAdminView extends Scene {
         einddatumLabel = new Label("Einddatum: ");
         begindatumLabel = new Label("Begindatum: ");
 
+        klantLabel = new Label("Klantnaam: ");
+        klantNaamInput = new TextField();
+        klantBox = new VBox(klantLabel, klantNaamInput);
+
+        projectLabel = new Label("Projectnaam: ");
+        projectNaamInput = new TextField();
+        projectBox = new VBox(projectLabel, projectNaamInput);
+
         einddatumPicker = new DatePicker();
         begindatumPicker = new DatePicker();
 
@@ -109,7 +124,7 @@ public class InzienUrenAdminView extends Scene {
         terugKnop = new Button(TERUGKNOPTEKST);
         verversKnop = new Button(KNOPSTRING);
 
-        leftFilterPanel = new VBox(begindatumVbox, einddatumVbox, verversKnop, terugKnop);
+        leftFilterPanel = new VBox(begindatumVbox, einddatumVbox, klantBox, projectBox, verversKnop, terugKnop);
 
 
         /**
@@ -283,5 +298,16 @@ public class InzienUrenAdminView extends Scene {
 
     public String getEinddatum() {
         return einddatum;
+    }
+
+    public String getKlantnaam(){
+        System.out.println(klantNaamInput.getText());
+        return this.klantNaamInput.getText();
+
+    }
+
+    public String getProjectnaam(){
+        System.out.println(projectNaamInput.getText());
+        return this.projectNaamInput.getText();
     }
 }
