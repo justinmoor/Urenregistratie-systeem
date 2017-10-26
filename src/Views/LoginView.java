@@ -107,4 +107,9 @@ public class LoginView extends Scene {
         login.setDefaultButton(true); 	// Gebruik enter om in te loggen. (enige knop op het scherm, dus default knop.)
     }
 
+    public void clearFields() {
+    	tf1.setText("");
+    	tf2.setText("");
+	}
+
 }

@@ -29,6 +29,7 @@ public class LoginController {
         /**
          * initialiseer alle nodige klassen.
          */
+
         this.stage = stage;
         loginView = new LoginView(this);
         db = new DatabaseConnectie();
@@ -53,7 +54,7 @@ public class LoginController {
                 model = gebruikerDAO.GetGebruikerFromDB(email);
 
                 System.out.println(model.toString());                       //Print de
-                menuController = new HoofdMenuController(stage, model, db);
+                menuController = new HoofdMenuController(stage, model, db, this);
 
                 if (model.getRechten().equals("0")) {
                     menuController.setPersoneelHoofdmenu();
@@ -64,5 +65,11 @@ public class LoginController {
             } else {
                 System.out.println(NAAMWWFOUTMESSAGE);
             }
+    }
+
+    public void logUit() {
+        stage.setScene(loginView);
+        stage.show();
+        loginView.clearFields();
     }
 }

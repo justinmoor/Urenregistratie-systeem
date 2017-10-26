@@ -130,6 +130,10 @@ public class AdministratieHoofdmenuView extends Scene {
 			controller.setAccountInfoView();
 		});
 
+		img_box.setOnMouseClicked(e -> {
+			controller.getLoginController().logUit();
+		});
+
 	}
 
 }

@@ -18,12 +18,14 @@ public class HoofdMenuController {
     private PersoneelHoofdmenuView personeelView;
     private AdministratieHoofdmenuView adminView;
     private DatabaseConnectie db;
+    private LoginController loginController;
 
-    public HoofdMenuController(Stage stage, GebruikerModel gebruikerModel, DatabaseConnectie db){
+    public HoofdMenuController(Stage stage, GebruikerModel gebruikerModel, DatabaseConnectie db, LoginController logincontroller) {
         this.stage = stage;
         this.gebruikerModel = gebruikerModel;
         this.tijdmodel = tijdmodel;
         this.db = db;
+        this.loginController = logincontroller;
         personeelView = new PersoneelHoofdmenuView(this);
         adminView = new AdministratieHoofdmenuView(this);
     }
@@ -67,4 +69,7 @@ public class HoofdMenuController {
 
     public void setAccountInfoView() { new AccountInfoController(stage, db, this); }
 
+    public LoginController getLoginController() {
+        return loginController;
+    }
 }

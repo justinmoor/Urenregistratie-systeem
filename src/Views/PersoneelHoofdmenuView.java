@@ -103,6 +103,10 @@ public class PersoneelHoofdmenuView extends Scene {
 		week.setOnAction(e -> {
 			// controller.setInzienUrenPers();
 		});
+
+		img_box.setOnMouseClicked(e -> {
+			controller.getLoginController().logUit();
+		});
 	}
 }
 
