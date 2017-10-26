@@ -128,15 +128,7 @@ public class GebruikerInfoView extends Scene {
 		inActief = new MenuItem("Inactief");
 		actief = new MenuItem("Actief");
 
-		inActief.setOnAction(e -> {
-		    final ArrayList<GebruikerModel> rijen = new ArrayList<>(table.getSelectionModel().getSelectedItems());
-            controller.setNietWerkzaam(rijen);
-        });
 
-		actief.setOnAction(e -> {
-            final ArrayList<GebruikerModel> rijen = new ArrayList<>(table.getSelectionModel().getSelectedItems());
-            controller.setWerkzaam(rijen);
-        });
 
 		context.getItems().addAll(inActief, actief);
 		table.setContextMenu(context);
@@ -146,9 +138,22 @@ public class GebruikerInfoView extends Scene {
     }
     
     private void InitAction(){
-    	 	img_box.setOnMousePressed(e -> {
+        img_box.setOnMousePressed(e -> {
             controller.getHoofdMenuController().setHoofdMenuView();
          });
+
+        inActief.setOnAction(e -> {
+            final ArrayList<GebruikerModel> rijen = new ArrayList<>(table.getSelectionModel().getSelectedItems());
+            controller.setNietWerkzaam(rijen);
+            InitTable();
+        });
+
+        actief.setOnAction(e -> {
+            final ArrayList<GebruikerModel> rijen = new ArrayList<>(table.getSelectionModel().getSelectedItems());
+            controller.setWerkzaam(rijen);
+            InitTable();
+        });
+
 	}
 
 
