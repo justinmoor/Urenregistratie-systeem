@@ -1,6 +1,7 @@
 package DAO;
 
 import Database.DatabaseConnectie;
+import Models.IngevuldeTijdModel;
 import Models.KlantModel;
 import Models.OnderwerpModel;
 import Models.ProjectModel;
@@ -18,64 +19,65 @@ public class IngevuldeTijdDAO {
         this.db = db;
     }
 
-    public ArrayList<KlantModel> haalKlantenOp() throws SQLException {
-
-        ArrayList<KlantModel> klant_namen = null;
+    public ArrayList haalKlantenOp() throws SQLException {
+        //Connection conn = DriverManager.getConnection("jdbc:mariadb://localhost:3306/UrenregistratieDatabase?user=root&password=ipsen123");
+        ArrayList<String> klant_namen = null;
         try {
             ResultSet results;
             PreparedStatement haalKlantenOp = db.getConnection().prepareStatement("SELECT klant_naam FROM klant;");
             results = haalKlantenOp.executeQuery();
-            klant_namen = new ArrayList<KlantModel>();
+            klant_namen = new ArrayList<String>();
             while (results.next()) {
-                klant_namen.add(new KlantModel(results.getString("klant_naam")));
+                klant_namen.add(results.getString("klant_naam"));
             }
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
-
+      //  conn.close();
         return klant_namen;
     }
 
-    public ArrayList<ProjectModel> haalProjectenOp(String klant_naam) throws SQLException{
-
-        ArrayList<ProjectModel> projecten = null;
+    public ArrayList haalProjectenOp(String klant_naam) throws SQLException{
+       // Connection conn = DriverManager.getConnection("jdbc:mariadb://localhost:3306/UrenregistratieDatabase?user=root&password=ipsen123");
+        ArrayList<String> projecten = null;
         try {
             ResultSet results;
             PreparedStatement haalProjectenOp = db.getConnection().prepareStatement("SELECT project_naam FROM project WHERE klant_naam =?;");
             haalProjectenOp.setString(1, klant_naam);
             results = haalProjectenOp.executeQuery();
-            projecten = new ArrayList<ProjectModel>();
+            projecten = new ArrayList<String>();
             while(results.next()) {
-                projecten.add(new ProjectModel(results.getString("project_naam")));
+                projecten.add(results.getString("project_naam"));
             }
         } catch (SQLException sql) {
             sql.printStackTrace();
         }
-
+      //  conn.close();
         return projecten;
     }
 
-    public ArrayList<OnderwerpModel> haalOnderwerpenOp(String project_naam) throws SQLException{
-
-        ArrayList<OnderwerpModel> onderwerpen = null;
+    public ArrayList haalOnderwerpenOp(String project_naam) throws SQLException{
+      //  Connection conn = DriverManager.getConnection("jdbc:mariadb://localhost:3306/UrenregistratieDatabase?user=root&password=ipsen123");
+        ArrayList<String> onderwerpen = null;
         try {
             ResultSet results;
             PreparedStatement haalOnderwerpenOp = db.getConnection().prepareStatement("SELECT onderwerp_naam FROM onderwerp WHERE project_naam =?;");
             haalOnderwerpenOp.setString(1, project_naam);
             results = haalOnderwerpenOp.executeQuery();
-            onderwerpen = new ArrayList<OnderwerpModel>();
+            onderwerpen = new ArrayList<String>();
             while (results.next()) {
-                onderwerpen.add(new OnderwerpModel(results.getString("onderwerp_naam")));
+                onderwerpen.add(results.getString("onderwerp_naam"));
             }
         } catch (SQLException sql) {
             sql.printStackTrace();
         }
-
+      //  conn.close();
         return onderwerpen;
     }
 
 
     public void insertMetCommentaar(int getPersoonsID, String klant, String project, String onderwerp, String commentaar, String begindatum, String begintijd, String einddatum, String eindtijd) throws SQLException{
+        Connection conn = DriverManager.getConnection("jdbc:mariadb://localhost:3306/UrenregistratieDatabase?user=root&password=ipsen123");
 
         try {
             PreparedStatement insertMetCommentaar = db.getConnection().prepareStatement("INSERT INTO geregistreerdetijd (persoonID, klant_naam, project_naam, onderwerp_naam, commentaar, begindatum, begintijd, einddatum, eindtijd) VALUES(?,?,?,?,?,?,?,?,?)");
@@ -103,13 +105,18 @@ public class IngevuldeTijdDAO {
      * @param einddatum
      * @return
      */
-    public ResultSet getAdminOverzicht(String begindatum, String einddatum) {
+    public ResultSet getAdminOverzicht(String begindatum, String einddatum, String klant, String project) {
         ResultSet results;
         results = null;
         try {
-            PreparedStatement getResults = db.getConnection().prepareStatement("SELECT * FROM geregistreerdetijd WHERE begindatum >=? AND einddatum<=?");
+            PreparedStatement getResults = db.getConnection().prepareStatement("SELECT geregistreerdetijd.*, personeel.voornaam, personeel.tussenvoegsel, personeel.achternaam FROM geregistreerdetijd JOIN personeel ON geregistreerdetijd.persoonID = personeel.persoonID\n WHERE begindatum >=? AND einddatum<=?"+ "AND (klant_naam = ? OR klant_naam LIKE ?)"+ "AND (project_naam = ? OR project_naam LIKE ?)");
             getResults.setString(1, begindatum);
             getResults.setString(2, einddatum);
+
+            getResults.setString(3, klant);
+            getResults.setString(4, klant+"%");
+            getResults.setString(5, project);
+            getResults.setString(6, project+"%");
 
             System.out.println(begindatum);
             System.out.println(einddatum);
@@ -122,6 +129,20 @@ public class IngevuldeTijdDAO {
         }
 
         return results;
+    }
+
+    /**
+     * Ontvangt het model waarvan de goeddgekeurd boolean is veranderd en stuurt deze om weg te schrijven naar de database.
+     * @param model
+     */
+    public void veranderGoedgekeurdKolom(IngevuldeTijdModel model){
+        try {
+            PreparedStatement goedkeurenQuery = db.getConnection().prepareStatement("UPDATE geregistreerdetijd SET goedgekeurd = TRUE WHERE uurid = ?");
+            goedkeurenQuery.setInt(1, model.getUurId());
+            goedkeurenQuery.executeQuery();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
     public void voegNieuweKlantToe(String klant, String project, String onderwerp) {

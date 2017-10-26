@@ -11,6 +11,7 @@ import javafx.stage.Stage;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.List;
 
 public class InzienUrenAdminController {
 
@@ -25,6 +26,7 @@ public class InzienUrenAdminController {
     IngevuldeTijdDAO dao;
     ResultSet results;
     ArrayList<IngevuldeTijdModel> resultatenlijst;
+    HoofdMenuController hoofdMenuController;
 
     /**
      * Is de klasse die de InzienUrenAdminView onderhoudt.
@@ -32,7 +34,8 @@ public class InzienUrenAdminController {
      * @param stage
      * @param dbc
      */
-    public  InzienUrenAdminController(Stage stage, DatabaseConnectie dbc){
+    public  InzienUrenAdminController(Stage stage, DatabaseConnectie dbc, HoofdMenuController hoofdMenuController){
+        this.hoofdMenuController = hoofdMenuController;
         dao = new IngevuldeTijdDAO(dbc);
         view = new InzienUrenAdminView(this);
         stage.setScene(view);
@@ -43,7 +46,7 @@ public class InzienUrenAdminController {
      * Krijgt een ResultSet van de DAO, maakt IngevuldeTijdModels van de resultset en voert deze door naar de view.
      */
     public void buttonPressed(){
-        results = dao.getAdminOverzicht(view.getBegindatum(), view.getEinddatum());
+        results = dao.getAdminOverzicht(view.getBegindatum(), view.getEinddatum(), view.getKlantnaam(), view.getProjectnaam());
         makeModelsFromResultSet(results);
 
         if(resultatenlijst.isEmpty()){
@@ -63,6 +66,12 @@ public class InzienUrenAdminController {
             if(results.next()){
                 resultatenlijst = new ArrayList<>();
                 do{
+                    String personeelsNaam;
+                    if(results.getString(3)!=null) {
+                        personeelsNaam = results.getString("voornaam") +" "+ results.getString("tussenvoegsel") + " "+ results.getString("achternaam");
+                    }else{
+                        personeelsNaam = results.getString("voornaam")+" "+ results.getString("achternaam");
+                    }
                     resultatenlijst.add(new IngevuldeTijdModel(
                             results.getInt("uurID"),
                             results.getString("begindatum"),
@@ -74,9 +83,11 @@ public class InzienUrenAdminController {
                             results.getInt("persoonID"),
                             results.getString("klant_naam"),
                             results.getString("project_naam"),
-                            results.getString( "onderwerp_naam")));
+                            results.getString( "onderwerp_naam"),
+                            personeelsNaam
+                    ));
 
-                    System.out.println(results.getString("begindatum"));
+                    System.out.println(results.getString("klant_naam"));
                 } while(results.next());
             } else{
                 resultatenlijst = new ArrayList<>();
@@ -93,5 +104,25 @@ public class InzienUrenAdminController {
     private void makeTableViewFromArrayList(){
         ObservableList<IngevuldeTijdModel> records = FXCollections.observableArrayList(resultatenlijst);
         view.vulTabelUitLijst(records);
+    }
+
+    /**
+     * Ontvangt een lijst van models die geselecteerd zijn in de view, verandert de goedgekeurd boolean
+     * naar true en stuurt ze vervolgens een voor een door naar de dao om weggeschreven te worden.
+     * @param models
+     */
+    public void keurGoed(List<IngevuldeTijdModel> models){
+        for (IngevuldeTijdModel model:models
+             ) {
+            model.setGoedgekeurd(true);
+            dao.veranderGoedgekeurdKolom(model);
+        }
+    }
+
+    /**
+     * Wanneer aangeroepen verandert de scene weer naar het hoofdmenu.
+     */
+    public void backToHomeScreen(){
+        hoofdMenuController.setHoofdMenuView();
     }
 }

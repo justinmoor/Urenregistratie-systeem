@@ -46,7 +46,7 @@ public class HoofdMenuController {
     }
 
     public void startInzienUrenAdminController(){
-        new InzienUrenAdminController(stage, db);
+        new InzienUrenAdminController(stage, db, this);
     }
 
     public void setIvullenUrenView() {

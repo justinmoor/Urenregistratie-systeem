@@ -1,8 +1,10 @@
 package Views;
 
+import Controllers.AutoCompletionTextfieldController;
 import Controllers.InzienUrenAdminController;
 import Models.IngevuldeTijdModel;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
@@ -12,6 +14,7 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 
 public class InzienUrenAdminView extends Scene {
 
@@ -21,8 +24,9 @@ public class InzienUrenAdminView extends Scene {
     private static final String KNOPSTRING = "Ververs";
     private static final double PANEWIDTH = 1400;               //Grootte van de pane
     private static final double PANEHEIGHT = 800;
+    private static final String TERUGKNOPTEKST = "Terug";
 
-    private final double PERSONEELIDCOLUMNWIDTH = 30;               //Breedten van de kolommen.
+    private final double PERSONEELNAAMCOLUMNWIDTH = 150;               //Breedten van de kolommen.
     private final double BEGINDATUMCOLUMNWIDTH = 90;
     private final double EINDDATUMCOLUMNWIDTH = 90;
     private final double BEGINTIJCOLUMNDWIDTH = 90;
@@ -30,7 +34,6 @@ public class InzienUrenAdminView extends Scene {
     private final double KLANTNAAMCOLUMNWIDTH = 100;
     private final double PROJECTNAAMCOLUMNWIDTH = 100;
     private final double ONDERWERPNAAMCOLUMNWIDTH = 100;
-    private final double UURIDCOLUMNWIDTH = 30;
     private final double COMMENTAARCOLUMNWIDTH = 350;
     private final double GOEDGEKEURDCOLUMNWIDTH = 80 ;
 
@@ -45,18 +48,24 @@ public class InzienUrenAdminView extends Scene {
     private DatePicker einddatumPicker;
     private GridPane gridpane;
     private VBox leftFilterPanel;
-    private Button goButton;
+    private Button verversKnop;
+    private Button terugKnop;
     private VBox begindatumVbox;
     private VBox einddatumVbox;
     private Label einddatumLabel;
     private Label begindatumLabel;
+    private Label klantLabel;
+    private Label projectLabel;
+    private VBox klantBox;
+    private VBox projectBox;
+    private TextField klantNaamInput;
+    private TextField projectNaamInput;
 
     /**
      * Maak de tabel en alle bijbehorende kolommen.
      */
     private TableView <IngevuldeTijdModel>overzichtTableView;
-    private TableColumn <IngevuldeTijdModel, String> uuridColumn;
-    private TableColumn <IngevuldeTijdModel, String> personeelidColumn;
+    private TableColumn <IngevuldeTijdModel, String> personeelNaamColumn;
     private TableColumn <IngevuldeTijdModel, String> begindatumColumn;
     private TableColumn <IngevuldeTijdModel, String> einddatumColumn;
     private TableColumn <IngevuldeTijdModel, String> begintijdColumn;
@@ -66,6 +75,12 @@ public class InzienUrenAdminView extends Scene {
     private TableColumn <IngevuldeTijdModel, String> onderwerpnaamColumn;
     private TableColumn <IngevuldeTijdModel, String> commentaarColumn;
     private TableColumn <IngevuldeTijdModel, String> goedgekeurdColumn;
+
+    /**
+     * Maak het contextmenu voor het goedkeuren van de uren, en de opties.
+     */
+    private ContextMenu contextMenuRightClick;
+    private MenuItem keurGoed;
 
     /**
      * Maak de begin en einddatum.
@@ -86,18 +101,30 @@ public class InzienUrenAdminView extends Scene {
         einddatumLabel = new Label("Einddatum: ");
         begindatumLabel = new Label("Begindatum: ");
 
+        klantLabel = new Label("Klantnaam: ");
+        klantNaamInput = new TextField();
+        klantBox = new VBox(klantLabel, klantNaamInput);
+
+        projectLabel = new Label("Projectnaam: ");
+        projectNaamInput = new TextField();
+        projectBox = new VBox(projectLabel, projectNaamInput);
+
         einddatumPicker = new DatePicker();
         begindatumPicker = new DatePicker();
 
         begindatumVbox = new VBox(begindatumLabel, begindatumPicker);
         einddatumVbox = new VBox(einddatumLabel, einddatumPicker);
+
         this.controller = controller;
+
         gridpane = (GridPane) this.getRoot();
+
         overzichtTableView = new TableView();
-        goButton = new Button(KNOPSTRING);
-        leftFilterPanel = new VBox(begindatumVbox, einddatumVbox, goButton);
 
+        terugKnop = new Button(TERUGKNOPTEKST);
+        verversKnop = new Button(KNOPSTRING);
 
+        leftFilterPanel = new VBox(begindatumVbox, einddatumVbox, klantBox, projectBox, verversKnop, terugKnop);
 
 
         /**
@@ -115,22 +142,49 @@ public class InzienUrenAdminView extends Scene {
 
         leftFilterPanel.setPrefWidth(200);
         leftFilterPanel.setSpacing(12);
-        goButton.setPrefWidth(leftFilterPanel.getPrefWidth());
+
+        /**
+         * Bepaal de breedte van alle knoppen in het linkerpanel.
+         */
+        terugKnop.setPrefWidth(leftFilterPanel.getPrefWidth());
+        verversKnop.setPrefWidth(leftFilterPanel.getPrefWidth());
         einddatumPicker.setPrefWidth(leftFilterPanel.getPrefWidth());
         begindatumPicker.setPrefWidth(leftFilterPanel.getPrefWidth());
 
+
         /**
-         * Wordt uitgevoerd wanneer de 'Ververs' knop wordt ingedrukt.
+         * Bepaal wat de knoppen doen.
          */
-        goButton.setOnAction(a ->{
+        verversKnop.setOnAction(a ->{
             buttonPressed();
         });
+
+        terugKnop.setOnAction(a ->{
+            controller.backToHomeScreen();
+        });
+
+        /**
+         * Maakt de context menu voor wanneer er met de rechtermuisknop wordt gedrukt op een rij. Voegt de "Goedkeuren" optie er aan toe.
+         */
+        contextMenuRightClick = new ContextMenu();
+        keurGoed = new MenuItem("Goedkeuren");
+
+        keurGoed.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                final ArrayList<IngevuldeTijdModel> aangevinkteRijen = new ArrayList<IngevuldeTijdModel>(overzichtTableView.getSelectionModel().getSelectedItems());
+                controller.keurGoed(aangevinkteRijen);
+            }
+        });
+
+        contextMenuRightClick.getItems().add(keurGoed);
+        overzichtTableView.setContextMenu(contextMenuRightClick);
+        overzichtTableView.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
 
         /**
          * Initialiseer de tabel.
          */
-        uuridColumn = new TableColumn("Uur ID");
-        personeelidColumn = new TableColumn("Personeel ID");
+        personeelNaamColumn = new TableColumn("Medewerker");
         begindatumColumn = new TableColumn("Begindatum");
         einddatumColumn = new TableColumn("Einddatum");
         begintijdColumn = new TableColumn("Begintijd");
@@ -143,24 +197,24 @@ public class InzienUrenAdminView extends Scene {
 
         /**
          * Koppel de kollommen uit de tabel met de attributen uit IngevuldeTijdModel.
+         * Stringvalues dienen gelijk te zijn aan de namen die voor de attributen in het model zijn gebruikt.
+         * De gebruikte attributen dienen een getter en setter te hebben.
          */
-        uuridColumn.setCellValueFactory(new PropertyValueFactory<>("uurId"));
-        personeelidColumn.setCellValueFactory(new PropertyValueFactory<>("personeelID"));
+        personeelNaamColumn.setCellValueFactory(new PropertyValueFactory<>("persoonNaam"));
         begindatumColumn.setCellValueFactory(new PropertyValueFactory<>("beginDatum"));
         einddatumColumn.setCellValueFactory(new PropertyValueFactory<>("eindDatum"));
         begintijdColumn.setCellValueFactory(new PropertyValueFactory<>("beginTijd"));
         eindtijdColumn.setCellValueFactory(new PropertyValueFactory<>("eindTijd"));
-        klantnaamColumn.setCellValueFactory(new PropertyValueFactory<>("klant"));
-        projectnaamColumn.setCellValueFactory(new PropertyValueFactory<>("project"));
-        onderwerpnaamColumn.setCellValueFactory(new PropertyValueFactory<>("onderwerp"));
+        klantnaamColumn.setCellValueFactory(new PropertyValueFactory<>("klantNaam"));
+        projectnaamColumn.setCellValueFactory(new PropertyValueFactory<>("projectNaam"));
+        onderwerpnaamColumn.setCellValueFactory(new PropertyValueFactory<>("onderwerpNaam"));
         commentaarColumn.setCellValueFactory(new PropertyValueFactory<>("commentaar"));
         goedgekeurdColumn.setCellValueFactory(new PropertyValueFactory<>("goedgekeurd"));
 
         /**
          * Configureer de breedte van de kolommen. Constante waarden staan bovenaan.
          */
-        uuridColumn.setMaxWidth(UURIDCOLUMNWIDTH);
-        personeelidColumn.setMaxWidth(PERSONEELIDCOLUMNWIDTH);
+        personeelNaamColumn.setMaxWidth(PERSONEELNAAMCOLUMNWIDTH);
         begindatumColumn.setMaxWidth(BEGINDATUMCOLUMNWIDTH);
         einddatumColumn.setMaxWidth(EINDDATUMCOLUMNWIDTH);
         begintijdColumn.setMaxWidth(BEGINTIJCOLUMNDWIDTH);
@@ -172,24 +226,25 @@ public class InzienUrenAdminView extends Scene {
         goedgekeurdColumn.setMaxWidth(GOEDGEKEURDCOLUMNWIDTH);
 
         overzichtTableView.getColumns().addAll(         //voeg alle gemaakte kolommen toe aan de tabel.
-                uuridColumn,
-                personeelidColumn,
-                begindatumColumn,
-                einddatumColumn,
+                personeelNaamColumn,
+                onderwerpnaamColumn,
                 begintijdColumn,
                 eindtijdColumn,
+                begindatumColumn,
+                einddatumColumn,
                 klantnaamColumn,
                 projectnaamColumn,
-                onderwerpnaamColumn,
                 commentaarColumn,
                 goedgekeurdColumn);
         overzichtTableView.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
 
         gridpane.getChildren().addAll(leftFilterPanel, overzichtTableView);               //Voegt alles toe aan de GridPane.
 
+        /**
+         * Zorgt ervoor dat wanneer er op de ESCAPE key wordt gedrukt dat er teruggegaan wordt naar het hoofdmenu.
+         */
         this.addEventHandler(KeyEvent.KEY_PRESSED, new EventHandler<KeyEvent>
                 () {
-
             @Override
             public void handle(KeyEvent t) {
                 if(t.getCode()== KeyCode.ESCAPE)
@@ -229,7 +284,7 @@ public class InzienUrenAdminView extends Scene {
     }
 
     private void backToHomeScreen(){
-
+        controller.backToHomeScreen();
     }
 
 
@@ -243,5 +298,16 @@ public class InzienUrenAdminView extends Scene {
 
     public String getEinddatum() {
         return einddatum;
+    }
+
+    public String getKlantnaam(){
+        System.out.println(klantNaamInput.getText());
+        return this.klantNaamInput.getText();
+
+    }
+
+    public String getProjectnaam(){
+        System.out.println(projectNaamInput.getText());
+        return this.projectNaamInput.getText();
     }
 }
