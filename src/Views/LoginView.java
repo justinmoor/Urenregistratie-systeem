@@ -21,31 +21,31 @@ import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 
 public class LoginView extends Scene {
-	private LoginController controller;
+		private LoginController controller;
+		
+		private BorderPane pane;
+	    
+	    private VBox groep;
+	    
+	    private Label titel;
+	    
+	    private Image img;
+	    private ImageView lijntje;
+	    
+	    private HBox email;
+	    private Label lbl1;
+	    private TextField tf1;
 	
-	private BorderPane pane;
-    
-    private VBox groep;
-    
-    private Label titel;
-    
-    private Image img;
-    private ImageView lijntje;
-    
-    private HBox email;
-    private Label lbl1;
-    private TextField tf1;
-
-    private HBox wachtwoord;
-    private Label lbl2;
-    private PasswordField tf2;
-    
-    private Button login;
-    
-    private Label foutief;
-    
-    private Image img2;
-    private ImageView blauw_lijntje; 
+	    private HBox wachtwoord;
+	    private Label lbl2;
+	    private PasswordField tf2;
+	    
+	    private Button login;
+	    
+	    private Label foutief;
+	    
+	    private Image img2;
+	    private ImageView blauw_lijntje; 
 
     public LoginView(LoginController controller) {
         super(new BorderPane(), 600, 400); 		// Nieuwe pane meegeven aan de superklasse (dus scene).
