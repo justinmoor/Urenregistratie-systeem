@@ -80,6 +80,14 @@
 	-fx-text-fill: #60c8db;
 }
 
+#opslaan {
+    -fx-background-color: #f9f9f7;
+    -fx-border-color: #c7c7c5;
+    -fx-text-fill: #6b757d;
+    -fx-min-height: 40;
+    -fx-min-width: 324;
+}
+
 #knoppen {
 	-fx-background-color: #f9f9f7;
 	-fx-border-color: #c7c7c5;

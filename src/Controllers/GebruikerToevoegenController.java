@@ -19,6 +19,7 @@ public class GebruikerToevoegenController {
         this.db = db;
         this.hoofdmenucontroller = hoofdmenucontroller;
         dao = new GebruikerDAO(db);
+        accountToevoegenView.setGebruikerLabel(hoofdmenucontroller.getGebruikerModel().getVolledigeNaam());
     }
 
     public void insert(String voornaam, String tussenvoegsel, String achternaam, String email, String rechten){
@@ -33,7 +34,6 @@ public class GebruikerToevoegenController {
     }
 
 	public HoofdMenuController getHoofdMenuController() {
-		// TODO Auto-generated method stub
 		return hoofdmenucontroller;
 	}
 }

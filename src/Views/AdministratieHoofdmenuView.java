@@ -1,23 +1,16 @@
 package Views;
 
 import Controllers.HoofdMenuController;
-import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-import javafx.scene.paint.Color;
-import javafx.scene.text.Font;
-import javafx.scene.text.FontWeight;
-import javafx.stage.Stage;
 
 public class AdministratieHoofdmenuView extends Scene {
 		private BorderPane pane;
@@ -113,7 +106,7 @@ public class AdministratieHoofdmenuView extends Scene {
 		
 		pane.setBottom(blauw_lijntje);
     
-    		getStylesheets().add("Views/styles.css");
+		getStylesheets().add("Views/styles.css");
 	}
 	
 	private void InitAction(){

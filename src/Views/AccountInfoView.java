@@ -38,6 +38,12 @@ public class AccountInfoView  extends Scene{
     private GridPane gridpane;
     private AccountInfoController controller;
 
+    private Image img4;
+    private ImageView vbox_lijntje;
+
+    private Image img3;
+    private ImageView blauw_lijntje;
+
 
     private Label voornaamlabel;
     private Label tussenVoegselLabel;
@@ -52,12 +58,10 @@ public class AccountInfoView  extends Scene{
     private Label achternaam;
     private Label email;
     private Label wachtwoord;
-    private Label indent;
 
     private PasswordField nWachtwoord;
     private PasswordField nHerhaalWachtwoord;
 
-    private Button home;
     private Button opslaan;
 
     private HBox topGedeelte;
@@ -72,8 +76,10 @@ public class AccountInfoView  extends Scene{
 
     private VBox gegevensOnderElkaarBox;
 
+
+
     public AccountInfoView(AccountInfoController controller) {
-        super(new BorderPane(), 600, 500);
+        super(new BorderPane(), 600, 400);
         pane = (BorderPane) this.getRoot();
         this.controller = controller;
     }
@@ -87,9 +93,9 @@ public class AccountInfoView  extends Scene{
         img = new Image("/Assets/back.png");
         terug = new ImageView(img);
         img_box.getChildren().add(terug);
-        img_box.setPadding(new Insets(15, 83, 15, 14));
+        img_box.setPadding(new Insets(15, 0, 15, 14));
 
-        accountLabel = new Label("HOME");
+        accountLabel = new Label("ACCOUNT");
         accountLabel.setId("home");
         accountLabel.setPadding(new Insets(15));
 
@@ -98,8 +104,10 @@ public class AccountInfoView  extends Scene{
         lijntje.setFitWidth(600);
 
         navigatie.setLeft(img_box);
-        navigatie.setCenter(home);
+        navigatie.setCenter(accountLabel);
         navigatie.setBottom(lijntje);
+
+        pane.setTop(navigatie);
 
         gridpane = new GridPane();
         gridpane.setAlignment(Pos.CENTER);
@@ -108,16 +116,6 @@ public class AccountInfoView  extends Scene{
         gridpane.setPadding(new Insets(10,10,10,30));
         gridpane.setStyle("-fx-background-color: #f9f9f7");
         pane.setCenter(gridpane);
-
-        accountLabel = new Label("ACCOUNT");
-        accountLabel.setFont(Font.font("SansSerif", FontWeight.BOLD, 30));
-        accountLabel.setTextFill(Color.GREY);
-        accountLabel.setAlignment(Pos.CENTER);
-
-        home = new Button("Hoofdmenu");
-        topGedeelte = new HBox(30);
-        topGedeelte.getChildren().addAll(home, accountLabel);
-        pane.setTop(topGedeelte);
 
         voornaamlabel = new Label("Voornaam: \t\t\t\t");
         voornaamlabel.setTextFill(Color.GREY);
@@ -164,9 +162,13 @@ public class AccountInfoView  extends Scene{
         wachtwoordBox = new HBox();
         wachtwoordBox.getChildren().addAll(wachtwoordLabel, wachtwoord);
 
+        img4 = new Image("/Assets/lijntje.png");
+
+        vbox_lijntje = new ImageView(img4);
+        vbox_lijntje.setFitWidth(324);
+
         nWachtwoordLabel = new Label("Nieuw Wachtwoord:\t\t");
         nWachtwoordLabel.setTextFill(Color.GREY);
-
 
         nWachtwoord = new PasswordField();
 
@@ -180,20 +182,26 @@ public class AccountInfoView  extends Scene{
         nHerhaalWachtwoordBox = new HBox(nHerhaalWachtwoordLabel, nHerhaalWachtwoord);
 
         opslaan = new Button("Opslaan");
-        indent = new Label("\t\t\t\t\t\t");
-        opslaanBox = new HBox();
-        opslaanBox.getChildren().addAll(indent, opslaan);
+        opslaan.setId("opslaan");
 
-        gegevensOnderElkaarBox = new VBox(8);
-        gegevensOnderElkaarBox.getChildren().addAll(voornaamBox, tussenvoegselBox, achternaamBox, emailBox, wachtwoordBox, nWachtwoordBox, nHerhaalWachtwoordBox, opslaanBox);
+        gegevensOnderElkaarBox = new VBox(12);
+        gegevensOnderElkaarBox.getChildren().addAll(voornaamBox, tussenvoegselBox, achternaamBox, emailBox, wachtwoordBox, vbox_lijntje, nWachtwoordBox, nHerhaalWachtwoordBox, opslaan);
+
         gridpane.add(gegevensOnderElkaarBox, 1, 1);
+
+        img3 = new Image("/Assets/blauwlijntje.png");
+
+        blauw_lijntje = new ImageView(img3);
+        blauw_lijntje.setFitWidth(612);
+
+        pane.setBottom(blauw_lijntje);
 
         getStylesheets().add("Views/styles.css");
     }
 
     public void initAction() {
 
-        home.setOnAction(e -> {
+        img_box.setOnMouseClicked(e -> {
             controller.getHoofdMenuController().setHoofdMenuView();
         });
 

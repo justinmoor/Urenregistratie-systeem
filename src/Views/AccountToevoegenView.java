@@ -73,6 +73,10 @@ public class AccountToevoegenView extends Scene {
 		InitAction();		// InitAction om alle functionaliteiten te initialiseren, denk aan knop.setOnAction() etc.
 	}
 
+	public void setGebruikerLabel(String volledigenaam){
+		gebruiker.setText(volledigenaam);
+	}
+
 	//Grafische elementen initialiseren.
 	public void initGui() {
 		pane.setId("pane");
@@ -89,7 +93,7 @@ public class AccountToevoegenView extends Scene {
 		home.setId("home");
 		home.setPadding(new Insets(15, 0, 15, 15));
 		
-		gebruiker = new Label("Peter van Vliet");
+		gebruiker = new Label();
 		gebruiker.setPadding(new Insets(15, 14, 15, 15));
 		
 		img2 = new Image("/Assets/lijntje.png");
