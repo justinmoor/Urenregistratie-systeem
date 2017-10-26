@@ -7,7 +7,8 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
-import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
@@ -19,11 +20,25 @@ import javafx.scene.text.FontWeight;
 
 public class AccountInfoView  extends Scene{
 
+
+
     private BorderPane pane;
+
+    private BorderPane navigatie;
+
+    private VBox img_box;
+    private Image img;
+    private ImageView terug;
+
+    private Label accountLabel;
+
+    private Image img2;
+    private ImageView lijntje;
+
     private GridPane gridpane;
     private AccountInfoController controller;
 
-    private Label accountLabel;
+
     private Label voornaamlabel;
     private Label tussenVoegselLabel;
     private Label achternaamLabel;
@@ -64,6 +79,28 @@ public class AccountInfoView  extends Scene{
     }
 
     public void initGui() {
+        pane.setId("pane");
+
+        navigatie = new BorderPane();
+
+        img_box = new VBox();
+        img = new Image("/Assets/back.png");
+        terug = new ImageView(img);
+        img_box.getChildren().add(terug);
+        img_box.setPadding(new Insets(15, 83, 15, 14));
+
+        accountLabel = new Label("HOME");
+        accountLabel.setId("home");
+        accountLabel.setPadding(new Insets(15));
+
+        img2 = new Image("/Assets/lijntje.png");
+        lijntje = new ImageView(img2);
+        lijntje.setFitWidth(600);
+
+        navigatie.setLeft(img_box);
+        navigatie.setCenter(home);
+        navigatie.setBottom(lijntje);
+
         gridpane = new GridPane();
         gridpane.setAlignment(Pos.CENTER);
         gridpane.setHgap(10);
@@ -150,6 +187,8 @@ public class AccountInfoView  extends Scene{
         gegevensOnderElkaarBox = new VBox(8);
         gegevensOnderElkaarBox.getChildren().addAll(voornaamBox, tussenvoegselBox, achternaamBox, emailBox, wachtwoordBox, nWachtwoordBox, nHerhaalWachtwoordBox, opslaanBox);
         gridpane.add(gegevensOnderElkaarBox, 1, 1);
+
+        getStylesheets().add("Views/styles.css");
     }
 
     public void initAction() {
