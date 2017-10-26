@@ -125,7 +125,8 @@ public class AccountToevoegenView extends Scene {
 					
 		toevoegen = new Button("TOEVOEGEN");
 		toevoegen.setId("toevoegen");
-		
+
+		groep = new VBox();
 		groep.getChildren().addAll(voornaamBox, tussenvoegselBox, achternaamBox, emailBox, rechtenBox, toevoegen);
 		
 		img3 = new Image("/Assets/blauwlijntje.png");

@@ -130,11 +130,9 @@ public class IngevuldeTijdDAO {
             PreparedStatement voegKlantToe = db.getConnection().prepareStatement("INSERT INTO klant (klant_naam) VALUES(?)");
 
             voegKlantToe.setString(1, klant);
-
             voegKlantToe.executeQuery();
 
             voegNieuwProjectToe(klant, project, onderwerp);
-
 
         } catch (SQLException e) {
             e.printStackTrace();

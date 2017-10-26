@@ -72,7 +72,7 @@ public class AdministratieHoofdmenuView extends Scene {
 		home.setId("home");
 		home.setPadding(new Insets(15));
 		
-		gebruiker = new Label("Peter van Vliet");
+		gebruiker = new Label(controller.getGebruikerModel().getVolledigeNaam());
 		gebruiker.setPadding(new Insets(15, 14, 15, 15));
 		
 		img2 = new Image("/Assets/lijntje.png");
@@ -129,6 +129,11 @@ public class AdministratieHoofdmenuView extends Scene {
 		personeel.setOnAction(e -> {
 			controller.setGebruikerInfoView();
 		});
+
+		gebruiker.setOnMouseClicked( e -> {
+			controller.setAccountInfoView();
+		});
+
 	}
 
 }

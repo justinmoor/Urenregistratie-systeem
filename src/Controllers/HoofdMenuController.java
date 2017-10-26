@@ -17,8 +17,6 @@ public class HoofdMenuController {
     private IngevuldeTijdModel tijdmodel;
     private PersoneelHoofdmenuView personeelView;
     private AdministratieHoofdmenuView adminView;
-    private GebruikerInfoView gebruikerInfoView;
-    private AccountToevoegenView accountToevoegenView;
     private DatabaseConnectie db;
 
     public HoofdMenuController(Stage stage, GebruikerModel gebruikerModel, DatabaseConnectie db){
@@ -26,12 +24,8 @@ public class HoofdMenuController {
         this.gebruikerModel = gebruikerModel;
         this.tijdmodel = tijdmodel;
         this.db = db;
-
-        //gebruikerController = new GebruikerController(this);
-
         personeelView = new PersoneelHoofdmenuView(this);
         adminView = new AdministratieHoofdmenuView(this);
-        //accountToevoegenView = new AccountToevoegenView(this);
     }
 
     public GebruikerModel getGebruikerModel() {
@@ -70,5 +64,7 @@ public class HoofdMenuController {
              setPersoneelHoofdmenu();
          }
     }
+
+    public void setAccountInfoView() { new AccountInfoController(stage, db, this); }
 
 }

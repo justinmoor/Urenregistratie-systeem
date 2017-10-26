@@ -41,7 +41,7 @@ public class GebruikerModel {
     }
 
     // Mensen zonder tussenvoegsel
-    public GebruikerModel(int gebruikerID, String voornaam, String achternaam, String email, String wachtwoord, String rechten, String werkzaam) {
+    public GebruikerModel(int gebruikerID, String achternaam, String voornaam, String email, String wachtwoord, String rechten, String werkzaam) {
         this.gebruikerID = gebruikerID;
         this.voornaam = voornaam;
         this.achternaam = achternaam;
@@ -127,5 +127,14 @@ public class GebruikerModel {
     public void setRechten(String rechten) {
 
         this.rechten = rechten;
+    }
+
+    public String getVolledigeNaam() {
+        if (tussenvoegsel != null) {
+            return voornaam + " " + tussenvoegsel + " " + achternaam;
+        } else {
+            return voornaam + " " + achternaam;
+        }
+
     }
 }
