@@ -133,7 +133,12 @@ public class GebruikerInfoView extends Scene {
             controller.setNietWerkzaam(rijen);
         });
 
-		context.getItems().add(inActief);
+		actief.setOnAction(e -> {
+            final ArrayList<GebruikerModel> rijen = new ArrayList<>(table.getSelectionModel().getSelectedItems());
+            controller.setWerkzaam(rijen);
+        });
+
+		context.getItems().addAll(inActief, actief);
 		table.setContextMenu(context);
         table.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
 

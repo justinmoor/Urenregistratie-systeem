@@ -1,6 +1,5 @@
 package Models;
 
-import javafx.beans.property.SimpleBooleanProperty;
 
 public class GebruikerModel {
 
@@ -62,12 +61,10 @@ public class GebruikerModel {
     }
 
     public int getGebruikerID() {
-
         return gebruikerID;
     }
 
     public void setGebruikerID(int gebruikerID) {
-
         this.gebruikerID = gebruikerID;
     }
 

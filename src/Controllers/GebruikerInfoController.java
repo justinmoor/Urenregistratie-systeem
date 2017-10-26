@@ -48,7 +48,6 @@ public class GebruikerInfoController {
 
     public void setNietWerkzaam(List<GebruikerModel> models){
         for(GebruikerModel model : models) {
-            model.setWerkzaam("0");
             dao.setNietWerkzaam(model);
         }
     }
