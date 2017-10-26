@@ -41,7 +41,7 @@ public class HoofdMenuController {
     }
 
     public void setAccountToevoegenView(){
-        new GebruikerToevoegenController(stage, db);
+        new GebruikerToevoegenController(stage, db, this);
         //stage.setScene(accountToevoegenView);
     }
 

@@ -20,34 +20,34 @@ import javafx.scene.text.FontWeight;
 import javafx.stage.Stage;
 
 public class AdministratieHoofdmenuView extends Scene {
-	private BorderPane pane;
-    
-    private BorderPane navigatie;
-    
-    private VBox img_box;
-    private Image img;
-    private ImageView terug;
-    
-    private Label home;
-    private Label gebruiker;
-    
-    private Image img2;
-    private ImageView lijntje;
-    
-    private HBox knoppen;
-    
-    private VBox links;
-    private Button uren;
-    private Button week;
-    
-    private VBox rechts;
-    private Button account;
-    private Button personeel;
-    
-    private Image img3;
-    private ImageView blauw_lijntje;
-
-	private HoofdMenuController controller;
+		private BorderPane pane;
+	    
+	    private BorderPane navigatie;
+	    
+	    private VBox img_box;
+	    private Image img;
+	    private ImageView terug;
+	    
+	    private Label home;
+	    private Label gebruiker;
+	    
+	    private Image img2;
+	    private ImageView lijntje;
+	    
+	    private HBox knoppen;
+	    
+	    private VBox links;
+	    private Button uren;
+	    private Button week;
+	    
+	    private VBox rechts;
+	    private Button account;
+	    private Button personeel;
+	    
+	    private Image img3;
+	    private ImageView blauw_lijntje;
+	
+		private HoofdMenuController controller;
 
 	public AdministratieHoofdmenuView(HoofdMenuController controller){
 		super(new BorderPane(), 600,  400); 		// Nieuwe pane meegeven aan de superklasse (dus scene).
@@ -129,6 +129,8 @@ public class AdministratieHoofdmenuView extends Scene {
 		personeel.setOnAction(e -> {
 			controller.setGebruikerInfoView();
 		});
+
+		gebruiker.setId("gebruiker");
 
 		gebruiker.setOnMouseClicked( e -> {
 			controller.setAccountInfoView();

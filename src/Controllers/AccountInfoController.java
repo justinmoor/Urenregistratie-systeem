@@ -50,6 +50,10 @@ public class AccountInfoController {
         wachtwoord = getHoofdMenuController().getGebruikerModel().getWachtwoord();
     }
 
+    public void veranderGebruiker(String nieuwWachtwoord) {
+        dao.setgebruikerWachtwoord(hoofdMenuController.getGebruikerModel(), nieuwWachtwoord);
+    }
+
     public String getVoornaam() {
         return voornaam;
     }

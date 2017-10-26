@@ -1,6 +1,7 @@
 package Views;
 
 import Controllers.GebruikerToevoegenController;
+import Controllers.HoofdMenuController;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -32,25 +33,28 @@ public class AccountToevoegenView extends Scene {
 	    
 	    private VBox groep;
 	
-	    private HBox voornaamBox;
-	    private HBox tussenvoegselBox;
-	    private HBox achternaamBox;
-	    private HBox emailBox;
-	    private HBox rechtenBox;
+	    private HBox voornaam;
+	    private Label lbl1;
+	    private TextField tf1;
 	    
-		private Label voornaam;
-		private Label tussenvoegsel;
-		private Label achternaam;
-		private Label email;
-		private Label rechten;
-					
-		private TextField voornaamInput;
-		private TextField tussenvoegselInput;
-		private TextField achternaamInput;
-		private TextField emailInput;
-		private HBox hbox;
-
-		private ComboBox rechtenKeuze;
+	    private HBox tussenvoegsel;
+	    private Label lbl2;
+	    private TextField tf2;
+	    
+	    private HBox achternaam;
+	    private Label lbl3;
+	    private TextField tf3;
+	    
+	    private HBox email;
+	    private Label lbl4;
+	    private TextField tf4;
+	    
+	    private HBox rechten;
+		private Label lbl5;
+		private ComboBox cb1;
+		
+		private Image img4;
+		private ImageView vbox_lijntje;
 			
 		private Button toevoegen;
 		
@@ -62,7 +66,8 @@ public class AccountToevoegenView extends Scene {
 	public AccountToevoegenView(GebruikerToevoegenController controller){
 		super(new BorderPane(), 600,  400); 			// Nieuwe pane meegeven aan de superklasse (dus scene).
 		pane = (BorderPane) this.getRoot(); 			// Deze nieuwe gridpane van de superklasse wordt de gridpane die hier gebruikt wordt.
-		this.controller = controller; 				// Controller zaken, moeten we nog overleggen.
+		this.controller = controller;
+		// Controller zaken, moeten we nog overleggen.
 
 		initGui(); 			// InitGui om alle grafische elementen te initialiseren.
 		InitAction();		// InitAction om alle functionaliteiten te initialiseren, denk aan knop.setOnAction() etc.
@@ -82,7 +87,7 @@ public class AccountToevoegenView extends Scene {
 		
 		home = new Label("ACCOUNT TOEVOEGEN");
 		home.setId("home");
-		home.setPadding(new Insets(15));
+		home.setPadding(new Insets(15, 0, 15, 15));
 		
 		gebruiker = new Label("Peter van Vliet");
 		gebruiker.setPadding(new Insets(15, 14, 15, 15));
@@ -95,46 +100,62 @@ public class AccountToevoegenView extends Scene {
 		navigatie.setCenter(home);
 		navigatie.setRight(gebruiker);
 		navigatie.setBottom(lijntje);
+		
+		groep = new VBox(12);
 
-		voornaamBox = new HBox(20);
-		voornaam = new Label("Voornaam:");
-		voornaamInput = new TextField();
-		voornaamBox.getChildren().addAll(voornaam, voornaamInput);
+		voornaam = new HBox(43);
+		lbl1 = new Label("Voornaam:");
+		tf1 = new TextField();
+		voornaam.getChildren().addAll(lbl1, tf1);
 			
-		tussenvoegselBox = new HBox(20);
-		tussenvoegsel = new Label("Tussenvoegsel:");
-		tussenvoegselInput = new TextField();
-		tussenvoegselBox.getChildren().addAll(tussenvoegsel, tussenvoegselInput);
+		tussenvoegsel = new HBox(16);
+		lbl2 = new Label("Tussenvoegsel:");
+		tf2 = new TextField();
+		tussenvoegsel.getChildren().addAll(lbl2, tf2);
 		
-		achternaamBox = new HBox(20);
-		achternaam = new Label("Achternaam:");
-		achternaamInput = new TextField();
-		achternaamBox.getChildren().addAll(achternaam, achternaamInput);
+		achternaam = new HBox(35);
+		lbl3 = new Label("Achternaam:");
+		tf3 = new TextField();
+		achternaam.getChildren().addAll(lbl3, tf3);
 		
-		emailBox = new HBox(20);
-		email = new Label("E-Mail:");
-		emailInput = new TextField();
-		emailBox.getChildren().addAll(email, emailInput);
+		email = new HBox(38);
+		lbl4 = new Label("E-Mail:");
+		tf4 = new TextField();
+		tf4.setId("email_text-field");
+		email.getChildren().addAll(lbl4, tf4);
 		
-		rechtenBox = new HBox(20);
-		rechten = new Label("Rechten:");
-		rechtenKeuze = new ComboBox();
-		rechtenKeuze.getItems().addAll("Personeel", "Administratie");
-		rechtenKeuze.setValue("Personeel");
-		rechtenBox.getChildren().addAll(rechten, rechtenKeuze);
+		img4 = new Image("/Assets/lijntje.png");
+		vbox_lijntje = new ImageView(img4);
+		vbox_lijntje.setFitWidth(259);
+		
+		rechten = new HBox(26);
+		lbl5 = new Label("Rechten:");
+		cb1 = new ComboBox();
+		cb1.getItems().addAll("Personeel", "Administratie");
+		cb1.setValue("Personeel");
+		rechten.getChildren().addAll(lbl5, cb1);
 					
 		toevoegen = new Button("TOEVOEGEN");
 		toevoegen.setId("toevoegen");
 
-		groep = new VBox();
-		groep.getChildren().addAll(voornaamBox, tussenvoegselBox, achternaamBox, emailBox, rechtenBox, toevoegen);
+		groep = new VBox(12);
+		groep.getChildren().addAll(voornaam, tussenvoegsel, achternaam, email, rechten, vbox_lijntje, toevoegen);
+		groep.setPadding(new Insets(0, 0, 16, 0));
 		
 		img3 = new Image("/Assets/blauwlijntje.png");
 		blauw_lijntje = new ImageView(img3);
 		blauw_lijntje.setFitWidth(612);
 		
 		pane.setTop(navigatie);
+		
 		pane.setCenter(groep);
+		groep.setAlignment(Pos.CENTER);
+		voornaam.setAlignment(Pos.CENTER);
+		tussenvoegsel.setAlignment(Pos.CENTER);
+		achternaam.setAlignment(Pos.CENTER);
+		email.setAlignment(Pos.CENTER);
+		rechten.setAlignment(Pos.CENTER);
+		
 		pane.setBottom(blauw_lijntje);
 		
 		getStylesheets().add("Views/styles.css");
@@ -143,9 +164,13 @@ public class AccountToevoegenView extends Scene {
 	//Functionele zaken initialiseren.
 	private void InitAction(){
 		toevoegen.setOnAction(e -> {
-			controller.insert(voornaamInput.getText(), tussenvoegselInput.getText(), achternaamInput.getText(), emailInput.getText(), rechtenKeuze.getValue().toString());
+			controller.insert(tf1.getText(), tf2.getText(), tf3.getText(), tf4.getText(), cb1.getValue().toString());
 
 		});
+		
+		terug.setOnMouseClicked(e -> {
+    	 	controller.getHoofdMenuController().setHoofdMenuView();
+    });
 	}
 }
 
