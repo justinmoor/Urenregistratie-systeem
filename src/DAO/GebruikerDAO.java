@@ -37,6 +37,7 @@ public class GebruikerDAO {
         }
         return model;
     }
+
     //Accepteert een email string en geeft het bijbehorende wachtwoord terug.
     public String getWachtwoordQuery(String email) {
         String wachtwoord = "";
@@ -115,6 +116,20 @@ public class GebruikerDAO {
             e.printStackTrace();
         }
         return gebruikers;
+    }
+
+    public void setgebruikerWachtwoord(GebruikerModel gebruikerModel, String nieuwWachtwoord) {
+
+        try {
+            PreparedStatement wijzigWachtwoord = db.getConnection().prepareStatement("UPDATE personeel SET wachtwoord = (?) WHERE persoonID = (?);");
+            wijzigWachtwoord.setString(1, nieuwWachtwoord);
+            wijzigWachtwoord.setInt(2, gebruikerModel.getGebruikerID());
+
+            wijzigWachtwoord.executeQuery();
+
+        } catch (SQLException e1) {
+            e1.printStackTrace();
+        }
     }
 }
 
