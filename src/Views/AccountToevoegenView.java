@@ -1,6 +1,7 @@
 package Views;
 
 import Controllers.GebruikerToevoegenController;
+import Controllers.HoofdMenuController;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -65,7 +66,8 @@ public class AccountToevoegenView extends Scene {
 	public AccountToevoegenView(GebruikerToevoegenController controller){
 		super(new BorderPane(), 600,  400); 			// Nieuwe pane meegeven aan de superklasse (dus scene).
 		pane = (BorderPane) this.getRoot(); 			// Deze nieuwe gridpane van de superklasse wordt de gridpane die hier gebruikt wordt.
-		this.controller = controller; 				// Controller zaken, moeten we nog overleggen.
+		this.controller = controller;
+		// Controller zaken, moeten we nog overleggen.
 
 		initGui(); 			// InitGui om alle grafische elementen te initialiseren.
 		InitAction();		// InitAction om alle functionaliteiten te initialiseren, denk aan knop.setOnAction() etc.
@@ -85,7 +87,7 @@ public class AccountToevoegenView extends Scene {
 		
 		home = new Label("ACCOUNT TOEVOEGEN");
 		home.setId("home");
-		home.setPadding(new Insets(15));
+		home.setPadding(new Insets(15, 0, 15, 15));
 		
 		gebruiker = new Label("Peter van Vliet");
 		gebruiker.setPadding(new Insets(15, 14, 15, 15));
@@ -165,6 +167,10 @@ public class AccountToevoegenView extends Scene {
 			controller.insert(tf1.getText(), tf2.getText(), tf3.getText(), tf4.getText(), cb1.getValue().toString());
 
 		});
+		
+		terug.setOnMouseClicked(e -> {
+    	 	controller.getHoofdMenuController().setHoofdMenuView();
+    });
 	}
 }
 

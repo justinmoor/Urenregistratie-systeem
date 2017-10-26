@@ -7,15 +7,17 @@ import Views.AccountToevoegenView;
 import javafx.stage.Stage;
 
 public class GebruikerToevoegenController {
+	private HoofdMenuController hoofdmenucontroller;
     private AccountToevoegenView accountToevoegenView;
     private DatabaseConnectie db;
     private GebruikerDAO dao;
 
-    public GebruikerToevoegenController(Stage stage, DatabaseConnectie db) {
+    public GebruikerToevoegenController(Stage stage, DatabaseConnectie db, HoofdMenuController hoofdmenucontroller) {
         accountToevoegenView = new AccountToevoegenView(this);
         stage.setScene(accountToevoegenView);
         stage.show();
         this.db = db;
+        this.hoofdmenucontroller = hoofdmenucontroller;
         dao = new GebruikerDAO(db);
     }
 
@@ -29,4 +31,9 @@ public class GebruikerToevoegenController {
 
         dao.insertAccount(voornaam, tussenvoegsel, achternaam, email, rechten);
     }
+
+	public HoofdMenuController getHoofdMenuController() {
+		// TODO Auto-generated method stub
+		return hoofdmenucontroller;
+	}
 }
