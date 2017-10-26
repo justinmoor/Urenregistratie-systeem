@@ -128,6 +128,7 @@ public class AdministratieHoofdmenuView extends Scene {
 		});
 		personeel.setOnAction(e -> {
 			controller.setGebruikerInfoView();
+
 		});
 
 		gebruiker.setId("gebruiker");

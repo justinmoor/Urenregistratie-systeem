@@ -58,7 +58,7 @@ public class AccountInfoView  extends Scene{
     private VBox gegevensOnderElkaarBox;
 
     public AccountInfoView(AccountInfoController controller) {
-        super(new BorderPane(), 600, 500);
+        super(new BorderPane(), 600, 400);
         pane = (BorderPane) this.getRoot();
         this.controller = controller;
     }
