@@ -23,8 +23,8 @@ public class GebruikerInfoController {
 	
 	private HoofdMenuController hoofdmenucontroller;
 
-    public GebruikerInfoController(Stage stage, DatabaseConnectie db, HoofdMenuController hoofdmenucontroller){
-        this.stage = stage;
+    public GebruikerInfoController(DatabaseConnectie db, HoofdMenuController hoofdmenucontroller){
+        this.stage = new Stage();
         this.db = db;
         this.hoofdmenucontroller = hoofdmenucontroller;
         dao = new GebruikerDAO(db);
@@ -40,12 +40,20 @@ public class GebruikerInfoController {
         return gebruikers;
     }
 
+    /**
+     * Zet de geselecteerde gebruikers op actief binnen het bedrijf.
+     * @param models
+     */
     public void setWerkzaam(List<GebruikerModel> models){
         for(GebruikerModel model : models) {
             dao.setWerkzaam(model);
         }
     }
 
+    /**
+     * Zet geselecteerde gebruikers op non-actief binnen het bedrijf.
+     * @param models
+     */
     public void setNietWerkzaam(List<GebruikerModel> models){
         for(GebruikerModel model : models) {
             dao.setNietWerkzaam(model);
@@ -59,5 +67,9 @@ public class GebruikerInfoController {
 	public void setAdminHoofdMenu() {
 		stage.setScene(adminView);
 	}
+
+	public void closeStage(){
+        this.stage.close();
+    }
 
 }

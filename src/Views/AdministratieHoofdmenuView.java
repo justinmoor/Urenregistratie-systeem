@@ -94,7 +94,7 @@ public class AdministratieHoofdmenuView extends Scene {
 		rechts.getChildren().addAll(account, personeel);
 		
 		knoppen.getChildren().addAll(links, rechts);
-		knoppen.setPadding(new Insets(80, 0, 0, 0));
+		knoppen.setPadding(new Insets(70, 0, 0, 0));
 		
 		pane.setTop(navigatie);
 		pane.setCenter(knoppen);
@@ -121,6 +121,7 @@ public class AdministratieHoofdmenuView extends Scene {
 		});
 		personeel.setOnAction(e -> {
 			controller.setGebruikerInfoView();
+
 		});
 
 		gebruiker.setId("gebruiker");

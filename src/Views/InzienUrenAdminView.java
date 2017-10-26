@@ -160,7 +160,7 @@ public class InzienUrenAdminView extends Scene {
         });
 
         terugKnop.setOnAction(a ->{
-            controller.backToHomeScreen();
+            controller.closeStage();
         });
 
         /**
@@ -243,14 +243,9 @@ public class InzienUrenAdminView extends Scene {
         /**
          * Zorgt ervoor dat wanneer er op de ESCAPE key wordt gedrukt dat er teruggegaan wordt naar het hoofdmenu.
          */
-        this.addEventHandler(KeyEvent.KEY_PRESSED, new EventHandler<KeyEvent>
-                () {
-            @Override
-            public void handle(KeyEvent t) {
-                if(t.getCode()== KeyCode.ESCAPE)
-                {
-                    backToHomeScreen();
-                }
+        this.addEventHandler(KeyEvent.KEY_PRESSED, e -> {
+            if(e.getCode() == KeyCode.ESCAPE){
+                controller.closeStage();
             }
         });
     }
