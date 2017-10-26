@@ -2,7 +2,7 @@ package Models;
 
 public class KlantModel {
 
-    String naam;
+    private String naam;
 
     public KlantModel(String naam) {
         this.naam = naam;
@@ -12,7 +12,4 @@ public class KlantModel {
         return naam;
     }
 
-    public void setNaam(String naam) {
-        this.naam = naam;
-    }
 }

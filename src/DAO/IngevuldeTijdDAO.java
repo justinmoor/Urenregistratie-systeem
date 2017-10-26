@@ -19,65 +19,64 @@ public class IngevuldeTijdDAO {
         this.db = db;
     }
 
-    public ArrayList haalKlantenOp() throws SQLException {
-        //Connection conn = DriverManager.getConnection("jdbc:mariadb://localhost:3306/UrenregistratieDatabase?user=root&password=ipsen123");
-        ArrayList<String> klant_namen = null;
+    public ArrayList<KlantModel> haalKlantenOp() throws SQLException {
+
+        ArrayList<KlantModel> klant_namen = null;
         try {
             ResultSet results;
             PreparedStatement haalKlantenOp = db.getConnection().prepareStatement("SELECT klant_naam FROM klant;");
             results = haalKlantenOp.executeQuery();
-            klant_namen = new ArrayList<String>();
+            klant_namen = new ArrayList<KlantModel>();
             while (results.next()) {
-                klant_namen.add(results.getString("klant_naam"));
+                klant_namen.add(new KlantModel(results.getString("klant_naam")));
             }
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
-      //  conn.close();
+
         return klant_namen;
     }
 
-    public ArrayList haalProjectenOp(String klant_naam) throws SQLException{
-       // Connection conn = DriverManager.getConnection("jdbc:mariadb://localhost:3306/UrenregistratieDatabase?user=root&password=ipsen123");
-        ArrayList<String> projecten = null;
+    public ArrayList<ProjectModel> haalProjectenOp(String klant_naam) throws SQLException{
+
+        ArrayList<ProjectModel> projecten = null;
         try {
             ResultSet results;
             PreparedStatement haalProjectenOp = db.getConnection().prepareStatement("SELECT project_naam FROM project WHERE klant_naam =?;");
             haalProjectenOp.setString(1, klant_naam);
             results = haalProjectenOp.executeQuery();
-            projecten = new ArrayList<String>();
+            projecten = new ArrayList<ProjectModel>();
             while(results.next()) {
-                projecten.add(results.getString("project_naam"));
+                projecten.add(new ProjectModel(results.getString("project_naam")));
             }
         } catch (SQLException sql) {
             sql.printStackTrace();
         }
-      //  conn.close();
+
         return projecten;
     }
 
-    public ArrayList haalOnderwerpenOp(String project_naam) throws SQLException{
-      //  Connection conn = DriverManager.getConnection("jdbc:mariadb://localhost:3306/UrenregistratieDatabase?user=root&password=ipsen123");
-        ArrayList<String> onderwerpen = null;
+    public ArrayList<OnderwerpModel> haalOnderwerpenOp(String project_naam) throws SQLException{
+
+        ArrayList<OnderwerpModel> onderwerpen = null;
         try {
             ResultSet results;
             PreparedStatement haalOnderwerpenOp = db.getConnection().prepareStatement("SELECT onderwerp_naam FROM onderwerp WHERE project_naam =?;");
             haalOnderwerpenOp.setString(1, project_naam);
             results = haalOnderwerpenOp.executeQuery();
-            onderwerpen = new ArrayList<String>();
+            onderwerpen = new ArrayList<OnderwerpModel>();
             while (results.next()) {
-                onderwerpen.add(results.getString("onderwerp_naam"));
+                onderwerpen.add(new OnderwerpModel(results.getString("onderwerp_naam")));
             }
         } catch (SQLException sql) {
             sql.printStackTrace();
         }
-      //  conn.close();
+
         return onderwerpen;
     }
 
 
     public void insertMetCommentaar(int getPersoonsID, String klant, String project, String onderwerp, String commentaar, String begindatum, String begintijd, String einddatum, String eindtijd) throws SQLException{
-        Connection conn = DriverManager.getConnection("jdbc:mariadb://localhost:3306/UrenregistratieDatabase?user=root&password=ipsen123");
 
         try {
             PreparedStatement insertMetCommentaar = db.getConnection().prepareStatement("INSERT INTO geregistreerdetijd (persoonID, klant_naam, project_naam, onderwerp_naam, commentaar, begindatum, begintijd, einddatum, eindtijd) VALUES(?,?,?,?,?,?,?,?,?)");

@@ -2,7 +2,7 @@ package Models;
 
 public class ProjectModel {
 
-    String project_naam;
+    private String project_naam;
 
     public ProjectModel(String project_naam) {
 
@@ -13,8 +13,5 @@ public class ProjectModel {
         return project_naam;
     }
 
-    public void setProject_naam(String project_naam) {
-        this.project_naam = project_naam;
-    }
 
 }
