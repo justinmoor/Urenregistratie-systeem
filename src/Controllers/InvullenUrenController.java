@@ -18,18 +18,18 @@ public class InvullenUrenController {
     private InvullenUrenView invullenurenView;
     private DatabaseConnectie db;
     private IngevuldeTijdDAO dao;
-    private HoofdMenuController hoofdMenuController;
+    private HoofdMenuController hoofdmenucontroller;
 
     private ArrayList<String> klanten;
     private ArrayList<String> producten;
     private ArrayList<String> onderwerpen;
 
-    InvullenUrenController(Stage stage, DatabaseConnectie db, HoofdMenuController controller) {
+    InvullenUrenController(Stage stage, DatabaseConnectie db, HoofdMenuController hoofdmenucontroller) {
         invullenurenView = new InvullenUrenView(this);
         stage.setScene(invullenurenView);
         stage.show();
         this.db = db;
-        this.hoofdMenuController = controller;
+        this.hoofdmenucontroller = hoofdmenucontroller;
         dao = new IngevuldeTijdDAO(db);
     }
 
@@ -57,14 +57,14 @@ public class InvullenUrenController {
 
 
     public void insert(String klant, String project, String onderwerp, String commentaar, String begindatum, String begintijd, String einddatum, String eindtijd) throws SQLException {
-        int  PersoonsID = hoofdMenuController.getGebruikerModel().getGebruikerID();
+        int  PersoonsID = hoofdmenucontroller.getGebruikerModel().getGebruikerID();
 
 
         dao.insertMetCommentaar(PersoonsID, klant, project, onderwerp, commentaar, begindatum, begintijd, einddatum, eindtijd);
     }
 
     public HoofdMenuController getHoofdMenuController() {
-        return hoofdMenuController;
+        return hoofdmenucontroller;
     }
 
     public void voegKlantToe(String klant, String project, String onderwerp) {

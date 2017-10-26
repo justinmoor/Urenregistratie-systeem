@@ -23,8 +23,8 @@ public class GebruikerInfoController {
 	
 	private HoofdMenuController hoofdmenucontroller;
 
-    public GebruikerInfoController(DatabaseConnectie db, HoofdMenuController hoofdmenucontroller){
-        this.stage = new Stage();
+    public GebruikerInfoController(Stage stage, DatabaseConnectie db, HoofdMenuController hoofdmenucontroller){
+        this.stage = stage;
         this.db = db;
         this.hoofdmenucontroller = hoofdmenucontroller;
         dao = new GebruikerDAO(db);
@@ -67,9 +67,5 @@ public class GebruikerInfoController {
 	public void setAdminHoofdMenu() {
 		stage.setScene(adminView);
 	}
-
-	public void closeStage(){
-        this.stage.close();
-    }
 
 }

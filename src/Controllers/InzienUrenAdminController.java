@@ -33,13 +33,14 @@ public class InzienUrenAdminController {
      * Krijgt DatabaseConnectie mee, zodat deze kan worden doorgegeven aan de DAO.
      * @param dbc
      */
-    public  InzienUrenAdminController(DatabaseConnectie dbc, HoofdMenuController hoofdMenuController){
+    public  InzienUrenAdminController(Stage stage, DatabaseConnectie dbc, HoofdMenuController hoofdMenuController){
         this.hoofdMenuController = hoofdMenuController;
         dao = new IngevuldeTijdDAO(dbc);
         view = new InzienUrenAdminView(this);
-        stage = new Stage();
+        stage = stage;
         stage.show();
         stage.setScene(view);
+        view.setPersoon(hoofdMenuController.getGebruikerModel().getVolledigeNaam());
     }
 
     /**
@@ -123,11 +124,8 @@ public class InzienUrenAdminController {
     /**
      * Wanneer aangeroepen verandert de scene weer naar het hoofdmenu.
      */
-    public void backToHomeScreen(){
-        hoofdMenuController.setHoofdMenuView();
-    }
 
-    public void closeStage(){
-        this.stage.close();
+    public HoofdMenuController getHoofdMenuController() {
+        return hoofdMenuController;
     }
 }

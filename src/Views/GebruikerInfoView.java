@@ -145,7 +145,7 @@ public class GebruikerInfoView extends Scene {
      */
     private void InitAction(){
         img_box.setOnMousePressed(e -> {
-            controller.closeStage();
+            controller.getHoofdMenuController().setHoofdMenuView();
          });
 
         inActief.setOnAction(e -> {
@@ -158,12 +158,6 @@ public class GebruikerInfoView extends Scene {
             final ArrayList<GebruikerModel> rijen = new ArrayList<>(table.getSelectionModel().getSelectedItems());
             controller.setWerkzaam(rijen);
             InitTable();
-        });
-
-        this.addEventHandler(KeyEvent.KEY_PRESSED, e -> {
-            if(e.getCode() == KeyCode.ESCAPE){
-                controller.closeStage();
-            }
         });
 
 	}

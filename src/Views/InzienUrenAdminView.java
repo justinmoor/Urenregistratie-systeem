@@ -1,16 +1,21 @@
 package Views;
 
+import Controllers.AccountInfoController;
 import Controllers.AutoCompletionTextfieldController;
 import Controllers.InzienUrenAdminController;
 import Models.IngevuldeTijdModel;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 import java.time.format.DateTimeFormatter;
@@ -24,7 +29,6 @@ public class InzienUrenAdminView extends Scene {
     private static final String KNOPSTRING = "Ververs";
     private static final double PANEWIDTH = 1400;               //Grootte van de pane
     private static final double PANEHEIGHT = 800;
-    private static final String TERUGKNOPTEKST = "Terug";
 
     private final double PERSONEELNAAMCOLUMNWIDTH = 150;               //Breedten van de kolommen.
     private final double BEGINDATUMCOLUMNWIDTH = 90;
@@ -41,15 +45,35 @@ public class InzienUrenAdminView extends Scene {
     private final int TABLEHEIGHT = 780;
 
     /**
+     * init alle top field onderdelen
+     */
+
+    private BorderPane navigatie;
+
+    private VBox img_box;
+    private Image img;
+    private ImageView terug;
+
+    private Label InzienUrenLabel;
+
+    private Label persoon;
+
+    private Image img2;
+    private ImageView lijntje;
+
+    private Image img3;
+    private ImageView blauw_lijntje;
+
+    /**
      * Allocate space voor alle beeldobjecten.
      */
     private InzienUrenAdminController controller;
     private DatePicker begindatumPicker;
     private DatePicker einddatumPicker;
+    private BorderPane pane;
     private GridPane gridpane;
     private VBox leftFilterPanel;
     private Button verversKnop;
-    private Button terugKnop;
     private VBox begindatumVbox;
     private VBox einddatumVbox;
     private Label einddatumLabel;
@@ -97,7 +121,9 @@ public class InzienUrenAdminView extends Scene {
         /**
          * Initialiseer alle beeldobjecten.
          */
-        super(new GridPane(), PANEWIDTH, PANEHEIGHT);
+        super(new BorderPane(), PANEWIDTH, PANEHEIGHT);
+        pane = (BorderPane) this.getRoot();
+        gridpane = new GridPane();
         einddatumLabel = new Label("Einddatum: ");
         begindatumLabel = new Label("Begindatum: ");
 
@@ -117,14 +143,11 @@ public class InzienUrenAdminView extends Scene {
 
         this.controller = controller;
 
-        gridpane = (GridPane) this.getRoot();
-
         overzichtTableView = new TableView();
 
-        terugKnop = new Button(TERUGKNOPTEKST);
         verversKnop = new Button(KNOPSTRING);
 
-        leftFilterPanel = new VBox(begindatumVbox, einddatumVbox, klantBox, projectBox, verversKnop, terugKnop);
+        leftFilterPanel = new VBox(begindatumVbox, einddatumVbox, klantBox, projectBox, verversKnop);
 
 
         /**
@@ -144,9 +167,59 @@ public class InzienUrenAdminView extends Scene {
         leftFilterPanel.setSpacing(12);
 
         /**
+         * init kop van view
+         */
+
+        navigatie = new BorderPane();
+
+        img_box = new VBox();
+        img = new Image("/Assets/back.png");
+        terug = new ImageView(img);
+        img_box.getChildren().add(terug);
+        img_box.setPadding(new Insets(15, 0, 15, 14));
+
+        InzienUrenLabel = new Label("INZIEN UREN");
+        InzienUrenLabel.setId("home");
+        InzienUrenLabel.setPadding(new Insets(15));
+
+        persoon = new Label();
+        persoon.setPadding(new Insets(15, 14, 15, 15));
+
+        img2 = new Image("/Assets/lijntje.png");
+        lijntje = new ImageView(img2);
+        lijntje.setFitWidth(pane.getWidth());
+
+        navigatie.setLeft(img_box);
+        navigatie.setCenter(InzienUrenLabel);
+        navigatie.setRight(persoon);
+        navigatie.setBottom(lijntje);
+
+        pane.setTop(navigatie);
+
+        /**
+         * init action terug image
+         */
+
+        img_box.setOnMouseClicked(e -> {
+            controller.getHoofdMenuController().setHoofdMenuView();
+        });
+
+        /**
+         * voeg gridpane toe aan borderpane
+         */
+        pane.setCenter(gridpane);
+
+        img3 = new Image("/Assets/blauwlijntje.png");
+
+        blauw_lijntje = new ImageView(img3);
+        blauw_lijntje.setFitWidth(pane.getWidth());
+
+        pane.setBottom(blauw_lijntje);
+
+        /**
          * Bepaal de breedte van alle knoppen in het linkerpanel.
          */
-        terugKnop.setPrefWidth(leftFilterPanel.getPrefWidth());
+
         verversKnop.setPrefWidth(leftFilterPanel.getPrefWidth());
         einddatumPicker.setPrefWidth(leftFilterPanel.getPrefWidth());
         begindatumPicker.setPrefWidth(leftFilterPanel.getPrefWidth());
@@ -157,10 +230,6 @@ public class InzienUrenAdminView extends Scene {
          */
         verversKnop.setOnAction(a ->{
             buttonPressed();
-        });
-
-        terugKnop.setOnAction(a ->{
-            controller.closeStage();
         });
 
         /**
@@ -240,14 +309,8 @@ public class InzienUrenAdminView extends Scene {
 
         gridpane.getChildren().addAll(leftFilterPanel, overzichtTableView);               //Voegt alles toe aan de GridPane.
 
-        /**
-         * Zorgt ervoor dat wanneer er op de ESCAPE key wordt gedrukt dat er teruggegaan wordt naar het hoofdmenu.
-         */
-        this.addEventHandler(KeyEvent.KEY_PRESSED, e -> {
-            if(e.getCode() == KeyCode.ESCAPE){
-                controller.closeStage();
-            }
-        });
+        getStylesheets().add("Views/styles.css");
+
     }
 
     /**
@@ -278,11 +341,6 @@ public class InzienUrenAdminView extends Scene {
 
     }
 
-    private void backToHomeScreen(){
-        controller.backToHomeScreen();
-    }
-
-
 
     /**
      * Getters en setters
@@ -304,5 +362,9 @@ public class InzienUrenAdminView extends Scene {
     public String getProjectnaam(){
         System.out.println(projectNaamInput.getText());
         return this.projectNaamInput.getText();
+    }
+
+    public void setPersoon(String volledigeNaam) {
+        persoon.setText(volledigeNaam);
     }
 }
