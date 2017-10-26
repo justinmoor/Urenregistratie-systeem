@@ -160,7 +160,7 @@ public class InzienUrenAdminView extends Scene {
         });
 
         terugKnop.setOnAction(a ->{
-            controller.backToHomeScreen();
+            controller.closeStage();
         });
 
         /**

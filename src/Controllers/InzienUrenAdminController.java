@@ -31,13 +31,14 @@ public class InzienUrenAdminController {
     /**
      * Is de klasse die de InzienUrenAdminView onderhoudt.
      * Krijgt DatabaseConnectie mee, zodat deze kan worden doorgegeven aan de DAO.
-     * @param stage
      * @param dbc
      */
-    public  InzienUrenAdminController(Stage stage, DatabaseConnectie dbc, HoofdMenuController hoofdMenuController){
+    public  InzienUrenAdminController(DatabaseConnectie dbc, HoofdMenuController hoofdMenuController){
         this.hoofdMenuController = hoofdMenuController;
         dao = new IngevuldeTijdDAO(dbc);
         view = new InzienUrenAdminView(this);
+        stage = new Stage();
+        stage.show();
         stage.setScene(view);
     }
 
@@ -124,5 +125,9 @@ public class InzienUrenAdminController {
      */
     public void backToHomeScreen(){
         hoofdMenuController.setHoofdMenuView();
+    }
+
+    public void closeStage(){
+        this.stage.close();
     }
 }

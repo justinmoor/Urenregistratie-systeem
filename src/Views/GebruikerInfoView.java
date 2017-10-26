@@ -136,10 +136,13 @@ public class GebruikerInfoView extends Scene {
 
         InitTable();
     }
-    
+
+    /**
+     * Initialiseert alle functionele zaken
+     */
     private void InitAction(){
         img_box.setOnMousePressed(e -> {
-            controller.getHoofdMenuController().setHoofdMenuView();
+            controller.closeStage();
          });
 
         inActief.setOnAction(e -> {
@@ -157,7 +160,9 @@ public class GebruikerInfoView extends Scene {
 	}
 
 
-
+    /**
+     * Initialiseert de tabel.
+     */
     private void InitTable(){
         ObservableList<GebruikerModel> gebruikers = FXCollections.observableList(controller.getGebruikers());
 
