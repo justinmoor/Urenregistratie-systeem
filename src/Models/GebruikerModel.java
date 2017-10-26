@@ -1,5 +1,6 @@
 package Models;
 
+
 public class GebruikerModel {
 
     private int gebruikerID;
@@ -60,12 +61,10 @@ public class GebruikerModel {
     }
 
     public int getGebruikerID() {
-
         return gebruikerID;
     }
 
     public void setGebruikerID(int gebruikerID) {
-
         this.gebruikerID = gebruikerID;
     }
 

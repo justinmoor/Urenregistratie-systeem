@@ -85,7 +85,7 @@ public class GebruikerDAO {
 
     public ArrayList getAllAccount(){
         gebruikers = new ArrayList<>();
-        String query = "SELECT voornaam, tussenvoegsel, achternaam, email, rechten, werkzaam FROM personeel;";
+        String query = "SELECT persoonID, voornaam, tussenvoegsel, achternaam, email, rechten, werkzaam FROM personeel;";
 
         try {
             PreparedStatement statement = db.getConnection().prepareStatement(query);
@@ -93,6 +93,7 @@ public class GebruikerDAO {
 
             while(result.next()){
                 GebruikerModel gebruiker = new GebruikerModel();
+                gebruiker.setGebruikerID(result.getInt("persoonID"));
                 gebruiker.setVoornaam(result.getString("voornaam"));
                 gebruiker.setTussenvoegsel(result.getString("tussenvoegsel"));
                 gebruiker.setAchternaam(result.getString("achternaam"));
@@ -117,6 +118,29 @@ public class GebruikerDAO {
         }
         return gebruikers;
     }
+
+    public void setWerkzaam(GebruikerModel model){
+        try {
+            PreparedStatement werkzaam = db.getConnection().prepareStatement("UPDATE personeel SET werkzaam = 1 WHERE persoonID = ?;");
+            werkzaam.setInt(1, model.getGebruikerID());
+            werkzaam.executeQuery();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void setNietWerkzaam(GebruikerModel model){
+        try {
+            PreparedStatement werkzaam = db.getConnection().prepareStatement("UPDATE personeel SET werkzaam = 0 WHERE persoonID = ?;");
+            werkzaam.setInt(1, model.getGebruikerID());
+            werkzaam.executeQuery();
+
+            System.out.println("Werkt " + model.getGebruikerID());
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
 
     public void setgebruikerWachtwoord(GebruikerModel gebruikerModel, String nieuwWachtwoord) {
 
