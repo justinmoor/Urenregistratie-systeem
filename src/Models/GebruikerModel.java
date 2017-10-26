@@ -1,5 +1,7 @@
 package Models;
 
+import javafx.beans.property.SimpleBooleanProperty;
+
 public class GebruikerModel {
 
     private int gebruikerID;

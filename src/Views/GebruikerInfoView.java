@@ -3,13 +3,13 @@ package Views;
 import Controllers.GebruikerInfoController;
 import Controllers.HoofdMenuController;
 import Models.GebruikerModel;
+import javafx.beans.property.SimpleBooleanProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
-import javafx.scene.control.Label;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
+import javafx.scene.control.cell.CheckBoxTableCell;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -49,6 +49,10 @@ public class GebruikerInfoView extends Scene {
 
     private GebruikerInfoController controller;
 
+    private ContextMenu context;
+    private MenuItem inActief;
+    private MenuItem actief;
+
   //  private HoofdMenuController controller;
 
     public GebruikerInfoView(GebruikerInfoController controller){
@@ -60,7 +64,7 @@ public class GebruikerInfoView extends Scene {
     }
 
     private void initGui(){
-    		pane.setId("pane");
+        pane.setId("pane");
 		
 		navigatie = new BorderPane();
 		
@@ -120,6 +124,19 @@ public class GebruikerInfoView extends Scene {
 		
 		getStylesheets().add("Views/styles.css");
 
+		context = new ContextMenu();
+		inActief = new MenuItem("Inactief");
+		actief = new MenuItem("Actief");
+
+		inActief.setOnAction(e -> {
+		    final ArrayList<GebruikerModel> rijen = new ArrayList<>(table.getSelectionModel().getSelectedItems());
+            controller.setNietWerkzaam(rijen);
+        });
+
+		context.getItems().add(inActief);
+		table.setContextMenu(context);
+        table.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
+
         InitTable();
     }
     
@@ -128,6 +145,8 @@ public class GebruikerInfoView extends Scene {
             controller.getHoofdMenuController().setHoofdMenuView();
          });
 	}
+
+
 
     private void InitTable(){
         ObservableList<GebruikerModel> gebruikers = FXCollections.observableList(controller.getGebruikers());
@@ -139,7 +158,8 @@ public class GebruikerInfoView extends Scene {
         achternaam.setCellValueFactory(new PropertyValueFactory<>("achternaam"));
         email.setCellValueFactory(new PropertyValueFactory<>("email"));
         rechten.setCellValueFactory(new PropertyValueFactory<>("rechten"));
-        werkzaam.setCellValueFactory(new PropertyValueFactory<>("werkzaam"));
-    }
 
+        werkzaam.setCellValueFactory(new PropertyValueFactory<>("werkzaam"));
+
+    }
 }

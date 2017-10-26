@@ -9,6 +9,7 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class GebruikerInfoController {
 
@@ -37,6 +38,19 @@ public class GebruikerInfoController {
     public ArrayList getGebruikers(){
         gebruikers = dao.getAllAccount();
         return gebruikers;
+    }
+
+    public void setWerkzaam(List<GebruikerModel> models){
+        for(GebruikerModel model : models) {
+            dao.setWerkzaam(model);
+        }
+    }
+
+    public void setNietWerkzaam(List<GebruikerModel> models){
+        for(GebruikerModel model : models) {
+            model.setWerkzaam("0");
+            dao.setNietWerkzaam(model);
+        }
     }
     
     public HoofdMenuController getHoofdMenuController() {
