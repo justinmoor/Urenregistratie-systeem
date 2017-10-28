@@ -131,6 +131,52 @@ public class IngevuldeTijdDAO {
     }
 
     /**
+     * Vraagt database om de gewerkte uren van een specifiek persoon. Geeft een resultset terug.
+     * @param begindatum
+     * @param einddatum
+     * @param klant
+     * @param project
+     * @param personeelsId
+     * @return
+     */
+    public ResultSet getPersoneelOverzicht(String begindatum, String einddatum, String klant, String project, int personeelsId) {
+        ResultSet results;
+        results = null;
+        try {
+            PreparedStatement getResults = db.getConnection().prepareStatement("SELECT *" +
+                    "FROM geregistreerdetijd " +
+                    //"JOIN personeel " +
+                    //"ON geregistreerdetijd.persoonID = personeel.persoonID " +
+                    "WHERE persoonID = ? " +
+                    "AND begindatum >=? " +
+                    "AND einddatum<=? " +
+                    "AND (klant_naam = ? " +
+                    "OR klant_naam LIKE ?) " +
+                    "AND (project_naam = ? " +
+                    "OR project_naam LIKE ?)");
+
+            getResults.setString(2, begindatum);
+            getResults.setString(3, einddatum);
+            getResults.setInt(1, personeelsId);
+            getResults.setString(4, klant);
+            getResults.setString(5, klant+"%");
+            getResults.setString(6, project);
+            getResults.setString(7, project+"%");
+
+            System.out.println(begindatum);
+            System.out.println(einddatum);
+
+            results = getResults.executeQuery();
+
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return results;
+    }
+
+    /**
      * Ontvangt het model waarvan de goeddgekeurd boolean is veranderd en stuurt deze om weg te schrijven naar de database.
      * @param model
      */

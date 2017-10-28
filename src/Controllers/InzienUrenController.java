@@ -2,19 +2,21 @@ package Controllers;
 
 import DAO.IngevuldeTijdDAO;
 import Database.DatabaseConnectie;
+import Models.GebruikerModel;
 import Models.IngevuldeTijdModel;
 import Views.InzienUrenAdminView;
+import Views.InzienUrenView;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.control.Alert;
 import javafx.stage.Stage;
+
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class InzienUrenAdminController {
-
+public class InzienUrenController {
     private final String ERRORMESSAGENORESULTS = "De zoekopdracht heeft geen resultaten opgeleverd";
 
     /**
@@ -22,25 +24,27 @@ public class InzienUrenAdminController {
      */
     Stage stage;
     DatabaseConnectie dbc;
-    InzienUrenAdminView view;
+    InzienUrenView view;
     IngevuldeTijdDAO dao;
     ResultSet results;
     ArrayList<IngevuldeTijdModel> resultatenlijst;
     HoofdMenuController hoofdMenuController;
+    GebruikerModel gebruiker;
 
     /**
      * Is de klasse die de InzienUrenAdminView onderhoudt.
      * Krijgt DatabaseConnectie mee, zodat deze kan worden doorgegeven aan de DAO.
      * @param dbc
      */
-    public  InzienUrenAdminController(Stage stage, DatabaseConnectie dbc, HoofdMenuController hoofdMenuController){
+    public  InzienUrenController(Stage stage, DatabaseConnectie dbc, HoofdMenuController hoofdMenuController, GebruikerModel gebruiker){
         this.hoofdMenuController = hoofdMenuController;
         dao = new IngevuldeTijdDAO(dbc);
-        view = new InzienUrenAdminView(this);
+        view = new InzienUrenView(this);
         stage = stage;
         stage.show();
         stage.setScene(view);
         view.setPersoonLabel(hoofdMenuController.getGebruikerModel().getVolledigeNaam());
+        this.gebruiker = gebruiker;
     }
 
     /**
@@ -48,7 +52,7 @@ public class InzienUrenAdminController {
      * Krijgt een ResultSet van de DAO, maakt IngevuldeTijdModels van de resultset en voert deze door naar de view.
      */
     public void buttonPressed(){
-        results = dao.getAdminOverzicht(view.getBegindatum(), view.getEinddatum(), view.getKlantnaam(), view.getProjectnaam());
+        results = dao.getPersoneelOverzicht(view.getBegindatum(), view.getEinddatum(), view.getKlantnaam(), view.getProjectnaam(), gebruiker.getGebruikerID());
         makeModelsFromResultSet(results);
 
         if(resultatenlijst.isEmpty()){
@@ -68,12 +72,8 @@ public class InzienUrenAdminController {
             if(results.next()){
                 resultatenlijst = new ArrayList<>();
                 do{
-                    String personeelsNaam;
-                    if(results.getString("tussenvoegsel")!=null) {
-                        personeelsNaam = results.getString("voornaam") +" "+ results.getString("tussenvoegsel") + " "+ results.getString("achternaam");
-                    }else{
-                        personeelsNaam = results.getString("voornaam")+" "+ results.getString("achternaam");
-                    }
+                    String personeelsNaam = gebruiker.getVolledigeNaam();
+                    System.out.println("Adding models to arraylist");
                     resultatenlijst.add(new IngevuldeTijdModel(
                             results.getInt("uurID"),
                             results.getString("begindatum"),
@@ -108,20 +108,8 @@ public class InzienUrenAdminController {
         view.vulTabelUitLijst(records);
     }
 
-    /**
-     * Ontvangt een lijst van models die geselecteerd zijn in de view, verandert de goedgekeurd boolean
-     * naar true en stuurt ze vervolgens een voor een door naar de dao om weggeschreven te worden.
-     * @param models
-     */
-    public void keurGoed(List<IngevuldeTijdModel> models){
-        for (IngevuldeTijdModel model:models
-             ) {
-            model.setGoedgekeurd(true);
-            dao.veranderGoedgekeurdKolom(model);
-        }
-    }
-
     public HoofdMenuController getHoofdMenuController() {
         return hoofdMenuController;
     }
 }
+

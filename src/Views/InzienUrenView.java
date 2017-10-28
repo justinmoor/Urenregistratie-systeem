@@ -1,10 +1,8 @@
 package Views;
 
-import Controllers.InzienUrenAdminController;
+import Controllers.InzienUrenController;
 import Models.IngevuldeTijdModel;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
@@ -15,9 +13,8 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
 
-public class InzienUrenAdminView extends Scene {
+public class InzienUrenView extends Scene {
 
     /**
      * Initialiseer constanten
@@ -58,7 +55,7 @@ public class InzienUrenAdminView extends Scene {
     /**
      * Allocate space voor alle beeldobjecten.
      */
-    private InzienUrenAdminController controller;
+    private InzienUrenController controller;
     private DatePicker begindatumPicker;
     private DatePicker einddatumPicker;
     private BorderPane pane;
@@ -79,8 +76,7 @@ public class InzienUrenAdminView extends Scene {
     /**
      * Maak de tabel en alle bijbehorende kolommen.
      */
-    private TableView <IngevuldeTijdModel>overzichtTableView;
-    private TableColumn <IngevuldeTijdModel, String> personeelNaamColumn;
+    private TableView<IngevuldeTijdModel> overzichtTableView;
     private TableColumn <IngevuldeTijdModel, String> begindatumColumn;
     private TableColumn <IngevuldeTijdModel, String> einddatumColumn;
     private TableColumn <IngevuldeTijdModel, String> begintijdColumn;
@@ -91,11 +87,6 @@ public class InzienUrenAdminView extends Scene {
     private TableColumn <IngevuldeTijdModel, String> commentaarColumn;
     private TableColumn <IngevuldeTijdModel, String> goedgekeurdColumn;
 
-    /**
-     * Maak het contextmenu voor het goedkeuren van de uren, en de opties.
-     */
-    private ContextMenu contextMenuRightClick;
-    private MenuItem keurGoed;
 
     /**
      * Maak de begin en einddatum.
@@ -107,7 +98,7 @@ public class InzienUrenAdminView extends Scene {
      * Maak de view aan. De controller wordt meegegeven, zodat de knoppen de logica aan de controller door kunnen geven.
      * @param controller
      */
-    public InzienUrenAdminView(InzienUrenAdminController controller){
+    public InzienUrenView(InzienUrenController controller){
 
         /**
          * Initialiseer alle beeldobjecten.
@@ -225,27 +216,8 @@ public class InzienUrenAdminView extends Scene {
         });
 
         /**
-         * Maakt de context menu voor wanneer er met de rechtermuisknop wordt gedrukt op een rij. Voegt de "Goedkeuren" optie er aan toe.
-         */
-        contextMenuRightClick = new ContextMenu();
-        keurGoed = new MenuItem("Goedkeuren");
-
-        keurGoed.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                final ArrayList<IngevuldeTijdModel> aangevinkteRijen = new ArrayList<IngevuldeTijdModel>(overzichtTableView.getSelectionModel().getSelectedItems());
-                controller.keurGoed(aangevinkteRijen);
-            }
-        });
-
-        contextMenuRightClick.getItems().add(keurGoed);
-        overzichtTableView.setContextMenu(contextMenuRightClick);
-        overzichtTableView.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
-
-        /**
          * Initialiseer de tabel.
          */
-        personeelNaamColumn = new TableColumn("Medewerker");
         begindatumColumn = new TableColumn("Begindatum");
         einddatumColumn = new TableColumn("Einddatum");
         begintijdColumn = new TableColumn("Begintijd");
@@ -261,7 +233,7 @@ public class InzienUrenAdminView extends Scene {
          * Stringvalues dienen gelijk te zijn aan de namen die voor de attributen in het model zijn gebruikt.
          * De gebruikte attributen dienen een getter en setter te hebben.
          */
-        personeelNaamColumn.setCellValueFactory(new PropertyValueFactory<>("persoonNaam"));
+
         begindatumColumn.setCellValueFactory(new PropertyValueFactory<>("beginDatum"));
         einddatumColumn.setCellValueFactory(new PropertyValueFactory<>("eindDatum"));
         begintijdColumn.setCellValueFactory(new PropertyValueFactory<>("beginTijd"));
@@ -275,7 +247,6 @@ public class InzienUrenAdminView extends Scene {
         /**
          * Configureer de breedte van de kolommen. Constante waarden staan bovenaan.
          */
-        personeelNaamColumn.setMaxWidth(PERSONEELNAAMCOLUMNWIDTH);
         begindatumColumn.setMaxWidth(BEGINDATUMCOLUMNWIDTH);
         einddatumColumn.setMaxWidth(EINDDATUMCOLUMNWIDTH);
         begintijdColumn.setMaxWidth(BEGINTIJCOLUMNDWIDTH);
@@ -287,7 +258,6 @@ public class InzienUrenAdminView extends Scene {
         goedgekeurdColumn.setMaxWidth(GOEDGEKEURDCOLUMNWIDTH);
 
         overzichtTableView.getColumns().addAll(         //voeg alle gemaakte kolommen toe aan de tabel.
-                personeelNaamColumn,
                 onderwerpnaamColumn,
                 begintijdColumn,
                 eindtijdColumn,
@@ -359,4 +329,5 @@ public class InzienUrenAdminView extends Scene {
     public void setPersoonLabel(String volledigeNaam) {
         persoonLabel.setText(volledigeNaam);
     }
+
 }

@@ -1,7 +1,6 @@
 package Views;
 
 import Controllers.GebruikerToevoegenController;
-import Controllers.HoofdMenuController;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -9,12 +8,8 @@ import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-import javafx.scene.paint.Color;
-import javafx.scene.text.Font;
-import javafx.scene.text.FontWeight;
 
 public class AccountToevoegenView extends Scene {
 		private BorderPane pane;
@@ -173,7 +168,7 @@ public class AccountToevoegenView extends Scene {
 		});
 		
 		terug.setOnMouseClicked(e -> {
-    	 	controller.getHoofdMenuController().setHoofdMenuView();
+    	 	controller.getHoofdMenuController().startHoofdmenuView();
     });
 	}
 }

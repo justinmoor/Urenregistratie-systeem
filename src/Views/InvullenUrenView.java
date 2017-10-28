@@ -20,12 +20,10 @@ package Views;
         import javafx.scene.text.Font;
         import javafx.scene.text.FontWeight;
 
-        import java.awt.*;
         import java.sql.SQLException;
         import java.time.LocalDate;
         import java.util.ArrayList;
         import java.util.Optional;
-        import java.util.OptionalInt;
 
 public class InvullenUrenView extends Scene {
 
@@ -301,7 +299,7 @@ public class InvullenUrenView extends Scene {
         });
 
         home.setOnAction(e -> {
-        	 	controller.getHoofdMenuController().setHoofdMenuView();
+        	 	controller.getHoofdMenuController().startHoofdmenuView();
         });
 
 

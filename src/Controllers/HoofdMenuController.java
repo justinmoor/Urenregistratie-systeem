@@ -3,10 +3,7 @@ package Controllers;
 import Database.DatabaseConnectie;
 import Models.GebruikerModel;
 import Models.IngevuldeTijdModel;
-import Views.AccountToevoegenView;
 import Views.AdministratieHoofdmenuView;
-import Views.GebruikerInfoView;
-import Views.InvullenUrenView;
 import Views.PersoneelHoofdmenuView;
 import javafx.stage.Stage;
 
@@ -34,15 +31,15 @@ public class HoofdMenuController {
         return gebruikerModel;
     }
 
-    public void setPersoneelHoofdmenu(){
+    public void startPersoneelHoofdmenuView(){
         stage.setScene(personeelView);
     }
 
-    public void setAdminHoofdMenu(){
+    public void startAdminHoofdmenuView(){
        stage.setScene(adminView);
     }
 
-    public void setAccountToevoegenView(){
+    public void startAccountToevoegenView(){
         new GebruikerToevoegenController(stage, db, this);
         //stage.setScene(accountToevoegenView);
     }
@@ -51,23 +48,29 @@ public class HoofdMenuController {
         new InzienUrenAdminController(stage, db, this);
     }
 
-    public void setIvullenUrenView() {
+    public void startInvullenUrenView() {
         new InvullenUrenController(stage, db, this);
     }
 
-    public void setGebruikerInfoView(){
+    public void startGebruikerInfoView(){
         new GebruikerInfoController(stage, db, this);
     }
     
-    public void setHoofdMenuView() {
+    public void startHoofdmenuView() {
     	 if (getGebruikerModel().getRechten().equals("1")) {
-             setAdminHoofdMenu();
+             startAdminHoofdmenuView();
          } else if (getGebruikerModel().getRechten().equals("0")) {
-             setPersoneelHoofdmenu();
+             startPersoneelHoofdmenuView();
          }
     }
 
-    public void setAccountInfoView() { new AccountInfoController(stage, db, this); }
+    public void startAccountInfoView() {
+        new AccountInfoController(stage, db, this);
+    }
+
+    public void startInzienUrenView(){
+        new InzienUrenController(stage, db, this, gebruikerModel);
+    }
 
     public LoginController getLoginController() {
         return loginController;

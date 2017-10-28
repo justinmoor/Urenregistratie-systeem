@@ -1,23 +1,16 @@
 package Views;
 
 import Controllers.GebruikerInfoController;
-import Controllers.HoofdMenuController;
 import Models.GebruikerModel;
-import javafx.beans.property.SimpleBooleanProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.scene.control.cell.CheckBoxTableCell;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.KeyCode;
-import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 
 import java.util.ArrayList;
@@ -145,7 +138,7 @@ public class GebruikerInfoView extends Scene {
      */
     private void InitAction(){
         img_box.setOnMousePressed(e -> {
-            controller.getHoofdMenuController().setHoofdMenuView();
+            controller.getHoofdMenuController().startHoofdmenuView();
          });
 
         inActief.setOnAction(e -> {

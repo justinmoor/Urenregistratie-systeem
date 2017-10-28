@@ -57,9 +57,9 @@ public class LoginController {
                 menuController = new HoofdMenuController(stage, model, db, this);
 
                 if (model.getRechten().equals("0")) {
-                    menuController.setPersoneelHoofdmenu();
+                    menuController.startPersoneelHoofdmenuView();
                 } else if (model.getRechten().equals("1")) {
-                    menuController.setAdminHoofdMenu();
+                    menuController.startAdminHoofdmenuView();
                 }
 
             } else {

@@ -1,7 +1,6 @@
 package Views;
 
 import Controllers.HoofdMenuController;
-import Controllers.InvullenUrenController;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -10,11 +9,7 @@ import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.GridPane;
-import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-import javafx.scene.text.Font;
-import javafx.scene.text.FontWeight;
 
 public class PersoneelHoofdmenuView extends Scene {
 	private BorderPane pane;
@@ -98,10 +93,10 @@ public class PersoneelHoofdmenuView extends Scene {
 	
 	private void InitAction(){
 		uren.setOnAction(e -> {
-			controller.setIvullenUrenView();
+			controller.startInvullenUrenView();
 		});
 		week.setOnAction(e -> {
-			// controller.setInzienUrenPers();
+			controller.startInzienUrenView();
 		});
 
 		img_box.setOnMouseClicked(e -> {
