@@ -209,7 +209,9 @@ public class AccountInfoView  extends Scene{
             if (nWachtwoord.getText().equals(nHerhaalWachtwoord.getText())) {
                 controller.veranderGebruiker(nWachtwoord.getText());
                 controller.getHoofdMenuController().getGebruikerModel().setWachtwoord(nWachtwoord.getText());
-                controller.getHoofdMenuController().setAccountInfoView();
+                wachtwoord.setText(nWachtwoord.getText());
+                nWachtwoord.setText("");
+                nHerhaalWachtwoord.setText("");
             } else {
                 System.out.println("Wachtwoorden zijn niet het zelfde");
             }

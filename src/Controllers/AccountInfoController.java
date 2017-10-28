@@ -34,7 +34,6 @@ public class AccountInfoController {
     }
 
     public HoofdMenuController getHoofdMenuController() {
-        System.out.println(hoofdMenuController);
         return hoofdMenuController;
     }
 
@@ -43,7 +42,7 @@ public class AccountInfoController {
         if (getHoofdMenuController().getGebruikerModel().getTussenvoegsel() != null) {
             tussenVoegsel = getHoofdMenuController().getGebruikerModel().getTussenvoegsel();
         } else {
-            tussenVoegsel = " ";
+            tussenVoegsel = "";
         }
         achternaam = getHoofdMenuController().getGebruikerModel().getAchternaam();
         email = getHoofdMenuController().getGebruikerModel().getEmail();
