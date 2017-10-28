@@ -39,7 +39,7 @@ public class InzienUrenAdminView extends Scene {
     private final double PROJECTNAAMCOLUMNWIDTH = 100;
     private final double ONDERWERPNAAMCOLUMNWIDTH = 100;
     private final double COMMENTAARCOLUMNWIDTH = 350;
-    private final double GOEDGEKEURDCOLUMNWIDTH = 80 ;
+    private final double GOEDGEKEURDCOLUMNWIDTH = 80;
 
     private final double TABLEWIDTH = 1150;                 //Grootte van de tabel.
     private final int TABLEHEIGHT = 780;
