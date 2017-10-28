@@ -14,8 +14,6 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
-import javafx.scene.text.Font;
-import javafx.scene.text.FontWeight;
 
 
 public class AccountInfoView  extends Scene{
@@ -202,16 +200,14 @@ public class AccountInfoView  extends Scene{
     public void initAction() {
 
         img_box.setOnMouseClicked(e -> {
-            controller.getHoofdMenuController().setHoofdMenuView();
+            controller.getHoofdMenuController().startHoofdmenuView();
         });
 
         opslaan.setOnAction(e -> {
             if (nWachtwoord.getText().equals(nHerhaalWachtwoord.getText())) {
                 controller.veranderGebruiker(nWachtwoord.getText());
                 controller.getHoofdMenuController().getGebruikerModel().setWachtwoord(nWachtwoord.getText());
-                wachtwoord.setText(nWachtwoord.getText());
-                nWachtwoord.setText("");
-                nHerhaalWachtwoord.setText("");
+                controller.getHoofdMenuController().startAccountInfoView();
             } else {
                 System.out.println("Wachtwoorden zijn niet het zelfde");
             }

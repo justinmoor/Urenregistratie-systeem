@@ -111,23 +111,23 @@ public class AdministratieHoofdmenuView extends Scene {
 	
 	private void InitAction(){
 		uren.setOnAction(e -> {
-			controller.setIvullenUrenView();
+			controller.startInvullenUrenView();
 		});
 		week.setOnAction(e -> {
 			controller.startInzienUrenAdminController();
 		});
 		account.setOnAction(e -> {
-			controller.setAccountToevoegenView();
+			controller.startAccountToevoegenView();
 		});
 		personeel.setOnAction(e -> {
-			controller.setGebruikerInfoView();
+			controller.startGebruikerInfoView();
 
 		});
 
 		gebruiker.setId("gebruiker");
 
 		gebruiker.setOnMouseClicked( e -> {
-			controller.setAccountInfoView();
+			controller.startAccountInfoView();
 		});
 
 		img_box.setOnMouseClicked(e -> {

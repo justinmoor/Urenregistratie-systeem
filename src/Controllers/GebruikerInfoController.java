@@ -33,6 +33,7 @@ public class GebruikerInfoController {
 
         stage.setScene(gebruikerInfoView);
         stage.show();
+        gebruikerInfoView.setGebruiker();
     }
 
     public ArrayList getGebruikers(){

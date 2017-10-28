@@ -31,6 +31,7 @@ public class InvullenUrenController {
         this.db = db;
         this.hoofdmenucontroller = hoofdmenucontroller;
         dao = new IngevuldeTijdDAO(db);
+        invullenurenView.setGebruiker();
     }
 
     public ArrayList<KlantModel> getKlanten() throws SQLException {
