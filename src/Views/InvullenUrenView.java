@@ -13,10 +13,13 @@ package Views;
         import javafx.scene.control.Label;
         import javafx.scene.control.TextArea;
         import javafx.scene.control.TextField;
-        import javafx.scene.layout.BorderPane;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.BorderPane;
         import javafx.scene.layout.GridPane;
         import javafx.scene.layout.HBox;
-        import javafx.scene.paint.Color;
+import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
         import javafx.scene.text.Font;
         import javafx.scene.text.FontWeight;
 
@@ -26,52 +29,80 @@ package Views;
         import java.util.Optional;
 
 public class InvullenUrenView extends Scene {
-
-    private GridPane gridpane;
-    private BorderPane pane;
-    private InvullenUrenController controller;
     private HoofdMenuController hoofdMenuController;
-    private HBox box;
-
-
-
-    private Label urenRegistrerenLabel;
-    private Label persoon;
-    private Label klantLabel;
-    private Label projectLabel;
-    private Label onderwerpLabel;
-    private Label commentaarLabel;
-    private Label BeginLabel;
-    private Label BdatumLabel;
-    private Label BtijdLabel;
-    private Label EindLabel;
-    private Label EDatumLabel;
-    private Label ETijdLabel;
-
-    private AutoCompletionTextfieldController klantField;
-    private AutoCompletionTextfieldController projectField;
-    private AutoCompletionTextfieldController onderwerpField;
-    private TextArea commentaarField;
-    private DatePicker BeginDatum;
-    private TextField BeginTijd;
-    private DatePicker EindDatum;
-    private TextField EindTijd;
-
-    private Button Opslaan;
-    private Button home;
+    
+    private BorderPane pane;
+    
+    private BorderPane navigatie;
+    
+    private VBox img_box;
+    private Image img;
+    private ImageView terug;
+    
+    private Label home;
+    private Label gebruiker;
+    
+    private Image img2;
+    private ImageView lijntje;
+    
+    private HBox groep;
+    
+    private VBox linkergroep;
+    		private HBox klant;
+    		private Label lbl1;
+    		private AutoCompletionTextfieldController klantField;
+    		
+    		private HBox project;
+    		private Label lbl2;
+    		private AutoCompletionTextfieldController projectField;
+    		
+    		private HBox onderwerp;
+    		private Label lbl3;
+    		private AutoCompletionTextfieldController onderwerpField;
+    
+    		private HBox commentaar;
+    		private Label lbl4;
+    		private TextArea commentaarField;
+    		
+    	private VBox rechtergroep;
+    		private Label begin;
+    		
+    		private HBox datum1;
+    		private Label lbl5;
+    		private DatePicker BeginDatum;
+    		
+    		private HBox tijd1;
+    		private Label lbl6;
+    		private TextField BeginTijd;
+    		
+    		private Image img3;
+    		private ImageView midlijnjte;
+    		
+    		private Label eind;
+    		
+    		private HBox datum2;
+    		private Label lbl7;
+    		private DatePicker EindDatum;
+    		
+    		private HBox tijd2;
+    		private Label lbl8;
+    		private TextField EindTijd;
+    		
+    		private Button bevestig;
 
     private ArrayList<KlantModel> klanten;
     private ArrayList<ProjectModel> projecten;
     private ArrayList<OnderwerpModel> onderwerpen;
 
-    public InvullenUrenView(InvullenUrenController controller) {
+	private InvullenUrenController controller;
 
-        super(new BorderPane(), 600, 500);
+    public InvullenUrenView(InvullenUrenController controller) {
+        super(new BorderPane(), 600, 400);
         pane = (BorderPane) this.getRoot();
         this.controller = controller;
         this.hoofdMenuController = controller.getHoofdMenuController();
         try {
-            initgui();
+            InitGui();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -80,111 +111,133 @@ public class InvullenUrenView extends Scene {
     }
 
 
-    private void initgui() throws SQLException {
-
-        gridpane = new GridPane();
-        gridpane.setAlignment(Pos.CENTER);
-        gridpane.setHgap(10);
-        gridpane.setVgap(15);
-        gridpane.setPadding(new Insets(10,10,10,30));
-        gridpane.setStyle("-fx-background-color: #f9f9f7");
-
-        pane.setCenter(gridpane);
-
-        urenRegistrerenLabel = new Label("UrenRegistratie");
-        urenRegistrerenLabel.setFont(Font.font("SansSerif", FontWeight.BOLD, 30));
-        urenRegistrerenLabel.setTextFill(Color.GREY);
-        urenRegistrerenLabel.setAlignment(Pos.CENTER);
-
-        //  persoon = new Label(controller.getGebruiker());
-        //persoon.setTextFill(Color.GREY);
-
-        klantLabel = new Label("Klant");
-        klantLabel.setTextFill(Color.GREY);
-        gridpane.add(klantLabel, 0,2);
-
-        projectLabel = new Label("Project");
-        projectLabel.setTextFill(Color.GREY);
-        gridpane.add(projectLabel, 0,3);
-
-        onderwerpLabel = new Label("Onderwerp");
-        onderwerpLabel.setTextFill(Color.GREY);
-        gridpane.add(onderwerpLabel, 0, 4);
-
-        commentaarLabel = new Label("Commentaar");
-        commentaarLabel.setTextFill(Color.GREY);
-        gridpane.add(commentaarLabel, 0, 5);
-
-        klantField = new AutoCompletionTextfieldController();
-        gridpane.add(klantField, 1,2);
-        klantField.setPrefColumnCount(1);
-
-        projectField = new AutoCompletionTextfieldController();
-        gridpane.add(projectField, 1, 3);
-
-        onderwerpField = new AutoCompletionTextfieldController();
-        gridpane.add(onderwerpField, 1, 4);
-
-        commentaarField = new TextArea();
-        gridpane.add(commentaarField, 1, 5);
-        commentaarField.setPrefColumnCount(5);
-        commentaarField.setPrefRowCount(2);
-
-        BeginLabel = new Label("BEGIN");
-        BeginLabel.setTextFill(Color.GREY);
-        BeginLabel.setPadding(new Insets(10,10,10,30));
-        gridpane.add(BeginLabel, 2, 1, 2, 1);
-
-        BdatumLabel= new Label("Datum");
-        BdatumLabel.setTextFill(Color.GREY);
-        gridpane.add(BdatumLabel, 2, 2);
-
-        BtijdLabel = new Label("Tijd");
-        BtijdLabel.setTextFill(Color.GREY);
-        gridpane.add(BtijdLabel, 2, 3);
-
-        EindLabel = new Label("EIND");
-        EindLabel.setTextFill(Color.GREY);
-        EindLabel.setPadding(new Insets(10,10,10,30));
-        gridpane.add(EindLabel, 2,4,2,1);
-
-        EDatumLabel = new Label("Datum");
-        EDatumLabel.setTextFill(Color.GREY);
-        gridpane.add(EDatumLabel, 2,5);
-
-        ETijdLabel = new Label("Tijd");
-        ETijdLabel.setTextFill(Color.GREY);
-        gridpane.add(ETijdLabel, 2, 6);
-
-        BeginDatum = new DatePicker();
-        BeginDatum.setValue(LocalDate.now());
-        gridpane.add(BeginDatum, 3, 2);
-
-        BeginTijd = new TextField();
-        gridpane.add(BeginTijd, 3, 3);
-
-        EindDatum = new DatePicker();
-        EindDatum.setValue(LocalDate.now());
-        gridpane.add(EindDatum, 3, 5);
-
-        EindTijd = new TextField();
-        gridpane.add(EindTijd, 3,6);
-
-        Opslaan = new Button("Bevestigen");
-        gridpane.add(Opslaan, 2,7, 2, 1);
-
-        home = new Button("home");
-        home.setAlignment(Pos.CENTER_LEFT );
-        box = new HBox(100);
-        box.getChildren().addAll(home, urenRegistrerenLabel);
-        pane.setTop(box);
-
+    private void InitGui() throws SQLException {
+		pane.setStyle("-fx-background-image: url('/assets/background.png')");
+		
+		navigatie = new BorderPane();
+		
+		img_box = new VBox();
+		img = new Image("/assets/back.png");
+		terug = new ImageView(img);
+		img_box.getChildren().add(terug);
+		img_box.setPadding(new Insets(15, 83, 15, 14));
+		
+		home = new Label("UREN REGISTREREN");
+		home.setId("home");
+		home.setPadding(new Insets(15));
+		
+		gebruiker = new Label("Peter van Vliet");
+		gebruiker.setPadding(new Insets(15, 14, 15, 15));
+		
+		img2 = new Image("/assets/lijntje.png");
+		lijntje = new ImageView(img2);
+		lijntje.setFitWidth(600);
+		
+		navigatie.setLeft(img_box);
+		navigatie.setCenter(home);
+		navigatie.setRight(gebruiker);
+		navigatie.setBottom(lijntje);
+		
+		groep = new HBox();
+		
+		linkergroep = new VBox(12);
+		linkergroep.setPadding(new Insets(40, 0, 0, 35));
+		
+		klant = new HBox();
+		lbl1 = new Label("Klant:\t\t");
+		lbl1.setPadding(new Insets(6, 2, 0, 0));
+		klantField = new AutoCompletionTextfieldController();
+		klantField.setId("text-field-big");
+		klant.getChildren().addAll(lbl1, klantField);
+		
+		project = new HBox();
+		lbl2 = new Label("Project:\t\t");
+		lbl2.setPadding(new Insets(6, 2, 0, 0));
+		projectField = new AutoCompletionTextfieldController();
+		projectField.setId("text-field-big");
+		project.getChildren().addAll(lbl2, projectField);
+		
+		onderwerp = new HBox();
+		lbl3 = new Label("Onderwerp:\t");
+		lbl3.setPadding(new Insets(6, 2, 0, 0));
+		onderwerpField = new AutoCompletionTextfieldController();
+		onderwerpField.setId("text-field-big");
+		onderwerp.getChildren().addAll(lbl3, onderwerpField);
+		
+		commentaar = new HBox();
+		lbl4 = new Label("Commentaar:\t");
+		lbl4.setPadding(new Insets(6, 2, 0, 0));
+		commentaarField = new TextArea();
+		commentaar.getChildren().addAll(lbl4, commentaarField);
+		
+		linkergroep.getChildren().addAll(klant, project, onderwerp, commentaar);
+		
+		rechtergroep = new VBox(12);
+		rechtergroep.setPadding(new Insets(0, 0, 0, 35));
+		
+		begin = new Label("BEGIN");
+		begin.setPadding(new Insets(0, 0, 0, 106));
+		begin.setId("label-bold");
+		
+		datum1 = new HBox();
+		lbl5 = new Label("Datum:\t");
+		lbl5.setPadding(new Insets(6, 2, 0, 0));
+		BeginDatum = new DatePicker();
+		BeginDatum.setId("text-field-small");
+		BeginDatum.setPrefWidth(136);
+		datum1.getChildren().addAll(lbl5, BeginDatum);
+		
+		tijd1 = new HBox();
+		lbl6 = new Label("Tijd:\t\t");
+		lbl6.setPadding(new Insets(6, 2, 0, 0));
+		BeginTijd = new TextField();
+		BeginTijd.setId("text-field-small");
+		BeginTijd.setPrefWidth(136);
+		tijd1.getChildren().addAll(lbl6, BeginTijd);
+		
+		img3 = new Image("/assets/lijntje.png");
+		midlijnjte = new ImageView(img3);
+		midlijnjte.setFitWidth(196);
+		
+		eind = new Label("EIND");
+		eind.setPadding(new Insets(0, 0, 0, 112));
+		eind.setId("label-bold");
+		
+		datum2 = new HBox();
+		lbl7 = new Label("Datum:\t");
+		lbl7.setPadding(new Insets(6, 2, 0, 0));
+		EindDatum = new DatePicker();
+		EindDatum.setId("text-field-small");
+		EindDatum.setPrefWidth(136);
+		datum2.getChildren().addAll(lbl7, EindDatum);
+		
+		tijd2 = new HBox();
+		lbl8 = new Label("Tijd:\t\t");
+		lbl8.setPadding(new Insets(6, 2, 0, 0));
+		EindTijd = new TextField();
+		EindTijd.setId("text-field-small");
+		EindTijd.setPrefWidth(136);
+		tijd2.getChildren().addAll(lbl8, EindTijd);
+		
+		bevestig = new Button("BEVESTIG");
+		bevestig.setId("bevestig");
+		
+		rechtergroep.getChildren().addAll(begin, datum1, tijd1, midlijnjte, eind, datum2, tijd2, bevestig);
+		rechtergroep.setPadding(new Insets(12, 0, 0, 40));
+		
+		groep.getChildren().addAll(linkergroep, rechtergroep);
+		
+		pane.setTop(navigatie);
+		pane.setCenter(groep);
+    
+		getStylesheets().add("Views/styles.css");
     }
 
     private void InitAction(){
-
-
-
+	    	terug.setOnMouseClicked(e -> {
+	    	 	controller.getHoofdMenuController().startHoofdmenuView();
+	    });
+    	
         klantField.setOnKeyPressed(e -> {
             klanten = null;
             try {
@@ -220,7 +273,7 @@ public class InvullenUrenView extends Scene {
             }
         });
 
-        Opslaan.setOnAction(e -> {
+        bevestig.setOnAction(e -> {
             if(klantField.getLength() > 1 && projectField.getLength() > 1 && onderwerpField.getLength() > 1 && !BeginDatum.getValue().equals("") && BeginTijd.getLength() > 1 && !EindDatum.getValue().equals("") && EindTijd.getLength() > 1) {
 
                 boolean bestaandeKlant = false;
@@ -297,11 +350,6 @@ public class InvullenUrenView extends Scene {
             }
 
         });
-
-        home.setOnAction(e -> {
-        	 	controller.getHoofdMenuController().startHoofdmenuView();
-        });
-
 
     }
 
