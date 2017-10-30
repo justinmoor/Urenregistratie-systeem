@@ -145,11 +145,11 @@ public class IngevuldeTijdDAO {
         ResultSet results;
         results = null;
         try {
-            PreparedStatement getResults = db.getConnection().prepareStatement("SELECT *" +
+            PreparedStatement getResults = db.getConnection().prepareStatement("SELECT * " +
                     "FROM geregistreerdetijd " +
                     //"JOIN personeel " +
                     //"ON geregistreerdetijd.persoonID = personeel.persoonID " +
-                    "WHERE persoonID = ? " +
+                    "WHERE (persoonID = ? " +
                     "AND begindatum >=? " +
                     "AND einddatum<=? " +
                     "AND (klant_naam = ? " +
