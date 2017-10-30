@@ -239,7 +239,7 @@ public class InzienUrenAdminView extends Scene {
          * Bepaal wat de knoppen doen.
          */
         verversKnop.setOnAction(a ->{
-            buttonPressed();
+            verversButtonPressed();
         });
         exporteerKnop.setOnAction(a ->{
             try {
@@ -334,9 +334,9 @@ public class InzienUrenAdminView extends Scene {
     /**
      * Wordt uitgevoerd wanneer de "Ververs" knop wordt ingedrukt.
      */
-    public void buttonPressed(){
+    public void verversButtonPressed(){
         convertDates();
-        controller.buttonPressed();
+        controller.verversButtonPressed();
     }
 
 

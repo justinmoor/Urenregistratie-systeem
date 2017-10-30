@@ -7,12 +7,10 @@ import Views.InzienUrenAdminView;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.control.Alert;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileWriter;
-import java.io.Writer;
+import java.io.*;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -33,6 +31,8 @@ public class InzienUrenAdminController {
     ArrayList<IngevuldeTijdModel> resultatenlijst;
     HoofdMenuController hoofdMenuController;
 
+    private final String COMMA = ";";
+
     /**
      * Is de klasse die de InzienUrenAdminView onderhoudt.
      * Krijgt DatabaseConnectie mee, zodat deze kan worden doorgegeven aan de DAO.
@@ -47,28 +47,37 @@ public class InzienUrenAdminController {
         stage.setScene(view);
         view.setPersoonLabel(hoofdMenuController.getGebruikerModel().getVolledigeNaam());
     }
-    
+
+    /**
+     * Maakt van de dataset die ook aanwezig is in de view een CSV file.
+     * @throws Exception
+     */
     public void writeExcel() throws Exception {
-        Writer writer = null;
-        try {
-            File file = new File("C:\\Person.csv.");
-            writer = new BufferedWriter(new FileWriter(file));
 
-        } catch (Exception ex) {
-            ex.printStackTrace();
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setInitialFileName(view.getBegindatum()+"-"+view.getEinddatum()+"gewerkte_uren.csv");
+        File saveFile = fileChooser.showSaveDialog(new Stage());
+        PrintWriter printWriter = new PrintWriter(saveFile);
+        String goedgekeurd = "";
+
+        String firstString = "uur ID"+COMMA+"Begindatum"+COMMA+"Einddatum"+ COMMA+ "Begintijd"+COMMA+"Eindtijd"+ COMMA+ "Commentaar"+ COMMA+ "Goedgekeurd"+ COMMA+ "Personeelslid"+ COMMA+ "Klant"+ COMMA+ "Project"+ COMMA+ "Onderwerp"+"\n";
+        printWriter.write(firstString);
+        for (IngevuldeTijdModel model :resultatenlijst) {
+            if (model.isGoedgekeurd()){
+                goedgekeurd = "ja";
+            } else{
+                goedgekeurd = "nee";
+            }
+            printWriter.write(model.getUurId()+COMMA+model.getBeginDatum()+COMMA+model.getEindDatum()+COMMA+model.getBeginTijd()+COMMA+model.getEindTijd()+ COMMA+ model.getCommentaar()+ COMMA+ goedgekeurd +COMMA+model.getPersoonNaam()+COMMA+ model.getKlantNaam()+COMMA+model.getProjectNaam()+COMMA+model.getOnderwerpNaam()+ "\n");
         }
-        finally {
-
-            writer.flush();
-             writer.close();
-        } 
+        printWriter.close();
     }
 
     /**
      * Wordt uitgevoerd wanneer de 'Ververs' knop wordt ingedrukt.
      * Krijgt een ResultSet van de DAO, maakt IngevuldeTijdModels van de resultset en voert deze door naar de view.
      */
-    public void buttonPressed(){
+    public void verversButtonPressed(){
         results = dao.getAdminOverzicht(view.getBegindatum(), view.getEinddatum(), view.getKlantnaam(), view.getProjectnaam(), view.getOnderwerpnaam());
         makeModelsFromResultSet(results);
 
