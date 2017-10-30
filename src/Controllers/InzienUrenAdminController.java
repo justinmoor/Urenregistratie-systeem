@@ -8,6 +8,11 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.control.Alert;
 import javafx.stage.Stage;
+
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.Writer;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -42,13 +47,29 @@ public class InzienUrenAdminController {
         stage.setScene(view);
         view.setPersoonLabel(hoofdMenuController.getGebruikerModel().getVolledigeNaam());
     }
+    
+    public void writeExcel() throws Exception {
+        Writer writer = null;
+        try {
+            File file = new File("C:\\Person.csv.");
+            writer = new BufferedWriter(new FileWriter(file));
+
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        finally {
+
+            writer.flush();
+             writer.close();
+        } 
+    }
 
     /**
      * Wordt uitgevoerd wanneer de 'Ververs' knop wordt ingedrukt.
      * Krijgt een ResultSet van de DAO, maakt IngevuldeTijdModels van de resultset en voert deze door naar de view.
      */
     public void buttonPressed(){
-        results = dao.getAdminOverzicht(view.getBegindatum(), view.getEinddatum(), view.getKlantnaam(), view.getProjectnaam());
+        results = dao.getAdminOverzicht(view.getBegindatum(), view.getEinddatum(), view.getKlantnaam(), view.getProjectnaam(), view.getOnderwerpnaam());
         makeModelsFromResultSet(results);
 
         if(resultatenlijst.isEmpty()){

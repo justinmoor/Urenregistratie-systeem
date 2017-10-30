@@ -68,11 +68,13 @@ public class InzienUrenView extends Scene {
     private Label begindatumLabel;
     private Label klantLabel;
     private Label projectLabel;
+    private Label onderwerpLabel;
     private VBox klantBox;
     private VBox projectBox;
+    private VBox onderwerpBox;
     private TextField klantNaamInput;
     private TextField projectNaamInput;
-
+    private TextField onderwerpInputBox;
     /**
      * Maak de tabel en alle bijbehorende kolommen.
      */
@@ -117,6 +119,10 @@ public class InzienUrenView extends Scene {
         projectNaamInput = new TextField();
         projectBox = new VBox(projectLabel, projectNaamInput);
 
+        onderwerpLabel = new Label("Onderwerpnaam: ");
+        onderwerpInputBox = new TextField();
+        onderwerpBox = new VBox(onderwerpLabel, onderwerpInputBox);
+
         begindatumLabel = new Label("Begindatum: ");
         begindatumPicker = new DatePicker();
 
@@ -130,7 +136,7 @@ public class InzienUrenView extends Scene {
 
         verversKnop = new Button(KNOPSTRING);
 
-        leftFilterPanel = new VBox(begindatumVbox, einddatumVbox, klantBox, projectBox, verversKnop);
+        leftFilterPanel = new VBox(begindatumVbox, einddatumVbox, klantBox, projectBox,onderwerpBox, verversKnop);
 
 
         /**
@@ -330,4 +336,8 @@ public class InzienUrenView extends Scene {
         persoonLabel.setText(volledigeNaam);
     }
 
+    public String getOnderwerpNaam(){
+        System.out.println(onderwerpInputBox.getText());
+        return onderwerpInputBox.getText();
+    }
 }

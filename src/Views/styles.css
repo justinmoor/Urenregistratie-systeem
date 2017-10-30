@@ -150,12 +150,6 @@
     -fx-min-width: 324;
 }
 
-#opslaan:hover {
-    -fx-background-color: #f9f9f7;
-	-fx-border-color: #60c8db;
-	-fx-text-fill: #60c8db;
-}
-
 #knoppen {
 	-fx-background-color: #f9f9f7;
 	-fx-border-color: #c7c7c5;
