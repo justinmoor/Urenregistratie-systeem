@@ -40,7 +40,7 @@ public class InzienUrenAdminView extends Scene {
     private final double GOEDGEKEURDCOLUMNWIDTH = 80;
 
     private final double TABLEWIDTH = 1150;                 //Grootte van de tabel.
-    private final int TABLEHEIGHT = 780;
+    private final int TABLEHEIGHT = 700;
 
     /**
      * init alle top field onderdelen

@@ -61,8 +61,8 @@ public class AdministratieHoofdmenuView extends Scene {
 		navigatie = new BorderPane();
 		
 		left_pane = new StackPane();
-		left_pane.setMinWidth(80);
-		left_pane.setPadding(new Insets(15, 0, 15, 15));
+		left_pane.setMinWidth(140);
+		left_pane.setPadding(new Insets(15, 0, 15, 10));
 		img_box = new VBox();
 		img = new Image("/Assets/back.png");
 		terug = new ImageView(img);
@@ -70,15 +70,14 @@ public class AdministratieHoofdmenuView extends Scene {
 		left_pane.getChildren().add(img_box);
 		
 		mid_pane = new StackPane();
-		mid_pane.setPrefWidth(440);
+		mid_pane.setPrefWidth(320);
 		home = new Label("HOME");
 		home.setId("home");
 		mid_pane.getChildren().add(home);
 		
 		right_pane = new StackPane();
-		right_pane.setPrefWidth(80);
+		right_pane.setPrefWidth(140);
 		gebruiker = new Label(controller.getGebruikerModel().getVolledigeNaam());
-		gebruiker.setAlignment(Pos.CENTER_RIGHT);
 		right_pane.getChildren().add(gebruiker);
 		
 		img2 = new Image("/Assets/lijntje.png");
