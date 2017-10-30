@@ -90,10 +90,8 @@ public class GebruikerInfoView extends Scene {
 		
         table = new TableView();
         table.setEditable(false);
-        table.setPadding(new Insets(10));
         
         table_box.getChildren().add(table);
-        table_box.setPadding(new Insets(10));
 
         naam = new TableColumn("Voornaam");
         tussenvoegsel = new TableColumn("Tussenvoegsel");

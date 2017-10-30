@@ -227,12 +227,12 @@ public class InzienUrenAdminView extends Scene {
          * Bepaal de breedte van alle knoppen in het linkerpanel.
          */
 
-        verversKnop.setPrefWidth(leftFilterPanel.getPrefWidth());
-        exporteerKnop.setPrefWidth(leftFilterPanel.getPrefWidth());
-        klantNaamInput.setPrefWidth(leftFilterPanel.getPrefWidth());
-        projectNaamInput.setPrefWidth(leftFilterPanel.getPrefWidth());
-        einddatumPicker.setPrefWidth(leftFilterPanel.getPrefWidth());
-        begindatumPicker.setPrefWidth(leftFilterPanel.getPrefWidth());
+//        verversKnop.setPrefWidth(leftFilterPanel.getPrefWidth());
+//        exporteerKnop.setPrefWidth(leftFilterPanel.getPrefWidth());
+//        klantNaamInput.setPrefWidth(leftFilterPanel.getPrefWidth());
+//        projectNaamInput.setPrefWidth(leftFilterPanel.getPrefWidth());
+//        einddatumPicker.setPrefWidth(leftFilterPanel.getPrefWidth());
+//        begindatumPicker.setPrefWidth(leftFilterPanel.getPrefWidth());
 
 
         /**
@@ -240,6 +240,14 @@ public class InzienUrenAdminView extends Scene {
          */
         verversKnop.setOnAction(a ->{
             buttonPressed();
+        });
+        exporteerKnop.setOnAction(a ->{
+            try {
+				controller.writeExcel();
+			} catch (Exception e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
         });
 
         /**
