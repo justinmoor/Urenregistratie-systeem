@@ -82,14 +82,14 @@ public class AccountToevoegenView extends Scene {
 		img = new Image("/Assets/back.png");
 		terug = new ImageView(img);
 		img_box.getChildren().add(terug);
-		img_box.setPadding(new Insets(15, 83, 15, 14));
+		img_box.setPadding(new Insets(15, 23, 15, 14));
 		
 		home = new Label("ACCOUNT TOEVOEGEN");
 		home.setId("home");
 		home.setPadding(new Insets(15, 0, 15, 15));
 		
 		gebruiker = new Label();
-		gebruiker.setPadding(new Insets(15, 14, 15, 15));
+		gebruiker.setPadding(new Insets(15, 26, 15, 0));
 		
 		img2 = new Image("/Assets/lijntje.png");
 		lijntje = new ImageView(img2);

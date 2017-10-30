@@ -10,6 +10,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 
 public class AdministratieHoofdmenuView extends Scene {
@@ -17,11 +18,15 @@ public class AdministratieHoofdmenuView extends Scene {
 	    
 	    private BorderPane navigatie;
 	    
+	    private StackPane left_pane;
 	    private VBox img_box;
 	    private Image img;
 	    private ImageView terug;
 	    
+	    private StackPane mid_pane;
 	    private Label home;
+	    
+	    private StackPane right_pane;
 	    private Label gebruiker;
 	    
 	    private Image img2;
@@ -59,14 +64,17 @@ public class AdministratieHoofdmenuView extends Scene {
 		img = new Image("/Assets/back.png");
 		terug = new ImageView(img);
 		img_box.getChildren().add(terug);
-		img_box.setPadding(new Insets(15, 83, 15, 14));
+		img_box.setPadding(new Insets(15, 0, 15, 15));
+		img_box.setPrefWidth(133);
 		
 		home = new Label("HOME");
 		home.setId("home");
-		home.setPadding(new Insets(15));
+		home.setPadding(new Insets(15, 0, 15, 0));
+		home.setPrefWidth(133);
 		
 		gebruiker = new Label(controller.getGebruikerModel().getVolledigeNaam());
-		gebruiker.setPadding(new Insets(15, 14, 15, 15));
+		gebruiker.setPadding(new Insets(15, 15, 15, 0));
+		gebruiker.setPrefWidth(133);
 		
 		img2 = new Image("/Assets/lijntje.png");
 		lijntje = new ImageView(img2);

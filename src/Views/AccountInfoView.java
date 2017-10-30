@@ -151,7 +151,7 @@ public class AccountInfoView  extends Scene{
         emailBox = new HBox();
         emailBox.getChildren().addAll(emailLabel, email);
 
-        wachtwoordLabel = new Label("Huidige Wachtwoord: \t\t");
+        wachtwoordLabel = new Label("Huidig wachtwoord: \t\t");
         wachtwoordLabel.setTextFill(Color.GREY);
 
         wachtwoord = new Label(controller.getWachtwoord());
@@ -165,7 +165,8 @@ public class AccountInfoView  extends Scene{
         vbox_lijntje = new ImageView(img4);
         vbox_lijntje.setFitWidth(324);
 
-        nWachtwoordLabel = new Label("Nieuw Wachtwoord:\t\t");
+        nWachtwoordLabel = new Label("Nieuw wachtwoord:\t\t");
+        nWachtwoordLabel.setPadding(new Insets(6, 0, 0, 0));
         nWachtwoordLabel.setTextFill(Color.GREY);
 
         nWachtwoord = new PasswordField();
@@ -173,17 +174,19 @@ public class AccountInfoView  extends Scene{
         nWachtwoordBox = new HBox(nWachtwoordLabel, nWachtwoord);
 
         nHerhaalWachtwoordLabel = new Label("Herhaal wachtwoord: \t\t");
+        nHerhaalWachtwoordLabel.setPadding(new Insets(6, 0, 0, 0));
         nHerhaalWachtwoordLabel.setTextFill(Color.GREY);
 
         nHerhaalWachtwoord = new PasswordField();
 
         nHerhaalWachtwoordBox = new HBox(nHerhaalWachtwoordLabel, nHerhaalWachtwoord);
 
-        opslaan = new Button("Opslaan");
+        opslaan = new Button("OPSLAAN");
         opslaan.setId("opslaan");
 
         gegevensOnderElkaarBox = new VBox(12);
         gegevensOnderElkaarBox.getChildren().addAll(voornaamBox, tussenvoegselBox, achternaamBox, emailBox, wachtwoordBox, vbox_lijntje, nWachtwoordBox, nHerhaalWachtwoordBox, opslaan);
+        gegevensOnderElkaarBox.setPadding(new Insets(0, 0, 20, 0));
 
         gridpane.add(gegevensOnderElkaarBox, 1, 1);
 

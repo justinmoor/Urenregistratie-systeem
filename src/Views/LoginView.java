@@ -79,6 +79,7 @@ public class LoginView extends Scene {
 		wachtwoord.getChildren().addAll(lbl2, tf2);
 		
 		login = new Button("LOG IN");
+		login.setId("login");
 		
 		groep.getChildren().addAll(titel, lijntje, email, wachtwoord, login);
 		
