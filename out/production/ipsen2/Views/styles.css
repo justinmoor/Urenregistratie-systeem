@@ -15,6 +15,13 @@
 	-fx-text-fill: #6b757d;
 }
 
+#label-bold {
+	-fx-font-family: "SansSerif";
+	-fx-font-size: 13px;
+	-fx-text-fill: #6b757d;
+	-fx-font-weight: bold;
+}
+
 #home {
 	-fx-font-family: "SansSerif";
 	-fx-font-size: 14px;
@@ -32,6 +39,37 @@
 	-fx-min-height: 30;
 }
 
+#text-field-big {
+	-fx-font-family: "SansSerif";
+	-fx-font-size: 12px;
+	-fx-text-fill: #6b757d;
+	-fx-background-color: #fcfcfc;
+	-fx-border-color: #c7c7c5;
+	-fx-min-width: 195;
+	-fx-min-height: 30;
+}
+
+#text-field-small {
+	-fx-font-family: "SansSerif";
+	-fx-font-size: 12px;
+	-fx-text-fill: #6b757d;
+	-fx-background-color: #fcfcfc;
+	-fx-border-color: #c7c7c5;
+	-fx-min-width: 135;
+	-fx-min-height: 30;
+}
+
+.date-picker {
+	-fx-font-family: "SansSerif";
+	-fx-font-size: 12px;
+	-fx-text-fill: #6b757d;
+	-fx-background-color: #fcfcfc;
+	-fx-border-color: #c7c7c5;
+	-fx-min-width: 135;
+	-fx-min-height: 30;
+}
+
+
 #email_text-field {
 	-fx-font-family: "SansSerif";
 	-fx-font-size: 12px;
@@ -40,6 +78,16 @@
 	-fx-border-color: #c7c7c5;
 	-fx-min-width: 180;
 	-fx-min-height: 30;
+}
+
+.text-area {
+	-fx-font-family: "SansSerif";
+	-fx-font-size: 12px;
+	-fx-text-fill: #6b757d;
+	-fx-background-color: #fcfcfc;
+	-fx-border-color: #c7c7c5;
+	-fx-max-width: 195;
+	-fx-max-height: 120;
 }
 
 .combo-box {
@@ -61,6 +109,20 @@
 }
 
 .button:hover {
+	-fx-background-color: #f9f9f7;
+	-fx-border-color: #60c8db;
+	-fx-text-fill: #60c8db;
+}
+
+#bevestig {
+	-fx-background-color: #f9f9f7;
+	-fx-border-color: #c7c7c5;
+	-fx-text-fill: #6b757d;
+	-fx-min-height: 37;
+	-fx-min-width: 198;
+}
+
+#bevestig:hover {
 	-fx-background-color: #f9f9f7;
 	-fx-border-color: #60c8db;
 	-fx-text-fill: #60c8db;
