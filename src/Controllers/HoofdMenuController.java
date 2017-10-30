@@ -49,7 +49,7 @@ public class HoofdMenuController {
     }
 
     public void startInvullenUrenView() {
-        new InvullenUrenController(stage, db, this);
+        new InvullenUrenController(stage, db, gebruikerModel, this);
     }
 
     public void startGebruikerInfoView(){

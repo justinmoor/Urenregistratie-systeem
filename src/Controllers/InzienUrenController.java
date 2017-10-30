@@ -52,6 +52,7 @@ public class InzienUrenController {
      * Krijgt een ResultSet van de DAO, maakt IngevuldeTijdModels van de resultset en voert deze door naar de view.
      */
     public void buttonPressed(){
+        System.out.println(gebruiker.getGebruikerID());
         results = dao.getPersoneelOverzicht(view.getBegindatum(), view.getEinddatum(), view.getKlantnaam(), view.getProjectnaam(), gebruiker.getGebruikerID(), view.getOnderwerpNaam());
         makeModelsFromResultSet(results);
 

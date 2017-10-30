@@ -18,6 +18,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
         import javafx.scene.layout.GridPane;
         import javafx.scene.layout.HBox;
+import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
         import javafx.scene.text.Font;
@@ -25,6 +26,8 @@ import javafx.scene.paint.Color;
 
         import java.sql.SQLException;
         import java.time.LocalDate;
+        import java.time.LocalTime;
+        import java.time.format.DateTimeFormatter;
         import java.util.ArrayList;
         import java.util.Optional;
 
@@ -35,11 +38,15 @@ public class InvullenUrenView extends Scene {
     
     private BorderPane navigatie;
     
+    private StackPane left_pane;
     private VBox img_box;
     private Image img;
     private ImageView terug;
     
+    private StackPane mid_pane;
     private Label home;
+    
+    private StackPane right_pane;
     private Label gebruiker;
     
     private Image img2;
@@ -73,7 +80,7 @@ public class InvullenUrenView extends Scene {
     		
     		private HBox tijd1;
     		private Label lbl6;
-    		private TextField BeginTijd;
+    		private Label BeginTijd;
     		
     		private Image img3;
     		private ImageView midlijnjte;
@@ -86,7 +93,7 @@ public class InvullenUrenView extends Scene {
     		
     		private HBox tijd2;
     		private Label lbl8;
-    		private TextField EindTijd;
+    		private Label EindTijd;
     		
     		private Button bevestig;
 
@@ -103,6 +110,7 @@ public class InvullenUrenView extends Scene {
         this.hoofdMenuController = controller.getHoofdMenuController();
         try {
             InitGui();
+            setTijd();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -112,30 +120,37 @@ public class InvullenUrenView extends Scene {
 
 
     private void InitGui() throws SQLException {
-		pane.setStyle("-fx-background-image: url('/Assets/background.png')");
+    		pane.setId("pane");
 		
 		navigatie = new BorderPane();
-		
+				
+		left_pane = new StackPane();
+		left_pane.setMinWidth(140);
+		left_pane.setPadding(new Insets(15, 0, 15, 15));
 		img_box = new VBox();
 		img = new Image("/Assets/back.png");
 		terug = new ImageView(img);
 		img_box.getChildren().add(terug);
-		img_box.setPadding(new Insets(15, 83, 15, 14));
+		left_pane.getChildren().add(img_box);
 		
+		mid_pane = new StackPane();
+		mid_pane.setPrefWidth(320);
 		home = new Label("UREN REGISTREREN");
 		home.setId("home");
-		home.setPadding(new Insets(15));
+		mid_pane.getChildren().add(home);
 		
-		gebruiker = new Label("Peter van Vliet");
-		gebruiker.setPadding(new Insets(15, 14, 15, 15));
+		right_pane = new StackPane();
+		right_pane.setPrefWidth(140);
+		gebruiker = new Label();
+		right_pane.getChildren().add(gebruiker);
 		
 		img2 = new Image("/Assets/lijntje.png");
 		lijntje = new ImageView(img2);
 		lijntje.setFitWidth(600);
 		
-		navigatie.setLeft(img_box);
-		navigatie.setCenter(home);
-		navigatie.setRight(gebruiker);
+		navigatie.setLeft(left_pane);
+		navigatie.setCenter(mid_pane);
+		navigatie.setRight(right_pane);
 		navigatie.setBottom(lijntje);
 		
 		groep = new HBox();
@@ -185,12 +200,13 @@ public class InvullenUrenView extends Scene {
 		BeginDatum = new DatePicker();
 		BeginDatum.setId("text-field-small");
 		BeginDatum.setPrefWidth(136);
+		BeginDatum.setValue(LocalDate.now());
 		datum1.getChildren().addAll(lbl5, BeginDatum);
 		
 		tijd1 = new HBox();
 		lbl6 = new Label("Tijd:\t\t");
 		lbl6.setPadding(new Insets(6, 2, 0, 0));
-		BeginTijd = new TextField();
+		BeginTijd = new Label(" ");
 		BeginTijd.setId("text-field-small");
 		BeginTijd.setPrefWidth(136);
 		tijd1.getChildren().addAll(lbl6, BeginTijd);
@@ -209,16 +225,17 @@ public class InvullenUrenView extends Scene {
 		EindDatum = new DatePicker();
 		EindDatum.setId("text-field-small");
 		EindDatum.setPrefWidth(136);
+        EindDatum.setValue(LocalDate.now());
 		datum2.getChildren().addAll(lbl7, EindDatum);
 		
 		tijd2 = new HBox();
 		lbl8 = new Label("Tijd:\t\t");
 		lbl8.setPadding(new Insets(6, 2, 0, 0));
-		EindTijd = new TextField();
+		EindTijd = new Label();
 		EindTijd.setId("text-field-small");
 		EindTijd.setPrefWidth(136);
 		tijd2.getChildren().addAll(lbl8, EindTijd);
-		
+
 		bevestig = new Button("BEVESTIG");
 		bevestig.setId("bevestig");
 		
@@ -274,7 +291,7 @@ public class InvullenUrenView extends Scene {
         });
 
         bevestig.setOnAction(e -> {
-            if(klantField.getLength() > 1 && projectField.getLength() > 1 && onderwerpField.getLength() > 1 && !BeginDatum.getValue().equals("") && BeginTijd.getLength() > 1 && !EindDatum.getValue().equals("") && EindTijd.getLength() > 1) {
+            if(klantField.getLength() > 1 && projectField.getLength() > 1 && onderwerpField.getLength() > 1 && !BeginDatum.getValue().equals("") && !BeginTijd.getText().equals("") && !EindDatum.getValue().equals("") && !EindTijd.getText().equals("")) {
 
                 boolean bestaandeKlant = false;
                 boolean bestaandProject = false;
@@ -367,9 +384,15 @@ public class InvullenUrenView extends Scene {
         commentaarField.setText("");
         BeginTijd.setText("");
         EindTijd.setText("");
+        setTijd();
     }
 
     public void setGebruiker() {
         gebruiker.setText(controller.getHoofdMenuController().getGebruikerModel().getVolledigeNaam());
+    }
+
+    public void setTijd() {
+        BeginTijd.setText("  " + LocalTime.now().format(DateTimeFormatter.ofPattern("hh:mm")));
+        EindTijd.setText("  " + LocalTime.now().format(DateTimeFormatter.ofPattern("hh:mm")));
     }
 }

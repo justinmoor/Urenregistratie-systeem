@@ -165,7 +165,7 @@ public class AccountInfoView  extends Scene{
         vbox_lijntje = new ImageView(img4);
         vbox_lijntje.setFitWidth(324);
 
-        nWachtwoordLabel = new Label("Nieuw wachtwoord:\t\t");
+        nWachtwoordLabel = new Label("Nieuw wachtwoord:\t\t\t");
         nWachtwoordLabel.setPadding(new Insets(6, 0, 0, 0));
         nWachtwoordLabel.setTextFill(Color.GREY);
 

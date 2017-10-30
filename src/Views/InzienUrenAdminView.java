@@ -1,5 +1,6 @@
 package Views;
 
+import Controllers.AutoCompletionTextfieldController;
 import Controllers.InzienUrenAdminController;
 import Models.IngevuldeTijdModel;
 import javafx.collections.ObservableList;
@@ -39,7 +40,7 @@ public class InzienUrenAdminView extends Scene {
     private final double GOEDGEKEURDCOLUMNWIDTH = 80;
 
     private final double TABLEWIDTH = 1150;                 //Grootte van de tabel.
-    private final int TABLEHEIGHT = 780;
+    private final int TABLEHEIGHT = 700;
 
     /**
      * init alle top field onderdelen
@@ -77,9 +78,9 @@ public class InzienUrenAdminView extends Scene {
     private VBox klantBox;
     private VBox projectBox;
     private VBox onderwerpBox;
-    private TextField klantNaamInput;
-    private TextField projectNaamInput;
-    private TextField onderwerpNaamInput;
+    private AutoCompletionTextfieldController klantNaamInput;
+    private AutoCompletionTextfieldController projectNaamInput;
+    private AutoCompletionTextfieldController onderwerpNaamInput;
 
     /**
      * Maak de tabel en alle bijbehorende kolommen.
@@ -125,17 +126,17 @@ public class InzienUrenAdminView extends Scene {
 
         klantLabel = new Label("Klantnaam: ");
         klantLabel.setPadding(new Insets(0, 0, 5, 0));
-        klantNaamInput = new TextField();
+        klantNaamInput = new AutoCompletionTextfieldController();
         klantBox = new VBox(klantLabel, klantNaamInput);
 
         projectLabel = new Label("Projectnaam: ");
         projectLabel.setPadding(new Insets(0, 0, 5, 0));
-        projectNaamInput = new TextField();
+        projectNaamInput = new AutoCompletionTextfieldController();
         projectBox = new VBox(projectLabel, projectNaamInput);
 
         onderwerpLabel = new Label("Onderwerpnaam: ");
         onderwerpLabel.setPadding(new Insets(0,0,5,0));
-        onderwerpNaamInput = new TextField();
+        onderwerpNaamInput = new AutoCompletionTextfieldController();
         onderwerpBox = new VBox(onderwerpLabel, onderwerpNaamInput);
 
         begindatumLabel = new Label("Begindatum: ");
@@ -250,6 +251,9 @@ public class InzienUrenAdminView extends Scene {
 			}
         });
 
+
+
+
         /**
          * Maakt de context menu voor wanneer er met de rechtermuisknop wordt gedrukt op een rij. Voegt de "Goedkeuren" optie er aan toe.
          */
@@ -329,6 +333,7 @@ public class InzienUrenAdminView extends Scene {
 
         getStylesheets().add("Views/styles.css");
 
+
     }
 
     /**
@@ -339,6 +344,18 @@ public class InzienUrenAdminView extends Scene {
         controller.verversButtonPressed();
     }
 
+    public void setKlanten(ArrayList<String> klanten) {
+        klantNaamInput.getEntries().addAll(klanten);
+    }
+
+    public void setProjecten(ArrayList<String> projecten) {
+        projectNaamInput.getEntries().addAll(projecten);
+
+    }
+
+    public void setOnderwerpen(ArrayList<String> onderwerpen) {
+        onderwerpNaamInput.getEntries().addAll(onderwerpen);
+    }
 
 
     /**
