@@ -142,13 +142,10 @@ public class IngevuldeTijdDAO {
      * @return
      */
     public ResultSet getPersoneelOverzicht(String begindatum, String einddatum, String klant, String project, int personeelsId, String onderwerp) {
-        ResultSet results;
-        results = null;
+        ResultSet results = null;
         try {
-            PreparedStatement getResults = db.getConnection().prepareStatement("SELECT *" +
+            PreparedStatement getResults = db.getConnection().prepareStatement("SELECT * " +
                     "FROM geregistreerdetijd " +
-                    //"JOIN personeel " +
-                    //"ON geregistreerdetijd.persoonID = personeel.persoonID " +
                     "WHERE persoonID = ? " +
                     "AND begindatum >=? " +
                     "AND einddatum<=? " +
@@ -156,19 +153,19 @@ public class IngevuldeTijdDAO {
                     "OR klant_naam LIKE ?) " +
                     "AND (project_naam = ? " +
                     "OR project_naam LIKE ?)" +
-                    "AND (onderwerp_naam = ?)" +
-                    "OR onderwerp_naam LIKE ?"
+                    "AND (onderwerp_naam = ?" +
+                    "OR onderwerp_naam LIKE ?)"
             );
 
+            getResults.setInt(1, personeelsId);
             getResults.setString(2, begindatum);
             getResults.setString(3, einddatum);
-            getResults.setInt(1, personeelsId);
             getResults.setString(4, klant);
             getResults.setString(5, klant+"%");
             getResults.setString(6, project);
             getResults.setString(7, project+"%");
             getResults.setString(8, onderwerp);
-            getResults.setString(9, onderwerp+ "%");
+            getResults.setString(9, onderwerp+"%");
 
             System.out.println(begindatum);
             System.out.println(einddatum);
