@@ -55,8 +55,25 @@
 	-fx-text-fill: #6b757d;
 	-fx-background-color: #fcfcfc;
 	-fx-border-color: #c7c7c5;
-	-fx-min-width: 135;
 	-fx-min-height: 30;
+}
+
+.table-view {
+	-fx-font-family: "SansSerif";
+	-fx-font-size: 12px;
+	-fx-text-fill: #6b757d;
+	-fx-background-color: #fcfcfc;
+	-fx-border-color: #c7c7c5;
+}
+
+#table-vieweru {
+	-fx-font-family: "SansSerif";
+	-fx-font-size: 12px;
+	-fx-text-fill: #6b757d;
+	-fx-background-color: #fcfcfc;
+	-fx-border-color: #c7c7c5;
+	-fx-min-width: 500px;
+	-fx-min-height: 400px;
 }
 
 .date-picker {
@@ -65,10 +82,26 @@
 	-fx-text-fill: #6b757d;
 	-fx-background-color: #fcfcfc;
 	-fx-border-color: #c7c7c5;
-	-fx-min-width: 135;
 	-fx-min-height: 30;
 }
 
+.date-picker .content {
+    -fx-background-color: transparent, #fcfcfc, transparent, #fcfcfc;
+}
+
+.date-picker:focused .content {
+    -fx-background-color: transparent, #fcfcfc, transparent, #fcfcfc;
+}
+
+.date-picker:focused {
+    -fx-highlight-fill: #7ecfff;
+}
+
+.date-picker .content {
+    -fx-padding: 10px;
+    -fx-text-fill: #6b757d;
+    -fx-highlight-fill: #7ecfff;
+}
 
 #email_text-field {
 	-fx-font-family: "SansSerif";
@@ -88,7 +121,28 @@
 	-fx-border-color: #c7c7c5;
 	-fx-max-width: 195;
 	-fx-max-height: 120;
+	-fx-focus-color: transparent;
 }
+
+.text-area .content {
+    -fx-background-color: transparent, #fcfcfc, transparent, #fcfcfc;
+}
+
+.text-area:focused .content {
+    -fx-background-color: transparent, #fcfcfc, transparent, #fcfcfc;
+}
+
+.text-area:focused {
+    -fx-highlight-fill: #7ecfff;
+}
+
+.text-area .content {
+    -fx-padding: 10px;
+    -fx-text-fill: #6b757d;
+    -fx-highlight-fill: #7ecfff;
+}
+
+
 
 .combo-box {
 	-fx-font-family: "SansSerif";
@@ -100,7 +154,7 @@
 	-fx-min-height: 30;
 }
 
-.button {
+#login {
 	-fx-background-color: #f9f9f7;
 	-fx-border-color: #c7c7c5;
 	-fx-text-fill: #6b757d;
@@ -108,7 +162,7 @@
 	-fx-min-width: 241;
 }
 
-.button:hover {
+#login:hover {
 	-fx-background-color: #f9f9f7;
 	-fx-border-color: #60c8db;
 	-fx-text-fill: #60c8db;
@@ -148,6 +202,12 @@
     -fx-text-fill: #6b757d;
     -fx-min-height: 40;
     -fx-min-width: 324;
+}
+
+#opslaan:hover {
+	-fx-background-color: #f9f9f7;
+	-fx-border-color: #60c8db;
+	-fx-text-fill: #60c8db;
 }
 
 #knoppen {
