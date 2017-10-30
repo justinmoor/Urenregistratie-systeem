@@ -169,6 +169,9 @@ public class InzienUrenAdminController {
         return hoofdMenuController;
     }
 
+    /**
+     * Vult de dictionary van de autocomplete in de view voor de klanteninput.
+     */
     private void vulKlantenEntries(){
         ArrayList<String> klanten = new ArrayList<>();
         try {
@@ -182,6 +185,10 @@ public class InzienUrenAdminController {
 
     }
 
+    /**
+     * Vult de dictionary van de autocomplete in de view voor de projecteninput.
+     * @param klantNaam
+     */
     public void vulProjectenEntries(String klantNaam){
         ArrayList<String> projecten = new ArrayList<>();
         try {
@@ -196,7 +203,11 @@ public class InzienUrenAdminController {
         view.setProjecten(projecten);
     }
 
-    public void vulOnderwerpenEntries(String klantnaam, String projectnaam){
+    /**
+     * Vult de dictionary van de autocomplete in de view voor de onderwerpinput.
+     * @param projectnaam
+     */
+    public void vulOnderwerpenEntries( String projectnaam){
         ArrayList<String> onderwerpen = new ArrayList<>();
 
         try {

@@ -255,6 +255,9 @@ public class InzienUrenAdminView extends Scene {
 			}
         });
 
+        /**
+         * ActionListener op de textfield van project. Op het moment dat deze is gefocussed haalt hiji de projecten uit de database en zet hij ze in de dictionary van de AutoComplete.
+         */
         projectNaamInput.focusedProperty().addListener(new ChangeListener<Boolean>()
         {
             @Override
@@ -270,6 +273,9 @@ public class InzienUrenAdminView extends Scene {
             }
         });
 
+        /**
+         * Actionlistener op de textfield van onderwerp. Op het moment dat deze is gefocussed haalt hij de onderwerpen uit de database en zet hij ze in de dictionary van de AutoComplete.
+         */
         onderwerpNaamInput.focusedProperty().addListener(new ChangeListener<Boolean>()
         {
             @Override
@@ -277,7 +283,7 @@ public class InzienUrenAdminView extends Scene {
             {
                 if (newPropertyValue)
                 {
-                    controller.vulOnderwerpenEntries(klantNaamInput.getText(),projectNaamInput.getText());
+                    controller.vulOnderwerpenEntries(projectNaamInput.getText());
                 }
                 else
                 {

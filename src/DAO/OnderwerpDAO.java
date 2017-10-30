@@ -8,12 +8,22 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+/**
+ * Is verantwoordelijk voor het halen van onderwerpen uit de database.
+ */
 public class OnderwerpDAO {
     DatabaseConnectie db;
 
     public OnderwerpDAO(DatabaseConnectie db){
         this.db = db;
     }
+
+    /**
+     * Haalt projecten uit de dataabse.
+     * @param project_naam
+     * @return
+     * @throws SQLException
+     */
     public ArrayList<OnderwerpModel> haalOnderwerpenOp(String project_naam) throws SQLException {
 
         ArrayList<OnderwerpModel> onderwerpen = null;

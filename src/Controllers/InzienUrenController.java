@@ -1,10 +1,11 @@
 package Controllers;
 
 import DAO.IngevuldeTijdDAO;
+import DAO.KlantDAO;
+import DAO.OnderwerpDAO;
+import DAO.ProjectDAO;
 import Database.DatabaseConnectie;
-import Models.GebruikerModel;
-import Models.IngevuldeTijdModel;
-import Views.InzienUrenAdminView;
+import Models.*;
 import Views.InzienUrenView;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -14,7 +15,6 @@ import javafx.stage.Stage;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.List;
 
 public class InzienUrenController {
     private final String ERRORMESSAGENORESULTS = "De zoekopdracht heeft geen resultaten opgeleverd";
@@ -25,7 +25,10 @@ public class InzienUrenController {
     Stage stage;
     DatabaseConnectie dbc;
     InzienUrenView view;
-    IngevuldeTijdDAO dao;
+    IngevuldeTijdDAO ingevuldeTijdDAO;
+    KlantDAO klantDAO;
+    ProjectDAO projectDAO;
+    OnderwerpDAO onderwerpDAO;
     ResultSet results;
     ArrayList<IngevuldeTijdModel> resultatenlijst;
     HoofdMenuController hoofdMenuController;
@@ -38,13 +41,17 @@ public class InzienUrenController {
      */
     public  InzienUrenController(Stage stage, DatabaseConnectie dbc, HoofdMenuController hoofdMenuController, GebruikerModel gebruiker){
         this.hoofdMenuController = hoofdMenuController;
-        dao = new IngevuldeTijdDAO(dbc);
+        ingevuldeTijdDAO = new IngevuldeTijdDAO(dbc);
+        this.klantDAO = new KlantDAO(dbc);
+        this.projectDAO = new ProjectDAO(dbc);
+        this.onderwerpDAO = new OnderwerpDAO(dbc);
         view = new InzienUrenView(this);
         stage = stage;
         stage.show();
         stage.setScene(view);
         view.setPersoonLabel(hoofdMenuController.getGebruikerModel().getVolledigeNaam());
         this.gebruiker = gebruiker;
+        vulKlantenEntries();
     }
 
     /**
@@ -53,7 +60,7 @@ public class InzienUrenController {
      */
     public void buttonPressed(){
         System.out.println(gebruiker.getGebruikerID());
-        results = dao.getPersoneelOverzicht(view.getBegindatum(), view.getEinddatum(), view.getKlantnaam(), view.getProjectnaam(), gebruiker.getGebruikerID(), view.getOnderwerpNaam());
+        results = ingevuldeTijdDAO.getPersoneelOverzicht(view.getBegindatum(), view.getEinddatum(), view.getKlantnaam(), view.getProjectnaam(), gebruiker.getGebruikerID(), view.getOnderwerpNaam());
         makeModelsFromResultSet(results);
 
         if(resultatenlijst.isEmpty()){
@@ -112,6 +119,55 @@ public class InzienUrenController {
     public HoofdMenuController getHoofdMenuController() {
         return hoofdMenuController;
     }
+    /**
+     * Vult de dictionary van de autocomplete in de view voor de klanteninput.
+     */
+    private void vulKlantenEntries(){
+        ArrayList<String> klanten = new ArrayList<>();
+        try {
+            for (KlantModel klant:klantDAO.haalKlantenOp()) {
+                klanten.add(klant.getNaam());
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        view.setKlanten(klanten);
 
+    }
+
+    /**
+     * Vult de dictionary van de autocomplete in de view voor de projecteninput.
+     * @param klantNaam
+     */
+    public void vulProjectenEntries(String klantNaam){
+        ArrayList<String> projecten = new ArrayList<>();
+        try {
+            for (ProjectModel project:projectDAO.haalProjectenOp(klantNaam)) {
+                System.out.println(project.getProject_naam());
+                projecten.add(project.getProject_naam());
+            }
+            projectDAO.haalProjectenOp(klantNaam);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        view.setProjecten(projecten);
+    }
+
+    /**
+     * Vult de dictionary van de autocomplete in de view voor de onderwerpinput.
+     * @param projectnaam
+     */
+    public void vulOnderwerpenEntries( String projectnaam){
+        ArrayList<String> onderwerpen = new ArrayList<>();
+
+        try {
+            for (OnderwerpModel onderwerp:onderwerpDAO.haalOnderwerpenOp(projectnaam)) {
+                onderwerpen.add(onderwerp.getOnderwerp_naam());
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        view.setOnderwerpen(onderwerpen);
+    }
 }
 

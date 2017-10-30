@@ -1,7 +1,10 @@
 package Views;
 
+import Controllers.AutoCompletionTextfieldController;
 import Controllers.InzienUrenController;
 import Models.IngevuldeTijdModel;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
@@ -13,6 +16,7 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 
 public class InzienUrenView extends Scene {
 
@@ -72,9 +76,9 @@ public class InzienUrenView extends Scene {
     private VBox klantBox;
     private VBox projectBox;
     private VBox onderwerpBox;
-    private TextField klantNaamInput;
-    private TextField projectNaamInput;
-    private TextField onderwerpInputBox;
+    private AutoCompletionTextfieldController klantNaamInput;
+    private AutoCompletionTextfieldController projectNaamInput;
+    private AutoCompletionTextfieldController onderwerpNaamInput;
     /**
      * Maak de tabel en alle bijbehorende kolommen.
      */
@@ -112,16 +116,16 @@ public class InzienUrenView extends Scene {
         this.controller = controller;
 
         klantLabel = new Label("Klantnaam: ");
-        klantNaamInput = new TextField();
+        klantNaamInput = new AutoCompletionTextfieldController();
         klantBox = new VBox(klantLabel, klantNaamInput);
 
         projectLabel = new Label("Projectnaam: ");
-        projectNaamInput = new TextField();
+        projectNaamInput = new AutoCompletionTextfieldController();
         projectBox = new VBox(projectLabel, projectNaamInput);
 
         onderwerpLabel = new Label("Onderwerpnaam: ");
-        onderwerpInputBox = new TextField();
-        onderwerpBox = new VBox(onderwerpLabel, onderwerpInputBox);
+        onderwerpNaamInput = new AutoCompletionTextfieldController();
+        onderwerpBox = new VBox(onderwerpLabel, onderwerpNaamInput);
 
         begindatumLabel = new Label("Begindatum: ");
         begindatumPicker = new DatePicker();
@@ -137,6 +141,42 @@ public class InzienUrenView extends Scene {
         verversKnop = new Button(KNOPSTRING);
 
         leftFilterPanel = new VBox(begindatumVbox, einddatumVbox, klantBox, projectBox,onderwerpBox, verversKnop);
+
+        /**
+         * ActionListener op de textfield van project. Op het moment dat deze is gefocussed haalt hiji de projecten uit de database en zet hij ze in de dictionary van de AutoComplete.
+         */
+        projectNaamInput.focusedProperty().addListener(new ChangeListener<Boolean>()
+        {
+            @Override
+            public void changed(ObservableValue<? extends Boolean> arg0, Boolean oldPropertyValue, Boolean newPropertyValue)
+            {
+                if (newPropertyValue)
+                {
+                    controller.vulProjectenEntries(klantNaamInput.getText());
+                }
+                else
+                {
+                }
+            }
+        });
+
+        /**
+         * Actionlistener op de textfield van onderwerp. Op het moment dat deze is gefocussed haalt hij de onderwerpen uit de database en zet hij ze in de dictionary van de AutoComplete.
+         */
+        onderwerpNaamInput.focusedProperty().addListener(new ChangeListener<Boolean>()
+        {
+            @Override
+            public void changed(ObservableValue<? extends Boolean> arg0, Boolean oldPropertyValue, Boolean newPropertyValue)
+            {
+                if (newPropertyValue)
+                {
+                    controller.vulOnderwerpenEntries(projectNaamInput.getText());
+                }
+                else
+                {
+                }
+            }
+        });
 
 
         /**
@@ -281,6 +321,21 @@ public class InzienUrenView extends Scene {
 
     }
 
+    public void setKlanten(ArrayList<String> klanten) {
+        klantNaamInput.getEntries().addAll(klanten);
+    }
+
+    public void setProjecten(ArrayList<String> projecten) {
+        projectNaamInput.getEntries().addAll(projecten);
+
+    }
+
+    public void setOnderwerpen(ArrayList<String> onderwerpen) {
+        onderwerpNaamInput.getEntries().addAll(onderwerpen);
+    }
+
+
+
     /**
      * Wordt uitgevoerd wanneer de "Ververs" knop wordt ingedrukt.
      */
@@ -337,7 +392,7 @@ public class InzienUrenView extends Scene {
     }
 
     public String getOnderwerpNaam(){
-        System.out.println(onderwerpInputBox.getText());
-        return onderwerpInputBox.getText();
+        System.out.println(onderwerpNaamInput.getText());
+        return onderwerpNaamInput.getText();
     }
 }

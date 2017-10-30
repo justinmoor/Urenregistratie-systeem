@@ -8,6 +8,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+/**
+ * Haalt alle data uit de database uit de "klant" tabel.
+ */
 public class KlantDAO {
     DatabaseConnectie db;
 
@@ -15,6 +18,12 @@ public class KlantDAO {
         this.db = db;
         System.out.println(db);
     }
+
+    /**
+     * Haalt alle klanten uit de database.
+     * @return
+     * @throws SQLException
+     */
     public ArrayList<KlantModel> haalKlantenOp() throws SQLException {
 
         ArrayList<KlantModel> klant_namen = null;

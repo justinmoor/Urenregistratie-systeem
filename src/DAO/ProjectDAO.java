@@ -8,6 +8,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+/**
+ * Is verantwoordelijk voor het halen van data uit de "project" tabel uit de database.
+ */
 public class ProjectDAO {
     DatabaseConnectie db;
 
@@ -15,6 +18,12 @@ public class ProjectDAO {
         this.db = db;
     }
 
+    /**
+     * Haalt projecten uit de database.
+     * @param klant_naam
+     * @return
+     * @throws SQLException
+     */
     public ArrayList<ProjectModel> haalProjectenOp(String klant_naam) throws SQLException {
 
         ArrayList<ProjectModel> projecten = null;
