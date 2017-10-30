@@ -53,14 +53,7 @@ public class InzienUrenAdminController {
         try {
             File file = new File("C:\\Person.csv.");
             writer = new BufferedWriter(new FileWriter(file));
-            for () {
 
-                String text = "\n";
-
-
-
-                writer.write(text);
-            }
         } catch (Exception ex) {
             ex.printStackTrace();
         }
@@ -76,7 +69,7 @@ public class InzienUrenAdminController {
      * Krijgt een ResultSet van de DAO, maakt IngevuldeTijdModels van de resultset en voert deze door naar de view.
      */
     public void buttonPressed(){
-        results = dao.getAdminOverzicht(view.getBegindatum(), view.getEinddatum(), view.getKlantnaam(), view.getProjectnaam());
+        results = dao.getAdminOverzicht(view.getBegindatum(), view.getEinddatum(), view.getKlantnaam(), view.getProjectnaam(), view.getOnderwerpnaam());
         makeModelsFromResultSet(results);
 
         if(resultatenlijst.isEmpty()){

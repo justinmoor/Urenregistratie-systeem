@@ -73,10 +73,13 @@ public class InzienUrenAdminView extends Scene {
     private Label begindatumLabel;
     private Label klantLabel;
     private Label projectLabel;
+    private Label onderwerpLabel;
     private VBox klantBox;
     private VBox projectBox;
+    private VBox onderwerpBox;
     private TextField klantNaamInput;
     private TextField projectNaamInput;
+    private TextField onderwerpNaamInput;
 
     /**
      * Maak de tabel en alle bijbehorende kolommen.
@@ -130,6 +133,11 @@ public class InzienUrenAdminView extends Scene {
         projectNaamInput = new TextField();
         projectBox = new VBox(projectLabel, projectNaamInput);
 
+        onderwerpLabel = new Label("Onderwerpnaam: ");
+        onderwerpLabel.setPadding(new Insets(0,0,5,0));
+        onderwerpNaamInput = new TextField();
+        onderwerpBox = new VBox(onderwerpLabel, onderwerpNaamInput);
+
         begindatumLabel = new Label("Begindatum: ");
         begindatumLabel.setPadding(new Insets(0, 0, 5, 0));
         begindatumPicker = new DatePicker();
@@ -146,7 +154,7 @@ public class InzienUrenAdminView extends Scene {
         verversKnop = new Button(KNOPSTRING);
         exporteerKnop = new Button(EXPORTSTRING);
 
-        leftFilterPanel = new VBox(begindatumVbox, einddatumVbox, klantBox, projectBox, verversKnop, exporteerKnop);
+        leftFilterPanel = new VBox(begindatumVbox, einddatumVbox, klantBox, projectBox,onderwerpBox, verversKnop, exporteerKnop);
 
 
         /**
@@ -368,5 +376,10 @@ public class InzienUrenAdminView extends Scene {
 
     public void setPersoonLabel(String volledigeNaam) {
         persoonLabel.setText(volledigeNaam);
+    }
+
+    public String getOnderwerpnaam(){
+        System.out.println(onderwerpNaamInput.getText());
+        return onderwerpNaamInput.getText();
     }
 }
