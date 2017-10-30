@@ -18,6 +18,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
         import javafx.scene.layout.GridPane;
         import javafx.scene.layout.HBox;
+import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
         import javafx.scene.text.Font;
@@ -35,11 +36,15 @@ public class InvullenUrenView extends Scene {
     
     private BorderPane navigatie;
     
+    private StackPane left_pane;
     private VBox img_box;
     private Image img;
     private ImageView terug;
     
+    private StackPane mid_pane;
     private Label home;
+    
+    private StackPane right_pane;
     private Label gebruiker;
     
     private Image img2;
@@ -114,28 +119,37 @@ public class InvullenUrenView extends Scene {
     private void InitGui() throws SQLException {
 		pane.setStyle("-fx-background-image: url('/Assets/background.png')");
 		
-		navigatie = new BorderPane();
+navigatie = new BorderPane();
 		
+		left_pane = new StackPane();
+		left_pane.setMinWidth(80);
+		left_pane.setPadding(new Insets(15, 0, 15, 15));
 		img_box = new VBox();
 		img = new Image("/Assets/back.png");
 		terug = new ImageView(img);
 		img_box.getChildren().add(terug);
-		img_box.setPadding(new Insets(15, 83, 15, 14));
+		left_pane.getChildren().add(img_box);
 		
+		mid_pane = new StackPane();
+		mid_pane.setPrefWidth(440);
 		home = new Label("UREN REGISTREREN");
 		home.setId("home");
-		home.setPadding(new Insets(15));
+		mid_pane.getChildren().add(home);
 		
-		gebruiker = new Label("Peter van Vliet");
-		gebruiker.setPadding(new Insets(15, 14, 15, 15));
+		right_pane = new StackPane();
+		right_pane.setPrefWidth(80);
+//		gebruiker = new Label(controller.getGebruikerModel().getVolledigeNaam());
+		gebruiker = new Label("WTF");
+		gebruiker.setAlignment(Pos.CENTER_RIGHT);
+		right_pane.getChildren().add(gebruiker);
 		
 		img2 = new Image("/Assets/lijntje.png");
 		lijntje = new ImageView(img2);
 		lijntje.setFitWidth(600);
 		
-		navigatie.setLeft(img_box);
-		navigatie.setCenter(home);
-		navigatie.setRight(gebruiker);
+		navigatie.setLeft(left_pane);
+		navigatie.setCenter(mid_pane);
+		navigatie.setRight(right_pane);
 		navigatie.setBottom(lijntje);
 		
 		groep = new HBox();

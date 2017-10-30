@@ -2,6 +2,7 @@ package Controllers;
 
 import DAO.IngevuldeTijdDAO;
 import Database.DatabaseConnectie;
+import Models.GebruikerModel;
 import Models.KlantModel;
 import Models.OnderwerpModel;
 import Models.ProjectModel;
@@ -16,6 +17,7 @@ import java.util.List;
 public class InvullenUrenController {
 
     private InvullenUrenView invullenurenView;
+    private GebruikerModel gebruikerModel;
     private DatabaseConnectie db;
     private IngevuldeTijdDAO dao;
     private HoofdMenuController hoofdmenucontroller;
@@ -24,14 +26,20 @@ public class InvullenUrenController {
     private ArrayList<String> producten;
     private ArrayList<String> onderwerpen;
 
-    InvullenUrenController(Stage stage, DatabaseConnectie db, HoofdMenuController hoofdmenucontroller) {
+    InvullenUrenController(Stage stage, DatabaseConnectie db, GebruikerModel gebruikerModel, HoofdMenuController hoofdmenucontroller) {
         invullenurenView = new InvullenUrenView(this);
+        this.gebruikerModel = gebruikerModel;
         stage.setScene(invullenurenView);
         stage.show();
         this.db = db;
+        this.gebruikerModel = gebruikerModel;
         this.hoofdmenucontroller = hoofdmenucontroller;
         dao = new IngevuldeTijdDAO(db);
         invullenurenView.setGebruiker();
+    }
+    
+    public GebruikerModel getGebruikerModel() {
+        return gebruikerModel;
     }
 
     public ArrayList<KlantModel> getKlanten() throws SQLException {

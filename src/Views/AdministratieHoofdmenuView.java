@@ -60,29 +60,34 @@ public class AdministratieHoofdmenuView extends Scene {
 		
 		navigatie = new BorderPane();
 		
+		left_pane = new StackPane();
+		left_pane.setMinWidth(80);
+		left_pane.setPadding(new Insets(15, 0, 15, 15));
 		img_box = new VBox();
 		img = new Image("/Assets/back.png");
 		terug = new ImageView(img);
 		img_box.getChildren().add(terug);
-		img_box.setPadding(new Insets(15, 0, 15, 15));
-		img_box.setPrefWidth(133);
+		left_pane.getChildren().add(img_box);
 		
+		mid_pane = new StackPane();
+		mid_pane.setPrefWidth(440);
 		home = new Label("HOME");
 		home.setId("home");
-		home.setPadding(new Insets(15, 0, 15, 0));
-		home.setPrefWidth(133);
+		mid_pane.getChildren().add(home);
 		
+		right_pane = new StackPane();
+		right_pane.setPrefWidth(80);
 		gebruiker = new Label(controller.getGebruikerModel().getVolledigeNaam());
-		gebruiker.setPadding(new Insets(15, 15, 15, 0));
-		gebruiker.setPrefWidth(133);
+		gebruiker.setAlignment(Pos.CENTER_RIGHT);
+		right_pane.getChildren().add(gebruiker);
 		
 		img2 = new Image("/Assets/lijntje.png");
 		lijntje = new ImageView(img2);
 		lijntje.setFitWidth(600);
 		
-		navigatie.setLeft(img_box);
-		navigatie.setCenter(home);
-		navigatie.setRight(gebruiker);
+		navigatie.setLeft(left_pane);
+		navigatie.setCenter(mid_pane);
+		navigatie.setRight(right_pane);
 		navigatie.setBottom(lijntje);
 
 		knoppen = new HBox(19);
