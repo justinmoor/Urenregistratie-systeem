@@ -3,15 +3,19 @@ package Views;
 import Controllers.AutoCompletionTextfieldController;
 import Controllers.InzienUrenAdminController;
 import Models.IngevuldeTijdModel;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.event.EventType;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
@@ -251,9 +255,35 @@ public class InzienUrenAdminView extends Scene {
 			}
         });
 
+        projectNaamInput.focusedProperty().addListener(new ChangeListener<Boolean>()
+        {
+            @Override
+            public void changed(ObservableValue<? extends Boolean> arg0, Boolean oldPropertyValue, Boolean newPropertyValue)
+            {
+                if (newPropertyValue)
+                {
+                    controller.vulProjectenEntries(klantNaamInput.getText());
+                }
+                else
+                {
+                }
+            }
+        });
 
-
-
+        onderwerpNaamInput.focusedProperty().addListener(new ChangeListener<Boolean>()
+        {
+            @Override
+            public void changed(ObservableValue<? extends Boolean> arg0, Boolean oldPropertyValue, Boolean newPropertyValue)
+            {
+                if (newPropertyValue)
+                {
+                    controller.vulOnderwerpenEntries(klantNaamInput.getText(),projectNaamInput.getText());
+                }
+                else
+                {
+                }
+            }
+        });
         /**
          * Maakt de context menu voor wanneer er met de rechtermuisknop wordt gedrukt op een rij. Voegt de "Goedkeuren" optie er aan toe.
          */
@@ -407,4 +437,6 @@ public class InzienUrenAdminView extends Scene {
         System.out.println(onderwerpNaamInput.getText());
         return onderwerpNaamInput.getText();
     }
+
+
 }

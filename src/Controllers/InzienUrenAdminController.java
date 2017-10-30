@@ -1,8 +1,14 @@
 package Controllers;
 
 import DAO.IngevuldeTijdDAO;
+import DAO.KlantDAO;
+import DAO.OnderwerpDAO;
+import DAO.ProjectDAO;
 import Database.DatabaseConnectie;
 import Models.IngevuldeTijdModel;
+import Models.KlantModel;
+import Models.OnderwerpModel;
+import Models.ProjectModel;
 import Views.InzienUrenAdminView;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -26,11 +32,13 @@ public class InzienUrenAdminController {
     Stage stage;
     DatabaseConnectie dbc;
     InzienUrenAdminView view;
-    IngevuldeTijdDAO dao;
+    IngevuldeTijdDAO ingevuldetijdDAO;
+    ProjectDAO projectDAO;
+    OnderwerpDAO onderwerpDAO;
     ResultSet results;
     ArrayList<IngevuldeTijdModel> resultatenlijst;
     HoofdMenuController hoofdMenuController;
-
+    KlantDAO klantDAO = new KlantDAO(dbc);
     private final String COMMA = ";";
 
     /**
@@ -39,13 +47,19 @@ public class InzienUrenAdminController {
      * @param dbc
      */
     public  InzienUrenAdminController(Stage stage, DatabaseConnectie dbc, HoofdMenuController hoofdMenuController){
+        this.dbc = dbc;
         this.hoofdMenuController = hoofdMenuController;
-        dao = new IngevuldeTijdDAO(dbc);
+        ingevuldetijdDAO = new IngevuldeTijdDAO(dbc);
+        onderwerpDAO = new OnderwerpDAO(dbc);
         view = new InzienUrenAdminView(this);
+        this.klantDAO = new KlantDAO(dbc);
+        this.projectDAO = new ProjectDAO(dbc);
+
         stage = stage;
         stage.show();
         stage.setScene(view);
         view.setPersoonLabel(hoofdMenuController.getGebruikerModel().getVolledigeNaam());
+        vulKlantenEntries();
     }
 
     /**
@@ -78,7 +92,7 @@ public class InzienUrenAdminController {
      * Krijgt een ResultSet van de DAO, maakt IngevuldeTijdModels van de resultset en voert deze door naar de view.
      */
     public void verversButtonPressed(){
-        results = dao.getAdminOverzicht(view.getBegindatum(), view.getEinddatum(), view.getKlantnaam(), view.getProjectnaam(), view.getOnderwerpnaam());
+        results = ingevuldetijdDAO.getAdminOverzicht(view.getBegindatum(), view.getEinddatum(), view.getKlantnaam(), view.getProjectnaam(), view.getOnderwerpnaam());
         makeModelsFromResultSet(results);
 
         if(resultatenlijst.isEmpty()){
@@ -140,18 +154,58 @@ public class InzienUrenAdminController {
 
     /**
      * Ontvangt een lijst van models die geselecteerd zijn in de view, verandert de goedgekeurd boolean
-     * naar true en stuurt ze vervolgens een voor een door naar de dao om weggeschreven te worden.
+     * naar true en stuurt ze vervolgens een voor een door naar de ingevuldetijdDAO om weggeschreven te worden.
      * @param models
      */
     public void keurGoed(List<IngevuldeTijdModel> models){
         for (IngevuldeTijdModel model:models
              ) {
             model.setGoedgekeurd(true);
-            dao.veranderGoedgekeurdKolom(model);
+            ingevuldetijdDAO.veranderGoedgekeurdKolom(model);
         }
     }
 
     public HoofdMenuController getHoofdMenuController() {
         return hoofdMenuController;
+    }
+
+    private void vulKlantenEntries(){
+        ArrayList<String> klanten = new ArrayList<>();
+        try {
+            for (KlantModel klant:klantDAO.haalKlantenOp()) {
+                klanten.add(klant.getNaam());
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+            view.setKlanten(klanten);
+
+    }
+
+    public void vulProjectenEntries(String klantNaam){
+        ArrayList<String> projecten = new ArrayList<>();
+        try {
+            for (ProjectModel project:projectDAO.haalProjectenOp(klantNaam)) {
+                System.out.println(project.getProject_naam());
+                projecten.add(project.getProject_naam());
+            }
+            projectDAO.haalProjectenOp(klantNaam);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        view.setProjecten(projecten);
+    }
+
+    public void vulOnderwerpenEntries(String klantnaam, String projectnaam){
+        ArrayList<String> onderwerpen = new ArrayList<>();
+
+        try {
+            for (OnderwerpModel onderwerp:onderwerpDAO.haalOnderwerpenOp(projectnaam)) {
+                onderwerpen.add(onderwerp.getOnderwerp_naam());
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        view.setOnderwerpen(onderwerpen);
     }
 }
