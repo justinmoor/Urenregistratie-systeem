@@ -37,9 +37,10 @@ public class InzienUrenController {
     /**
      * Is de klasse die de InzienUrenAdminView onderhoudt.
      * Krijgt DatabaseConnectie mee, zodat deze kan worden doorgegeven aan de DAO.
+     *
      * @param dbc
      */
-    public  InzienUrenController(Stage stage, DatabaseConnectie dbc, HoofdMenuController hoofdMenuController, GebruikerModel gebruiker){
+    public InzienUrenController(Stage stage, DatabaseConnectie dbc, HoofdMenuController hoofdMenuController, GebruikerModel gebruiker) {
         this.hoofdMenuController = hoofdMenuController;
         ingevuldeTijdDAO = new IngevuldeTijdDAO(dbc);
         this.klantDAO = new KlantDAO(dbc);
@@ -58,12 +59,12 @@ public class InzienUrenController {
      * Wordt uitgevoerd wanneer de 'Ververs' knop wordt ingedrukt.
      * Krijgt een ResultSet van de DAO, maakt IngevuldeTijdModels van de resultset en voert deze door naar de view.
      */
-    public void buttonPressed(){
+    public void buttonPressed() {
         System.out.println(gebruiker.getGebruikerID());
         results = ingevuldeTijdDAO.getPersoneelOverzicht(view.getBegindatum(), view.getEinddatum(), view.getKlantnaam(), view.getProjectnaam(), gebruiker.getGebruikerID(), view.getOnderwerpNaam());
         makeModelsFromResultSet(results);
 
-        if(resultatenlijst.isEmpty()){
+        if (resultatenlijst.isEmpty()) {
             Alert legeResultatenLijstAlert = new Alert(Alert.AlertType.ERROR, ERRORMESSAGENORESULTS);
             legeResultatenLijstAlert.show();
         } else {
@@ -73,13 +74,14 @@ public class InzienUrenController {
 
     /**
      * Krijgt een ResultSet van de geregistreerde tijden, vult hier de resultatenlijst ArrayList mee.
+     *
      * @param results
      */
     private void makeModelsFromResultSet(ResultSet results) {
         try {
-            if(results.next()){
+            if (results.next()) {
                 resultatenlijst = new ArrayList<>();
-                do{
+                do {
                     String personeelsNaam = gebruiker.getVolledigeNaam();
                     System.out.println("Adding models to arraylist");
                     resultatenlijst.add(new IngevuldeTijdModel(
@@ -93,13 +95,13 @@ public class InzienUrenController {
                             results.getInt("persoonID"),
                             results.getString("klant_naam"),
                             results.getString("project_naam"),
-                            results.getString( "onderwerp_naam"),
+                            results.getString("onderwerp_naam"),
                             personeelsNaam
                     ));
 
                     System.out.println(results.getString("klant_naam"));
-                } while(results.next());
-            } else{
+                } while (results.next());
+            } else {
                 resultatenlijst = new ArrayList<>();
             }
             results.close();
@@ -111,7 +113,7 @@ public class InzienUrenController {
     /**
      * Roept de view aan en vult de TableView met de data uit de resultatenlijst ArrayList.
      */
-    private void makeTableViewFromArrayList(){
+    private void makeTableViewFromArrayList() {
         ObservableList<IngevuldeTijdModel> records = FXCollections.observableArrayList(resultatenlijst);
         view.vulTabelUitLijst(records);
     }
@@ -119,13 +121,14 @@ public class InzienUrenController {
     public HoofdMenuController getHoofdMenuController() {
         return hoofdMenuController;
     }
+
     /**
      * Vult de dictionary van de autocomplete in de view voor de klanteninput.
      */
-    private void vulKlantenEntries(){
+    private void vulKlantenEntries() {
         ArrayList<String> klanten = new ArrayList<>();
         try {
-            for (KlantModel klant:klantDAO.haalKlantenOp()) {
+            for (KlantModel klant : klantDAO.haalKlantenOp()) {
                 klanten.add(klant.getNaam());
             }
         } catch (SQLException e) {
@@ -137,31 +140,31 @@ public class InzienUrenController {
 
     /**
      * Vult de dictionary van de autocomplete in de view voor de projecteninput.
+     *
      * @param klantNaam
      */
-    public void vulProjectenEntries(String klantNaam){
+    public void vulProjectenEntries(String klantNaam) {
         ArrayList<String> projecten = new ArrayList<>();
-        try {
-            for (ProjectModel project:projectDAO.haalProjectenOp(klantNaam)) {
-                System.out.println(project.getProject_naam());
-                projecten.add(project.getProject_naam());
-            }
-            projectDAO.haalProjectenOp(klantNaam);
-        } catch (SQLException e) {
-            e.printStackTrace();
+
+        for (ProjectModel project : projectDAO.haalProjectenOp(klantNaam)) {
+            System.out.println(project.getProject_naam());
+            projecten.add(project.getProject_naam());
         }
+        projectDAO.haalProjectenOp(klantNaam);
+
         view.setProjecten(projecten);
     }
 
     /**
      * Vult de dictionary van de autocomplete in de view voor de onderwerpinput.
+     *
      * @param projectnaam
      */
-    public void vulOnderwerpenEntries( String projectnaam){
+    public void vulOnderwerpenEntries(String projectnaam) {
         ArrayList<String> onderwerpen = new ArrayList<>();
 
         try {
-            for (OnderwerpModel onderwerp:onderwerpDAO.haalOnderwerpenOp(projectnaam)) {
+            for (OnderwerpModel onderwerp : onderwerpDAO.haalOnderwerpenOp(projectnaam)) {
                 onderwerpen.add(onderwerp.getOnderwerp_naam());
             }
         } catch (SQLException e) {

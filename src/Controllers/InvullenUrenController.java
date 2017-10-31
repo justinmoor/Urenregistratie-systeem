@@ -26,6 +26,7 @@ public class InvullenUrenController {
     private ArrayList<String> producten;
     private ArrayList<String> onderwerpen;
 
+
     InvullenUrenController(Stage stage, DatabaseConnectie db, GebruikerModel gebruikerModel, HoofdMenuController hoofdmenucontroller) {
         invullenurenView = new InvullenUrenView(this);
         this.gebruikerModel = gebruikerModel;

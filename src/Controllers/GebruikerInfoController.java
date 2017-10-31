@@ -64,9 +64,4 @@ public class GebruikerInfoController {
     public HoofdMenuController getHoofdMenuController() {
     		return hoofdmenucontroller;
     }
-
-	public void setAdminHoofdMenu() {
-		stage.setScene(adminView);
-	}
-
 }

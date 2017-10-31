@@ -91,7 +91,6 @@ public class InzienUrenAdminController {
     }
 
 
-
     /**
      * Wordt uitgevoerd wanneer de 'Ververs' knop wordt ingedrukt.
      * Krijgt een ResultSet van de DAO, maakt IngevuldeTijdModels van de resultset en voert deze door naar de view.
@@ -199,15 +198,13 @@ public class InzienUrenAdminController {
      */
     public void vulProjectenEntries(String klantNaam) {
         ArrayList<String> projecten = new ArrayList<>();
-        try {
-            for (ProjectModel project : projectDAO.haalProjectenOp(klantNaam)) {
-                System.out.println(project.getProject_naam());
-                projecten.add(project.getProject_naam());
-            }
-            projectDAO.haalProjectenOp(klantNaam);
-        } catch (SQLException e) {
-            e.printStackTrace();
+
+        for (ProjectModel project : projectDAO.haalProjectenOp(klantNaam)) {
+            System.out.println(project.getProject_naam());
+            projecten.add(project.getProject_naam());
         }
+        projectDAO.haalProjectenOp(klantNaam);
+
         view.setProjecten(projecten);
     }
 

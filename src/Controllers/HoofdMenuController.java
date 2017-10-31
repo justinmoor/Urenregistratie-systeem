@@ -7,6 +7,9 @@ import Views.AdministratieHoofdmenuView;
 import Views.PersoneelHoofdmenuView;
 import javafx.stage.Stage;
 
+/**
+ * Deze klasse regelt het switchen van views
+ */
 public class HoofdMenuController {
 
     private Stage stage;
@@ -31,27 +34,45 @@ public class HoofdMenuController {
         return gebruikerModel;
     }
 
+    /**
+     * Zet het hoofdmenu voor personeel
+     */
     public void startPersoneelHoofdmenuView(){
         stage.setScene(personeelView);
     }
 
+    /**
+     * Zet het hoofdmenu voor een administrator
+     */
     public void startAdminHoofdmenuView(){
        stage.setScene(adminView);
     }
 
+    /**
+     * Zet de view om een account toe te voegen
+     */
     public void startAccountToevoegenView(){
         new GebruikerToevoegenController(stage, db, this);
         //stage.setScene(accountToevoegenView);
     }
 
+    /**
+     * Zet de view voor het inzien van de uren
+     */
     public void startInzienUrenAdminController(){
         new InzienUrenAdminController(stage, db, this);
     }
 
+    /**
+     * Zet de view voor het inzien van je uren
+     */
     public void startInvullenUrenView() {
         new InvullenUrenController(stage, db, gebruikerModel, this);
     }
 
+    /**
+     * Zet de account info view
+     */
     public void startGebruikerInfoView(){
         new GebruikerInfoController(stage, db, this);
     }

@@ -2,8 +2,6 @@ package DAO;
 
 import Database.DatabaseConnectie;
 import Models.GebruikerModel;
-import com.sun.org.apache.regexp.internal.RE;
-
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;

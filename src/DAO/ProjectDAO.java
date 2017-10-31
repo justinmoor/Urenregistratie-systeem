@@ -22,9 +22,8 @@ public class ProjectDAO {
      * Haalt projecten uit de database.
      * @param klant_naam
      * @return
-     * @throws SQLException
      */
-    public ArrayList<ProjectModel> haalProjectenOp(String klant_naam) throws SQLException {
+    public ArrayList<ProjectModel> haalProjectenOp(String klant_naam)  {
 
         ArrayList<ProjectModel> projecten = null;
         try {

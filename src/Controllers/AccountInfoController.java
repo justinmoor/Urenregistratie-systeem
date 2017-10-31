@@ -37,6 +37,9 @@ public class AccountInfoController {
         return hoofdMenuController;
     }
 
+    /**
+     * Initialiseert een nieuw ingelogd persoon
+     */
     public void initPersoon() {
         voornaam = getHoofdMenuController().getGebruikerModel().getVoornaam();
         if (getHoofdMenuController().getGebruikerModel().getTussenvoegsel() != null) {
@@ -49,6 +52,10 @@ public class AccountInfoController {
         wachtwoord = getHoofdMenuController().getGebruikerModel().getWachtwoord();
     }
 
+    /**
+     * Verandert wachtwoord in de view
+     * @param nieuwWachtwoord
+     */
     public void veranderGebruiker(String nieuwWachtwoord) {
         dao.setgebruikerWachtwoord(hoofdMenuController.getGebruikerModel(), nieuwWachtwoord);
     }

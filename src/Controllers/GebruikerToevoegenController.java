@@ -6,12 +6,22 @@ import Models.GebruikerModel;
 import Views.AccountToevoegenView;
 import javafx.stage.Stage;
 
+/**
+ * Deze klasse wordt gebruikt om een nieuw account in te voegen
+ * @author Justin Moor
+ */
 public class GebruikerToevoegenController {
 	private HoofdMenuController hoofdmenucontroller;
     private AccountToevoegenView accountToevoegenView;
     private DatabaseConnectie db;
     private GebruikerDAO dao;
 
+    /**
+     * Constructor
+     * @param stage
+     * @param db
+     * @param hoofdmenucontroller
+     */
     public GebruikerToevoegenController(Stage stage, DatabaseConnectie db, HoofdMenuController hoofdmenucontroller) {
         accountToevoegenView = new AccountToevoegenView(this);
         stage.setScene(accountToevoegenView);
@@ -22,6 +32,14 @@ public class GebruikerToevoegenController {
         accountToevoegenView.setGebruikerLabel(hoofdmenucontroller.getGebruikerModel().getVolledigeNaam());
     }
 
+    /**
+     * Nieuw account toevoegen met de meegegeven informatie
+     * @param voornaam
+     * @param tussenvoegsel
+     * @param achternaam
+     * @param email
+     * @param rechten
+     */
     public void insert(String voornaam, String tussenvoegsel, String achternaam, String email, String rechten){
 
         if(rechten.equals("Administratie")){
@@ -33,6 +51,10 @@ public class GebruikerToevoegenController {
         dao.insertAccount(voornaam, tussenvoegsel, achternaam, email, rechten);
     }
 
+    /**
+     * Geeft Hoofdmenucontroller terug
+     * @return hoofdmenucontroller
+     */
 	public HoofdMenuController getHoofdMenuController() {
 		return hoofdmenucontroller;
 	}

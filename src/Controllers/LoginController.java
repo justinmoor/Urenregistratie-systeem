@@ -68,6 +68,9 @@ public class LoginController {
             }
     }
 
+    /**
+     * Uitloggen
+     */
     public void logUit() {
         stage.setScene(loginView);
         stage.show();
