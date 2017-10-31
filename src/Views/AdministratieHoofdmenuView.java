@@ -16,6 +16,7 @@ import javafx.scene.layout.VBox;
 public class AdministratieHoofdmenuView extends Scene {
 		/**
 		 * Initialiseren van alle benodigde onderdelen voor deze view
+		 * @author stanhoenson
 		 */
 		private BorderPane pane;
 	    
@@ -56,6 +57,7 @@ public class AdministratieHoofdmenuView extends Scene {
 		/**
 	     * Maakt de view aan. Ook wordt de controller meegegeven, zodat de controller de logica van de knoppen regelt
 	     * @param controller
+	     * @author stanhoenson
 	     */ 	
 	public AdministratieHoofdmenuView(HoofdMenuController controller){
 		super(new BorderPane(), 600,  400); 		// Nieuwe pane meegeven aan de superklasse (dus scene).
@@ -67,6 +69,7 @@ public class AdministratieHoofdmenuView extends Scene {
 
 	/**
 	 * Maken en plaatsen van alle onderdelen voor de GUI
+	 * @author stanhoenson
 	 */
 	public void initGui() {
 		pane.setId("pane");
@@ -136,6 +139,7 @@ public class AdministratieHoofdmenuView extends Scene {
 	
 	/**
      * Methode waar acties worden meegegeven aan verschillende knoppen of andere onderdelen uit de view
+     * @author stanhoenson
      */
 	private void InitAction(){
 		uren.setOnAction(e -> {

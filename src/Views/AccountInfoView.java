@@ -30,6 +30,7 @@ public class AccountInfoView  extends Scene{
 
     /**
      * Initialiseren van de navigatie balk en de benodigde onderdelen
+     * @author stanhoenson
      */
     private BorderPane navigatie;
     

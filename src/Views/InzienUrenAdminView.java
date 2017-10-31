@@ -29,8 +29,8 @@ public class InzienUrenAdminView extends Scene {
      */
     private static final String KNOPSTRING = "VERVERS";
     private static final String EXPORTSTRING = "EXPORTEER";
-    private static final double PANEWIDTH = 1400;               //Grootte van de pane
-    private static final double PANEHEIGHT = 800;
+    private static final double PANEWIDTH = 1346;               //Grootte van de pane
+    private static final double PANEHEIGHT = 781;
 
     private final double PERSONEELNAAMCOLUMNWIDTH = 150;               //Breedten van de kolommen.
     private final double BEGINDATUMCOLUMNWIDTH = 90;
@@ -125,23 +125,29 @@ public class InzienUrenAdminView extends Scene {
         super(new BorderPane(), PANEWIDTH, PANEHEIGHT);
         pane = (BorderPane) this.getRoot();
         gridpane = new GridPane();
+        
+        pane.setId("pane");
 
         this.controller = controller;
 
         klantLabel = new Label("Klantnaam: ");
         klantLabel.setPadding(new Insets(0, 0, 5, 0));
         klantNaamInput = new AutoCompletionTextfieldController();
+        klantNaamInput.setId("text-field-week");
         klantBox = new VBox(klantLabel, klantNaamInput);
 
         projectLabel = new Label("Projectnaam: ");
         projectLabel.setPadding(new Insets(0, 0, 5, 0));
         projectNaamInput = new AutoCompletionTextfieldController();
+        projectNaamInput.setId("text-field-week");
         projectBox = new VBox(projectLabel, projectNaamInput);
 
         onderwerpLabel = new Label("Onderwerpnaam: ");
         onderwerpLabel.setPadding(new Insets(0,0,5,0));
         onderwerpNaamInput = new AutoCompletionTextfieldController();
+        onderwerpNaamInput.setId("text-field-week");
         onderwerpBox = new VBox(onderwerpLabel, onderwerpNaamInput);
+        onderwerpBox.setPadding(new Insets(0, 0, 20, 0));
 
         begindatumLabel = new Label("Begindatum: ");
         begindatumLabel.setPadding(new Insets(0, 0, 5, 0));
@@ -157,8 +163,10 @@ public class InzienUrenAdminView extends Scene {
         overzichtTableView = new TableView();
 
         verversKnop = new Button(KNOPSTRING);
+        verversKnop.setId("button-week");
         exporteerKnop = new Button(EXPORTSTRING);
-
+        exporteerKnop.setId("button-week");
+       
         leftFilterPanel = new VBox(begindatumVbox, einddatumVbox, klantBox, projectBox,onderwerpBox, verversKnop, exporteerKnop);
 
 
@@ -175,7 +183,7 @@ public class InzienUrenAdminView extends Scene {
         overzichtTableView.setMinWidth(TABLEWIDTH);           //Zet de grootte van de tabel.
         overzichtTableView.setMinHeight(TABLEHEIGHT);
 
-        leftFilterPanel.setPrefWidth(200);
+        leftFilterPanel.setMaxWidth(160);
         leftFilterPanel.setSpacing(12);
 
         /**
@@ -188,14 +196,14 @@ public class InzienUrenAdminView extends Scene {
         img = new Image("/Assets/back.png");
         terug = new ImageView(img);
         img_box.getChildren().add(terug);
-        img_box.setPadding(new Insets(15, 0, 15, 14));
+        img_box.setPadding(new Insets(15, 0, 15, 15));
 
         inzienUrenLabel = new Label("INZIEN UREN");
         inzienUrenLabel.setId("home");
         inzienUrenLabel.setPadding(new Insets(15));
 
         persoonLabel = new Label();
-        persoonLabel.setPadding(new Insets(15, 14, 15, 15));
+        persoonLabel.setPadding(new Insets(15, 15, 15, 15));
 
         img2 = new Image("/Assets/lijntje.png");
         lijntje = new ImageView(img2);

@@ -51,6 +51,13 @@ public class GebruikerToevoegenController {
         dao.insertAccount(voornaam, tussenvoegsel, achternaam, email, rechten);
     }
 
+    public boolean checkVelden(String voornaam, String achternaam, String email){
+        if(voornaam.isEmpty() || achternaam.isEmpty() || email.isEmpty()) {
+            return false;
+        }
+        return true;
+    }
+
     /**
      * Geeft Hoofdmenucontroller terug
      * @return hoofdmenucontroller

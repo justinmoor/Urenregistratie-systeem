@@ -135,6 +135,7 @@ public class InvullenUrenView extends Scene {
 
     /**
 	 * Maken en plaatsen van alle onderdelen voor de GUI
+	 * @author stanhoenson
 	 */
     private void InitGui() throws SQLException {
     		pane.setId("pane");

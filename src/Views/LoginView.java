@@ -23,11 +23,13 @@ import javafx.scene.text.Text;
 public class LoginView extends Scene {
 		/**
 	     * Initialiseren van de bijhorende controller
+	     * @author stanhoenson
 	     */
 		private LoginController controller;
 		
 		/**
 		 * Initialiseren van alle benodigde onderdelen voor deze view
+		 * @author stanhoenson
 		 */
 		private BorderPane pane;
 	    
@@ -51,11 +53,13 @@ public class LoginView extends Scene {
 	    private Label foutief;
 	    
 	    private Image img2;
-	    private ImageView blauw_lijntje; 
+	    private ImageView blauw_lijntje;
+	    private Label fout;
 
 	    /**
 	     * Maakt de view aan. Ook wordt de controller meegegeven, zodat de controller de logica van de knoppen regelt
 	     * @param controller
+	     * @author stanhoenson
 	     */ 	
     public LoginView(LoginController controller) {
         super(new BorderPane(), 600, 400); 		// Nieuwe pane meegeven aan de superklasse (dus scene).
@@ -67,11 +71,13 @@ public class LoginView extends Scene {
 
     /**
 	 * Maken en plaatsen van alle onderdelen voor de GUI
+	 * @author stanhoenson
 	 */
     public void initGui() {
     		pane.setId("pane");
     	
 		groep = new VBox(12);
+		fout = new Label("");
 		
 		titel = new Label("Urenregistratie");
 		titel.setId("title");
@@ -93,7 +99,7 @@ public class LoginView extends Scene {
 		login = new Button("LOG IN");
 		login.setId("login");
 		
-		groep.getChildren().addAll(titel, lijntje, email, wachtwoord, login);
+		groep.getChildren().addAll(titel, lijntje, email, wachtwoord, login, fout);
 		
 		pane.setCenter(groep);
 		groep.setAlignment(Pos.CENTER);
@@ -113,10 +119,13 @@ public class LoginView extends Scene {
 
     /**
      * Methode waar acties worden meegegeven aan verschillende knoppen of andere onderdelen uit de view
+     * @author stanhoenson
      */
     private void InitAction() {
         login.setOnAction(e -> {
-            controller.logIn(tf1.getText(), tf2.getText());
+            if(!controller.logIn(tf1.getText(), tf2.getText())){
+            	fout.setText("Gebruikersnaam of wachtwoord is fout!");
+			}
         });
 
         login.setDefaultButton(true); 	// Gebruik enter om in te loggen. (enige knop op het scherm, dus default knop.)
@@ -125,6 +134,7 @@ public class LoginView extends Scene {
     public void clearFields() {
     	tf1.setText("");
     	tf2.setText("");
+    	fout.setText("");
 	}
 
 }
