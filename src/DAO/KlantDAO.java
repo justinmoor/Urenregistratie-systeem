@@ -12,10 +12,12 @@ import java.util.ArrayList;
  * Haalt alle data uit de database uit de "klant" tabel.
  */
 public class KlantDAO {
-    DatabaseConnectie db;
+    private DatabaseConnectie db;
+    private ProjectDAO projectDao;
 
     public KlantDAO(DatabaseConnectie db){
         this.db = db;
+        projectDao = new ProjectDAO(db);
         System.out.println(db);
     }
 
@@ -40,5 +42,26 @@ public class KlantDAO {
         }
 
         return klant_namen;
+    }
+
+    /**
+     * Voegt nieuwe klant toe
+     * @param klant
+     * @param project
+     * @param onderwerp
+     */
+    public void voegNieuweKlantToe(String klant, String project, String onderwerp) {
+
+        try {
+            PreparedStatement voegKlantToe = db.getConnection().prepareStatement("INSERT INTO klant (klant_naam) VALUES(?)");
+
+            voegKlantToe.setString(1, klant);
+            voegKlantToe.executeQuery();
+
+            projectDao.voegNieuwProjectToe(klant, project, onderwerp);
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 }

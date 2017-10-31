@@ -20,76 +20,6 @@ public class IngevuldeTijdDAO {
     }
 
     /**
-     * Haalt klanten op
-     * @return naam v/d klant
-     */
-    public ArrayList<KlantModel> haalKlantenOp() {
-
-        ArrayList<KlantModel> klant_namen = null;
-        try {
-            ResultSet results;
-            PreparedStatement haalKlantenOp = db.getConnection().prepareStatement("SELECT klant_naam FROM klant;");
-            results = haalKlantenOp.executeQuery();
-            klant_namen = new ArrayList<KlantModel>();
-            while (results.next()) {
-                klant_namen.add(new KlantModel(results.getString("klant_naam")));
-            }
-        } catch (SQLException ex) {
-            ex.printStackTrace();
-        }
-
-        return klant_namen;
-    }
-
-    /**
-     * Haalt projecten op bij bepaalde klant
-     * @param klant_naam
-     * @return projecten
-     */
-    public ArrayList<ProjectModel> haalProjectenOp(String klant_naam) {
-
-        ArrayList<ProjectModel> projecten = null;
-        try {
-            ResultSet results;
-            PreparedStatement haalProjectenOp = db.getConnection().prepareStatement("SELECT project_naam FROM project WHERE klant_naam =?;");
-            haalProjectenOp.setString(1, klant_naam);
-            results = haalProjectenOp.executeQuery();
-            projecten = new ArrayList<ProjectModel>();
-            while(results.next()) {
-                projecten.add(new ProjectModel(results.getString("project_naam")));
-            }
-        } catch (SQLException sql) {
-            sql.printStackTrace();
-        }
-
-        return projecten;
-    }
-
-    /**
-     * Haalt onderwerpen (Sprints) bij projecten op
-     * @param project_naam
-     * @return project
-     */
-    public ArrayList<OnderwerpModel> haalOnderwerpenOp(String project_naam){
-
-        ArrayList<OnderwerpModel> onderwerpen = null;
-        try {
-            ResultSet results;
-            PreparedStatement haalOnderwerpenOp = db.getConnection().prepareStatement("SELECT onderwerp_naam FROM onderwerp WHERE project_naam =?;");
-            haalOnderwerpenOp.setString(1, project_naam);
-            results = haalOnderwerpenOp.executeQuery();
-            onderwerpen = new ArrayList<OnderwerpModel>();
-            while (results.next()) {
-                onderwerpen.add(new OnderwerpModel(results.getString("onderwerp_naam")));
-            }
-        } catch (SQLException sql) {
-            sql.printStackTrace();
-        }
-
-        return onderwerpen;
-    }
-
-    /**
      * Voegt commentaar bij een ingevulde tijd.
      * @param getPersoonsID
      * @param klant
@@ -219,64 +149,9 @@ public class IngevuldeTijdDAO {
         }
     }
 
-    /**
-     * Voegt nieuwe klant toe
-     * @param klant
-     * @param project
-     * @param onderwerp
-     */
-    public void voegNieuweKlantToe(String klant, String project, String onderwerp) {
 
-        try {
-            PreparedStatement voegKlantToe = db.getConnection().prepareStatement("INSERT INTO klant (klant_naam) VALUES(?)");
 
-            voegKlantToe.setString(1, klant);
-            voegKlantToe.executeQuery();
 
-            voegNieuwProjectToe(klant, project, onderwerp);
 
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-    }
 
-    /**
-     * Voegt niew project toe
-     * @param klant
-     * @param project
-     * @param onderwerp
-     */
-    public void voegNieuwProjectToe(String klant, String project, String onderwerp) {
-
-        try {
-            PreparedStatement voegProjectToe = db.getConnection().prepareStatement("INSERT INTO project (klant_naam, project_naam) VALUES(?,?)");
-
-            voegProjectToe.setString(1,klant);
-            voegProjectToe.setString(2, project);
-            voegProjectToe.executeQuery();
-
-            voegNiewOnderwerpToe(project, onderwerp);
-
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-    }
-
-    /**
-     * Voegt nieuw onderwerp toe
-     * @param project
-     * @param onderwerp
-     */
-    public void voegNiewOnderwerpToe(String project, String onderwerp) {
-        try {
-            PreparedStatement voegOnderwerpToe = db.getConnection().prepareStatement("INSERT INTO onderwerp (project_naam, onderwerp_naam) VALUES(?,?)");
-
-            voegOnderwerpToe.setString(1, project);
-            voegOnderwerpToe.setString(2, onderwerp);
-            voegOnderwerpToe.executeQuery();
-
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-    }
 }

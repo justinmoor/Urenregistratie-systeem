@@ -1,6 +1,9 @@
 package Controllers;
 
 import DAO.IngevuldeTijdDAO;
+import DAO.KlantDAO;
+import DAO.OnderwerpDAO;
+import DAO.ProjectDAO;
 import Database.DatabaseConnectie;
 import Models.GebruikerModel;
 import Models.KlantModel;
@@ -20,6 +23,9 @@ public class InvullenUrenController {
     private GebruikerModel gebruikerModel;
     private DatabaseConnectie db;
     private IngevuldeTijdDAO dao;
+    private KlantDAO klantDao;
+    private ProjectDAO projectDao;
+    private OnderwerpDAO onderwerpDao;
     private HoofdMenuController hoofdmenucontroller;
 
     private ArrayList<String> klanten;
@@ -36,6 +42,9 @@ public class InvullenUrenController {
         this.gebruikerModel = gebruikerModel;
         this.hoofdmenucontroller = hoofdmenucontroller;
         dao = new IngevuldeTijdDAO(db);
+        klantDao = new KlantDAO(db);
+        projectDao = new ProjectDAO(db);
+        onderwerpDao = new OnderwerpDAO(db);
         invullenurenView.setGebruiker();
     }
     
@@ -45,20 +54,20 @@ public class InvullenUrenController {
 
     public ArrayList<KlantModel> getKlanten() throws SQLException {
 
-        ArrayList<KlantModel> klanten = dao.haalKlantenOp();
+        ArrayList<KlantModel> klanten = klantDao.haalKlantenOp();
         return klanten;
 
     }
 
     public ArrayList<ProjectModel> getProjecten(String klant_naam) throws SQLException {
 
-        ArrayList<ProjectModel> projecten = dao.haalProjectenOp(klant_naam);
+        ArrayList<ProjectModel> projecten = projectDao.haalProjectenOp(klant_naam);
         return projecten;
     }
 
     public ArrayList<OnderwerpModel> getOnderwerpen(String project_naam) throws SQLException {
 
-        ArrayList<OnderwerpModel> onderwerpen = dao.haalOnderwerpenOp(project_naam);
+        ArrayList<OnderwerpModel> onderwerpen = onderwerpDao.haalOnderwerpenOp(project_naam);
 
         return onderwerpen;
     }
@@ -78,14 +87,14 @@ public class InvullenUrenController {
     }
 
     public void voegKlantToe(String klant, String project, String onderwerp) {
-        dao.voegNieuweKlantToe(klant, project,onderwerp);
+        klantDao.voegNieuweKlantToe(klant, project,onderwerp);
     }
 
     public void voegProjectToe(String klant, String project, String onderwerp) {
-        dao.voegNieuwProjectToe(klant,project,onderwerp);
+        projectDao.voegNieuwProjectToe(klant,project,onderwerp);
     }
 
     public void voegOnderwerpToe(String project, String onderwerp) {
-        dao.voegNiewOnderwerpToe(project, onderwerp);
+        onderwerpDao.voegNiewOnderwerpToe(project, onderwerp);
     }
 }

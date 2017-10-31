@@ -42,4 +42,22 @@ public class OnderwerpDAO {
 
         return onderwerpen;
     }
+
+    /**
+     * Voegt nieuw onderwerp toe
+     * @param project
+     * @param onderwerp
+     */
+    public void voegNiewOnderwerpToe(String project, String onderwerp) {
+        try {
+            PreparedStatement voegOnderwerpToe = db.getConnection().prepareStatement("INSERT INTO onderwerp (project_naam, onderwerp_naam) VALUES(?,?)");
+
+            voegOnderwerpToe.setString(1, project);
+            voegOnderwerpToe.setString(2, onderwerp);
+            voegOnderwerpToe.executeQuery();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
 }

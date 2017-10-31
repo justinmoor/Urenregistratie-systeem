@@ -12,8 +12,11 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import javafx.scene.image.ImageView;
+
+import java.text.SimpleDateFormat;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
+import java.util.Calendar;
 
 public class TimePicker extends Stage{
 
@@ -117,6 +120,13 @@ public class TimePicker extends Stage{
         urenTeller = Integer.parseInt(LocalTime.now().format(DateTimeFormatter.ofPattern("hh")));
         minTeller = Integer.parseInt(LocalTime.now().format(DateTimeFormatter.ofPattern("mm")));
 
+
+        Calendar cal = Calendar.getInstance();
+        SimpleDateFormat sdfUur = new SimpleDateFormat("HH");
+        SimpleDateFormat sdfMinute = new SimpleDateFormat("mm");
+        urenTeller = Integer.parseInt(sdfUur.format(cal.getTime()));
+        minTeller = Integer.parseInt((sdfMinute.format(cal.getTime())));
+
         uren = new Label("" + urenTeller);
         min = new Label("" + minTeller);
         uren.setPadding(new Insets(0, 0, 0, 9));
@@ -180,12 +190,13 @@ public class TimePicker extends Stage{
                 min.setText(tijd);
             }
             if (soort.equals("BeginTijd")) {
-                String tijd = uren.getText() + " : "  + min.getText();
+                String tijd = uren.getText() + ":"  + min.getText();
                 urenView.setBeginTijd("  " + tijd);
             } else if (soort.equals("EindTijd")) {
-                String tijd = uren.getText() +" : "+ min.getText();
+                String tijd = uren.getText() +":"+ min.getText();
                 urenView.setEindTijd("  " + tijd);
             }
+            newStage.close();
         });
 
         urenOmhoog.setOnAction(e -> {

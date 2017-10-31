@@ -12,10 +12,13 @@ import java.util.ArrayList;
  * Is verantwoordelijk voor het halen van data uit de "project" tabel uit de database.
  */
 public class ProjectDAO {
-    DatabaseConnectie db;
+
+    private DatabaseConnectie db;
+    private OnderwerpDAO onderwerpDao;
 
     public ProjectDAO(DatabaseConnectie db){
         this.db = db;
+        onderwerpDao = new OnderwerpDAO(db);
     }
 
     /**
@@ -33,7 +36,6 @@ public class ProjectDAO {
             results = haalProjectenOp.executeQuery();
             projecten = new ArrayList<>();
             while(results.next()) {
-                System.out.println("Vul de arraylist met projectmodels");
                 projecten.add(new ProjectModel(results.getString("project_naam")));
             }
         } catch (SQLException sql) {
@@ -41,5 +43,27 @@ public class ProjectDAO {
         }
 
         return projecten;
+    }
+
+    /**
+     * Voegt niew project toe
+     * @param klant
+     * @param project
+     * @param onderwerp
+     */
+    public void voegNieuwProjectToe(String klant, String project, String onderwerp) {
+
+        try {
+            PreparedStatement voegProjectToe = db.getConnection().prepareStatement("INSERT INTO project (klant_naam, project_naam) VALUES(?,?)");
+
+            voegProjectToe.setString(1,klant);
+            voegProjectToe.setString(2, project);
+            voegProjectToe.executeQuery();
+
+            onderwerpDao.voegNiewOnderwerpToe(project, onderwerp);
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 }
