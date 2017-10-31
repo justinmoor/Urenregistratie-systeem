@@ -2,6 +2,7 @@ package DAO;
 
 import Database.DatabaseConnectie;
 import Models.GebruikerModel;
+import com.sun.org.apache.regexp.internal.RE;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -17,7 +18,7 @@ public class GebruikerDAO {
     }
 
     // Accepteert een email string en geeft de bijbehorende gebruiker uit de database terug.
-    public GebruikerModel GetGebruikerFromDB(String email){
+    public GebruikerModel GetGebruikerFromDB(String email) {
         GebruikerModel model = new GebruikerModel();
         try {
             PreparedStatement getGebruiker = db.getConnection().prepareStatement("SELECT * FROM personeel WHERE email =?");
@@ -25,10 +26,10 @@ public class GebruikerDAO {
 
             ResultSet results = getGebruiker.executeQuery();
 
-            if(results.next() ){
-                if(results.getString("tussenvoegsel")!=null){
+            if (results.next()) {
+                if (results.getString("tussenvoegsel") != null) {
                     model = new GebruikerModel(results.getInt("persoonID"), results.getString("achternaam"), results.getString("tussenvoegsel"), results.getString("voornaam"), results.getString("email"), results.getString("wachtwoord"), results.getString("rechten"), results.getString("werkzaam"));
-                } else{
+                } else {
                     model = new GebruikerModel(results.getInt("persoonID"), results.getString("achternaam"), results.getString("voornaam"), results.getString("email"), results.getString("wachtwoord"), results.getString("rechten"), results.getString("werkzaam"));
                 }
             }
@@ -36,6 +37,24 @@ public class GebruikerDAO {
             e.printStackTrace();
         }
         return model;
+    }
+
+    public String getWerkzaam(String email) {
+        String werkzaam = "";
+
+        try {
+            PreparedStatement statement = db.getConnection().prepareStatement("SELECT werkzaam FROM personeel WHERE email = ?");
+            statement.setString(1, email);
+
+            ResultSet result = statement.executeQuery();
+
+            if (result.next()) {
+                werkzaam = result.getString("werkzaam");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return werkzaam;
     }
 
     //Accepteert een email string en geeft het bijbehorende wachtwoord terug.
@@ -48,24 +67,24 @@ public class GebruikerDAO {
 
             ResultSet result = statement.executeQuery();
 
-            if(result.next()){
+            if (result.next()) {
                 wachtwoord = result.getString("wachtwoord");
             }
 
-        } catch(SQLException e){
+        } catch (SQLException e) {
             e.printStackTrace();
         }
         return wachtwoord;
     }
 
-    public void insertAccount(String voornaam, String tussenvoegsel, String achternaam, String email, String rechten){
+    public void insertAccount(String voornaam, String tussenvoegsel, String achternaam, String email, String rechten) {
         String query = "INSERT INTO personeel (achternaam, tussenvoegsel, voornaam, email, rechten) VALUES (?, ?, ?, ?, ?);";
 
         try {
             PreparedStatement statement = db.getConnection().prepareStatement(query);
             statement.setString(1, achternaam);
 
-            if(tussenvoegsel.equals("")){
+            if (tussenvoegsel.equals("")) {
                 statement.setString(2, null);
             } else {
                 statement.setString(2, tussenvoegsel);
@@ -75,7 +94,7 @@ public class GebruikerDAO {
             statement.setString(5, rechten);
 
             statement.executeQuery();
-        } catch (SQLException e){
+        } catch (SQLException e) {
             e.printStackTrace();
         }
     }
@@ -83,7 +102,7 @@ public class GebruikerDAO {
     //Alle accounts krijgen
     private ArrayList<GebruikerModel> gebruikers;
 
-    public ArrayList getAllAccount(){
+    public ArrayList getAllAccount() {
         gebruikers = new ArrayList<>();
         String query = "SELECT persoonID, voornaam, tussenvoegsel, achternaam, email, rechten, werkzaam FROM personeel;";
 
@@ -91,7 +110,7 @@ public class GebruikerDAO {
             PreparedStatement statement = db.getConnection().prepareStatement(query);
             ResultSet result = statement.executeQuery();
 
-            while(result.next()){
+            while (result.next()) {
                 GebruikerModel gebruiker = new GebruikerModel();
                 gebruiker.setGebruikerID(result.getInt("persoonID"));
                 gebruiker.setVoornaam(result.getString("voornaam"));
@@ -99,13 +118,13 @@ public class GebruikerDAO {
                 gebruiker.setAchternaam(result.getString("achternaam"));
                 gebruiker.setEmail(result.getString("email"));
 
-                if(result.getString("rechten").equals("1")) {
+                if (result.getString("rechten").equals("1")) {
                     gebruiker.setRechten(("Administrator"));
                 } else {
                     gebruiker.setRechten("Personeel");
                 }
 
-                if(result.getString("werkzaam").equals("1")){
+                if (result.getString("werkzaam").equals("1")) {
                     gebruiker.setWerkzaam("Ja");
                 } else {
                     gebruiker.setWerkzaam("Nee");
@@ -113,13 +132,13 @@ public class GebruikerDAO {
 
                 gebruikers.add(gebruiker);
             }
-        } catch(SQLException e){
+        } catch (SQLException e) {
             e.printStackTrace();
         }
         return gebruikers;
     }
 
-    public void setWerkzaam(GebruikerModel model){
+    public void setWerkzaam(GebruikerModel model) {
         try {
             PreparedStatement werkzaam = db.getConnection().prepareStatement("UPDATE personeel SET werkzaam = 1 WHERE persoonID = ?;");
             werkzaam.setInt(1, model.getGebruikerID());
@@ -129,7 +148,7 @@ public class GebruikerDAO {
         }
     }
 
-    public void setNietWerkzaam(GebruikerModel model){
+    public void setNietWerkzaam(GebruikerModel model) {
         try {
             PreparedStatement werkzaam = db.getConnection().prepareStatement("UPDATE personeel SET werkzaam = 0 WHERE persoonID = ?;");
             werkzaam.setInt(1, model.getGebruikerID());

@@ -29,16 +29,16 @@ public class InzienUrenAdminController {
     /**
      * Maak alle hulpklassen aan.
      */
-    Stage stage;
-    DatabaseConnectie dbc;
-    InzienUrenAdminView view;
-    IngevuldeTijdDAO ingevuldetijdDAO;
-    ProjectDAO projectDAO;
-    OnderwerpDAO onderwerpDAO;
-    ResultSet results;
-    ArrayList<IngevuldeTijdModel> resultatenlijst;
-    HoofdMenuController hoofdMenuController;
-    KlantDAO klantDAO = new KlantDAO(dbc);
+    private Stage stage;
+    private DatabaseConnectie dbc;
+    private InzienUrenAdminView view;
+    private IngevuldeTijdDAO ingevuldetijdDAO;
+    private ProjectDAO projectDAO;
+    private OnderwerpDAO onderwerpDAO;
+    private ResultSet results;
+    private ArrayList<IngevuldeTijdModel> resultatenlijst;
+    private HoofdMenuController hoofdMenuController;
+    private KlantDAO klantDAO = new KlantDAO(dbc);
     private final String COMMA = ";";
 
     /**
@@ -69,8 +69,6 @@ public class InzienUrenAdminController {
      * @throws Exception
      */
     public void writeExcel() throws Exception {
-
-
         FileChooser fileChooser = new FileChooser();
         fileChooser.setInitialFileName(view.getBegindatum() + "-" + view.getEinddatum() + "gewerkte_uren.csv");
         File saveFile = fileChooser.showSaveDialog(new Stage());
@@ -92,7 +90,7 @@ public class InzienUrenAdminController {
         }
     }
 
-}
+
 
     /**
      * Wordt uitgevoerd wanneer de 'Ververs' knop wordt ingedrukt.

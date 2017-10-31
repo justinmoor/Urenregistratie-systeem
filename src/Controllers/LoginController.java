@@ -19,6 +19,7 @@ public class LoginController {
     private GebruikerDAO gebruikerDAO;
     private GebruikerModel model;
     private final String NAAMWWFOUTMESSAGE = "Gebruikersnaam of wachtwoord is fout";
+    private final String WERKZAAM = "1"; //Werkzaam = 1, Niet werkzaam = 0
 
     /**
      * Constructor. Initialiseert alle benodigdheden.
@@ -50,7 +51,7 @@ public class LoginController {
      */
     public void logIn(String email, String wachtwoordUitView) {
 
-            if (gebruikerDAO.getWachtwoordQuery(email).equals(wachtwoordUitView)) {
+            if (gebruikerDAO.getWachtwoordQuery(email).equals(wachtwoordUitView) && gebruikerDAO.getWerkzaam(email).equals(WERKZAAM)) {
                 model = gebruikerDAO.GetGebruikerFromDB(email);
 
                 System.out.println(model.toString());                       //Print de
