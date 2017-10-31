@@ -8,14 +8,24 @@ import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 
 import javafx.scene.image.ImageView;
+
+import javax.swing.text.html.StyleSheet;
+import java.awt.*;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 
 public class TimePicker extends Stage{
 
+    private String soort;
+    private InvullenUrenView urenView;
+
+    private Button opslaan;
     private Stage newStage;
     private GridPane pane;
     private Scene scene;
+
+    private int urenTeller;
+    private int minTeller;
 
     private Label uren;
     private Label min;
@@ -31,10 +41,13 @@ public class TimePicker extends Stage{
     private ImageView arrowdownuren;
     private ImageView arrowdownmin;
 
-    public TimePicker(Label label) {
+    public TimePicker(InvullenUrenView urenView, String soort) {
+        this.urenView = urenView;
+        this.soort = soort;
 
         initGui();
         initActions();
+
         newStage.show();
 
     }
@@ -44,8 +57,11 @@ public class TimePicker extends Stage{
         newStage = new Stage();
         pane = new GridPane();
 
-        uren = new Label(LocalTime.now().format(DateTimeFormatter.ofPattern("hh")));
-        min = new Label(LocalTime.now().format(DateTimeFormatter.ofPattern("mm")));
+        urenTeller = Integer.parseInt(LocalTime.now().format(DateTimeFormatter.ofPattern("hh")));
+        minTeller = Integer.parseInt(LocalTime.now().format(DateTimeFormatter.ofPattern("mm")));
+
+        uren = new Label("" + urenTeller);
+        min = new Label("" + minTeller);
 
         imageOmhoog = new Image("Assets/up.png");
         arrowUpuren = new ImageView(imageOmhoog);
@@ -76,24 +92,70 @@ public class TimePicker extends Stage{
         minutenOmlaag = new Button();
         minutenOmlaag.setGraphic(arrowdownmin);
 
+        opslaan = new Button("opslaan");
+
         pane.add(urenOmhoog, 1, 1);
         pane.add(minutenOmhoog, 2, 1);
         pane.add(uren, 1, 2);
         pane.add(min, 2, 2);
         pane.add(urenOmlaag, 1, 3);
         pane.add(minutenOmlaag, 2, 3);
+        pane.add(opslaan, 3, 4, 3, 3);
 
         scene = new Scene(pane, 300, 300);
         newStage.setScene(scene);
-        newStage.show();
 
-
-        Button opslaan = new Button();
     }
 
     private void initActions() {
 
+        opslaan.setOnAction(e -> {
+            if (Integer.parseInt(min.getText()) < 10) {
+                String tijd = "0"+ Integer.parseInt(min.getText());
+                min.setText(tijd);
+            }
+            if (soort.equals("BeginTijd")) {
+                String tijd = uren.getText() + " : "  + min.getText();
+                urenView.setBeginTijd(tijd);
+            } else if (soort.equals("EindTijd")) {
+                String tijd = uren.getText() +" : "+ min.getText();
+                urenView.setEindTijd(tijd);
+            }
+        });
+
+        urenOmhoog.setOnAction(e -> {
+
+            if (Integer.parseInt(uren.getText()) < 25) {
+                urenTeller = Integer.parseInt(uren.getText()) + 1;
+                if (urenTeller < 10) {
+                    String tijd = "0"+ urenTeller;
+                    uren.setText(tijd);
+                } else {
+                    uren.setText("" + urenTeller);
+                }
+            } else {
+                uren.setText("01");
+
+            }
+        });
+
+        urenOmlaag.setOnAction(e -> {
+
+            if (Integer.parseInt(uren.getText()) > 01) {
+                urenTeller = Integer.parseInt(uren.getText()) - 1;
+                if (urenTeller < 10) {
+                    String tijd = "0" + urenTeller;
+                    uren.setText(tijd);
+                } else {
+                    uren.setText("" + urenTeller);
+                }
+            } else {
+                uren.setText("24");
+            }
+
+        });
 
 
     }
+
 }

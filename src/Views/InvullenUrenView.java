@@ -89,7 +89,8 @@ public class InvullenUrenView extends Scene {
     		private Label BeginTijd;
     		private Button setBeginTijd;
     		private Image clockImg;
-    		private ImageView clockImgView;
+    		private ImageView clockImgViewBegin;
+    		private ImageView clockImgViewEind;
     		
     		private Image img3;
     		private ImageView midlijnjte;
@@ -228,8 +229,11 @@ public class InvullenUrenView extends Scene {
 		BeginTijd.setId("text-field-small");
 		BeginTijd.setPrefWidth(112);
 		clockImg = new Image("Assets/clock.png");
-		clockImgView = new ImageView(clockImg);
-		setBeginTijd = new Button("" +clockImgView);
+		clockImgViewBegin = new ImageView(clockImg);
+		clockImgViewBegin.setFitWidth(6);
+		clockImgViewBegin.setFitHeight(20);
+		setBeginTijd = new Button();
+		setBeginTijd.setGraphic(clockImgViewBegin);
 		setBeginTijd.setPrefWidth(24);
 		tijd1.getChildren().addAll(lbl6, BeginTijd, setBeginTijd);
 		
@@ -255,8 +259,15 @@ public class InvullenUrenView extends Scene {
 		lbl8.setPadding(new Insets(6, 2, 0, 0));
 		EindTijd = new Label();
 		EindTijd.setId("text-field-small");
-		EindTijd.setPrefWidth(136);
-		tijd2.getChildren().addAll(lbl8, EindTijd);
+		EindTijd.setPrefWidth(112);
+        clockImgViewEind = new ImageView(clockImg);
+        clockImgViewEind.setFitWidth(6);
+        clockImgViewEind.setFitHeight(20);
+        setEindTijd = new Button();
+        setEindTijd.setGraphic(clockImgViewEind);
+        setEindTijd.setPrefWidth(24);
+
+		tijd2.getChildren().addAll(lbl8, EindTijd, setEindTijd);
 
 		bevestig = new Button("BEVESTIG");
 		bevestig.setId("bevestig");
@@ -268,8 +279,8 @@ public class InvullenUrenView extends Scene {
 		
 		pane.setTop(navigatie);
 		pane.setCenter(groep);
-    
-		getStylesheets().add("Views/styles.css");
+
+        getStylesheets().add("Views/styles.css");
     }
 
     /**
@@ -278,10 +289,12 @@ public class InvullenUrenView extends Scene {
     private void InitAction(){
 
         setBeginTijd.setOnAction(e -> {
-            new TimePicker(BeginTijd);
+            new TimePicker(this,"BeginTijd");
         });
 
-
+        setEindTijd.setOnAction(e -> {
+            new TimePicker(this, "EindTijd");
+        });
 
 
 
@@ -427,7 +440,6 @@ public class InvullenUrenView extends Scene {
 
     /**
 	 * Haalt de volledigenaam op van de huidige gebruiker
-	 * @param volledigenaam
 	 */
     public void setGebruiker() {
         gebruiker.setText(controller.getHoofdMenuController().getGebruikerModel().getVolledigeNaam());
@@ -439,5 +451,13 @@ public class InvullenUrenView extends Scene {
     public void setTijd() {
         BeginTijd.setText("  " + LocalTime.now().format(DateTimeFormatter.ofPattern("hh:mm")));
         EindTijd.setText("  " + LocalTime.now().format(DateTimeFormatter.ofPattern("hh:mm")));
+    }
+
+    public void setBeginTijd (String tijd) {
+        BeginTijd.setText(tijd);
+    }
+
+    public void setEindTijd (String tijd) {
+        EindTijd.setText(tijd);
     }
 }
