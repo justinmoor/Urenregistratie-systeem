@@ -9,18 +9,23 @@ import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 
 public class PersoneelHoofdmenuView extends Scene {
 	private BorderPane pane;
     
-    private BorderPane navigatie;
+	private BorderPane navigatie;
     
+    private StackPane left_pane;
     private VBox img_box;
     private Image img;
     private ImageView terug;
     
+    private StackPane mid_pane;
     private Label home;
+    
+    private StackPane right_pane;
     private Label gebruiker;
     
     private Image img2;
@@ -47,28 +52,35 @@ public class PersoneelHoofdmenuView extends Scene {
 	public void initGui() {
 		pane.setId("pane");
 		
-		navigatie = new BorderPane();
+navigatie = new BorderPane();
 		
+		left_pane = new StackPane();
+		left_pane.setMinWidth(140);
+		left_pane.setPadding(new Insets(15, 0, 15, 15));
 		img_box = new VBox();
 		img = new Image("/Assets/back.png");
 		terug = new ImageView(img);
 		img_box.getChildren().add(terug);
-		img_box.setPadding(new Insets(15, 83, 15, 14));
+		left_pane.getChildren().add(img_box);
 		
+		mid_pane = new StackPane();
+		mid_pane.setPrefWidth(320);
 		home = new Label("HOME");
 		home.setId("home");
-		home.setPadding(new Insets(15));
+		mid_pane.getChildren().add(home);
 		
-		gebruiker = new Label("Peter van Vliet"); //Gebruiker model
-		gebruiker.setPadding(new Insets(15, 14, 15, 15));
+		right_pane = new StackPane();
+		right_pane.setPrefWidth(140);
+		gebruiker = new Label(controller.getGebruikerModel().getVolledigeNaam());
+		right_pane.getChildren().add(gebruiker);
 		
 		img2 = new Image("/Assets/lijntje.png");
 		lijntje = new ImageView(img2);
 		lijntje.setFitWidth(600);
 		
-		navigatie.setLeft(img_box);
-		navigatie.setCenter(home);
-		navigatie.setRight(gebruiker);
+		navigatie.setLeft(left_pane);
+		navigatie.setCenter(mid_pane);
+		navigatie.setRight(right_pane);
 		navigatie.setBottom(lijntje);
 
 		knoppen = new VBox(19);

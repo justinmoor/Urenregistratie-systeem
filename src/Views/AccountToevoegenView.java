@@ -85,7 +85,7 @@ public class AccountToevoegenView extends Scene {
 		
 		left_pane = new StackPane();
 		left_pane.setMinWidth(140);
-		left_pane.setPadding(new Insets(15, 0, 15, 10));
+		left_pane.setPadding(new Insets(15, 0, 15, 15));
 		img_box = new VBox();
 		img = new Image("/Assets/back.png");
 		terug = new ImageView(img);
@@ -155,7 +155,7 @@ public class AccountToevoegenView extends Scene {
 		
 		img3 = new Image("/Assets/blauwlijntje.png");
 		blauw_lijntje = new ImageView(img3);
-		blauw_lijntje.setFitWidth(612);
+		blauw_lijntje.setFitWidth(600);
 		
 		pane.setTop(navigatie);
 		

@@ -12,22 +12,22 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 
 
 public class AccountInfoView  extends Scene{
-
-
-
     private BorderPane pane;
 
     private BorderPane navigatie;
-
+    
+    private StackPane left_pane;
     private VBox img_box;
     private Image img;
     private ImageView terug;
-
+    
+    private StackPane mid_pane;
     private Label accountLabel;
 
     private Image img2;
@@ -86,16 +86,22 @@ public class AccountInfoView  extends Scene{
         pane.setId("pane");
 
         navigatie = new BorderPane();
-
-        img_box = new VBox();
-        img = new Image("/Assets/back.png");
-        terug = new ImageView(img);
-        img_box.getChildren().add(terug);
-        img_box.setPadding(new Insets(15, 0, 15, 14));
-
-        accountLabel = new Label("ACCOUNT");
-        accountLabel.setId("home");
-        accountLabel.setPadding(new Insets(15));
+		
+        left_pane = new StackPane();
+		left_pane.setMinWidth(200);
+		left_pane.setPadding(new Insets(15, 0, 15, 15));
+		img_box = new VBox();
+		img = new Image("/Assets/back.png");
+		terug = new ImageView(img);
+		img_box.getChildren().add(terug);
+		left_pane.getChildren().add(img_box);
+		
+		mid_pane = new StackPane();
+		mid_pane.setPrefWidth(400);
+		accountLabel = new Label("ACCOUNT INFO");
+		accountLabel.setId("home");
+		accountLabel.setAlignment(Pos.CENTER);
+		mid_pane.getChildren().add(accountLabel);
 
         img2 = new Image("/Assets/lijntje.png");
         lijntje = new ImageView(img2);
@@ -109,9 +115,6 @@ public class AccountInfoView  extends Scene{
 
         gridpane = new GridPane();
         gridpane.setAlignment(Pos.CENTER);
-        gridpane.setHgap(10);
-        gridpane.setVgap(15);
-        gridpane.setPadding(new Insets(10,10,10,30));
         gridpane.setStyle("-fx-background-color: #f9f9f7");
         pane.setCenter(gridpane);
 
@@ -193,7 +196,7 @@ public class AccountInfoView  extends Scene{
         img3 = new Image("/Assets/blauwlijntje.png");
 
         blauw_lijntje = new ImageView(img3);
-        blauw_lijntje.setFitWidth(612);
+        blauw_lijntje.setFitWidth(600);
 
         pane.setBottom(blauw_lijntje);
 
