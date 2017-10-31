@@ -304,9 +304,6 @@ public class InvullenUrenView extends Scene {
             new TimePicker(this, "EindTijd");
         });
 
-
-
-
 	    	terug.setOnMouseClicked(e -> {
 	    	 	controller.getHoofdMenuController().startHoofdmenuView();
 	    });
@@ -315,6 +312,7 @@ public class InvullenUrenView extends Scene {
             klanten = null;
             try {
                 klanten = controller.getKlanten();
+                System.out.println("called");
             } catch (SQLException e1) {
                 e1.printStackTrace();
             }
