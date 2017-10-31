@@ -15,6 +15,7 @@ import javafx.scene.layout.VBox;
 public class AccountToevoegenView extends Scene {
 		/**
 		 * Initialiseren van alle benodigde onderdelen voor deze view
+		 * @author stanhoenson
 		 */
 		private BorderPane pane;
 
@@ -73,6 +74,7 @@ public class AccountToevoegenView extends Scene {
 		/**
 	     * Maakt de view aan. Ook wordt de controller meegegeven, zodat de controller de logica van de knoppen regelt
 	     * @param controller
+	     * @author stanhoenson
 	     */ 	
 	public AccountToevoegenView(GebruikerToevoegenController controller){
 		super(new BorderPane(), 600,  400); 			// Nieuwe pane meegeven aan de superklasse (dus scene).
@@ -87,6 +89,7 @@ public class AccountToevoegenView extends Scene {
 	/**
 	 * Haalt de volledigenaam op van de huidige gebruiker
 	 * @param volledigenaam
+	 * @author stanhoenson
 	 */
 	public void setGebruikerLabel(String volledigenaam){
 		gebruiker.setText(volledigenaam);
@@ -94,6 +97,7 @@ public class AccountToevoegenView extends Scene {
 
 	/**
 	 * Maken en plaatsen van alle onderdelen voor de GUI
+	 * @author stanhoenson
 	 */
 	public void initGui() {
 		pane.setId("pane");

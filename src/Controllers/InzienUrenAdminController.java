@@ -65,7 +65,7 @@ public class InzienUrenAdminController {
 
     /**
      * Maakt van de dataset die ook aanwezig is in de view een CSV file.
-     *
+     * @author stanhoenson
      * @throws Exception
      */
     public void writeExcel() throws Exception {
