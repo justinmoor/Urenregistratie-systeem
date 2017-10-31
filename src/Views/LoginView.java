@@ -51,7 +51,8 @@ public class LoginView extends Scene {
 	    private Label foutief;
 	    
 	    private Image img2;
-	    private ImageView blauw_lijntje; 
+	    private ImageView blauw_lijntje;
+	    private Label fout;
 
 	    /**
 	     * Maakt de view aan. Ook wordt de controller meegegeven, zodat de controller de logica van de knoppen regelt
@@ -72,6 +73,7 @@ public class LoginView extends Scene {
     		pane.setId("pane");
     	
 		groep = new VBox(12);
+		fout = new Label("");
 		
 		titel = new Label("Urenregistratie");
 		titel.setId("title");
@@ -93,7 +95,7 @@ public class LoginView extends Scene {
 		login = new Button("LOG IN");
 		login.setId("login");
 		
-		groep.getChildren().addAll(titel, lijntje, email, wachtwoord, login);
+		groep.getChildren().addAll(titel, lijntje, email, wachtwoord, login, fout);
 		
 		pane.setCenter(groep);
 		groep.setAlignment(Pos.CENTER);
@@ -116,7 +118,9 @@ public class LoginView extends Scene {
      */
     private void InitAction() {
         login.setOnAction(e -> {
-            controller.logIn(tf1.getText(), tf2.getText());
+            if(!controller.logIn(tf1.getText(), tf2.getText())){
+            	fout.setText("Gebruikersnaam of wachtwoord is fout!");
+			}
         });
 
         login.setDefaultButton(true); 	// Gebruik enter om in te loggen. (enige knop op het scherm, dus default knop.)
@@ -125,6 +129,7 @@ public class LoginView extends Scene {
     public void clearFields() {
     	tf1.setText("");
     	tf2.setText("");
+    	fout.setText("");
 	}
 
 }

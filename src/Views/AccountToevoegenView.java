@@ -62,7 +62,8 @@ public class AccountToevoegenView extends Scene {
 		private Button toevoegen;
 		
 		private Image img3;
-	    private ImageView blauw_lijntje; 
+	    private ImageView blauw_lijntje;
+	    private Label fout;
 	    
 	    /**
 	     * Initialiseren van de bijhorende controller
@@ -98,7 +99,7 @@ public class AccountToevoegenView extends Scene {
 		pane.setId("pane");
 		
 		navigatie = new BorderPane();
-		
+		fout = new Label("");
 		left_pane = new StackPane();
 		left_pane.setMinWidth(140);
 		left_pane.setPadding(new Insets(15, 0, 15, 15));
@@ -166,7 +167,7 @@ public class AccountToevoegenView extends Scene {
 		toevoegen.setId("toevoegen");
 
 		groep = new VBox(12);
-		groep.getChildren().addAll(voornaam, tussenvoegsel, achternaam, email, rechten, vbox_lijntje, toevoegen);
+		groep.getChildren().addAll(voornaam, tussenvoegsel, achternaam, email, rechten, vbox_lijntje, toevoegen, fout);
 		groep.setPadding(new Insets(0, 0, 16, 0));
 		
 		img3 = new Image("/Assets/blauwlijntje.png");
@@ -193,7 +194,11 @@ public class AccountToevoegenView extends Scene {
      */
 	private void InitAction(){
 		toevoegen.setOnAction(e -> {
-			controller.insert(tf1.getText(), tf2.getText(), tf3.getText(), tf4.getText(), cb1.getValue().toString());
+		    if(controller.checkVelden(tf1.getText(), tf3.getText(), tf4.getText())) {
+                controller.insert(tf1.getText(), tf2.getText(), tf3.getText(), tf4.getText(), cb1.getValue().toString());
+            } else {
+		        fout.setText("Niet alle velden zijn ingevuld!");
+            }
 
 		});
 		
