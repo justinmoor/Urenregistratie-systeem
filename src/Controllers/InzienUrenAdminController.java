@@ -68,23 +68,27 @@ public class InzienUrenAdminController {
      */
     public void writeExcel() throws Exception {
 
-        FileChooser fileChooser = new FileChooser();
-        fileChooser.setInitialFileName(view.getBegindatum()+"-"+view.getEinddatum()+"gewerkte_uren.csv");
-        File saveFile = fileChooser.showSaveDialog(new Stage());
-        PrintWriter printWriter = new PrintWriter(saveFile);
-        String goedgekeurd = "";
+        try {
+            FileChooser fileChooser = new FileChooser();
+            fileChooser.setInitialFileName(view.getBegindatum() + "-" + view.getEinddatum() + "gewerkte_uren.csv");
+            File saveFile = fileChooser.showSaveDialog(new Stage());
+            PrintWriter printWriter = new PrintWriter(saveFile);
+            String goedgekeurd = "";
 
-        String firstString = "uur ID"+COMMA+"Begindatum"+COMMA+"Einddatum"+ COMMA+ "Begintijd"+COMMA+"Eindtijd"+ COMMA+ "Commentaar"+ COMMA+ "Goedgekeurd"+ COMMA+ "Personeelslid"+ COMMA+ "Klant"+ COMMA+ "Project"+ COMMA+ "Onderwerp"+"\n";
-        printWriter.write(firstString);
-        for (IngevuldeTijdModel model :resultatenlijst) {
-            if (model.isGoedgekeurd()){
-                goedgekeurd = "ja";
-            } else{
-                goedgekeurd = "nee";
+            String firstString = "uur ID" + COMMA + "Begindatum" + COMMA + "Einddatum" + COMMA + "Begintijd" + COMMA + "Eindtijd" + COMMA + "Commentaar" + COMMA + "Goedgekeurd" + COMMA + "Personeelslid" + COMMA + "Klant" + COMMA + "Project" + COMMA + "Onderwerp" + "\n";
+            printWriter.write(firstString);
+            for (IngevuldeTijdModel model : resultatenlijst) {
+                if (model.isGoedgekeurd()) {
+                    goedgekeurd = "ja";
+                } else {
+                    goedgekeurd = "nee";
+                }
+                printWriter.write(model.getUurId() + COMMA + model.getBeginDatum() + COMMA + model.getEindDatum() + COMMA + model.getBeginTijd() + COMMA + model.getEindTijd() + COMMA + model.getCommentaar() + COMMA + goedgekeurd + COMMA + model.getPersoonNaam() + COMMA + model.getKlantNaam() + COMMA + model.getProjectNaam() + COMMA + model.getOnderwerpNaam() + "\n");
             }
-            printWriter.write(model.getUurId()+COMMA+model.getBeginDatum()+COMMA+model.getEindDatum()+COMMA+model.getBeginTijd()+COMMA+model.getEindTijd()+ COMMA+ model.getCommentaar()+ COMMA+ goedgekeurd +COMMA+model.getPersoonNaam()+COMMA+ model.getKlantNaam()+COMMA+model.getProjectNaam()+COMMA+model.getOnderwerpNaam()+ "\n");
+            printWriter.close();
+        } catch (NullPointerException ex){
+            System.out.println("ERROR ERROR ERROR ERROR: NULL, OPVANGEN!!");
         }
-        printWriter.close();
     }
 
     /**
