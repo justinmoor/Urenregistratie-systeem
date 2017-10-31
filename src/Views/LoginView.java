@@ -21,8 +21,14 @@ import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 
 public class LoginView extends Scene {
+		/**
+	     * Initialiseren van de bijhorende controller
+	     */
 		private LoginController controller;
 		
+		/**
+		 * Initialiseren van alle benodigde onderdelen voor deze view
+		 */
 		private BorderPane pane;
 	    
 	    private VBox groep;
@@ -47,6 +53,10 @@ public class LoginView extends Scene {
 	    private Image img2;
 	    private ImageView blauw_lijntje; 
 
+	    /**
+	     * Maakt de view aan. Ook wordt de controller meegegeven, zodat de controller de logica van de knoppen regelt
+	     * @param controller
+	     */ 	
     public LoginView(LoginController controller) {
         super(new BorderPane(), 600, 400); 		// Nieuwe pane meegeven aan de superklasse (dus scene).
         pane = (BorderPane) this.getRoot(); 		// Deze nieuwe gridpane van de superklasse wordt de gridpane die hier gebruikt wordt.
@@ -55,7 +65,9 @@ public class LoginView extends Scene {
         InitAction(); 		// InitAction om alle functionaliteiten te initialiseren, denk aan knop.setOnAction() etc.
     }
 
-    //Grafische elementen initialiseren.
+    /**
+	 * Maken en plaatsen van alle onderdelen voor de GUI
+	 */
     public void initGui() {
     		pane.setId("pane");
     	
@@ -99,7 +111,9 @@ public class LoginView extends Scene {
         getStylesheets().add("Views/styles.css");
     }
 
-    //Functionele zaken initialiseren.
+    /**
+     * Methode waar acties worden meegegeven aan verschillende knoppen of andere onderdelen uit de view
+     */
     private void InitAction() {
         login.setOnAction(e -> {
             controller.logIn(tf1.getText(), tf2.getText());

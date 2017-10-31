@@ -18,8 +18,19 @@ import javafx.scene.paint.Color;
 
 
 public class AccountInfoView  extends Scene{
+	/**
+	 * Initialiseren van de bijhorende controller
+	 */
+	private AccountInfoController controller;
+	
+	/**
+	 * Initialiseren van de algemene pane
+	 */
     private BorderPane pane;
 
+    /**
+     * Initialiseren van de navigatie balk en de benodigde onderdelen
+     */
     private BorderPane navigatie;
     
     private StackPane left_pane;
@@ -33,15 +44,19 @@ public class AccountInfoView  extends Scene{
     private Image img2;
     private ImageView lijntje;
 
+    /**
+     * Initialiseren van de gridpane waar alle onderdelen in komen
+     */
     private GridPane gridpane;
-    private AccountInfoController controller;
 
+    /**
+     * Initialiseren van alle benodigde onderdelen voor deze specifieke view
+     */
     private Image img4;
     private ImageView vbox_lijntje;
 
     private Image img3;
     private ImageView blauw_lijntje;
-
 
     private Label voornaamlabel;
     private Label tussenVoegselLabel;
@@ -62,6 +77,9 @@ public class AccountInfoView  extends Scene{
 
     private Button opslaan;
 
+    /**
+     * Initialiseren van HBox's en VBox's voor het maken van de layout
+     */
     private HBox topGedeelte;
     private HBox voornaamBox;
     private HBox tussenvoegselBox;
@@ -74,19 +92,30 @@ public class AccountInfoView  extends Scene{
 
     private VBox gegevensOnderElkaarBox;
 
-
-
+    /**
+     * Maakt de view aan. Ook wordt de controller meegegeven, zodat de controller de logica van de knoppen regelt
+     * @param controller
+     */ 
     public AccountInfoView(AccountInfoController controller) {
         super(new BorderPane(), 600, 400);
         pane = (BorderPane) this.getRoot();
         this.controller = controller;
     }
 
+    /**
+     * Maken en plaatsen van alle onderdelen voor de GUI
+     */ 
     public void initGui() {
         pane.setId("pane");
 
+        /**
+         * Aanmaken van de navigatie balk en de benodigde onderdelen
+         */
         navigatie = new BorderPane();
 		
+        /**
+         * Aanmaken van de linker kant van de navigatie balk
+         */
         left_pane = new StackPane();
 		left_pane.setMinWidth(200);
 		left_pane.setPadding(new Insets(15, 0, 15, 15));
@@ -96,6 +125,9 @@ public class AccountInfoView  extends Scene{
 		img_box.getChildren().add(terug);
 		left_pane.getChildren().add(img_box);
 		
+		/**
+         * Aanmaken van het midden van de navigatie balk
+         */
 		mid_pane = new StackPane();
 		mid_pane.setPrefWidth(400);
 		accountLabel = new Label("ACCOUNT INFO");
@@ -103,21 +135,33 @@ public class AccountInfoView  extends Scene{
 		accountLabel.setAlignment(Pos.CENTER);
 		mid_pane.getChildren().add(accountLabel);
 
+		/**
+         * Aanmaken van het lijntje om de navigatie balk beter kunnen onderscheiden van de rest van de view
+         */
         img2 = new Image("/Assets/lijntje.png");
         lijntje = new ImageView(img2);
         lijntje.setFitWidth(600);
 
-        navigatie.setLeft(img_box);
-        navigatie.setCenter(accountLabel);
+        /**
+         * Plaatsen van de onderdelen in de navigatie pane
+         */
+        navigatie.setLeft(left_pane);
+        navigatie.setCenter(mid_pane);
         navigatie.setBottom(lijntje);
 
         pane.setTop(navigatie);
 
+        /**
+         * Aanmaken van de gridpane, wat styling en het plaatsen van de gridpane in de algemene pane
+         */
         gridpane = new GridPane();
         gridpane.setAlignment(Pos.CENTER);
         gridpane.setStyle("-fx-background-color: #f9f9f7");
         pane.setCenter(gridpane);
 
+        /**
+         * Aanmaken van alle benodigde onderdelen voor deze specifieke view
+         */
         voornaamlabel = new Label("Voornaam: \t\t\t\t");
         voornaamlabel.setTextFill(Color.GREY);
 
@@ -187,6 +231,9 @@ public class AccountInfoView  extends Scene{
         opslaan = new Button("OPSLAAN");
         opslaan.setId("opslaan");
 
+        /**
+         * Aanmaken van de VBox waar alle onderdelen aan worden toegevoegd en het plaatsen van deze VBox
+         */
         gegevensOnderElkaarBox = new VBox(12);
         gegevensOnderElkaarBox.getChildren().addAll(voornaamBox, tussenvoegselBox, achternaamBox, emailBox, wachtwoordBox, vbox_lijntje, nWachtwoordBox, nHerhaalWachtwoordBox, opslaan);
         gegevensOnderElkaarBox.setPadding(new Insets(0, 0, 20, 0));
@@ -200,9 +247,15 @@ public class AccountInfoView  extends Scene{
 
         pane.setBottom(blauw_lijntje);
 
+        /**
+         * Toevoegen van een stylesheet
+         */
         getStylesheets().add("Views/styles.css");
     }
 
+    /**
+     * Methode waar acties worden meegegeven aan verschillende knoppen of andere onderdelen uit de view
+     */
     public void initAction() {
 
         img_box.setOnMouseClicked(e -> {

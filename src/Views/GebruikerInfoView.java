@@ -16,6 +16,9 @@ import javafx.scene.layout.VBox;
 import java.util.ArrayList;
 
 public class GebruikerInfoView extends Scene {
+	/**
+	 * Initialiseren van alle benodigde onderdelen voor deze view
+	 */
 	private BorderPane pane;
 	
 	private BorderPane navigatie;
@@ -43,6 +46,9 @@ public class GebruikerInfoView extends Scene {
     private ImageView blauw_lijntje;
     private TableColumn <GebruikerModel, String> werkzaam;
 
+    /**
+     * Initialiseren van de bijhorende controller
+     */
     private GebruikerInfoController controller;
 
     private ContextMenu context;
@@ -51,6 +57,10 @@ public class GebruikerInfoView extends Scene {
 
   //  private HoofdMenuController controller;
 
+    /**
+     * Maakt de view aan. Ook wordt de controller meegegeven, zodat de controller de logica van de knoppen regelt
+     * @param controller
+     */ 	
     public GebruikerInfoView(GebruikerInfoController controller){
         super(new BorderPane(), 900, 600);
         pane = (BorderPane) this.getRoot();
@@ -59,6 +69,9 @@ public class GebruikerInfoView extends Scene {
         InitAction();
     }
 
+    /**
+	 * Maken en plaatsen van alle onderdelen voor de GUI
+	 */
     private void initGui(){
         pane.setId("pane");
 		
@@ -122,8 +135,6 @@ public class GebruikerInfoView extends Scene {
 		inActief = new MenuItem("Inactief");
 		actief = new MenuItem("Actief");
 
-
-
 		context.getItems().addAll(inActief, actief);
 		table.setContextMenu(context);
         table.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
@@ -132,7 +143,7 @@ public class GebruikerInfoView extends Scene {
     }
 
     /**
-     * Initialiseert alle functionele zaken
+     * Methode waar acties worden meegegeven aan verschillende knoppen of andere onderdelen uit de view
      */
     private void InitAction(){
         img_box.setOnMousePressed(e -> {
@@ -155,7 +166,7 @@ public class GebruikerInfoView extends Scene {
 
 
     /**
-     * Initialiseert de tabel.
+     * Initialiseert de tabel
      */
     private void InitTable(){
         ObservableList<GebruikerModel> gebruikers = FXCollections.observableList(controller.getGebruikers());

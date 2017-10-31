@@ -13,6 +13,9 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 
 public class PersoneelHoofdmenuView extends Scene {
+	/**
+	 * Initialiseren van alle benodigde onderdelen voor deze view
+	 */
 	private BorderPane pane;
     
 	private BorderPane navigatie;
@@ -37,9 +40,16 @@ public class PersoneelHoofdmenuView extends Scene {
     
     private Image img3;
     private ImageView blauw_lijntje;
-		
+	
+    /**
+     * Initialiseren van de bijhorende controller
+     */
 	private HoofdMenuController controller;
 	
+	/**
+     * Maakt de view aan. Ook wordt de controller meegegeven, zodat de controller de logica van de knoppen regelt
+     * @param controller
+     */ 
 	public PersoneelHoofdmenuView(HoofdMenuController controller){
 		super(new BorderPane(), 600,  400); 		// Nieuwe pane meegeven aan de superklasse (dus scene).
 		pane = (BorderPane) this.getRoot(); 		// Deze nieuwe gridpane van de superklasse wordt de gridpane die hier gebruikt wordt.
@@ -49,10 +59,13 @@ public class PersoneelHoofdmenuView extends Scene {
 		InitAction();		// InitAction om alle functionaliteiten te initialiseren, denk aan knop.setOnAction() etc.
 	}
 
+	/**
+	 * Maken en plaatsen van alle onderdelen voor de GUI
+	 */
 	public void initGui() {
 		pane.setId("pane");
 		
-navigatie = new BorderPane();
+		navigatie = new BorderPane();
 		
 		left_pane = new StackPane();
 		left_pane.setMinWidth(140);
@@ -103,6 +116,9 @@ navigatie = new BorderPane();
 		getStylesheets().add("Views/styles.css");
 	}
 	
+	/**
+     * Methode waar acties worden meegegeven aan verschillende knoppen of andere onderdelen uit de view
+     */
 	private void InitAction(){
 		uren.setOnAction(e -> {
 			controller.startInvullenUrenView();

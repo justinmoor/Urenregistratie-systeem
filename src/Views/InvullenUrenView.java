@@ -32,8 +32,14 @@ import javafx.scene.paint.Color;
         import java.util.Optional;
 
 public class InvullenUrenView extends Scene {
+	/**
+     * Initialiseren van de bijhorende controller
+     */
     private HoofdMenuController hoofdMenuController;
     
+    /**
+	 * Initialiseren van alle benodigde onderdelen voor deze view
+	 */
     private BorderPane pane;
     
     private BorderPane navigatie;
@@ -103,6 +109,10 @@ public class InvullenUrenView extends Scene {
 
 	private InvullenUrenController controller;
 
+	/**
+     * Maakt de view aan. Ook wordt de controller meegegeven, zodat de controller de logica van de knoppen regelt
+     * @param controller
+     */ 	
     public InvullenUrenView(InvullenUrenController controller) {
         super(new BorderPane(), 600, 400);
         pane = (BorderPane) this.getRoot();
@@ -118,7 +128,9 @@ public class InvullenUrenView extends Scene {
         InitAction();
     }
 
-
+    /**
+	 * Maken en plaatsen van alle onderdelen voor de GUI
+	 */
     private void InitGui() throws SQLException {
     		pane.setId("pane");
 		
@@ -250,6 +262,9 @@ public class InvullenUrenView extends Scene {
 		getStylesheets().add("Views/styles.css");
     }
 
+    /**
+     * Methode waar acties worden meegegeven aan verschillende knoppen of andere onderdelen uit de view
+     */
     private void InitAction(){
 	    	terug.setOnMouseClicked(e -> {
 	    	 	controller.getHoofdMenuController().startHoofdmenuView();
@@ -370,6 +385,9 @@ public class InvullenUrenView extends Scene {
 
     }
 
+    /**
+     * Ophalen van de door de gebruiker ingevoerde gegevens
+     */
     private void InvullenUren() {
         try {
             controller.insert(klantField.getText(), projectField.getText(), onderwerpField.getText(), commentaarField.getText(), BeginDatum.getValue().toString(),
@@ -387,10 +405,17 @@ public class InvullenUrenView extends Scene {
         setTijd();
     }
 
+    /**
+	 * Haalt de volledigenaam op van de huidige gebruiker
+	 * @param volledigenaam
+	 */
     public void setGebruiker() {
         gebruiker.setText(controller.getHoofdMenuController().getGebruikerModel().getVolledigeNaam());
     }
 
+    /**
+     * Haalt de huidige tijd op en zet dat in de view
+     */
     public void setTijd() {
         BeginTijd.setText("  " + LocalTime.now().format(DateTimeFormatter.ofPattern("hh:mm")));
         EindTijd.setText("  " + LocalTime.now().format(DateTimeFormatter.ofPattern("hh:mm")));

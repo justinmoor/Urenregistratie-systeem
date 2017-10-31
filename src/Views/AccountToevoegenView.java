@@ -13,24 +13,27 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 
 public class AccountToevoegenView extends Scene {
+		/**
+		 * Initialiseren van alle benodigde onderdelen voor deze view
+		 */
 		private BorderPane pane;
 
-		 private BorderPane navigatie;
+		private BorderPane navigatie;
 		    
-		    private StackPane left_pane;
-		    private VBox img_box;
-		    private Image img;
-		    private ImageView terug;
+		private StackPane left_pane;
+		private VBox img_box;
+		private Image img;
+		private ImageView terug;
 		    
-		    private StackPane mid_pane;
-		    private Label home;
+		private StackPane mid_pane;
+		private Label home;
 		    
-		    private StackPane right_pane;
-		    private Label gebruiker;
+		private StackPane right_pane;
+		private Label gebruiker;
 		    
-		    private Image img2;
-		    private ImageView lijntje;
-	    
+		private Image img2;
+		private ImageView lijntje;
+	   
 	    private VBox groep;
 	
 	    private HBox voornaam;
@@ -61,8 +64,15 @@ public class AccountToevoegenView extends Scene {
 		private Image img3;
 	    private ImageView blauw_lijntje; 
 	    
+	    /**
+	     * Initialiseren van de bijhorende controller
+	     */
 		private GebruikerToevoegenController controller;
 
+		/**
+	     * Maakt de view aan. Ook wordt de controller meegegeven, zodat de controller de logica van de knoppen regelt
+	     * @param controller
+	     */ 	
 	public AccountToevoegenView(GebruikerToevoegenController controller){
 		super(new BorderPane(), 600,  400); 			// Nieuwe pane meegeven aan de superklasse (dus scene).
 		pane = (BorderPane) this.getRoot(); 			// Deze nieuwe gridpane van de superklasse wordt de gridpane die hier gebruikt wordt.
@@ -73,11 +83,17 @@ public class AccountToevoegenView extends Scene {
 		InitAction();		// InitAction om alle functionaliteiten te initialiseren, denk aan knop.setOnAction() etc.
 	}
 
+	/**
+	 * Haalt de volledigenaam op van de huidige gebruiker
+	 * @param volledigenaam
+	 */
 	public void setGebruikerLabel(String volledigenaam){
 		gebruiker.setText(volledigenaam);
 	}
 
-	//Grafische elementen initialiseren.
+	/**
+	 * Maken en plaatsen van alle onderdelen voor de GUI
+	 */
 	public void initGui() {
 		pane.setId("pane");
 		
@@ -172,7 +188,9 @@ public class AccountToevoegenView extends Scene {
 		getStylesheets().add("Views/styles.css");
 	}
 
-	//Functionele zaken initialiseren.
+	/**
+     * Methode waar acties worden meegegeven aan verschillende knoppen of andere onderdelen uit de view
+     */
 	private void InitAction(){
 		toevoegen.setOnAction(e -> {
 			controller.insert(tf1.getText(), tf2.getText(), tf3.getText(), tf4.getText(), cb1.getValue().toString());
