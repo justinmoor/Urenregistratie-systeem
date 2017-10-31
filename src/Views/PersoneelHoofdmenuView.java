@@ -112,6 +112,7 @@ public class PersoneelHoofdmenuView extends Scene {
 		img3 = new Image("/Assets/blauwlijntje.png");
 		blauw_lijntje = new ImageView(img3);
 		blauw_lijntje.setFitWidth(600);
+		pane.setBottom(blauw_lijntje);
     
 		getStylesheets().add("Views/styles.css");
 	}
