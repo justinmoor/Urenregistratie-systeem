@@ -19,7 +19,11 @@ public class IngevuldeTijdDAO {
         this.db = db;
     }
 
-    public ArrayList<KlantModel> haalKlantenOp() throws SQLException {
+    /**
+     * Haalt klanten op
+     * @return naam v/d klant
+     */
+    public ArrayList<KlantModel> haalKlantenOp() {
 
         ArrayList<KlantModel> klant_namen = null;
         try {
@@ -37,7 +41,12 @@ public class IngevuldeTijdDAO {
         return klant_namen;
     }
 
-    public ArrayList<ProjectModel> haalProjectenOp(String klant_naam) throws SQLException{
+    /**
+     * Haalt projecten op bij bepaalde klant
+     * @param klant_naam
+     * @return projecten
+     */
+    public ArrayList<ProjectModel> haalProjectenOp(String klant_naam) {
 
         ArrayList<ProjectModel> projecten = null;
         try {
@@ -56,7 +65,12 @@ public class IngevuldeTijdDAO {
         return projecten;
     }
 
-    public ArrayList<OnderwerpModel> haalOnderwerpenOp(String project_naam) throws SQLException{
+    /**
+     * Haalt onderwerpen (Sprints) bij projecten op
+     * @param project_naam
+     * @return project
+     */
+    public ArrayList<OnderwerpModel> haalOnderwerpenOp(String project_naam){
 
         ArrayList<OnderwerpModel> onderwerpen = null;
         try {
@@ -75,8 +89,19 @@ public class IngevuldeTijdDAO {
         return onderwerpen;
     }
 
-
-    public void insertMetCommentaar(int getPersoonsID, String klant, String project, String onderwerp, String commentaar, String begindatum, String begintijd, String einddatum, String eindtijd) throws SQLException{
+    /**
+     * Voegt commentaar bij een ingevulde tijd.
+     * @param getPersoonsID
+     * @param klant
+     * @param project
+     * @param onderwerp
+     * @param commentaar
+     * @param begindatum
+     * @param begintijd
+     * @param einddatum
+     * @param eindtijd
+     */
+    public void insertMetCommentaar(int getPersoonsID, String klant, String project, String onderwerp, String commentaar, String begindatum, String begintijd, String einddatum, String eindtijd){
 
         try {
             PreparedStatement insertMetCommentaar = db.getConnection().prepareStatement("INSERT INTO geregistreerdetijd (persoonID, klant_naam, project_naam, onderwerp_naam, commentaar, begindatum, begintijd, einddatum, eindtijd) VALUES(?,?,?,?,?,?,?,?,?)");
@@ -194,6 +219,12 @@ public class IngevuldeTijdDAO {
         }
     }
 
+    /**
+     * Voegt nieuwe klant toe
+     * @param klant
+     * @param project
+     * @param onderwerp
+     */
     public void voegNieuweKlantToe(String klant, String project, String onderwerp) {
 
         try {
@@ -209,6 +240,12 @@ public class IngevuldeTijdDAO {
         }
     }
 
+    /**
+     * Voegt niew project toe
+     * @param klant
+     * @param project
+     * @param onderwerp
+     */
     public void voegNieuwProjectToe(String klant, String project, String onderwerp) {
 
         try {
@@ -225,6 +262,11 @@ public class IngevuldeTijdDAO {
         }
     }
 
+    /**
+     * Voegt nieuw onderwerp toe
+     * @param project
+     * @param onderwerp
+     */
     public void voegNiewOnderwerpToe(String project, String onderwerp) {
         try {
             PreparedStatement voegOnderwerpToe = db.getConnection().prepareStatement("INSERT INTO onderwerp (project_naam, onderwerp_naam) VALUES(?,?)");

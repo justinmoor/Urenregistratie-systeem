@@ -39,6 +39,11 @@ public class GebruikerDAO {
         return model;
     }
 
+    /**
+     * Deze methode krijgt de data of de gebruiker die wilt inloggen werkzaam is.
+     * @param email
+     * @return Werkzaam string
+     */
     public String getWerkzaam(String email) {
         String werkzaam = "";
 
@@ -57,7 +62,11 @@ public class GebruikerDAO {
         return werkzaam;
     }
 
-    //Accepteert een email string en geeft het bijbehorende wachtwoord terug.
+    /**
+     * Haalt het wachtwoord uit de database om in te kunnen loggen
+     * @param email
+     * @return Wachtwoord string
+     */
     public String getWachtwoordQuery(String email) {
         String wachtwoord = "";
 
@@ -77,6 +86,14 @@ public class GebruikerDAO {
         return wachtwoord;
     }
 
+    /**
+     * Maakt een nieuw account aan.
+     * @param voornaam
+     * @param tussenvoegsel
+     * @param achternaam
+     * @param email
+     * @param rechten
+     */
     public void insertAccount(String voornaam, String tussenvoegsel, String achternaam, String email, String rechten) {
         String query = "INSERT INTO personeel (achternaam, tussenvoegsel, voornaam, email, rechten) VALUES (?, ?, ?, ?, ?);";
 
@@ -102,6 +119,10 @@ public class GebruikerDAO {
     //Alle accounts krijgen
     private ArrayList<GebruikerModel> gebruikers;
 
+    /**
+     * Verkrijg alle accounts uit de database om een overzicht te maken
+     * @return Arraylist van alle accounts
+     */
     public ArrayList getAllAccount() {
         gebruikers = new ArrayList<>();
         String query = "SELECT persoonID, voornaam, tussenvoegsel, achternaam, email, rechten, werkzaam FROM personeel;";
@@ -138,6 +159,10 @@ public class GebruikerDAO {
         return gebruikers;
     }
 
+    /**
+     * Zet een bepaalde gebruiker op actief (werkzaam)
+     * @param model van de gebruiker
+     */
     public void setWerkzaam(GebruikerModel model) {
         try {
             PreparedStatement werkzaam = db.getConnection().prepareStatement("UPDATE personeel SET werkzaam = 1 WHERE persoonID = ?;");
@@ -148,6 +173,10 @@ public class GebruikerDAO {
         }
     }
 
+    /**
+     * Zet een bepaalde gebruiker op inactief (niet werkzaam)
+     * @param model van de gebruiker
+     */
     public void setNietWerkzaam(GebruikerModel model) {
         try {
             PreparedStatement werkzaam = db.getConnection().prepareStatement("UPDATE personeel SET werkzaam = 0 WHERE persoonID = ?;");
@@ -161,6 +190,11 @@ public class GebruikerDAO {
     }
 
 
+    /**
+     * Wijzigt het wachtwoord
+     * @param gebruikerModel
+     * @param nieuwWachtwoord
+     */
     public void setgebruikerWachtwoord(GebruikerModel gebruikerModel, String nieuwWachtwoord) {
 
         try {
