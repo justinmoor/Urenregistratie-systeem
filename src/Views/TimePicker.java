@@ -1,12 +1,16 @@
 package Views;
 
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-
 import javafx.scene.image.ImageView;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
@@ -15,7 +19,10 @@ public class TimePicker extends Stage{
 
     private Stage newStage;
     private GridPane pane;
+    private BorderPane borderpane;
     private Scene scene;
+    
+    private Label titel;
 
     private Label uren;
     private Label min;
@@ -30,6 +37,21 @@ public class TimePicker extends Stage{
     private Image imageOmlaag;
     private ImageView arrowdownuren;
     private ImageView arrowdownmin;
+    
+    private BorderPane navigatie;
+    
+    private StackPane mid_pane;
+    private Label home;
+    
+    private VBox bottom;
+    
+    private Image img2;
+    private ImageView lijntje;
+    
+    private Image img3;
+    private ImageView blauw_lijntje;
+    
+    private Button opslaan;
 
     public TimePicker(Label label) {
 
@@ -40,12 +62,53 @@ public class TimePicker extends Stage{
     }
 
     private void initGui() {
-
         newStage = new Stage();
-        pane = new GridPane();
+        
+        navigatie = new BorderPane();
+        
+        mid_pane = new StackPane();
+		mid_pane.setPrefWidth(260);
+		home = new Label("KIES TIJD");
+		home.setId("home");
+		home.setPadding(new Insets(15, 0, 15, 0));
+		mid_pane.getChildren().add(home);
+		
+		img2 = new Image("/Assets/lijntje.png");
+		lijntje = new ImageView(img2);
+		lijntje.setFitWidth(260);
+		
+		navigatie.setCenter(mid_pane);
+		navigatie.setBottom(lijntje);
+		
+		bottom = new VBox(40);
+		
+		opslaan = new Button("OPSLAAN");
+		opslaan.setId("opslaan-time");
+		
+		img3 = new Image("/Assets/blauwlijntje.png");
+		blauw_lijntje = new ImageView(img3);
+		blauw_lijntje.setFitWidth(260);
+		
+		//bottom.getChildren().addAll(blauw_lijntje);
+        
+        borderpane = new BorderPane();
+        borderpane.setStyle("-fx-background-image: url('/Assets/timepicker_cheat.png')");
+        
+        pane = new GridPane(); 
+        pane.setHgap(10);
+        pane.setVgap(15);
+        
+        pane.setAlignment(Pos.CENTER);
+        pane.setPadding(new Insets(0, 10, 0, 0));
+        
+        borderpane.setTop(navigatie);
+        borderpane.setCenter(pane);
+        borderpane.setBottom(blauw_lijntje);
 
         uren = new Label(LocalTime.now().format(DateTimeFormatter.ofPattern("hh")));
+        uren.setPadding(new Insets(0, 0, 0, 9));
         min = new Label(LocalTime.now().format(DateTimeFormatter.ofPattern("mm")));
+        min.setPadding(new Insets(0, 0, 0, 9));
 
         imageOmhoog = new Image("Assets/up.png");
         arrowUpuren = new ImageView(imageOmhoog);
@@ -54,12 +117,14 @@ public class TimePicker extends Stage{
 
         imageOmlaag = new Image("Assets/down.png");
         arrowdownuren = new ImageView(imageOmlaag);
-        arrowdownuren.setFitHeight(16);
         arrowdownuren.setFitWidth(16);
+        arrowdownuren.setFitHeight(16);
 
         urenOmhoog = new Button();
+        urenOmhoog.setId("button-timepicker");
         urenOmhoog.setGraphic(arrowUpuren);
         urenOmlaag = new Button();
+        urenOmlaag.setId("button-timepicker");
         urenOmlaag.setGraphic(arrowdownuren);
 
         arrowMin = new ImageView(imageOmhoog);
@@ -73,7 +138,9 @@ public class TimePicker extends Stage{
 
         minutenOmhoog = new Button();
         minutenOmhoog.setGraphic(arrowMin);
+        minutenOmhoog.setId("button-timepicker");
         minutenOmlaag = new Button();
+        minutenOmlaag.setId("button-timepicker");
         minutenOmlaag.setGraphic(arrowdownmin);
 
         pane.add(urenOmhoog, 1, 1);
@@ -82,13 +149,14 @@ public class TimePicker extends Stage{
         pane.add(min, 2, 2);
         pane.add(urenOmlaag, 1, 3);
         pane.add(minutenOmlaag, 2, 3);
+        pane.add(opslaan, 1, 4, 2, 2);
 
-        scene = new Scene(pane, 300, 300);
+        scene = new Scene(borderpane, 260, 300);
         newStage.setScene(scene);
         newStage.show();
 
+        scene.getStylesheets().add("Views/styles.css");
 
-        Button opslaan = new Button();
     }
 
     private void initActions() {
