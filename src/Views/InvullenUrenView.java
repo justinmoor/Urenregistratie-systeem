@@ -106,6 +106,9 @@ public class InvullenUrenView extends Scene {
     		private Label EindTijd;
     		private Button setEindTijd;
 
+    		private Image img4;
+    	    private ImageView blauw_lijntje;
+
     		
     		private Button bevestig;
 
@@ -277,10 +280,15 @@ public class InvullenUrenView extends Scene {
 		
 		groep.getChildren().addAll(linkergroep, rechtergroep);
 		
+		img4 = new Image("/Assets/blauwlijntje.png");
+		blauw_lijntje = new ImageView(img3);
+		blauw_lijntje.setFitWidth(600);
+
 		pane.setTop(navigatie);
 		pane.setCenter(groep);
+		pane.setBottom(blauw_lijntje);
 
-        getStylesheets().add("Views/styles.css");
+		getStylesheets().add("Views/styles.css");
     }
 
     /**
