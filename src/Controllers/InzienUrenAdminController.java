@@ -44,9 +44,10 @@ public class InzienUrenAdminController {
     /**
      * Is de klasse die de InzienUrenAdminView onderhoudt.
      * Krijgt DatabaseConnectie mee, zodat deze kan worden doorgegeven aan de DAO.
+     *
      * @param dbc
      */
-    public  InzienUrenAdminController(Stage stage, DatabaseConnectie dbc, HoofdMenuController hoofdMenuController){
+    public InzienUrenAdminController(Stage stage, DatabaseConnectie dbc, HoofdMenuController hoofdMenuController) {
         this.dbc = dbc;
         this.hoofdMenuController = hoofdMenuController;
         ingevuldetijdDAO = new IngevuldeTijdDAO(dbc);
@@ -64,14 +65,16 @@ public class InzienUrenAdminController {
 
     /**
      * Maakt van de dataset die ook aanwezig is in de view een CSV file.
+     *
      * @throws Exception
      */
     public void writeExcel() throws Exception {
 
-        try {
-            FileChooser fileChooser = new FileChooser();
-            fileChooser.setInitialFileName(view.getBegindatum() + "-" + view.getEinddatum() + "gewerkte_uren.csv");
-            File saveFile = fileChooser.showSaveDialog(new Stage());
+
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setInitialFileName(view.getBegindatum() + "-" + view.getEinddatum() + "gewerkte_uren.csv");
+        File saveFile = fileChooser.showSaveDialog(new Stage());
+        if (saveFile != null) {
             PrintWriter printWriter = new PrintWriter(saveFile);
             String goedgekeurd = "";
 
@@ -86,20 +89,20 @@ public class InzienUrenAdminController {
                 printWriter.write(model.getUurId() + COMMA + model.getBeginDatum() + COMMA + model.getEindDatum() + COMMA + model.getBeginTijd() + COMMA + model.getEindTijd() + COMMA + model.getCommentaar() + COMMA + goedgekeurd + COMMA + model.getPersoonNaam() + COMMA + model.getKlantNaam() + COMMA + model.getProjectNaam() + COMMA + model.getOnderwerpNaam() + "\n");
             }
             printWriter.close();
-        } catch (NullPointerException ex){
-            System.out.println("ERROR ERROR ERROR ERROR: NULL, OPVANGEN!!");
         }
     }
+
+}
 
     /**
      * Wordt uitgevoerd wanneer de 'Ververs' knop wordt ingedrukt.
      * Krijgt een ResultSet van de DAO, maakt IngevuldeTijdModels van de resultset en voert deze door naar de view.
      */
-    public void verversButtonPressed(){
+    public void verversButtonPressed() {
         results = ingevuldetijdDAO.getAdminOverzicht(view.getBegindatum(), view.getEinddatum(), view.getKlantnaam(), view.getProjectnaam(), view.getOnderwerpnaam());
         makeModelsFromResultSet(results);
 
-        if(resultatenlijst.isEmpty()){
+        if (resultatenlijst.isEmpty()) {
             Alert legeResultatenLijstAlert = new Alert(Alert.AlertType.ERROR, ERRORMESSAGENORESULTS);
             legeResultatenLijstAlert.show();
         } else {
@@ -109,18 +112,19 @@ public class InzienUrenAdminController {
 
     /**
      * Krijgt een ResultSet van de geregistreerde tijden, vult hier de resultatenlijst ArrayList mee.
+     *
      * @param results
      */
     private void makeModelsFromResultSet(ResultSet results) {
         try {
-            if(results.next()){
+            if (results.next()) {
                 resultatenlijst = new ArrayList<>();
-                do{
+                do {
                     String personeelsNaam;
-                    if(results.getString("tussenvoegsel")!=null) {
-                        personeelsNaam = results.getString("voornaam") +" "+ results.getString("tussenvoegsel") + " "+ results.getString("achternaam");
-                    }else{
-                        personeelsNaam = results.getString("voornaam")+" "+ results.getString("achternaam");
+                    if (results.getString("tussenvoegsel") != null) {
+                        personeelsNaam = results.getString("voornaam") + " " + results.getString("tussenvoegsel") + " " + results.getString("achternaam");
+                    } else {
+                        personeelsNaam = results.getString("voornaam") + " " + results.getString("achternaam");
                     }
                     resultatenlijst.add(new IngevuldeTijdModel(
                             results.getInt("uurID"),
@@ -133,13 +137,13 @@ public class InzienUrenAdminController {
                             results.getInt("persoonID"),
                             results.getString("klant_naam"),
                             results.getString("project_naam"),
-                            results.getString( "onderwerp_naam"),
+                            results.getString("onderwerp_naam"),
                             personeelsNaam
                     ));
 
                     System.out.println(results.getString("klant_naam"));
-                } while(results.next());
-            } else{
+                } while (results.next());
+            } else {
                 resultatenlijst = new ArrayList<>();
             }
             results.close();
@@ -151,7 +155,7 @@ public class InzienUrenAdminController {
     /**
      * Roept de view aan en vult de TableView met de data uit de resultatenlijst ArrayList.
      */
-    private void makeTableViewFromArrayList(){
+    private void makeTableViewFromArrayList() {
         ObservableList<IngevuldeTijdModel> records = FXCollections.observableArrayList(resultatenlijst);
         view.vulTabelUitLijst(records);
     }
@@ -159,11 +163,12 @@ public class InzienUrenAdminController {
     /**
      * Ontvangt een lijst van models die geselecteerd zijn in de view, verandert de goedgekeurd boolean
      * naar true en stuurt ze vervolgens een voor een door naar de ingevuldetijdDAO om weggeschreven te worden.
+     *
      * @param models
      */
-    public void keurGoed(List<IngevuldeTijdModel> models){
-        for (IngevuldeTijdModel model:models
-             ) {
+    public void keurGoed(List<IngevuldeTijdModel> models) {
+        for (IngevuldeTijdModel model : models
+                ) {
             model.setGoedgekeurd(true);
             ingevuldetijdDAO.veranderGoedgekeurdKolom(model);
         }
@@ -176,27 +181,28 @@ public class InzienUrenAdminController {
     /**
      * Vult de dictionary van de autocomplete in de view voor de klanteninput.
      */
-    private void vulKlantenEntries(){
+    private void vulKlantenEntries() {
         ArrayList<String> klanten = new ArrayList<>();
         try {
-            for (KlantModel klant:klantDAO.haalKlantenOp()) {
+            for (KlantModel klant : klantDAO.haalKlantenOp()) {
                 klanten.add(klant.getNaam());
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
-            view.setKlanten(klanten);
+        view.setKlanten(klanten);
 
     }
 
     /**
      * Vult de dictionary van de autocomplete in de view voor de projecteninput.
+     *
      * @param klantNaam
      */
-    public void vulProjectenEntries(String klantNaam){
+    public void vulProjectenEntries(String klantNaam) {
         ArrayList<String> projecten = new ArrayList<>();
         try {
-            for (ProjectModel project:projectDAO.haalProjectenOp(klantNaam)) {
+            for (ProjectModel project : projectDAO.haalProjectenOp(klantNaam)) {
                 System.out.println(project.getProject_naam());
                 projecten.add(project.getProject_naam());
             }
@@ -209,13 +215,14 @@ public class InzienUrenAdminController {
 
     /**
      * Vult de dictionary van de autocomplete in de view voor de onderwerpinput.
+     *
      * @param projectnaam
      */
-    public void vulOnderwerpenEntries( String projectnaam){
+    public void vulOnderwerpenEntries(String projectnaam) {
         ArrayList<String> onderwerpen = new ArrayList<>();
 
         try {
-            for (OnderwerpModel onderwerp:onderwerpDAO.haalOnderwerpenOp(projectnaam)) {
+            for (OnderwerpModel onderwerp : onderwerpDAO.haalOnderwerpenOp(projectnaam)) {
                 onderwerpen.add(onderwerp.getOnderwerp_naam());
             }
         } catch (SQLException e) {
