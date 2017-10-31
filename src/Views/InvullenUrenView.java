@@ -87,6 +87,9 @@ public class InvullenUrenView extends Scene {
     		private HBox tijd1;
     		private Label lbl6;
     		private Label BeginTijd;
+    		private Button setBeginTijd;
+    		private Image clockImg;
+    		private ImageView clockImgView;
     		
     		private Image img3;
     		private ImageView midlijnjte;
@@ -100,6 +103,8 @@ public class InvullenUrenView extends Scene {
     		private HBox tijd2;
     		private Label lbl8;
     		private Label EindTijd;
+    		private Button setEindTijd;
+
     		
     		private Button bevestig;
 
@@ -215,13 +220,17 @@ public class InvullenUrenView extends Scene {
 		BeginDatum.setValue(LocalDate.now());
 		datum1.getChildren().addAll(lbl5, BeginDatum);
 		
-		tijd1 = new HBox();
+		tijd1 = new HBox(0);
 		lbl6 = new Label("Tijd:\t\t");
 		lbl6.setPadding(new Insets(6, 2, 0, 0));
 		BeginTijd = new Label(" ");
 		BeginTijd.setId("text-field-small");
-		BeginTijd.setPrefWidth(136);
-		tijd1.getChildren().addAll(lbl6, BeginTijd);
+		BeginTijd.setPrefWidth(112);
+		clockImg = new Image("Assets/clock.png");
+		clockImgView = new ImageView(clockImg);
+		setBeginTijd = new Button("" +clockImgView);
+		setBeginTijd.setPrefWidth(24);
+		tijd1.getChildren().addAll(lbl6, BeginTijd, setBeginTijd);
 		
 		img3 = new Image("/Assets/lijntje.png");
 		midlijnjte = new ImageView(img3);
@@ -266,6 +275,16 @@ public class InvullenUrenView extends Scene {
      * Methode waar acties worden meegegeven aan verschillende knoppen of andere onderdelen uit de view
      */
     private void InitAction(){
+
+        setBeginTijd.setOnAction(e -> {
+            new TimePicker(BeginTijd);
+        });
+
+
+
+
+
+
 	    	terug.setOnMouseClicked(e -> {
 	    	 	controller.getHoofdMenuController().startHoofdmenuView();
 	    });
