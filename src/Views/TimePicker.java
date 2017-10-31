@@ -87,9 +87,13 @@ public class TimePicker extends Stage{
         newStage.setScene(scene);
         newStage.show();
 
+
+        Button opslaan = new Button();
     }
 
     private void initActions() {
+
+
 
     }
 }
