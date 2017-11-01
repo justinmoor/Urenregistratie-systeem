@@ -93,7 +93,7 @@ public class GebruikerDAO {
      * @param rechten
      */
     public void insertAccount(String voornaam, String tussenvoegsel, String achternaam, String email, String rechten) {
-        String query = "INSERT INTO personeel (achternaam, tussenvoegsel, voornaam, email, rechten) VALUES (?, ?, ?, ?, ?);";
+        String query = "INSERT INTO personeel (achternaam, tussenvoegsel, voornaam, email, rechten, werkzaam) VALUES (?, ?, ?, ?, ?, ?);";
 
         try {
             PreparedStatement statement = db.getConnection().prepareStatement(query);
@@ -107,6 +107,7 @@ public class GebruikerDAO {
             statement.setString(3, voornaam);
             statement.setString(4, email);
             statement.setString(5, rechten);
+            statement.setString(6, "1");
 
             statement.executeQuery();
         } catch (SQLException e) {
