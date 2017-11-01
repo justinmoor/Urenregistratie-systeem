@@ -9,6 +9,7 @@ import Models.IngevuldeTijdModel;
 import Models.KlantModel;
 import Models.OnderwerpModel;
 import Models.ProjectModel;
+import Services.ExcelService;
 import Views.InzienUrenAdminView;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -68,26 +69,8 @@ public class InzienUrenAdminController {
      * @author stanhoenson
      * @throws Exception
      */
-    public void writeExcel() throws Exception {
-        FileChooser fileChooser = new FileChooser();
-        fileChooser.setInitialFileName(view.getBegindatum() + "-" + view.getEinddatum() + "gewerkte_uren.csv");
-        File saveFile = fileChooser.showSaveDialog(new Stage());
-        if (saveFile != null) {
-            PrintWriter printWriter = new PrintWriter(saveFile);
-            String goedgekeurd = "";
-
-            String firstString = "uur ID" + COMMA + "Begindatum" + COMMA + "Einddatum" + COMMA + "Begintijd" + COMMA + "Eindtijd" + COMMA + "Commentaar" + COMMA + "Goedgekeurd" + COMMA + "Personeelslid" + COMMA + "Klant" + COMMA + "Project" + COMMA + "Onderwerp" + "\n";
-            printWriter.write(firstString);
-            for (IngevuldeTijdModel model : resultatenlijst) {
-                if (model.isGoedgekeurd()) {
-                    goedgekeurd = "ja";
-                } else {
-                    goedgekeurd = "nee";
-                }
-                printWriter.write(model.getUurId() + COMMA + model.getBeginDatum() + COMMA + model.getEindDatum() + COMMA + model.getBeginTijd() + COMMA + model.getEindTijd() + COMMA + model.getCommentaar() + COMMA + goedgekeurd + COMMA + model.getPersoonNaam() + COMMA + model.getKlantNaam() + COMMA + model.getProjectNaam() + COMMA + model.getOnderwerpNaam() + "\n");
-            }
-            printWriter.close();
-        }
+    public void writeExcel(){
+        new ExcelService().exportCSV(view.getBegindatum(), view.getEinddatum(), resultatenlijst);
     }
 
 

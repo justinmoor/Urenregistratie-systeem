@@ -264,7 +264,7 @@ public class InzienUrenAdminView extends Scene {
         });
 
         /**
-         * ActionListener op de textfield van project. Op het moment dat deze is gefocussed haalt hiji de projecten uit de database en zet hij ze in de dictionary van de AutoComplete.
+         * ActionListener op de textfield van project. Op het moment dat deze is gefocussed haalt hij de projecten uit de database en zet hij ze in de dictionary van de AutoComplete.
          */
         projectNaamInput.focusedProperty().addListener(new ChangeListener<Boolean>()
         {
