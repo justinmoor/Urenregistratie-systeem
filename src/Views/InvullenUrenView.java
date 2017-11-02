@@ -256,7 +256,7 @@ public class InvullenUrenView extends Scene {
 		
 		img3 = new Image("/Assets/lijntje.png");
 		midlijnjte = new ImageView(img3);
-		midlijnjte.setFitWidth(196);
+		midlijnjte.setFitWidth(204);
 		
 		eind = new Label("EIND");
 		eind.setPadding(new Insets(0, 0, 0, 112));
