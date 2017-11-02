@@ -136,6 +136,10 @@ public class PersoneelHoofdmenuView extends Scene {
 		img_box.setOnMouseClicked(e -> {
 			controller.getLoginController().logUit();
 		});
+
+		gebruiker.setOnMouseClicked(e -> {
+			controller.startAccountInfoView();
+		});
 	}
 }
 
