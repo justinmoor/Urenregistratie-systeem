@@ -75,7 +75,7 @@ public class TimePicker extends Stage{
     private void initGui() {
 
         newStage = new Stage();
-
+        newStage.setAlwaysOnTop(true);
         navigatie = new BorderPane();
 
         mid_pane = new StackPane();
