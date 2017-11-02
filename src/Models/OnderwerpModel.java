@@ -1,5 +1,12 @@
 package Models;
 
+/**
+ * Het model dat gemaakt wordt elke keer dat een onderwerp de database uitghaald wordt
+ *
+ * @author Alex de Bruin
+ * @version 2.0
+ */
+
 public class OnderwerpModel {
 
 

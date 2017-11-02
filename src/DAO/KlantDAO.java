@@ -10,6 +10,11 @@ import java.util.ArrayList;
 
 /**
  * Haalt alle data uit de database uit de "klant" tabel.
+ *
+ * @author Ian beemsterboer
+ * @author Alex de Bruin
+ *
+ * @version 3.0
  */
 public class KlantDAO {
     private DatabaseConnectie db;

@@ -10,6 +10,16 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
+
+/**
+ * De dao voor alle data uit de database die met de tijd te maken hebben
+ *
+ * @author Alex de Bruin
+ * @author Ian Beemsterboer
+ * @author Justin Moor
+ *
+ * @version 3.0
+ */
 public class IngevuldeTijdDAO {
 
 

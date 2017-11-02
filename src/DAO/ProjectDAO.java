@@ -10,6 +10,11 @@ import java.util.ArrayList;
 
 /**
  * Is verantwoordelijk voor het halen van data uit de "project" tabel uit de database.
+ *
+ * @author Ian BeemsterBoer
+ * @author Alex de Bruin
+ *
+ * @version 3.0
  */
 public class ProjectDAO {
 

@@ -10,6 +10,11 @@ import java.util.ArrayList;
 
 /**
  * Is verantwoordelijk voor het halen van onderwerpen uit de database.
+ *
+ * @author Ian Beemsterboer
+ * @author Alex de Bruin
+ *
+ * @version 3.0
  */
 public class OnderwerpDAO {
     DatabaseConnectie db;

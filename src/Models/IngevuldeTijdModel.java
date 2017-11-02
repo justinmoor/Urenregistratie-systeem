@@ -1,5 +1,15 @@
 package Models;
 
+/**
+ * Het model dat gemaakt wordt elke keer als er tijd uit de database gehaald wordt
+ *
+ * @author Alex de Bruin
+ * @author Ian beemsterboer
+ * @author Justin Moor
+ *
+ * @version 3.0
+ */
+
 public class IngevuldeTijdModel {
 
  private int uurId;

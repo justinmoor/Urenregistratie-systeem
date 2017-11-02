@@ -9,6 +9,15 @@ import java.io.FileNotFoundException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 
+/**
+ * De klasse die het mogelijk maakt om een overzicht naar een csv bestand te exporteren
+ *
+ * @author Stan Hoenson
+ * @author Ian Beemsterboer
+ *
+ * @version 3.0
+ */
+
 public class ExcelService {
     private final String COMMA = ";";
     public ExcelService(){

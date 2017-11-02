@@ -1,6 +1,15 @@
 package Models;
 
 
+/**
+ * Het model dat gemaakt wordt wanneer iets van de gebruiker uit de database gehaald wordt
+ *
+ * @author Justin Moor
+ * @author Ian Beemsterboer
+ *
+ * @version 3.0
+ */
+
 public class GebruikerModel {
 
     private int gebruikerID;

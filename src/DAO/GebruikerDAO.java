@@ -7,6 +7,16 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+
+/**
+ * De dao voor alle gebruiker gegevens
+ *
+ * @author Justin Moor
+ * @author Ian Beemsterboer
+ *
+ * @verison 3.0
+ */
+
 public class GebruikerDAO {
 
     private DatabaseConnectie db;
