@@ -12,10 +12,8 @@ import Models.ProjectModel;
 import Views.InvullenUrenView;
 import javafx.stage.Stage;
 
-import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.List;
 
 /**
  * De controller voor het invullen van de uren
@@ -101,5 +99,9 @@ public class InvullenUrenController {
 
     public void voegOnderwerpToe(String project, String onderwerp) {
         onderwerpDao.voegNiewOnderwerpToe(project, onderwerp);
+    }
+
+    public DatabaseConnectie getDb() {
+        return db;
     }
 }

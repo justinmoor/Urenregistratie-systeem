@@ -8,17 +8,16 @@ import javafx.beans.value.ObservableValue;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
-import javafx.event.EventType;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
+
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
@@ -158,12 +157,12 @@ public class InzienUrenAdminView extends Scene {
         onderwerpBox = new VBox(onderwerpLabel, onderwerpNaamInput);
         onderwerpBox.setPadding(new Insets(0, 0, 20, 0));
 
-        begindatumLabel = new Label("Begindatum: ");
+        begindatumLabel = new Label("Begindatum: * ");
         begindatumLabel.setPadding(new Insets(0, 0, 5, 0));
         begindatumPicker = new DatePicker();
 
 
-        einddatumLabel = new Label("Einddatum: ");
+        einddatumLabel = new Label("Einddatum: * ");
         einddatumLabel.setPadding(new Insets(0, 0, 5, 0));
         einddatumPicker = new DatePicker();
 
@@ -373,13 +372,13 @@ public class InzienUrenAdminView extends Scene {
 
         overzichtTableView.getColumns().addAll(         //voeg alle gemaakte kolommen toe aan de tabel.
                 personeelNaamColumn,
-                onderwerpnaamColumn,
                 begintijdColumn,
                 eindtijdColumn,
                 begindatumColumn,
                 einddatumColumn,
                 klantnaamColumn,
                 projectnaamColumn,
+                onderwerpnaamColumn,
                 commentaarColumn,
                 goedgekeurdColumn);
         overzichtTableView.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);

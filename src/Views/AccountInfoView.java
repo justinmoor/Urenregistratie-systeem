@@ -9,11 +9,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.GridPane;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.StackPane;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 
 /**
@@ -283,13 +279,20 @@ public class AccountInfoView  extends Scene{
                 	controller.getHoofdMenuController().getGebruikerModel().setWachtwoord(nWachtwoord.getText());
                 	controller.getHoofdMenuController().startAccountInfoView();
             } else if (nWachtwoord.getLength() < 8){
-            		System.out.println("Wachtwoord is niet lang genoeg");
+
+                MeldingView view = new MeldingView("teKort", this);
             } else {
+                MeldingView view = new MeldingView("nietZelfde", this);
                 System.out.println("Wachtwoorden zijn niet het zelfde");
             }
 
         });
         
+    }
+
+    public void clearNewWachtwoord() {
+        nWachtwoord.setText(null);
+        nHerhaalWachtwoord.setText(null);
     }
 
 }
