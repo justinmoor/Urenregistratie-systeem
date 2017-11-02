@@ -283,7 +283,7 @@ public class InvullenUrenView extends Scene {
 		img4 = new Image("/Assets/blauwlijntje.png");
 		blauw_lijntje = new ImageView(img3);
 		blauw_lijntje.setFitWidth(600);
-
+		
 		pane.setTop(navigatie);
 		pane.setCenter(groep);
 		pane.setBottom(blauw_lijntje);
