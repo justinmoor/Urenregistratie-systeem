@@ -264,10 +264,12 @@ public class AccountInfoView  extends Scene{
         });
 
         opslaan.setOnAction(e -> {
-            if (nWachtwoord.getText().equals(nHerhaalWachtwoord.getText())) {
+            if (nWachtwoord.getText().equals(nHerhaalWachtwoord.getText())&&nWachtwoord.getLength() > 8) {
                 controller.veranderGebruiker(nWachtwoord.getText());
-                controller.getHoofdMenuController().getGebruikerModel().setWachtwoord(nWachtwoord.getText());
-                controller.getHoofdMenuController().startAccountInfoView();
+                	controller.getHoofdMenuController().getGebruikerModel().setWachtwoord(nWachtwoord.getText());
+                	controller.getHoofdMenuController().startAccountInfoView();
+            } else if (nWachtwoord.getLength() < 8){
+            		System.out.println("Wachtwoord is niet lang genoeg");
             } else {
                 System.out.println("Wachtwoorden zijn niet het zelfde");
             }
