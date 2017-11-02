@@ -59,7 +59,7 @@ public class InzienUrenController {
      * Wordt uitgevoerd wanneer de 'Ververs' knop wordt ingedrukt.
      * Krijgt een ResultSet van de DAO, maakt IngevuldeTijdModels van de resultset en voert deze door naar de view.
      */
-    public void buttonPressed() {
+    public void verversButtonPressed() {
         System.out.println(gebruiker.getGebruikerID());
         results = ingevuldeTijdDAO.getPersoneelOverzicht(view.getBegindatum(), view.getEinddatum(), view.getKlantnaam(), view.getProjectnaam(), gebruiker.getGebruikerID(), view.getOnderwerpNaam());
         makeModelsFromResultSet(results);
