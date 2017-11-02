@@ -278,7 +278,7 @@ public class AccountInfoView  extends Scene{
         });
 
         opslaan.setOnAction(e -> {
-            if (nWachtwoord.getText().equals(nHerhaalWachtwoord.getText())&&nWachtwoord.getLength() > 8) {
+            if (nWachtwoord.getText().equals(nHerhaalWachtwoord.getText()) && nWachtwoord.getLength() >= 8) {
                 controller.veranderGebruiker(nWachtwoord.getText());
                 	controller.getHoofdMenuController().getGebruikerModel().setWachtwoord(nWachtwoord.getText());
                 	controller.getHoofdMenuController().startAccountInfoView();

@@ -127,8 +127,8 @@ public class TimePicker extends Stage{
         borderpane.setCenter(pane);
         borderpane.setBottom(blauw_lijntje);
 
-        urenTeller = Integer.parseInt(LocalTime.now().format(DateTimeFormatter.ofPattern("hh")));
-        minTeller = Integer.parseInt(LocalTime.now().format(DateTimeFormatter.ofPattern("mm")));
+        //urenTeller = Integer.parseInt(LocalTime.now().format(DateTimeFormatter.ofPattern("hh")));
+        //minTeller = Integer.parseInt(LocalTime.now().format(DateTimeFormatter.ofPattern("mm")));
 
 
         Calendar cal = Calendar.getInstance();

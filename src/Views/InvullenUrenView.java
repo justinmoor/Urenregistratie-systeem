@@ -25,10 +25,12 @@ import javafx.scene.paint.Color;
         import javafx.scene.text.FontWeight;
 
         import java.sql.SQLException;
+        import java.text.SimpleDateFormat;
         import java.time.LocalDate;
         import java.time.LocalTime;
         import java.time.format.DateTimeFormatter;
         import java.util.ArrayList;
+        import java.util.Calendar;
         import java.util.Optional;
 
 
@@ -230,7 +232,7 @@ public class InvullenUrenView extends Scene {
 		lbl5.setPadding(new Insets(6, 2, 0, 0));
 		BeginDatum = new DatePicker();
 		BeginDatum.setId("text-field-small");
-		BeginDatum.setMinWidth(136);
+		BeginDatum.setMinWidth(144);
 		BeginDatum.setValue(LocalDate.now());
 		datum1.getChildren().addAll(lbl5, BeginDatum);
 		
@@ -265,7 +267,7 @@ public class InvullenUrenView extends Scene {
 		lbl7.setPadding(new Insets(6, 2, 0, 0));
 		EindDatum = new DatePicker();
 		EindDatum.setId("text-field-small");
-		EindDatum.setMinWidth(136);
+		EindDatum.setMinWidth(144);
         EindDatum.setValue(LocalDate.now());
 		datum2.getChildren().addAll(lbl7, EindDatum);
 		
@@ -319,8 +321,8 @@ public class InvullenUrenView extends Scene {
             new TimePicker(this, "EindTijd");
         });
 
-	    	terug.setOnMouseClicked(e -> {
-	    	 	controller.getHoofdMenuController().startHoofdmenuView();
+        terug.setOnMouseClicked(e -> {
+            controller.getHoofdMenuController().startHoofdmenuView();
 	    });
     	
         klantField.setOnKeyPressed(e -> {
@@ -360,7 +362,7 @@ public class InvullenUrenView extends Scene {
         });
 
         bevestig.setOnAction(e -> {
-            if(klantField.getLength() > 1 && projectField.getLength() > 1 && onderwerpField.getLength() > 1 && !BeginDatum.getValue().equals("") && !BeginTijd.getText().equals("") && !EindDatum.getValue().equals("") && !EindTijd.getText().equals("")) {
+            if(klantField.getLength() > 1 && projectField.getLength() > 1 && onderwerpField.getLength() > 1 && !BeginDatum.getValue().equals("") && !BeginTijd.getText().equals("") && !EindDatum.getValue().equals("") && !EindTijd.getText().equals("") && BeginDatum.getValue().isBefore(EindDatum.getValue()) && Integer.parseInt(BeginTijd.getText())< Integer.parseInt(EindTijd.getText())) {
 
                 boolean bestaandeKlant = false;
                 boolean bestaandProject = false;
@@ -470,8 +472,11 @@ public class InvullenUrenView extends Scene {
      * Haalt de huidige tijd op en zet dat in de view
      */
     public void setTijd() {
-        BeginTijd.setText("  " + LocalTime.now().format(DateTimeFormatter.ofPattern("hh:mm")));
-        EindTijd.setText("  " + LocalTime.now().format(DateTimeFormatter.ofPattern("hh:mm")));
+        Calendar cal = Calendar.getInstance();
+        SimpleDateFormat sdfUur = new SimpleDateFormat("HH");
+        SimpleDateFormat sdfMinute = new SimpleDateFormat("mm");
+        BeginTijd.setText("  " + sdfUur.format(cal.getTime()) + ":"+ sdfMinute.format(cal.getTime()));
+        EindTijd.setText("  " + sdfUur.format(cal.getTime()) +":"+ sdfMinute.format(cal.getTime()));
     }
 
     public void setBeginTijd (String tijd) {
