@@ -9,6 +9,13 @@ import javafx.stage.Stage;
 
 /**
  * Deze klasse regelt het switchen van views
+ *
+ * @author Justin Moor
+ * @author Ian Beemsterboer
+ * @author Stan Hoenson
+ * @author Alex de Bruin
+ *
+ * @version 3.0
  */
 public class HoofdMenuController {
 

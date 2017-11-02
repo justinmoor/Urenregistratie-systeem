@@ -11,6 +11,15 @@ import javafx.scene.control.TextField;
 import java.util.*;
 import java.util.stream.Collectors;
 
+/**
+ *
+ * Dit is de controller die het auto aanvullen mogelijk maakt met het registreren van uren en het opvragen van het week overzicht
+ *
+ * @author Alex de Bruin
+ * @version 3.0
+ *
+ */
+
 public class AutoCompletionTextfieldController extends TextField {
 
 

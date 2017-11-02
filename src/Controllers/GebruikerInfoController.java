@@ -11,6 +11,15 @@ import javafx.stage.Stage;
 import java.util.ArrayList;
 import java.util.List;
 
+
+/**
+ *
+ * Dit is de controller voor het overzicht van alle werknemers in de database
+ * @author Justin Moor
+ * @version 3.0
+ *
+ */
+
 public class GebruikerInfoController {
 
     private GebruikerDAO dao;

@@ -17,6 +17,14 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * De controller voor het invullen van de uren
+ *
+ * @author Alex de Bruin
+ * @version 3.0
+ *
+ */
+
 public class InvullenUrenController {
 
     private InvullenUrenView invullenurenView;
@@ -27,10 +35,6 @@ public class InvullenUrenController {
     private ProjectDAO projectDao;
     private OnderwerpDAO onderwerpDao;
     private HoofdMenuController hoofdmenucontroller;
-
-    private ArrayList<String> klanten;
-    private ArrayList<String> producten;
-    private ArrayList<String> onderwerpen;
 
 
     InvullenUrenController(Stage stage, DatabaseConnectie db, GebruikerModel gebruikerModel, HoofdMenuController hoofdmenucontroller) {

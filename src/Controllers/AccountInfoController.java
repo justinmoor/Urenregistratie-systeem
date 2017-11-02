@@ -5,9 +5,16 @@ import Database.DatabaseConnectie;
 import Views.AccountInfoView;
 import javafx.stage.Stage;
 
+/**
+ *
+ * Dit is de controller die accountinfo voor de gebruiker die ingelogd is aanmaakt
+ *
+ * @author Alex de Bruin
+ * @version 3.0
+ *
+ */
 
 public class AccountInfoController {
-
 
     private DatabaseConnectie db;
     private HoofdMenuController hoofdMenuController;

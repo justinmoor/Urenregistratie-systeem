@@ -8,7 +8,9 @@ import javafx.stage.Stage;
 
 /**
  * Deze klasse wordt gebruikt om een nieuw account in te voegen
- * @author Justin Moor
+ *
+ *  @author Justin Moor
+ *  @version 3.0
  */
 public class GebruikerToevoegenController {
 	private HoofdMenuController hoofdmenucontroller;

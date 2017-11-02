@@ -23,6 +23,14 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * De controller voor het inzien van de uren als admin
+ *
+ * @author Ian Beemsterboer
+ *
+ * @version 3.0
+ */
+
 public class InzienUrenAdminController {
 
     private final String ERRORMESSAGENORESULTS = "De zoekopdracht heeft geen resultaten opgeleverd";

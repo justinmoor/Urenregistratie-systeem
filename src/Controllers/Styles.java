@@ -6,6 +6,13 @@ import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextFlow;
 
+/**
+ * Een hulp klasse van de autoCompletionTekstfieldcontroller klasse
+ *
+ * @author Alex de Bruin
+ * @version 3.0
+ */
+
 public class Styles {
     public static TextFlow buildTextFlow(String text, String filter) {
         int filterIndex = text.toLowerCase().indexOf(filter.toLowerCase());

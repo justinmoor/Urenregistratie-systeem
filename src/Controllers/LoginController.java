@@ -9,7 +9,11 @@ import javafx.stage.Stage;
 /**
  * Bevat alle logica om in te loggen.
  *
- * @author Justin, Ian
+ * @author Justin Moor
+ * @author Ian Beemsterboer
+ * @author Alex de Bruin
+ *
+ * @version 3.1
  */
 public class LoginController {
 

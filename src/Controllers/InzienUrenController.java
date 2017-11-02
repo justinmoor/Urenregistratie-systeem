@@ -16,6 +16,14 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+/**
+ * controller voor het inzien van de uren van de gebruiker
+ *
+ * @author Ian Beemsterboer
+ * @version 3.0
+ *
+ */
+
 public class InzienUrenController {
     private final String ERRORMESSAGENORESULTS = "De zoekopdracht heeft geen resultaten opgeleverd";
 
@@ -42,12 +50,13 @@ public class InzienUrenController {
      */
     public InzienUrenController(Stage stage, DatabaseConnectie dbc, HoofdMenuController hoofdMenuController, GebruikerModel gebruiker) {
         this.hoofdMenuController = hoofdMenuController;
+        this.dbc = dbc;
         ingevuldeTijdDAO = new IngevuldeTijdDAO(dbc);
         this.klantDAO = new KlantDAO(dbc);
         this.projectDAO = new ProjectDAO(dbc);
         this.onderwerpDAO = new OnderwerpDAO(dbc);
         view = new InzienUrenView(this);
-        stage = stage;
+        this.stage = stage;
         stage.show();
         stage.setScene(view);
         view.setPersoonLabel(hoofdMenuController.getGebruikerModel().getVolledigeNaam());
