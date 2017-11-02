@@ -20,6 +20,7 @@ import java.util.ArrayList;
  * controller voor het inzien van de uren van de gebruiker
  *
  * @author Ian Beemsterboer
+ * @author Stan Hoenson
  * @version 3.0
  *
  */

@@ -15,6 +15,15 @@ import javafx.scene.layout.VBox;
 
 import java.util.ArrayList;
 
+/**
+ * De view die alle gebruikers in de database laad zien
+ *
+ * @author Justin Moor
+ * @author Stan Hoenson
+ *
+ * @version 3.0
+ */
+
 public class GebruikerInfoView extends Scene {
 	/**
 	 * Initialiseren van alle benodigde onderdelen voor deze view

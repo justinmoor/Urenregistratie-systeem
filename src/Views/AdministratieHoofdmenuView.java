@@ -13,6 +13,17 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 
+/**
+ * De hoofdmenuview voor administrators zodat ze makkelijk kunnen navigeren
+ *
+ * @author Stan Hoenson
+ * @author Justin Moor
+ * @author Ian beemsterboer
+ * @author Alex de Bruin
+ *
+ * @version 3.0
+ */
+
 public class AdministratieHoofdmenuView extends Scene {
 		/**
 		 * Initialiseren van alle benodigde onderdelen voor deze view

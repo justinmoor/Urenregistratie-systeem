@@ -31,6 +31,15 @@ import javafx.scene.paint.Color;
         import java.util.ArrayList;
         import java.util.Optional;
 
+
+        /**
+         * De view om de uren die gewerkt zijn te registreren in de database
+         *
+         * @author Alex de Bruin
+         * @author Stan Hoenson
+         *
+         * @version 3.0
+         */
 public class InvullenUrenView extends Scene {
 	/**
      * Initialiseren van de bijhorende controller

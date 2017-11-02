@@ -22,6 +22,15 @@ import javafx.scene.layout.VBox;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
+/**
+ * De view die een overzicht geeft van alle gemaakte uren met de geselecteerde filters aan de administrator
+ *
+ * @author Ian Beemsterboer
+ * @author Stan Hoenson
+ *
+ * @version 3.0
+ */
+
 public class InzienUrenAdminView extends Scene {
 
     /**

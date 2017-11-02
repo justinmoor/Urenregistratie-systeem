@@ -21,6 +21,7 @@ import java.util.List;
  * De controller voor het invullen van de uren
  *
  * @author Alex de Bruin
+ * @author Stan Hoenson
  * @version 3.0
  *
  */

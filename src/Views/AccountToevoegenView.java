@@ -12,6 +12,14 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 
+/**
+ * De view waar een nieuwe gebruiker aangemaakt kan worden
+ *
+ * @author Justin Moor
+ *
+ * @version 3.0
+ */
+
 public class AccountToevoegenView extends Scene {
 		/**
 		 * Initialiseren van alle benodigde onderdelen voor deze view

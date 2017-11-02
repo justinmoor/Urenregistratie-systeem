@@ -27,7 +27,7 @@ import java.util.List;
  * De controller voor het inzien van de uren als admin
  *
  * @author Ian Beemsterboer
- *
+ * @author Stan Hoenson
  * @version 3.0
  */
 

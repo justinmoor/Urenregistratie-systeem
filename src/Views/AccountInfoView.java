@@ -16,6 +16,14 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 
+/**
+ * De view die de informatie laat zien van de gebruiker die  ingelogd is
+ *
+ * @author Alex de Bruin
+ *
+ * @version 3.0
+ */
+
 
 public class AccountInfoView  extends Scene{
 	/**

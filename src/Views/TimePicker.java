@@ -18,6 +18,16 @@ import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Calendar;
 
+/**
+ * De view om een tijd te selecteren vanuit het invullenurenview
+ *
+ * @author Alex de Bruin
+ * @author Stan Hoenson
+ *
+ * @version 3.0
+ *
+ */
+
 public class TimePicker extends Stage{
 
     private String soort;

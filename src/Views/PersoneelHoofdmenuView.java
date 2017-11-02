@@ -12,6 +12,16 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 
+/**
+ * De view voor personeel om makkelijk mee te navigeren door de applicatie heen
+ *
+ * @author Stan Hoenson
+ * @author Justin Moor
+ * @author Alex de Bruin
+ *
+ * @version 3.0
+ */
+
 public class PersoneelHoofdmenuView extends Scene {
 	/**
 	 * Initialiseren van alle benodigde onderdelen voor deze view

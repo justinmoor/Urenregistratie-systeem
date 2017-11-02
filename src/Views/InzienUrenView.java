@@ -18,6 +18,15 @@ import javafx.scene.layout.VBox;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
+/**
+ * De view die een overzicht geeft van alle gemaakte uren van de medewerker die is ingelogd
+ *
+ * @author Ian Beemsterboer
+ * @author Stan Hoenson
+ *
+ * @version 3.0
+ */
+
 public class InzienUrenView extends Scene {
 
     /**

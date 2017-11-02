@@ -16,6 +16,7 @@ import java.util.List;
  *
  * Dit is de controller voor het overzicht van alle werknemers in de database
  * @author Justin Moor
+ * @author Stan Hoenson
  * @version 3.0
  *
  */

@@ -20,6 +20,14 @@ import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 
+/**
+ * De view waarmee je inlogd
+ *
+ * @author Stan Hoenson
+ *
+ * @version 3.0
+ */
+
 public class LoginView extends Scene {
 		/**
 	     * Initialiseren van de bijhorende controller

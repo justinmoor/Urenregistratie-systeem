@@ -10,6 +10,7 @@ import javafx.stage.Stage;
  * Deze klasse wordt gebruikt om een nieuw account in te voegen
  *
  *  @author Justin Moor
+ *  @author Stan Hoenson
  *  @version 3.0
  */
 public class GebruikerToevoegenController {
