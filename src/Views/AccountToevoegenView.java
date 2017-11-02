@@ -198,16 +198,20 @@ public class AccountToevoegenView extends Scene {
      */
 	private void InitAction(){
 		toevoegen.setOnAction(e -> {
-		    if(controller.checkVelden(tf1.getText(), tf3.getText(), tf4.getText())) {
-                controller.insert(tf1.getText(), tf2.getText(), tf3.getText(), tf4.getText(), cb1.getValue().toString());
-                tf1.setText("");
-                tf2.setText("");
-                tf3.setText("");
-                tf4.setText("");
-                cb1.setValue("Personeel");
-            } else {
-		        fout.setText("Niet alle velden zijn ingevuld!");
-            }
+			if(controller.checkConnection()) {
+				if (controller.checkVelden(tf1.getText(), tf3.getText(), tf4.getText())) {
+					controller.insert(tf1.getText(), tf2.getText(), tf3.getText(), tf4.getText(), cb1.getValue().toString());
+					tf1.setText("");
+					tf2.setText("");
+					tf3.setText("");
+					tf4.setText("");
+					cb1.setValue("Personeel");
+				} else {
+					fout.setText("Niet alle velden zijn ingevuld!");
+				}
+			} else {
+				fout.setText("Er kan geen verbinding worden gemaakt!");
+			}
 
 		});
 		

@@ -75,7 +75,7 @@ public class AdministratieHoofdmenuView extends Scene {
 		pane.setId("pane");
 		
 		navigatie = new BorderPane();
-		
+
 		left_pane = new StackPane();
 		left_pane.setMinWidth(140);
 		left_pane.setPadding(new Insets(15, 0, 15, 15));
@@ -132,7 +132,7 @@ public class AdministratieHoofdmenuView extends Scene {
 		blauw_lijntje = new ImageView(img3);
 		blauw_lijntje.setFitWidth(600);
 		
-		pane.setBottom(blauw_lijntje);
+		pane.setBottom(blauw_lijntje);;
     
 		getStylesheets().add("Views/styles.css");
 	}
@@ -152,7 +152,11 @@ public class AdministratieHoofdmenuView extends Scene {
 			controller.startAccountToevoegenView();
 		});
 		personeel.setOnAction(e -> {
-			controller.startGebruikerInfoView();
+			if(controller.checkConnectie()) {
+				controller.startGebruikerInfoView();
+			} else {
+				personeel.setText("Geen verbinding!");
+			}
 
 		});
 

@@ -19,7 +19,7 @@ public class OnderwerpDAO {
     }
 
     /**
-     * Haalt projecten uit de dataabse.
+     * Haalt projecten uit de database.
      * @param project_naam
      * @return
      * @throws SQLException

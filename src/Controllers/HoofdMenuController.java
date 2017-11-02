@@ -96,4 +96,11 @@ public class HoofdMenuController {
     public LoginController getLoginController() {
         return loginController;
     }
+
+    public boolean checkConnectie(){
+        if(db.getConnection() != null){
+            return true;
+        }
+        return false;
+    }
 }

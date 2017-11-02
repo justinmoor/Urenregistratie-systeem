@@ -57,7 +57,6 @@ public class LoginController {
         if (gebruikerDAO.getWachtwoordQuery(email).equals(wachtwoordUitView) && gebruikerDAO.getWerkzaam(email).equals(WERKZAAM)) {
             model = gebruikerDAO.GetGebruikerFromDB(email);
 
-            System.out.println(model.toString());                       //Print de
             menuController = new HoofdMenuController(stage, model, db, this);
 
             if (model.getRechten().equals("0")) {
