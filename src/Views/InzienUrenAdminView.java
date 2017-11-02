@@ -309,6 +309,7 @@ public class InzienUrenAdminView extends Scene {
             public void handle(ActionEvent event) {
                 final ArrayList<IngevuldeTijdModel> aangevinkteRijen = new ArrayList<IngevuldeTijdModel>(overzichtTableView.getSelectionModel().getSelectedItems());
                 controller.keurGoed(aangevinkteRijen);
+                verversButtonPressed();
             }
         });
 
