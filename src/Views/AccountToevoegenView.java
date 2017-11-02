@@ -172,7 +172,7 @@ public class AccountToevoegenView extends Scene {
 
 		groep = new VBox(12);
 		groep.getChildren().addAll(voornaam, tussenvoegsel, achternaam, email, rechten, vbox_lijntje, toevoegen, fout);
-		groep.setPadding(new Insets(0, 0, 16, 0));
+		groep.setPadding(new Insets(36, 0, 16, 0));
 		
 		img3 = new Image("/Assets/blauwlijntje.png");
 		blauw_lijntje = new ImageView(img3);

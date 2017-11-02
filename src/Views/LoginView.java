@@ -110,7 +110,7 @@ public class LoginView extends Scene {
         
         img2 = new Image("/Assets/blauwlijntje.png");
 		blauw_lijntje = new ImageView(img2);
-		blauw_lijntje.setFitWidth(612);
+		blauw_lijntje.setFitWidth(600);
 		
 		pane.setBottom(blauw_lijntje);
 
