@@ -58,6 +58,13 @@ public class GebruikerToevoegenController {
         return true;
     }
 
+    public boolean checkConnection(){
+        if(db.getConnection() != null){
+            return true;
+        }
+        return false;
+    }
+
     /**
      * Geeft Hoofdmenucontroller terug
      * @return hoofdmenucontroller
