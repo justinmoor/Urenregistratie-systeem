@@ -230,7 +230,7 @@ public class InvullenUrenView extends Scene {
 		lbl5.setPadding(new Insets(6, 2, 0, 0));
 		BeginDatum = new DatePicker();
 		BeginDatum.setId("text-field-small");
-		BeginDatum.setPrefWidth(136);
+		BeginDatum.setMinWidth(136);
 		BeginDatum.setValue(LocalDate.now());
 		datum1.getChildren().addAll(lbl5, BeginDatum);
 		
@@ -242,11 +242,14 @@ public class InvullenUrenView extends Scene {
 		BeginTijd.setPrefWidth(112);
 		clockImg = new Image("Assets/clock.png");
 		clockImgViewBegin = new ImageView(clockImg);
-		clockImgViewBegin.setFitWidth(6);
-		clockImgViewBegin.setFitHeight(20);
+		clockImgViewBegin.setFitWidth(12);
+		clockImgViewBegin.setFitHeight(12);
 		setBeginTijd = new Button();
 		setBeginTijd.setGraphic(clockImgViewBegin);
-		setBeginTijd.setPrefWidth(24);
+		setBeginTijd.setMinWidth(24);
+		setBeginTijd.setId("button-time");
+		setBeginTijd.setMinHeight(30);
+		//setBeginTijd.setPadding(new Insets(0, 9, 0, 0));
 		tijd1.getChildren().addAll(lbl6, BeginTijd, setBeginTijd);
 		
 		img3 = new Image("/Assets/lijntje.png");
@@ -262,7 +265,7 @@ public class InvullenUrenView extends Scene {
 		lbl7.setPadding(new Insets(6, 2, 0, 0));
 		EindDatum = new DatePicker();
 		EindDatum.setId("text-field-small");
-		EindDatum.setPrefWidth(136);
+		EindDatum.setMinWidth(136);
         EindDatum.setValue(LocalDate.now());
 		datum2.getChildren().addAll(lbl7, EindDatum);
 		
@@ -273,11 +276,14 @@ public class InvullenUrenView extends Scene {
 		EindTijd.setId("text-field-small");
 		EindTijd.setPrefWidth(112);
         clockImgViewEind = new ImageView(clockImg);
-        clockImgViewEind.setFitWidth(6);
-        clockImgViewEind.setFitHeight(20);
+        clockImgViewEind.setFitWidth(12);
+        clockImgViewEind.setFitHeight(12);
         setEindTijd = new Button();
         setEindTijd.setGraphic(clockImgViewEind);
-        setEindTijd.setPrefWidth(24);
+        setEindTijd.setId("button-time");
+        setEindTijd.setMinWidth(24);
+        setEindTijd.setMinHeight(30);
+        //setEindTijd.setPadding(new Insets(0, 9, 0, 0));
 
 		tijd2.getChildren().addAll(lbl8, EindTijd, setEindTijd);
 
