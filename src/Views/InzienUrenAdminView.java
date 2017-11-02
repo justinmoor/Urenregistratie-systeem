@@ -153,6 +153,7 @@ public class InzienUrenAdminView extends Scene {
         begindatumLabel.setPadding(new Insets(0, 0, 5, 0));
         begindatumPicker = new DatePicker();
 
+
         einddatumLabel = new Label("Einddatum: ");
         einddatumLabel.setPadding(new Insets(0, 0, 5, 0));
         einddatumPicker = new DatePicker();
@@ -386,7 +387,12 @@ public class InzienUrenAdminView extends Scene {
      */
     public void verversButtonPressed(){
         convertDates();
-        controller.verversButtonPressed();
+        if(begindatumPicker.getValue().isAfter(einddatumPicker.getValue())){
+            Alert datumIncorrect = new Alert(Alert.AlertType.ERROR, "De begindatum is na de einddatum.");
+            datumIncorrect.show();
+        }else {
+            controller.verversButtonPressed();
+        }
     }
 
     public void setKlanten(ArrayList<String> klanten) {
@@ -410,6 +416,8 @@ public class InzienUrenAdminView extends Scene {
         this.begindatum = begindatumPicker.getValue().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
         this.einddatum = einddatumPicker.getValue().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
     }
+
+
 
     /**
      * Haalt alles uit de tabel. ontvangt een ObservableList van IngevuldeTijdModels en vult de tabel hiermee.

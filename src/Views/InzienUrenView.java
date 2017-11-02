@@ -265,7 +265,7 @@ public class InzienUrenView extends Scene {
          * Bepaal wat de knoppen doen.
          */
         verversKnop.setOnAction(a ->{
-            buttonPressed();
+            verversButtonPressed();
         });
 
         /**
@@ -346,9 +346,14 @@ public class InzienUrenView extends Scene {
     /**
      * Wordt uitgevoerd wanneer de "Ververs" knop wordt ingedrukt.
      */
-    public void buttonPressed(){
+    public void verversButtonPressed(){
         convertDates();
-        controller.buttonPressed();
+        if(begindatumPicker.getValue().isAfter(einddatumPicker.getValue())){
+            Alert datumIncorrect = new Alert(Alert.AlertType.ERROR, "De begindatum is na de einddatum.");
+            datumIncorrect.show();
+        }else {
+            controller.verversButtonPressed();
+        }
     }
 
 
