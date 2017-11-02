@@ -230,7 +230,7 @@ public class InvullenUrenView extends Scene {
 		lbl5.setPadding(new Insets(6, 2, 0, 0));
 		BeginDatum = new DatePicker();
 		BeginDatum.setId("text-field-small");
-		BeginDatum.setMinWidth(136);
+		BeginDatum.setMinWidth(144);
 		BeginDatum.setValue(LocalDate.now());
 		datum1.getChildren().addAll(lbl5, BeginDatum);
 		
@@ -254,7 +254,7 @@ public class InvullenUrenView extends Scene {
 		
 		img3 = new Image("/Assets/lijntje.png");
 		midlijnjte = new ImageView(img3);
-		midlijnjte.setFitWidth(196);
+		midlijnjte.setFitWidth(204);
 		
 		eind = new Label("EIND");
 		eind.setPadding(new Insets(0, 0, 0, 112));
@@ -265,7 +265,7 @@ public class InvullenUrenView extends Scene {
 		lbl7.setPadding(new Insets(6, 2, 0, 0));
 		EindDatum = new DatePicker();
 		EindDatum.setId("text-field-small");
-		EindDatum.setMinWidth(136);
+		EindDatum.setMinWidth(144);
         EindDatum.setValue(LocalDate.now());
 		datum2.getChildren().addAll(lbl7, EindDatum);
 		
