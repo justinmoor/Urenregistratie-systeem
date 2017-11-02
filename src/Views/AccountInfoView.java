@@ -118,7 +118,7 @@ public class AccountInfoView  extends Scene{
          * Aanmaken van de linker kant van de navigatie balk
          */
         left_pane = new StackPane();
-		left_pane.setMinWidth(200);
+		left_pane.setMinWidth(30);
 		left_pane.setPadding(new Insets(15, 0, 15, 15));
 		img_box = new VBox();
 		img = new Image("/Assets/back.png");
@@ -130,7 +130,8 @@ public class AccountInfoView  extends Scene{
          * Aanmaken van het midden van de navigatie balk
          */
 		mid_pane = new StackPane();
-		mid_pane.setPrefWidth(400);
+		mid_pane.setPrefWidth(570);
+		mid_pane.setPadding(new Insets(0, 37, 0, 0));
 		accountLabel = new Label("ACCOUNT INFO");
 		accountLabel.setId("home");
 		accountLabel.setAlignment(Pos.CENTER);
@@ -168,6 +169,7 @@ public class AccountInfoView  extends Scene{
 
         voornaam = new Label(controller.getVoornaam());
         voornaam.setTextFill(Color.GREY);
+        voornaam.setStyle("-fx-font-weight: bold");
 
         voornaamBox = new HBox();
         voornaamBox.getChildren().addAll(voornaamlabel, voornaam);
@@ -177,6 +179,7 @@ public class AccountInfoView  extends Scene{
 
         tussenvoegsel = new Label(controller.getTussenVoegsel());
         tussenvoegsel.setTextFill(Color.GREY);
+        tussenvoegsel.setStyle("-fx-font-weight: bold");
 
         tussenvoegselBox = new HBox();
         tussenvoegselBox.getChildren().addAll(tussenVoegselLabel, tussenvoegsel);
@@ -185,6 +188,7 @@ public class AccountInfoView  extends Scene{
         achternaamLabel.setTextFill(Color.GREY);
 
         achternaam = new Label(controller.getAchternaam());
+        achternaam.setStyle("-fx-font-weight: bold");
         achternaam.setTextFill(Color.GREY);
 
         achternaamBox = new HBox();
@@ -195,6 +199,7 @@ public class AccountInfoView  extends Scene{
 
         email = new Label(controller.getEmail());
         email.setTextFill(Color.GREY);
+        email.setStyle("-fx-font-weight: bold");
 
         emailBox = new HBox();
         emailBox.getChildren().addAll(emailLabel, email);
@@ -204,6 +209,7 @@ public class AccountInfoView  extends Scene{
 
         wachtwoord = new Label(controller.getWachtwoord());
         wachtwoord.setTextFill(Color.GREY);
+        wachtwoord.setStyle("-fx-font-weight: bold");
 
         wachtwoordBox = new HBox();
         wachtwoordBox.getChildren().addAll(wachtwoordLabel, wachtwoord);
