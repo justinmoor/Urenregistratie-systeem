@@ -168,7 +168,6 @@ public class AdministratieHoofdmenuView extends Scene {
 			} else {
 				personeel.setText("Geen verbinding!");
 			}
-
 		});
 
 		gebruiker.setId("gebruiker");
@@ -182,7 +181,6 @@ public class AdministratieHoofdmenuView extends Scene {
 		});
 
 	}
-
 }
 
 

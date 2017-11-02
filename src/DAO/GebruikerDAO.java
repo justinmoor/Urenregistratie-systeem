@@ -51,6 +51,7 @@ public class GebruikerDAO {
      * Deze methode krijgt de data of de gebruiker die wilt inloggen werkzaam is.
      * @param email
      * @return Werkzaam string
+     * @author Justin Moor
      */
     public String getWerkzaam(String email) {
         String werkzaam = "";
@@ -101,6 +102,7 @@ public class GebruikerDAO {
      * @param achternaam
      * @param email
      * @param rechten
+     * @author Justin Moor
      */
     public void insertAccount(String voornaam, String tussenvoegsel, String achternaam, String email, String rechten) {
         String query = "INSERT INTO personeel (achternaam, tussenvoegsel, voornaam, email, rechten, werkzaam) VALUES (?, ?, ?, ?, ?, ?);";
@@ -131,6 +133,7 @@ public class GebruikerDAO {
     /**
      * Verkrijg alle accounts uit de database om een overzicht te maken
      * @return Arraylist van alle accounts
+     * @author Justin Moor
      */
     public ArrayList getAllAccount() {
         gebruikers = new ArrayList<>();
@@ -171,6 +174,7 @@ public class GebruikerDAO {
     /**
      * Zet een bepaalde gebruiker op actief (werkzaam)
      * @param model van de gebruiker
+     * @author Justin Moor
      */
     public void setWerkzaam(GebruikerModel model) {
         try {
@@ -185,6 +189,7 @@ public class GebruikerDAO {
     /**
      * Zet een bepaalde gebruiker op inactief (niet werkzaam)
      * @param model van de gebruiker
+     * @author Justin Moor
      */
     public void setNietWerkzaam(GebruikerModel model) {
         try {
