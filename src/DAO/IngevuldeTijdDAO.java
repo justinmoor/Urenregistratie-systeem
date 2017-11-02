@@ -73,10 +73,6 @@ public class IngevuldeTijdDAO {
             getResults.setString(6, project+"%");
             getResults.setString(7, onderwerp);
             getResults.setString(8, onderwerp+ "%");
-
-            System.out.println(begindatum);
-            System.out.println(einddatum);
-
             results = getResults.executeQuery();
 
 
@@ -121,9 +117,6 @@ public class IngevuldeTijdDAO {
             getResults.setString(7, project+"%");
             getResults.setString(8, onderwerp);
             getResults.setString(9, onderwerp+"%");
-
-            System.out.println(begindatum);
-            System.out.println(einddatum);
 
             results = getResults.executeQuery();
 

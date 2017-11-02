@@ -181,8 +181,6 @@ public class GebruikerDAO {
             PreparedStatement werkzaam = db.getConnection().prepareStatement("UPDATE personeel SET werkzaam = 0 WHERE persoonID = ?;");
             werkzaam.setInt(1, model.getGebruikerID());
             werkzaam.executeQuery();
-
-            System.out.println("Werkt " + model.getGebruikerID());
         } catch (SQLException e) {
             e.printStackTrace();
         }
