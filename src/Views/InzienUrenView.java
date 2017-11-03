@@ -304,7 +304,7 @@ public class InzienUrenView extends Scene {
         projectnaamColumn.setCellValueFactory(new PropertyValueFactory<>("projectNaam"));
         onderwerpnaamColumn.setCellValueFactory(new PropertyValueFactory<>("onderwerpNaam"));
         commentaarColumn.setCellValueFactory(new PropertyValueFactory<>("commentaar"));
-        goedgekeurdColumn.setCellValueFactory(new PropertyValueFactory<>("goedgekeurd"));
+        goedgekeurdColumn.setCellValueFactory(new PropertyValueFactory<>("goedgekeurdString"));
 
         /**
          * Configureer de breedte van de kolommen. Constante waarden staan bovenaan.
