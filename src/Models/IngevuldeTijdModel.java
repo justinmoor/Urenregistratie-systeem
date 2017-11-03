@@ -26,6 +26,9 @@ public class IngevuldeTijdModel {
  private String persoonNaam;
  private boolean isChanged = false;
 
+
+ private String goedgekeurdString;
+
  //met commentaar
  public IngevuldeTijdModel(int uurId, int personeelId, String beginDatum, String beginTijd, String eindDatum, String eindTijd, String klantNaam, String projectNaam, String onderwerpNaam, String commentaar) {
   this.uurId = uurId;
@@ -39,6 +42,7 @@ public class IngevuldeTijdModel {
   this.onderwerpNaam = onderwerpNaam;
   this.commentaar = commentaar;
  }
+
  public IngevuldeTijdModel(int uurId, String beginDatum, String eindDatum, String beginTijd,  String eindTijd, String commentaar,  boolean goedgekeurd, int personeelId,  String klantNaam, String projectNaam, String onderwerpNaam, String persoonNaam) {
   this.uurId = uurId;
   this.personeelID = personeelId;
@@ -52,6 +56,11 @@ public class IngevuldeTijdModel {
   this.commentaar = commentaar;
   this.goedgekeurd = goedgekeurd;
   this.persoonNaam = persoonNaam;
+  if(goedgekeurd){
+   this.goedgekeurdString = "Ja";
+  } else{
+   this.goedgekeurdString = "Nee";
+  }
  }
 
  public int getUurId() {
@@ -140,6 +149,11 @@ public class IngevuldeTijdModel {
 
  public void setGoedgekeurd(boolean goedgekeurd) {
   this.goedgekeurd = goedgekeurd;
+  if(goedgekeurd){
+   setGoedgekeurdString("Ja");
+  } else{
+   setGoedgekeurdString("Nee");
+  }
  }
 
  public boolean isChanged() {
@@ -158,4 +172,15 @@ public class IngevuldeTijdModel {
  public void setChanged(boolean changed) {
   isChanged = changed;
  }
+
+ public String getGoedgekeurdString() {
+  return goedgekeurdString;
+ }
+
+ public void setGoedgekeurdString(String goedgekeurdString) {
+  this.goedgekeurdString = goedgekeurdString;
+ }
+
 }
+
+
