@@ -4,10 +4,18 @@ import DAO.KlantDAO;
 import DAO.OnderwerpDAO;
 import DAO.ProjectDAO;
 import Database.DatabaseConnectie;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 
@@ -26,14 +34,28 @@ public class MeldingView extends Stage{
     private String onderwerp;
 
     private Stage newStage;
-    private GridPane pane;
+    private BorderPane pane;
     private Scene scene;
 
+    private BorderPane navigatie;
+
+    private StackPane mid_pane;
+    private Label home;
+    
+    private Image img2;
+    private ImageView lijntje;
+    
+    private VBox groep;
+    
     private Label tekst;
     private Label subTekst;
 
+    private HBox buttonBox;
     private Button btOK;
     private Button btCancel;
+    
+    private Image img3;
+    private ImageView blauw_lijntje;
 
 
     //alert als uren een nieuwe klant project of onderwerp heeft
@@ -67,30 +89,94 @@ public class MeldingView extends Stage{
     private void initUrenGui() {
 
         setStage();
+        
+        pane.setId("pane");
+        
+        navigatie = new BorderPane();
 
+        mid_pane = new StackPane();
+		mid_pane.setPrefWidth(700);
+		home = new Label("TOEVOEGEN");
+		home.setId("home");
+		home.setPadding(new Insets(15, 0, 15, 0));
+		mid_pane.getChildren().add(home);
+
+		img2 = new Image("/Assets/lijntje.png");
+		lijntje = new ImageView(img2);
+		lijntje.setFitWidth(700);
+
+		navigatie.setCenter(mid_pane);
+		navigatie.setBottom(lijntje);
+
+        groep = new VBox(30);
         tekst = new Label("kiesTekst");
         subTekst = new Label("Klik Oke om bovenstaande toetevoegen aan de database. Klik Cancel als u bovenstaande niet wil toevoegen");
-        btOK = new Button("Oke");
-        btCancel = new Button("Cancel");
-
-        pane.add(tekst, 1,1,2,1);
-        pane.add(btCancel, 1, 2, 1,1);
-        pane.add(btOK, 2, 2, 1, 1);
+        
+        buttonBox = new HBox(20);
+        btOK = new Button("OKE");
+        btCancel = new Button("CANCEL");
+        btOK.setId("button-melding");
+        btCancel.setId("button-melding");
+        buttonBox.getChildren().addAll(btCancel, btOK);
+        buttonBox.setAlignment(Pos.CENTER);
+        
+        groep.getChildren().addAll(tekst, buttonBox);
+        groep.setAlignment(Pos.CENTER);
+        
+		img3 = new Image("/Assets/blauwlijntje.png");
+		blauw_lijntje = new ImageView(img3);
+		blauw_lijntje.setFitWidth(700);
+        
+        pane.setTop(navigatie);
+        pane.setCenter(groep); 
+        pane.setBottom(blauw_lijntje);
+        
+        scene.getStylesheets().add("Views/styles.css");
     }
 
     private void initWachtwoordGui() {
+    	 	pane.setId("pane");
+    	 	
+    	 	groep = new VBox(30);
+         
+        navigatie = new BorderPane();
 
+        mid_pane = new StackPane();
+ 		mid_pane.setPrefWidth(700);
+ 		home = new Label("WACHTWOORD WIJZIGEN MISLUKT");
+ 		home.setId("home");
+ 		home.setPadding(new Insets(15, 0, 15, 0));
+ 		mid_pane.getChildren().add(home);
+
+ 		img2 = new Image("/Assets/lijntje.png");
+ 		lijntje = new ImageView(img2);
+ 		lijntje.setFitWidth(700);
+
+ 		navigatie.setCenter(mid_pane);
+ 		navigatie.setBottom(lijntje);
+    	
         tekst = new Label();
-        btOK = new Button("Oke");
+        btOK = new Button("OKE");
+        btOK.setId("button-melding");
+        
+        groep.getChildren().addAll(tekst, btOK);
+        groep.setAlignment(Pos.CENTER);
 
         if (categorie.equals("teKort")) {
             tekst.setText("Het wachtwoord moet minimaal 8 tekens lang zijn.");
         } else if (categorie.equals("nietZelfde")) {
             tekst.setText("De opgegeven wachtwoorden zijn niet het zelfde");
         }
-
-        pane.add(tekst,1, 1);
-        pane.add(btOK, 1, 2);
+        
+        img3 = new Image("/Assets/blauwlijntje.png");
+		blauw_lijntje = new ImageView(img3);
+		blauw_lijntje.setFitWidth(700);
+        
+        pane.setTop(navigatie);
+        pane.setCenter(groep); 
+        pane.setBottom(blauw_lijntje);
+        
+        scene.getStylesheets().add("Views/styles.css");
 
     }
 
@@ -102,8 +188,8 @@ public class MeldingView extends Stage{
     }
 
     private Stage setStage() {
-        pane = new GridPane();
-        scene = new Scene(pane, 260, 300);
+        pane = new BorderPane();
+        scene = new Scene(pane, 700, 260);
         newStage = new Stage();
         newStage.setScene(scene);
         newStage.setAlwaysOnTop(true);
